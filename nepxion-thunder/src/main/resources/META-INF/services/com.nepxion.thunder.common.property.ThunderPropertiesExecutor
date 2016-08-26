@@ -1,0 +1,2 @@
+# 外部参数化平台数据获取的实现类(implements ThunderPropertiesExecutor)。必须是全路径类名，例如如下：
+# com.nepxion.thunder.common.property.ThunderPropertiesExecutorImpl

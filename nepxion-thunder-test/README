@@ -1,0 +1,6 @@
+Thunder压力测试
+
+1. copy.bat，拷贝thunder.jar到本工程lib目录下
+2. install.bat，执行maven编译
+3. deploy.bat，编译出包后放在bin/application下
+4. all.bat，上面三个命令的批量执行

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<artifactId>thunder-framework</artifactId>
+	<name>Nepxion Thunder Framework</name>
+	<packaging>jar</packaging>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>nepxion</groupId>
+		<artifactId>thunder</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<properties>
+		<tibco.version>7.0.1</tibco.version>
+		<splunk.version>1.5.0</splunk.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>tibco</groupId>
+			<artifactId>tibjms</artifactId>
+			<version>${tibco.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/tibjms-${tibco.version}.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>splunk</groupId>
+			<artifactId>splunk-sdk-java</artifactId>
+			<version>${splunk.version}</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/splunk-sdk-java-${splunk.version}.jar</systemPath>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<defaultGoal>compile</defaultGoal>
+		<finalName>nepxion-thunder-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<testFailureIgnore>true</testFailureIgnore>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+           http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    
+    <dubbo:application id="application" name="APP-IOS"/>
+    
+    <dubbo:registry id="registry" protocol="zookeeper" address="localhost:2181"/>
+    
+    <!-- 同步调用  -->
+    <dubbo:reference id="echoService" interface="com.nepxion.dubbo.test.service.EchoService" async="false" timeout="10000"/>
+    
+    <!-- 异步调用，callback方式  -->
+    <!-- <dubbo:reference id="echoService" interface="com.nepxion.dubbo.test.service.EchoService" async="true">
+        <dubbo:method name="echo" onreturn="echoCallback.onResult" onthrow="echoCallback.onError"/>
+    </dubbo:reference>
+    
+    <bean id ="echoCallback" class="com.nepxion.dubbo.test.service.EchoCallbackImpl" /> -->
+    
+    <!-- 异步调用，可用于异步Future阻塞式方式  -->
+    <!-- <dubbo:reference id="echoService" interface="com.nepxion.dubbo.test.service.EchoService" async="true" timeout="10000"/> -->
+</beans>

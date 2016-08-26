@@ -1,0 +1,111 @@
+<xsd:schema xmlns="http://www.nepxion.com/schema/thunder"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	targetNamespace="http://www.nepxion.com/schema/thunder"
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	version="1.0.0">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<xsd:import namespace="http://www.springframework.org/schema/beans" schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"/>
+	<xsd:import namespace="http://www.springframework.org/schema/tool" schemaLocation="http://www.springframework.org/schema/tool/spring-tool-3.0.xsd"/>
+	<xsd:element name="application" type="applicationType"/>
+	<xsd:element name="registry" type="registryType"/>
+	<xsd:element name="protocol" type="protocolType"/>
+	<xsd:element name="strategy" type="strategyType"/>
+	<xsd:element name="monitor" type="monitorType"/>
+	<xsd:element name="service" type="serviceType"/>
+	<xsd:element name="reference" type="referenceType"/>
+	<xsd:complexType name="applicationType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="application" type="xsd:token" use="required"/>
+				<xsd:attribute name="group" type="xsd:token" use="required"/>
+				<xsd:attribute name="cluster" type="xsd:token" use="required"/>
+				<xsd:attribute name="host" type="xsd:token" use="optional"/>
+				<xsd:attribute name="port" type="xsd:int" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="registryType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="type" type="xsd:token" use="optional"/>
+				<xsd:attribute name="address" type="xsd:token" use="optional"/>
+				<xsd:attribute name="config" type="xsd:token" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>	
+	<xsd:complexType name="protocolType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="type" type="xsd:token" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>	
+	<xsd:complexType name="strategyType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="loadbalance" type="xsd:token" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="monitorType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="type" type="xsd:token" use="optional"/>
+				<xsd:attribute name="address" type="xsd:token" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>	
+	<xsd:complexType name="serviceType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:attribute name="interface" type="xsd:token" use="required">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation>
+								<tool:expected-type type="java.lang.Class"/>
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="ref" type="xsd:token" use="required"/>
+				<xsd:attribute name="server" type="xsd:token" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="referenceType">
+		<xsd:complexContent>
+			<xsd:extension base="beans:identifiedType">
+				<xsd:sequence>
+					<xsd:element name="method" type="methodType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute name="interface" use="required" type="xsd:token">
+					<xsd:annotation>
+						<xsd:appinfo>
+							<tool:annotation>
+								<tool:expected-type type="java.lang.Class"/>
+							</tool:annotation>
+						</xsd:appinfo>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="traceIdIndex" type="xsd:int" use="optional"/>
+				<xsd:attribute name="async" type="xsd:boolean" use="optional"/>
+				<xsd:attribute name="timeout" type="xsd:int" use="optional"/>
+				<xsd:attribute name="broadcast" type="xsd:boolean" use="optional"/>
+				<xsd:attribute name="callback" type="xsd:token" use="optional"/>
+				<xsd:attribute name="server" type="xsd:token" use="optional"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="methodType">
+		<xsd:attribute name="method" type="xsd:token" use="required"/>
+		<xsd:attribute name="parameterTypes" type="xsd:token" use="optional"/>
+		<xsd:attribute name="traceIdIndex" type="xsd:int" use="optional"/>
+		<xsd:attribute name="async" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="timeout" type="xsd:int" use="optional"/>
+		<xsd:attribute name="broadcast" type="xsd:boolean" use="optional"/>
+		<xsd:attribute name="callback" type="xsd:token" use="optional"/>
+	</xsd:complexType>
+</xsd:schema>
