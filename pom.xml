@@ -19,7 +19,6 @@
 		<commons.jxpath.version>1.3</commons.jxpath.version>
 		<commons.validator.version>1.5.0</commons.validator.version>
 		<spring.version>4.2.7.RELEASE</spring.version>
-		<spring.boot.version>1.3.7.RELEASE</spring.boot.version>
 		<mail.version>1.5.5</mail.version>
 		<netty.version>4.0.36.Final</netty.version>
 		<hessian.version>4.0.38</hessian.version>
@@ -150,26 +149,6 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring.boot.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
