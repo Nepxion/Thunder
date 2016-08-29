@@ -1,1 +1,0 @@
-call mvn package && java -jar target/nepxion-thunder-spring-boot-docker-1.0.0.jar
