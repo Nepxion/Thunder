@@ -49,8 +49,8 @@
 			<groupId>nepxion</groupId>
 			<artifactId>thunder</artifactId>
 			<version>${project.version}</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/nepxion-thunder-${project.version}.jar</systemPath>
+			<!-- <scope>system</scope>
+			<systemPath>${project.basedir}/lib/nepxion-thunder-${project.version}.jar</systemPath> -->
 		</dependency>
 	</dependencies>
 

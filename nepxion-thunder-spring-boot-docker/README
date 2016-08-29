@@ -1,5 +1,7 @@
 Thunder Spring Boot在Docker上的部署
 
+0. repo.bat，装载thunder.jar到本地maven库(spring-boot-maven-plugin似乎不支持本地maven应用的打包)
+
 1. copy.bat，拷贝thunder.jar到本工程lib目录下
 2. install.bat，执行maven编译
 3. all.bat，上面二个命令的批量执行
