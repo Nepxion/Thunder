@@ -19,6 +19,14 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>${spring.boot.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring.boot.version}</version>
 			<exclusions>
@@ -54,9 +62,20 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.boot.version}</version>
 				<configuration>
+					<executable>true</executable>
 					<mainClass>com.nepxion.thunder.test.NettyServerBootTest</mainClass>
-					<layout>JAR</layout>
+					<layout>JAR</layout>					
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<attach>false</attach>
+						</configuration>						
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
