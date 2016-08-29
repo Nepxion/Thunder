@@ -23,21 +23,21 @@
     
     <thunder:monitor id="monitor" type="logService"/>
     
-    <thunder:service id="userServiceImpl" interface="com.nepxion.thunder.test.service.UserService" ref="_userServiceImpl"/>
-    <bean name="_userServiceImpl" class="com.nepxion.thunder.test.service.UserServiceImpl"/>
+    <thunder:service id="userServiceImpl" interface="com.nepxion.thunder.boot.service.UserService" ref="_userServiceImpl"/>
+    <bean name="_userServiceImpl" class="com.nepxion.thunder.boot.service.UserServiceImpl"/>
     
-    <thunder:service id="animalServiceImpl" interface="com.nepxion.thunder.test.service.AnimalService" ref="_animalServiceImpl"/>
-    <bean name="_animalServiceImpl" class="com.nepxion.thunder.test.service.AnimalServiceImpl"/>
+    <thunder:service id="animalServiceImpl" interface="com.nepxion.thunder.boot.service.AnimalService" ref="_animalServiceImpl"/>
+    <bean name="_animalServiceImpl" class="com.nepxion.thunder.boot.service.AnimalServiceImpl"/>
     
-    <thunder:reference id="userService" interface="com.nepxion.thunder.test.service.UserService">
+    <thunder:reference id="userService" interface="com.nepxion.thunder.boot.service.UserService">
         <thunder:method method="getUser" parameterTypes="java.lang.String" async="false"/>
         <thunder:method method="getUser" parameterTypes="java.lang.String,int" async="false"/>
         <thunder:method method="getUsers" async="true" callback="userCallback"/>
         <thunder:method method="refreshUsers" async="true"/>
     </thunder:reference>
-    <bean id="userCallback" class="com.nepxion.thunder.test.service.UserCallback"/>
+    <bean id="userCallback" class="com.nepxion.thunder.boot.service.UserCallback"/>
     
-    <thunder:reference id="animalService" interface="com.nepxion.thunder.test.service.AnimalService">
+    <thunder:reference id="animalService" interface="com.nepxion.thunder.boot.service.AnimalService">
         <thunder:method method="getAnimal" parameterTypes="java.lang.String" async="true" broadcast="true"/>
     </thunder:reference>
 </beans>

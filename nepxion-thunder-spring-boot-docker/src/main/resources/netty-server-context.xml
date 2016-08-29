@@ -23,9 +23,9 @@
     
     <thunder:monitor id="monitor" type="logService"/>
     
-    <thunder:service id="userServiceImpl" interface="com.nepxion.thunder.test.service.UserService" ref="_userServiceImpl"/>
-    <bean name="_userServiceImpl" class="com.nepxion.thunder.test.service.UserServiceImpl"/>
+    <thunder:service id="userServiceImpl" interface="com.nepxion.thunder.boot.service.UserService" ref="_userServiceImpl"/>
+    <bean name="_userServiceImpl" class="com.nepxion.thunder.boot.service.UserServiceImpl"/>
     
-    <thunder:service id="animalServiceImpl" interface="com.nepxion.thunder.test.service.AnimalService" ref="_animalServiceImpl"/>
-    <bean name="_animalServiceImpl" class="com.nepxion.thunder.test.service.AnimalServiceImpl"/>
+    <thunder:service id="animalServiceImpl" interface="com.nepxion.thunder.boot.service.AnimalService" ref="_animalServiceImpl"/>
+    <bean name="_animalServiceImpl" class="com.nepxion.thunder.boot.service.AnimalServiceImpl"/>
 </beans>
