@@ -1,4 +1,4 @@
-package com.nepxion.thunder.test;
+package com.nepxion.thunder.boot;
 
 /**
  * <p>Title: Nepxion Thunder</p>
@@ -20,9 +20,9 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.test.service.AnimalService;
-import com.nepxion.thunder.test.service.User;
-import com.nepxion.thunder.test.service.UserService;
+import com.nepxion.thunder.boot.service.AnimalService;
+import com.nepxion.thunder.boot.service.User;
+import com.nepxion.thunder.boot.service.UserService;
 
 public class ClientTest {
     private static final Logger LOG = LoggerFactory.getLogger(ClientTest.class);

@@ -1,4 +1,4 @@
-package com.nepxion.thunder.test;
+package com.nepxion.thunder.boot;
 
 /**
  * <p>Title: Nepxion Thunder</p>
@@ -16,8 +16,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ImportResource;
 
-import com.nepxion.thunder.test.service.AnimalService;
-import com.nepxion.thunder.test.service.UserService;
+import com.nepxion.thunder.boot.service.AnimalService;
+import com.nepxion.thunder.boot.service.UserService;
 
 @EnableAutoConfiguration
 @ImportResource({ "classpath*:netty-client-context.xml" })

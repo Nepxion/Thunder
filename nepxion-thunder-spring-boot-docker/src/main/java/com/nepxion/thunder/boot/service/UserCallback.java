@@ -1,4 +1,4 @@
-package com.nepxion.thunder.test.service;
+package com.nepxion.thunder.boot.service;
 
 /**
  * <p>Title: Nepxion Thunder</p>
@@ -10,16 +10,18 @@ package com.nepxion.thunder.test.service;
  * @version 1.0
  */
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nepxion.thunder.common.callback.ThunderCallback;
 
-public class AnimalCallback extends ThunderCallback<Animal> {
-    private static final Logger LOG = LoggerFactory.getLogger(AnimalCallback.class);
+public class UserCallback extends ThunderCallback<List<User>> {
+    private static final Logger LOG = LoggerFactory.getLogger(UserCallback.class);
     
     @Override
-	public void onResult(Animal result) {
+	public void onResult(List<User> result) {
         LOG.info("客户端-异步回调结果：返回值={}", result);
 	}
 

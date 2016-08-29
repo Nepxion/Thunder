@@ -1,4 +1,4 @@
-package com.nepxion.thunder.test.service;
+package com.nepxion.thunder.boot.service;
 
 /**
  * <p>Title: Nepxion Thunder</p>

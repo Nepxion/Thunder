@@ -63,8 +63,8 @@
 				<version>${spring.boot.version}</version>
 				<configuration>
 					<executable>true</executable>
-					<mainClass>com.nepxion.thunder.test.NettyServerBootTest</mainClass>
-					<layout>JAR</layout>					
+					<mainClass>com.nepxion.thunder.boot.NettyServerBootTest</mainClass>
+					<layout>JAR</layout>
 				</configuration>
 				<executions>
 					<execution>
@@ -73,7 +73,7 @@
 						</goals>
 						<configuration>
 							<attach>false</attach>
-						</configuration>						
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
