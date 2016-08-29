@@ -3,7 +3,7 @@
 
 ## 1. 概要
 
-    1.1 Thunder是基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
+    1.1 Thunder是基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
     跟Dubbo相比，Thunder的增强功能包括
     1）支持Message Queue（消息队列中间件），Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积
     2）支持本地链式调用，全程无阻塞的调用方式，可省去业务端写Callback的步骤
@@ -35,6 +35,7 @@
     1.17 Nepxion Swing Repository，Thunder利用它实现Java Desktop版的服务治理
     1.18 Java SPI，Thunder利用它实现相关扩展
     1.19 Jdeferred Promise，Thunder利用它实现链式调用
+	1.20 Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口，Thunder利用它做容器
 
 ## 2. 功能
 
