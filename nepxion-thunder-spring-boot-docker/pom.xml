@@ -63,7 +63,7 @@
 				<version>${spring.boot.version}</version>
 				<configuration>
 					<executable>true</executable>
-					<mainClass>com.nepxion.thunder.boot.NettyServerBootTest</mainClass>
+					<mainClass>com.nepxion.thunder.boot.NettyClientBootEmbeddedRunnerTest</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 				<executions>
