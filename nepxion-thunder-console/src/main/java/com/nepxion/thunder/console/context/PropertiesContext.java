@@ -22,7 +22,9 @@ import com.nepxion.thunder.common.thread.ThreadPoolFactory;
 import com.nepxion.thunder.serialization.SerializerFactory;
 
 public class PropertiesContext {
-    public static final String LOG_FILE_PATH_ATTRIBUTE_NAME = "logFilePath";
+    public static final String LOGGER_TAB_SELECTION_ATTRIBUTE_NAME = "loggerTabSelection";
+    public static final String LOGGER_FILE_PATH_ATTRIBUTE_NAME = "loggerFilePath";
+    public static final String LOGGER_TRACE_ID_ATTRIBUTE_NAME = "loggerTraceId";
 
     private static ThunderProperties properties = ThunderPropertiesManager.getProperties();
 
@@ -117,10 +119,21 @@ public class PropertiesContext {
         }
     }
     
+    public static boolean isLoggerTabSelection() {
+        boolean loggerTabSelection = false;
+        try {
+            loggerTabSelection = properties.getBoolean(LOGGER_TAB_SELECTION_ATTRIBUTE_NAME);
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return loggerTabSelection;
+    }
+    
     public static String getLoggerFilePath() {
         String loggerFilePath = null;
         try {
-            loggerFilePath = properties.getString(LOG_FILE_PATH_ATTRIBUTE_NAME);
+            loggerFilePath = properties.getString(LOGGER_FILE_PATH_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -130,6 +143,14 @@ public class PropertiesContext {
         }
         
         return loggerFilePath;
+    }
+    
+    public static String getLoggerTraceId() {
+        try {
+            return properties.getString(LOGGER_TRACE_ID_ATTRIBUTE_NAME);
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     public static void addPropertiesMap(Map<String, Object> value) {

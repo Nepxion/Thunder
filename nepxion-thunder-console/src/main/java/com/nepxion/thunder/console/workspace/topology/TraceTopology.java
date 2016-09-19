@@ -186,6 +186,12 @@ public class TraceTopology extends AbstractTopology {
         traceIdTextField = new JBasicTextField();
         traceIdTextField.setPreferredSize(new Dimension(200, traceIdTextField.getPreferredSize().height));
 
+        boolean loggerTabSelection = PropertiesContext.isLoggerTabSelection();
+        if (loggerTabSelection) {
+            String loggerTraceId = PropertiesContext.getLoggerTraceId();
+            traceIdTextField.setText(loggerTraceId);
+        }
+        
         JToolBar toolBar = getGraph().getToolbar();
         toolBar.addSeparator();
         toolBar.add(new JClassicButton(createConfigDataSourceAction()));
@@ -877,6 +883,10 @@ public class TraceTopology extends AbstractTopology {
     }
 
     protected List<MonitorStat> retrieve(String traceId) throws Exception {
+        if (dataSourcePane == null) {
+            dataSourcePane = new DataSourcePane();
+        }
+        
         int selectedValue = dataSourcePane.getSelectedValue();
         switch (selectedValue) {
             case 0:
@@ -1055,6 +1065,11 @@ public class TraceTopology extends AbstractTopology {
             add(cacheRadioButtonPane);
             add(cacheTabbedPane);
             setPreferredSize(new Dimension(400, getPreferredSize().height));
+            
+            boolean loggerTabSelection = PropertiesContext.isLoggerTabSelection();
+            if (loggerTabSelection) {
+                loggerFileRadioButton.setSelected(true);
+            }
         }
 
         public int getSelectedValue() {
