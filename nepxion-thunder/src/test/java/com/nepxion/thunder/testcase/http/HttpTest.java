@@ -148,7 +148,7 @@ public class HttpTest {
         final CloseableHttpAsyncClient httpAsyncClient = clientExecutor.getClient();
         final HttpPost httpPost = new HttpPost("http://client:secret@localhost:8888/oauth/token");
         List<NameValuePair> pairList = new ArrayList<NameValuePair>();
-        pairList.add(new BasicNameValuePair("code", "T2oWFg"));
+        pairList.add(new BasicNameValuePair("code", "DybDI6"));
         pairList.add(new BasicNameValuePair("grant_type", "authorization_code"));
         pairList.add(new BasicNameValuePair("redirect_uri", "http://www.baidu.com"));
         httpPost.setEntity(new UrlEncodedFormEntity(pairList));
