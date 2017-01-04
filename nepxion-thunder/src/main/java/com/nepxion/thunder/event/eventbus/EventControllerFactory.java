@@ -10,7 +10,7 @@ package com.nepxion.thunder.event.eventbus;
  * @version 1.0
  */
 
-import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Executor;
 
 import com.google.common.collect.Maps;
@@ -21,8 +21,8 @@ import com.nepxion.thunder.common.thread.ThreadPoolFactory;
 
 public final class EventControllerFactory {
     private static final String SINGLETON = "Singleton";
-    private static Map<Object, EventController> syncControllerMap = Maps.newConcurrentMap();
-    private static Map<Object, EventController> asyncControllerMap = Maps.newConcurrentMap();
+    private static ConcurrentMap<Object, EventController> syncControllerMap = Maps.newConcurrentMap();
+    private static ConcurrentMap<Object, EventController> asyncControllerMap = Maps.newConcurrentMap();
     
     private EventControllerFactory() {
 
@@ -34,22 +34,10 @@ public final class EventControllerFactory {
     
     public static EventController getController(Object id, EventControllerType type) {
         switch (type) {
-            case SYNC : 
-                EventController syncEventController = syncControllerMap.get(id);
-                if (syncEventController == null) {
-                    syncEventController = createSyncController();
-                    syncControllerMap.put(id, syncEventController);
-                }
-                
-                return syncEventController;
-            case ASYNC : 
-                EventController asyncEventController = asyncControllerMap.get(id);
-                if (asyncEventController == null) {
-                    asyncEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, EventControllerFactory.class.getName()));
-                    asyncControllerMap.put(id, asyncEventController);
-                }
-                
-                return asyncEventController;
+            case SYNC :                 
+                return syncControllerMap.putIfAbsent(id, createSyncController());
+            case ASYNC :                 
+                return asyncControllerMap.putIfAbsent(id, createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, EventControllerFactory.class.getName())));
         }
         
         return null;
