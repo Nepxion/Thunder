@@ -11,15 +11,20 @@ package com.nepxion.thunder.testcase.http;
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -126,6 +131,69 @@ public class HttpTest {
             e.printStackTrace();
         }
         
+        System.in.read();
+    }
+    
+    @Test
+    public void test() throws Exception {
+        ThunderProperties properties = ThunderPropertiesManager.getProperties();
+
+        ApacheAsyncClientExecutor clientExecutor = new ApacheAsyncClientExecutor();
+        try {
+            clientExecutor.initialize(properties);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        final CloseableHttpAsyncClient httpAsyncClient = clientExecutor.getClient();
+        final HttpPost httpPost = new HttpPost("http://client:secret@localhost:8888/oauth/token");
+        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+        pairList.add(new BasicNameValuePair("code", "DybDI6"));
+        pairList.add(new BasicNameValuePair("grant_type", "authorization_code"));
+        pairList.add(new BasicNameValuePair("redirect_uri", "http://www.baidu.com"));
+        httpPost.setEntity(new UrlEncodedFormEntity(pairList));
+        httpAsyncClient.execute(httpPost, new FutureCallback<HttpResponse>() {
+            @Override
+            public void completed(HttpResponse result) {
+                try {
+                    LOG.info("异步调用:{}", EntityUtils.toString(result.getEntity()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                httpPost.reset();
+                try {
+                    httpAsyncClient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void failed(Exception e) {
+                LOG.error("Failed", e);
+                httpPost.reset();
+                try {
+                    httpAsyncClient.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void cancelled() {
+                LOG.info("Cancelled");
+                httpPost.reset();
+                try {
+                    httpAsyncClient.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         System.in.read();
     }
 }
