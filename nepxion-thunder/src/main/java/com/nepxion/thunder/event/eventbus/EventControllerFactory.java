@@ -28,16 +28,34 @@ public final class EventControllerFactory {
 
     }
 
-    public static EventController getSingletonController(EventControllerType type) {        
+    public static EventController getSingletonController(EventControllerType type) {
         return getController(SINGLETON, type);
     }
     
     public static EventController getController(Object id, EventControllerType type) {
         switch (type) {
-            case SYNC :                 
-                return syncControllerMap.putIfAbsent(id, createSyncController());
-            case ASYNC :                 
-                return asyncControllerMap.putIfAbsent(id, createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, EventControllerFactory.class.getName())));
+            case SYNC :
+                EventController syncEventController = syncControllerMap.get(id);
+                if (syncEventController == null) {
+                    EventController newEventController = createSyncController();
+                    syncEventController = syncControllerMap.putIfAbsent(id, newEventController);
+                    if (syncEventController == null) {
+                        syncEventController = newEventController;
+                    }
+                    
+                    return syncEventController;
+                }
+            case ASYNC :
+                EventController asyncEventController = asyncControllerMap.get(id);
+                if (asyncEventController == null) {
+                    EventController newEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, EventControllerFactory.class.getName()));
+                    asyncEventController = asyncControllerMap.putIfAbsent(id, newEventController);
+                    if (asyncEventController == null) {
+                        asyncEventController = newEventController;
+                    }
+                    
+                    return asyncEventController;
+                }
         }
         
         return null;
