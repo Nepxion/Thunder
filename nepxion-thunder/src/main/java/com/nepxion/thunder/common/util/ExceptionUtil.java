@@ -18,16 +18,66 @@ public class ExceptionUtil {
         if (exception == null) {
             return null;
         }
-        
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        exception.printStackTrace(new PrintStream(baos));
-        
-        return baos.toString().trim();
 
-        /*StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        exception.printStackTrace(pw);
-        
-        return sw.toString().trim();*/
+        return detailMessage(exception);
     }
+
+    private static String detailMessage(Exception exception) {
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        PrintStream ps = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            ps = new PrintStream(baos);
+            exception.printStackTrace(ps);
+            result = baos.toString().trim();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /*private static String detailMessage(Exception exception) {
+        String result = null;
+        StringWriter sw = null;
+        PrintWriter pw = null;
+
+        try {
+            sw = new StringWriter();
+            pw = new PrintWriter(sw);
+            exception.printStackTrace(pw);
+            result = sw.toString().trim();
+        } finally {
+            if (pw != null) {
+                try {
+                    pw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (sw != null) {
+                try {
+                    sw.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
+    }*/
 }
