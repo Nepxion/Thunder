@@ -7,7 +7,7 @@
 	<packaging>pom</packaging>
 	<modelVersion>4.0.0</modelVersion>
 	<version>1.0.0</version>
-	<url>http://code.taobao.org/u/Nepxion/</url>
+	<url>https://github.com/Nepxion/</url>
 
 	<properties>
 		<commons.lang3.version>3.4</commons.lang3.version>
