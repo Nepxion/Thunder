@@ -42,9 +42,9 @@ public final class EventControllerFactory {
                     if (syncEventController == null) {
                         syncEventController = newEventController;
                     }
-                    
-                    return syncEventController;
                 }
+                
+                return syncEventController;
             case ASYNC :
                 EventController asyncEventController = asyncControllerMap.get(id);
                 if (asyncEventController == null) {
@@ -53,9 +53,9 @@ public final class EventControllerFactory {
                     if (asyncEventController == null) {
                         asyncEventController = newEventController;
                     }
-                    
-                    return asyncEventController;
                 }
+                
+                return asyncEventController;
         }
         
         return null;
