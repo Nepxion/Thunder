@@ -27,7 +27,11 @@ import io.netty.handler.logging.LoggingHandler;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import net.openhft.affinity.AffinityStrategies;
+import net.openhft.affinity.AffinityThreadFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +66,9 @@ public class NettyServerExecutor extends AbstractServerExecutor {
         LOG.info("Attempt to start server with host={}, port={}", host, port);
         
         final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        final EventLoopGroup workerGroup = new NioEventLoopGroup(2 * ThunderConstants.CPUS);
-        
+        // From https://github.com/netty/netty/wiki/Thread-Affinity
+        final ThreadFactory threadFactory = new AffinityThreadFactory("AffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+        final EventLoopGroup workerGroup = new NioEventLoopGroup(2 * ThunderConstants.CPUS, threadFactory);
         Executors.newSingleThreadExecutor().submit(new Callable<ChannelFuture>() {
             @Override
             public ChannelFuture call() throws Exception {

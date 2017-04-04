@@ -21,6 +21,7 @@
 		<spring.version>4.2.7.RELEASE</spring.version>
 		<mail.version>1.5.5</mail.version>
 		<netty.version>4.0.36.Final</netty.version>
+		<affinity.version>3.0.6</affinity.version>		
 		<hessian.version>4.0.38</hessian.version>
 		<activemq.core.version>5.7.0</activemq.core.version>
 		<activemq.pool.version>5.13.2</activemq.pool.version>
@@ -161,6 +162,12 @@
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
 			<version>${netty.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.openhft</groupId>
+			<artifactId>affinity</artifactId>
+			<version>${affinity.version}</version>
 		</dependency>
 
 		<dependency>
