@@ -67,7 +67,7 @@ public class NettyServerExecutor extends AbstractServerExecutor {
         
         final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         // From https://github.com/netty/netty/wiki/Thread-Affinity
-        final ThreadFactory threadFactory = new AffinityThreadFactory("AffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+        final ThreadFactory threadFactory = new AffinityThreadFactory("ServerAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
         final EventLoopGroup workerGroup = new NioEventLoopGroup(2 * ThunderConstants.CPUS, threadFactory);
         Executors.newSingleThreadExecutor().submit(new Callable<ChannelFuture>() {
             @Override

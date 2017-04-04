@@ -31,7 +31,11 @@ import io.netty.handler.timeout.WriteTimeoutHandler;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
+
+import net.openhft.affinity.AffinityStrategies;
+import net.openhft.affinity.AffinityThreadFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +72,8 @@ public class NettyClientExecutor extends AbstractClientExecutor {
         
         LOG.info("Attempt to connect to {}:{}", host, port);
         
-        final EventLoopGroup group = new NioEventLoopGroup(ThunderConstants.CPUS);
+        final ThreadFactory threadFactory = new AffinityThreadFactory("ClientAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+        final EventLoopGroup group = new NioEventLoopGroup(ThunderConstants.CPUS, threadFactory);
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
