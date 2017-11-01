@@ -1,5 +1,7 @@
+# Compiled class file
 *.class
 .classpath
+.springBeans
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -14,8 +16,12 @@ test-output/
 *.jar
 *.war
 *.ear
+*.zip
+*.tar.gz
+*.rar
 *.swp
 *.log
+*.ctxt
 # nodejs local modules
 .tags*
 .idea/
@@ -24,4 +30,3 @@ test-output/
 .settings/
 target/
 hs_err_pid*
-
