@@ -10,9 +10,9 @@
 	<url>https://github.com/Nepxion/</url>
 
 	<properties>
-		<commons.lang3.version>3.4</commons.lang3.version>
+		<commons.lang3.version>3.6</commons.lang3.version>
 		<commons.collections4.version>4.1</commons.collections4.version>
-		<commons.io.version>2.4</commons.io.version>
+		<commons.io.version>2.5</commons.io.version>
 		<commons.pool2.version>2.4.2</commons.pool2.version>
 		<commons.configuration.version>1.10</commons.configuration.version>
 		<commons.beanutils.version>1.9.2</commons.beanutils.version>
