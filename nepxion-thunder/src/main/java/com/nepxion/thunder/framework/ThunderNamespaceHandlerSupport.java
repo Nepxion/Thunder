@@ -31,12 +31,12 @@ import com.nepxion.thunder.framework.parser.StrategyBeanDefinitionParser;
 public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
     static {
         System.out.println("");
-        System.out.println("╔════╦╗─────────╔╗");
-        System.out.println("║╔╗╔╗║║─────────║║");
+        System.out.println("╔════╦╗         ╔╗");
+        System.out.println("║╔╗╔╗║║         ║║");
         System.out.println("╚╝║║╚╣╚═╦╗╔╦═╗╔═╝╠══╦═╗");
-        System.out.println("──║║─║╔╗║║║║╔╗╣╔╗║║═╣╔╝");
-        System.out.println("──║║─║║║║╚╝║║║║╚╝║║═╣║");
-        System.out.println("──╚╝─╚╝╚╩══╩╝╚╩══╩══╩╝");
+        System.out.println("  ║║ ║╔╗║║║║╔╗╣╔╗║║═╣╔╝");
+        System.out.println("  ║║ ║║║║╚╝║║║║╚╝║║═╣║");
+        System.out.println("  ╚╝ ╚╝╚╩══╩╝╚╩══╩══╩╝");
         System.out.println("Nepxion Thunder  v1.0.0.RELEASE");
         System.out.println("");
     }
