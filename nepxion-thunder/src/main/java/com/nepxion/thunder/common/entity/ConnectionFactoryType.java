@@ -24,14 +24,14 @@ public enum ConnectionFactoryType {
     public String getValue() {
         return value;
     }
-    
+
     public static ConnectionFactoryType fromString(String value) {
         for (ConnectionFactoryType type : ConnectionFactoryType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

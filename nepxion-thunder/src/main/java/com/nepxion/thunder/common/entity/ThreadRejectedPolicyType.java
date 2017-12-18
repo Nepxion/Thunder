@@ -26,14 +26,14 @@ public enum ThreadRejectedPolicyType {
     public String getValue() {
         return value;
     }
-    
+
     public static ThreadRejectedPolicyType fromString(String value) {
         for (ThreadRejectedPolicyType type : ThreadRejectedPolicyType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

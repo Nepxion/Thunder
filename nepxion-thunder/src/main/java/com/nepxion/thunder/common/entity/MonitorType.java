@@ -24,14 +24,14 @@ public enum MonitorType {
     public String getValue() {
         return value;
     }
-    
+
     public static MonitorType fromString(String value) {
         for (MonitorType type : MonitorType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

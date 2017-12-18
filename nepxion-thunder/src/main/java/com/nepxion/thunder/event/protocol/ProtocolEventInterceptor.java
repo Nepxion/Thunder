@@ -23,6 +23,6 @@ public abstract class ProtocolEventInterceptor {
     public void listen(ProtocolEvent event) {
         onEvent(event);
     }
-    
+
     protected abstract void onEvent(ProtocolEvent event);
 }

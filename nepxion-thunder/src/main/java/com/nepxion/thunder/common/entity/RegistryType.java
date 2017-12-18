@@ -22,14 +22,14 @@ public enum RegistryType {
     public String getValue() {
         return value;
     }
-    
+
     public static RegistryType fromString(String value) {
         for (RegistryType type : RegistryType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

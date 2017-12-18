@@ -12,7 +12,7 @@ package com.nepxion.thunder.event.eventbus;
 
 public class Event {
     protected Object source;
-    
+
     public Event() {
         this(null);
     }

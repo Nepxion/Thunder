@@ -23,14 +23,14 @@ public enum PropertyType {
     public String getValue() {
         return value;
     }
-    
+
     public static PropertyType fromString(String value) {
         for (PropertyType type : PropertyType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

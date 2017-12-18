@@ -22,7 +22,7 @@ public class RoundRobinLoadBalanceExecutor extends AbstractLoadBalanceExecutor {
     private Map<String, AtomicLong> indexMap = Maps.newConcurrentMap();
 
     @Override
-    protected ConnectionEntity loadBalance(String interfaze, List<ConnectionEntity> connectionEntityList) throws Exception {        
+    protected ConnectionEntity loadBalance(String interfaze, List<ConnectionEntity> connectionEntityList) throws Exception {
         AtomicLong atomicLong = indexMap.get(interfaze);
         if (atomicLong == null) {
             atomicLong = new AtomicLong(0);

@@ -24,12 +24,12 @@ public class MonitorStat implements Serializable {
     private String traceId;
     private String messageId;
     private String messageType;
-    
+
     private String fromCluster;
     private String fromUrl;
     private String toCluster;
     private String toUrl;
-    
+
     // 调用的业务处理起始时间
     private long processStartTime;
     // 调用的业务处理结束时间
@@ -38,7 +38,7 @@ public class MonitorStat implements Serializable {
     private long deliverStartTime;
     // 调用的网络传输结束时间
     private long deliverEndTime;
-    
+
     private String interfaze;
     private String method;
     private String parameterTypes;
@@ -52,7 +52,7 @@ public class MonitorStat implements Serializable {
     private String loadBalance;
     private boolean feedback;
     private String exception;
-    
+
     public String getTraceId() {
         return traceId;
     }
@@ -76,7 +76,7 @@ public class MonitorStat implements Serializable {
     public void setMessageType(String messageType) {
         this.messageType = messageType;
     }
-    
+
     public String getFromCluster() {
         return fromCluster;
     }
@@ -84,7 +84,7 @@ public class MonitorStat implements Serializable {
     public void setFromCluster(String fromCluster) {
         this.fromCluster = fromCluster;
     }
-    
+
     public String getFromUrl() {
         return fromUrl;
     }
@@ -92,7 +92,7 @@ public class MonitorStat implements Serializable {
     public void setFromUrl(String fromUrl) {
         this.fromUrl = fromUrl;
     }
-    
+
     public String getToCluster() {
         return toCluster;
     }
@@ -108,7 +108,7 @@ public class MonitorStat implements Serializable {
     public void setToUrl(String toUrl) {
         this.toUrl = toUrl;
     }
-    
+
     public long getProcessStartTime() {
         return processStartTime;
     }
@@ -140,7 +140,7 @@ public class MonitorStat implements Serializable {
     public void setDeliverEndTime(long deliverEndTime) {
         this.deliverEndTime = deliverEndTime;
     }
-    
+
     public String getInterfaze() {
         return interfaze;
     }
@@ -172,7 +172,7 @@ public class MonitorStat implements Serializable {
     public void setProtocol(String protocol) {
         this.protocol = protocol;
     }
-    
+
     public String getApplication() {
         return application;
     }
@@ -188,7 +188,7 @@ public class MonitorStat implements Serializable {
     public void setGroup(String group) {
         this.group = group;
     }
-    
+
     public boolean isAsync() {
         return async;
     }
@@ -196,7 +196,7 @@ public class MonitorStat implements Serializable {
     public void setAsync(boolean async) {
         this.async = async;
     }
-    
+
     public String getCallback() {
         return callback;
     }
@@ -220,7 +220,7 @@ public class MonitorStat implements Serializable {
     public void setBroadcast(boolean broadcast) {
         this.broadcast = broadcast;
     }
-    
+
     public String getLoadBalance() {
         return loadBalance;
     }
@@ -228,7 +228,7 @@ public class MonitorStat implements Serializable {
     public void setLoadBalance(String loadBalance) {
         this.loadBalance = loadBalance;
     }
-    
+
     public boolean isFeedback() {
         return feedback;
     }

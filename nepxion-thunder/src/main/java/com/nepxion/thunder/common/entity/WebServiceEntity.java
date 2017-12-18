@@ -16,9 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WebServiceEntity implements Serializable {
     private static final long serialVersionUID = 8598019385005343221L;
-    
+
     private String path;
-    
+
     public String getPath() {
         return path;
     }
@@ -30,11 +30,11 @@ public class WebServiceEntity implements Serializable {
 
         this.path = path;
     }
-    
+
     @Override
     public int hashCode() {
         int result = 17;
-        
+
         if (path != null) {
             result = 37 * result + path.hashCode();
         }

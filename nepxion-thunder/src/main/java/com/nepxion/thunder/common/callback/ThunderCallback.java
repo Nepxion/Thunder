@@ -20,6 +20,6 @@ public abstract class ThunderCallback<T> {
     }
 
     public abstract void onResult(T result);
-    
+
     public abstract void onError(Exception exception);
 }

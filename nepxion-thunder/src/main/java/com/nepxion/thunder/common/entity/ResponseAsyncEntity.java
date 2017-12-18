@@ -15,14 +15,14 @@ import java.io.Serializable;
 import com.nepxion.thunder.common.promise.PromiseEntity;
 import com.nepxion.thunder.protocol.ProtocolRequest;
 
-public class ResponseAsyncEntity implements Serializable {    
+public class ResponseAsyncEntity implements Serializable {
     private static final long serialVersionUID = -253171631908650621L;
-    
+
     private ProtocolRequest request;
     private PromiseEntity<?> promise;
 
     public ResponseAsyncEntity() {
-        
+
     }
 
     public ProtocolRequest getRequest() {
@@ -32,7 +32,7 @@ public class ResponseAsyncEntity implements Serializable {
     public void setRequest(ProtocolRequest request) {
         this.request = request;
     }
-    
+
     public PromiseEntity<?> getPromise() {
         return promise;
     }

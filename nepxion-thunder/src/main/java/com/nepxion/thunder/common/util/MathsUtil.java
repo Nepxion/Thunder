@@ -19,7 +19,7 @@ public class MathsUtil {
         if (StringUtils.isEmpty(value)) {
             return null;
         }
-        
+
         long result = 0;
         try {
             result = 1;

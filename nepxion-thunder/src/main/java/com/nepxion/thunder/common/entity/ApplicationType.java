@@ -13,7 +13,7 @@ package com.nepxion.thunder.common.entity;
 public enum ApplicationType {
     // 服务提供方
     SERVICE("service"),
-    
+
     // 服务调用方
     REFERENCE("reference");
 
@@ -26,14 +26,14 @@ public enum ApplicationType {
     public String getValue() {
         return value;
     }
-    
+
     public static ApplicationType fromString(String value) {
         for (ApplicationType type : ApplicationType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

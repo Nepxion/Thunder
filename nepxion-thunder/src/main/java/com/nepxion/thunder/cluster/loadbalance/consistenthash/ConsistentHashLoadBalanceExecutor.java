@@ -26,14 +26,14 @@ public class ConsistentHashLoadBalanceExecutor extends AbstractLoadBalanceExecut
     private NodeLocator<ConnectionEntity> locator = new KetamaNodeLocator<ConnectionEntity>(new ArrayList<ConnectionEntity>(), DefaultHashAlgorithm.KETAMA_HASH);
 
     @Override
-    protected ConnectionEntity loadBalance(String interfaze, List<ConnectionEntity> connectionEntityList) throws Exception {        
+    protected ConnectionEntity loadBalance(String interfaze, List<ConnectionEntity> connectionEntityList) throws Exception {
         return locator.getPrimary(RandomUtil.uuidRandom());
     }
 
     @Override
     protected void cacheConnectionEntityList(List<ConnectionEntity> connectionEntityList) {
         super.cacheConnectionEntityList(connectionEntityList);
-        
+
         List<ConnectionEntity> entityList = locator.getAll();
         if (CollectionUtils.isNotEmpty(connectionEntityList)) {
             if (!CollectionUtils.isEqualCollection(entityList, connectionEntityList)) {

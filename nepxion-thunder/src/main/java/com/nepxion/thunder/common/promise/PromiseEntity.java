@@ -17,11 +17,11 @@ import org.slf4j.LoggerFactory;
 
 public class PromiseEntity<T> extends DeferredObject<T, Exception, Void> {
     private static final Logger LOG = LoggerFactory.getLogger(PromiseEntity.class);
-    
+
     @Override
     public Deferred<T, Exception, Void> reject(Exception exception) {
         LOG.error("Promise chain is terminated", exception);
-        
+
         return super.reject(exception);
     }
 }

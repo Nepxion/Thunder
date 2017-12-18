@@ -15,13 +15,13 @@ import java.util.concurrent.CyclicBarrier;
 
 public class ResponseSyncEntity implements Serializable {
     private static final long serialVersionUID = 5149083798031489971L;
-    
+
     private Object result;
     private Exception exception;
     private CyclicBarrier barrier;
 
     public ResponseSyncEntity() {
-        
+
     }
 
     public Object getResult() {

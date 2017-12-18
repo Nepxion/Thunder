@@ -32,7 +32,7 @@ public class ApplicationEntity implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public String getApplication() {
         return application;
     }
@@ -48,7 +48,7 @@ public class ApplicationEntity implements Serializable {
     public void setGroup(String group) {
         this.group = group;
     }
-    
+
     public String getCluster() {
         return cluster;
     }
@@ -72,11 +72,11 @@ public class ApplicationEntity implements Serializable {
     public void setPort(int port) {
         this.port = port;
     }
-    
+
     public String toUrl() {
         return host + ":" + port;
     }
-    
+
     public long getTime() {
         return time;
     }
@@ -88,7 +88,7 @@ public class ApplicationEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        
+
         if (application != null) {
             result = 37 * result + application.hashCode();
         }
@@ -96,7 +96,7 @@ public class ApplicationEntity implements Serializable {
         if (group != null) {
             result = 37 * result + group.hashCode();
         }
-        
+
         if (cluster != null) {
             result = 37 * result + cluster.hashCode();
         }
@@ -104,7 +104,7 @@ public class ApplicationEntity implements Serializable {
         if (host != null) {
             result = 37 * result + host.hashCode();
         }
-        
+
         result = 37 * result + port;
 
         return result;

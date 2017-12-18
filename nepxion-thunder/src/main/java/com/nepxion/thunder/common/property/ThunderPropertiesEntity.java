@@ -17,7 +17,7 @@ import com.google.common.collect.Maps;
 
 public abstract class ThunderPropertiesEntity implements Serializable {
     private static final long serialVersionUID = 5403317977587754742L;
-    
+
     protected ThunderProperties properties;
 
     public ThunderPropertiesEntity(ThunderProperties properties) {

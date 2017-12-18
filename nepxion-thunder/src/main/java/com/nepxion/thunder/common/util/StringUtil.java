@@ -16,20 +16,20 @@ public class StringUtil {
         
         return character.toString().concat(value.substring(1));
     }
-    
+
     public static String firstLetterToLower(String value) {
         Character character = Character.toLowerCase(value.charAt(0));
         
         return character.toString().concat(value.substring(1));
     }
-    
+
     /*public static String firstLetterToUpper(String value){
         char[] array = value.toCharArray();
         array[0] -= 32;
         
         return String.valueOf(array);
     }
-    
+
     public static String firstLetterToLower(String value){
         char[] array = value.toCharArray();
         array[0] += 32;

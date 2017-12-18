@@ -18,7 +18,7 @@ import com.nepxion.thunder.common.util.ClassUtil;
 
 public class MethodKey implements Serializable {
     private static final long serialVersionUID = 3458411349312814646L;
-    
+
     private String method;
     private String parameterTypes;
 
@@ -29,7 +29,7 @@ public class MethodKey implements Serializable {
     public void setMethod(String method) {
         this.method = method;
     }
-    
+
     public String getParameterTypes() {
         return parameterTypes;
     }
@@ -40,7 +40,7 @@ public class MethodKey implements Serializable {
         }
         this.parameterTypes = parameterTypes;
     }
-    
+
     public MethodKey clone() {
         MethodKey methodKey = new MethodKey();
 
@@ -49,7 +49,7 @@ public class MethodKey implements Serializable {
 
         return methodKey;
     }
-    
+
     public static MethodKey create(String method, Class<?>[] parameterClasses) {
         return create(method, toParameterTypes(parameterClasses));
     }
@@ -62,7 +62,7 @@ public class MethodKey implements Serializable {
 
         return methodKey;
     }
-    
+
     public static String toParameterTypes(Class<?>[] parameterClasses) {
         return ClassUtil.convertParameter(parameterClasses);
     }
@@ -70,15 +70,15 @@ public class MethodKey implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        
+
         if (method != null) {
             result = 37 * result + method.hashCode();
         }
-        
+
         if (parameterTypes != null) {
             result = 37 * result + parameterTypes.hashCode();
         }
-        
+
         return result;
     }
 
@@ -87,13 +87,13 @@ public class MethodKey implements Serializable {
         if (!(object instanceof MethodKey)) {
             return false;
         }
-        
+
         MethodKey methodKey = (MethodKey) object;
         if (StringUtils.equals(this.method, methodKey.method)
                 && StringUtils.equals(this.parameterTypes, methodKey.parameterTypes)) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -104,7 +104,7 @@ public class MethodKey implements Serializable {
         builder.append(method);
         builder.append(", parameterTypes=");
         builder.append(parameterTypes);
-        
+
         return builder.toString();
     }
 }

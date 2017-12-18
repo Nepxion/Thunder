@@ -60,25 +60,25 @@ public class ThunderPropertiesManager {
             }
         }
     }
-    
+
     public static ThunderPropertiesExecutor initializePropertiesExecutor() {
         ThunderPropertiesExecutor propertiesExecutor = null;
         try {
             propertiesExecutor = SpiLoader.load(ThunderPropertiesExecutor.class);
-            
+
             LOG.info("Thunder properties executor is loaded from spi, class={}", propertiesExecutor.getClass().getName());
         } catch (Exception e) {
             LOG.info("Thunder properties executor isn't defined from spi, so use Register Center as remote properties storage");
         }
-        
+
         return propertiesExecutor;
     }
-    
-    public static void initializeRemoteProperties(ThunderPropertiesExecutor propertiesExecutor, ApplicationEntity applicationEntity) throws Exception {        
+
+    public static void initializeRemoteProperties(ThunderPropertiesExecutor propertiesExecutor, ApplicationEntity applicationEntity) throws Exception {
         if (propertiesExecutor == null) {
             return;
         }
-        
+
         String property = propertiesExecutor.retrieveProperty(applicationEntity);
         if (StringUtils.isEmpty(property)) {
             if (extProperties != null) {
@@ -92,11 +92,11 @@ public class ThunderPropertiesManager {
 
         if (StringUtils.isNotEmpty(property)) {
             remoteProperties = new ThunderProperties(property.getBytes());
-            
+
             LOG.info("Merge remote property configs to default property configs");
             LOG.info("---------------- Remote Property Config ----------------\r\n{}", remoteProperties.getContent());
             LOG.info("--------------------------------------------------------");
-            
+
             try {
                 properties.mergeProperties(remoteProperties);
             } catch (Exception e) {
@@ -110,11 +110,11 @@ public class ThunderPropertiesManager {
     public static ThunderProperties getProperties() {
         return properties;
     }
-    
+
     public static ThunderProperties getExtProperties() {
         return extProperties;
     }
-    
+
     public static ThunderProperties getRemoteProperties() {
         return remoteProperties;
     }

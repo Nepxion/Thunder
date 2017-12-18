@@ -16,21 +16,21 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DestinationEntity implements Serializable {
     private static final long serialVersionUID = 7659819277817309758L;
-    
+
     private DestinationType destinationType;
     private String interfaze;
     private ApplicationEntity applicationEntity;
-    
+
     public DestinationEntity(String interfaze, ApplicationEntity applicationEntity) {
         this(null, interfaze, applicationEntity);
     }
-    
+
     public DestinationEntity(DestinationType destinationType, String interfaze, ApplicationEntity applicationEntity) {
         this.destinationType = destinationType;
         this.interfaze = interfaze;
         this.applicationEntity = applicationEntity;
     }
-    
+
     @Override
     public int hashCode() {
         int result = 17;
@@ -70,7 +70,7 @@ public class DestinationEntity implements Serializable {
     public String toString() {
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
-        
+
         StringBuilder builder = new StringBuilder();
         if (destinationType != null) {
             builder.append(destinationType);
@@ -81,7 +81,7 @@ public class DestinationEntity implements Serializable {
         builder.append(application);
         builder.append("-");
         builder.append(interfaze);
-        
+
         return builder.toString();
     }
 }

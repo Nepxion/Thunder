@@ -18,13 +18,13 @@ public class ReferenceInstanceEvent extends InstanceEvent {
     public ReferenceInstanceEvent(InstanceEventType eventType, String interfaze, ApplicationEntity applicationEntity, List<ApplicationEntity> applicationEntityList) {
         super(eventType, interfaze, applicationEntity, applicationEntityList);
     }
-    
+
     @Override
     public String toString() {
         return getEventName();
     }
-    
+
     public static String getEventName() {
-        return ReferenceInstanceEvent.class.getName(); 
+        return ReferenceInstanceEvent.class.getName();
     }
 }

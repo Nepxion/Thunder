@@ -13,7 +13,7 @@ package com.nepxion.thunder.cluster.loadbalance;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.ConnectionEntity;
 
-public interface LoadBalanceExecutor extends ThunderDelegate {  
+public interface LoadBalanceExecutor extends ThunderDelegate {
     // 负载均衡
     ConnectionEntity loadBalance(String interfaze) throws Exception;
 }

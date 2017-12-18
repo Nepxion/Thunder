@@ -43,7 +43,7 @@ public abstract class InstanceEvent extends Event {
     public ApplicationEntity getApplicationEntity() {
         return applicationEntity;
     }
-    
+
     public List<ApplicationEntity> getApplicationEntityList() {
         return applicationEntityList;
     }

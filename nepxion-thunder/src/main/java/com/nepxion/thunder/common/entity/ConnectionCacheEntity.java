@@ -22,23 +22,23 @@ import com.google.common.collect.Maps;
 
 public class ConnectionCacheEntity {
     private Map<String, List<ConnectionEntity>> connectionEntityMap;
-    
+
     public ConnectionCacheEntity() {
         connectionEntityMap = Maps.newConcurrentMap();
     }
-    
-    public synchronized Map<String, List<ConnectionEntity>> getConnectionEntityMap() {        
+
+    public synchronized Map<String, List<ConnectionEntity>> getConnectionEntityMap() {
         return connectionEntityMap;
     }
-    
-    public synchronized List<ConnectionEntity> getConnectionEntityList(String interfaze) {        
+
+    public synchronized List<ConnectionEntity> getConnectionEntityList(String interfaze) {
         return connectionEntityMap.get(interfaze);
     }
-    
+
     // 根据Interface获取应用实体的列表
     public synchronized List<ApplicationEntity> getApplicationEntityList(String interfaze) {
         List<ApplicationEntity> applicationEntityList = new ArrayList<ApplicationEntity>();
-        
+
         List<ConnectionEntity> connectionEntityList = retrieveConnectionEntityList(interfaze);
         for (ConnectionEntity connectionEntity : connectionEntityList) {
             ApplicationEntity applicationEntity = connectionEntity.getApplicationEntity();
@@ -46,16 +46,16 @@ public class ConnectionCacheEntity {
                 applicationEntityList.add(applicationEntity);
             }
         }
-        
+
         return applicationEntityList;
     }
-    
+
     // 复制已存在的连接实体
     public synchronized void duplicateConnectionEntity(String interfaze, ApplicationEntity applicationEntity) {
         ConnectionEntity connectionEntity = getConnectionEntity(applicationEntity);
         online(interfaze, connectionEntity);
     }
-    
+
     // 判断缓存是否含有上下线信息，如果contains==true，说明上线，反之下线
     // 对于TCP调用，多个Interface共享一个通道
     // 对于HTTP调用，单个Interface占用一个连接
@@ -66,7 +66,7 @@ public class ConnectionCacheEntity {
             return getConnectionEntity(applicationEntity) != null;
         }
     }
-    
+
     // 客户端连接上线，加入缓存
     public synchronized void online(String interfaze, ConnectionEntity connectionEntity) {
         List<ConnectionEntity> connectionEntityList = retrieveConnectionEntityList(interfaze);
@@ -74,7 +74,7 @@ public class ConnectionCacheEntity {
             connectionEntityList.add(connectionEntity);
         }
     }
-    
+
     // 客户端连接下线，移出缓存
     public synchronized void offline(String interfaze, ApplicationEntity applicationEntity) {
         if (StringUtils.isNotEmpty(interfaze)) {
@@ -83,7 +83,7 @@ public class ConnectionCacheEntity {
             removeConnectionEntity(applicationEntity);
         }
     }
-    
+
     private synchronized ConnectionEntity getConnectionEntity(String interfaze, ApplicationEntity applicationEntity) {
         List<ConnectionEntity> connectionEntityList = retrieveConnectionEntityList(interfaze);
         if (CollectionUtils.isEmpty(connectionEntityList)) {
@@ -96,10 +96,10 @@ public class ConnectionCacheEntity {
                 return connectionEntity;
             }
         }
-        
+
         return null;
     }
-    
+
     private synchronized ConnectionEntity getConnectionEntity(ApplicationEntity applicationEntity) {
         for (Map.Entry<String, List<ConnectionEntity>> entry : connectionEntityMap.entrySet()) {
             List<ConnectionEntity> connectionEntityList = entry.getValue();
@@ -110,10 +110,10 @@ public class ConnectionCacheEntity {
                 }
             }
         }
-        
+
         return null;
     }
-    
+
     private void removeConnectionEntity(String interfaze, ApplicationEntity applicationEntity) {
         List<ConnectionEntity> connectionEntityList = retrieveConnectionEntityList(interfaze);
         if (CollectionUtils.isEmpty(connectionEntityList)) {
@@ -124,12 +124,12 @@ public class ConnectionCacheEntity {
             ApplicationEntity entity = connectionEntity.getApplicationEntity();
             if (entity.equals(applicationEntity)) {
                 connectionEntityList.remove(connectionEntity);
-                
+
                 break;
             }
         }
     }
-    
+
     private void removeConnectionEntity(ApplicationEntity applicationEntity) {
         for (Map.Entry<String, List<ConnectionEntity>> entry : connectionEntityMap.entrySet()) {
             List<ConnectionEntity> connectionEntityList = entry.getValue();
@@ -137,13 +137,13 @@ public class ConnectionCacheEntity {
                 ApplicationEntity entity = connectionEntity.getApplicationEntity();
                 if (entity.equals(applicationEntity)) {
                     connectionEntityList.remove(connectionEntity);
-                    
+
                     break;
                 }
             }
         }
     }
-    
+
     // 获取ConnectionEntityList，如果是null，塞入一个新的List并返回它
     private synchronized List<ConnectionEntity> retrieveConnectionEntityList(String interfaze) {
         List<ConnectionEntity> connectionEntityList = getConnectionEntityList(interfaze);

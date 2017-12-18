@@ -27,7 +27,7 @@ public class MethodEntity implements Serializable {
     private boolean broadcast;
     private ThunderCallback<?> callback;
     private CallbackType callbackType;
-    
+
     public String getMethod() {
         return method;
     }
@@ -46,7 +46,7 @@ public class MethodEntity implements Serializable {
         }
         this.parameterTypes = parameterTypes;
     }
-    
+
     public int getTraceIdIndex() {
         return traceIdIndex;
     }
@@ -78,7 +78,7 @@ public class MethodEntity implements Serializable {
     public void setBroadcast(boolean broadcast) {
         this.broadcast = broadcast;
     }
-    
+
     public ThunderCallback<?> getCallback() {
         return callback;
     }
@@ -86,7 +86,7 @@ public class MethodEntity implements Serializable {
     public void setCallback(ThunderCallback<?> callback) {
         this.callback = callback;
     }
-    
+
     public CallbackType getCallbackType() {
         return callbackType;
     }
@@ -94,14 +94,14 @@ public class MethodEntity implements Serializable {
     public void setCallbackType(CallbackType callbackType) {
         this.callbackType = callbackType;
     }
-    
+
     public boolean isCallback() {
         return callback != null || callbackType != null;
     }
-    
+
     public MethodEntity clone() {
         MethodEntity methodEntity = new MethodEntity();
-        
+
         methodEntity.setMethod(method);
         methodEntity.setParameterTypes(parameterTypes);
         methodEntity.setTraceIdIndex(traceIdIndex);
@@ -117,15 +117,15 @@ public class MethodEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        
+
         if (method != null) {
             result = 37 * result + method.hashCode();
         }
-        
+
         if (parameterTypes != null) {
             result = 37 * result + parameterTypes.hashCode();
         }
-        
+
         result = 37 * result + traceIdIndex;
         result = 37 * result + (async ? Boolean.TRUE.hashCode() : Boolean.FALSE.hashCode());
         result = 37 * result + String.valueOf(timeout).hashCode();
@@ -133,7 +133,7 @@ public class MethodEntity implements Serializable {
         if (callbackType != null) {
             result = 37 * result + callbackType.hashCode();
         }
-        
+
         return result;
     }
 
@@ -142,21 +142,21 @@ public class MethodEntity implements Serializable {
         if (!(object instanceof MethodEntity)) {
             return false;
         }
-        
+
         MethodEntity methodEntity = (MethodEntity) object;
         if (StringUtils.equals(this.method, methodEntity.method)
                 && StringUtils.equals(this.parameterTypes, methodEntity.parameterTypes)
-                && this.traceIdIndex == methodEntity.traceIdIndex				
+                && this.traceIdIndex == methodEntity.traceIdIndex
                 && Boolean.valueOf(this.async).equals(Boolean.valueOf(methodEntity.async))
                 && this.timeout == methodEntity.timeout
                 && Boolean.valueOf(this.broadcast).equals(Boolean.valueOf(methodEntity.broadcast))
                 && this.callbackType == methodEntity.callbackType) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

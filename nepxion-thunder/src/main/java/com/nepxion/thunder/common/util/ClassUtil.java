@@ -56,7 +56,7 @@ public class ClassUtil {
 
         return "";
     }
-    
+
     public static List<String> convertMethodList(Class<?> clazz) {
         List<String> methodList = new ArrayList<String>();
         Method[] methods = clazz.getMethods();
@@ -64,21 +64,21 @@ public class ClassUtil {
             String methodDescription = convertParameter(method.getName(), method.getParameterTypes());
             methodList.add(methodDescription);
         }
-        
+
         return methodList;
     }
-    
+
     public static Map<MethodKey, MethodEntity> convertMethodMap(Class<?> clazz, MethodEntity entity) {
         Map<MethodKey, MethodEntity> methodMap = new HashMap<MethodKey, MethodEntity>();
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             String methodName = method.getName();
             String parameterTypes = convertParameter(method.getParameterTypes());
-            
+
             MethodKey methodKey = new MethodKey();
             methodKey.setMethod(methodName);
             methodKey.setParameterTypes(parameterTypes);
-            
+
             MethodEntity methodEntity = new MethodEntity();
             methodEntity.setMethod(methodName);
             methodEntity.setParameterTypes(parameterTypes);
@@ -87,13 +87,13 @@ public class ClassUtil {
             methodEntity.setTimeout(entity.getTimeout());
             methodEntity.setBroadcast(entity.isBroadcast());
             methodEntity.setCallbackType(entity.getCallbackType());
-            
+
             methodMap.put(methodKey, methodEntity);
         }
-        
+
         return methodMap;
     }
-    
+
     // 根据接口类中Method获取用户定义的MethodKey
     public static MethodKey getMethodKey(Map<MethodKey, MethodEntity> methodMap, String method) {
         for (Map.Entry<MethodKey, MethodEntity> entry : methodMap.entrySet()) {
@@ -105,7 +105,7 @@ public class ClassUtil {
 
         return null;
     }
-    
+
     // 根据接口类中Method判断用户定义的MethodKey是否重复定义(前提，用户设置ParameterTypes为空)
     public static boolean duplicatedMethodKey(Map<MethodKey, MethodEntity> methodMap, String method) {
         int count = 0;
@@ -118,7 +118,7 @@ public class ClassUtil {
 
         return count > 1;
     }
-    
+
     // 根据接口类中Method和ParameterTypes判断用户定义的MethodKey是否存在
     public static boolean hasMethodKey(Map<MethodKey, MethodEntity> methodMap, MethodKey methodKey) {
         for (Map.Entry<MethodKey, MethodEntity> entry : methodMap.entrySet()) {
@@ -152,32 +152,32 @@ public class ClassUtil {
     public static <T> T createInstance(String className) throws Exception {
         return (T) Class.forName(className).newInstance();
     }
-    
+
     @SuppressWarnings("unchecked")
     public static <T> T createInstance(String className, Object... args) throws Exception {
         Class<?> clazz = Class.forName(className);
-        
+
         Class<?>[] argsClasses = new Class[args.length];
         for (int i = 0; i < args.length; i++) {
             argsClasses[i] = args[i].getClass();
         }
-        
+
         Constructor<?> constructor = clazz.getConstructor(argsClasses);
-        
+
         return (T) constructor.newInstance(args);
     }
-    
+
     @SuppressWarnings("unchecked")
-    public static <T> T createConstructor(String className, Class<?>... parameterTypes) throws Exception {        
+    public static <T> T createConstructor(String className, Class<?>... parameterTypes) throws Exception {
         return (T) Class.forName(className).getConstructor(parameterTypes);
     }
-    
+
     public static Object invoke(Object object, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws Exception {
         MethodInvocation invocation = new MethodInvocation();
         invocation.setMethodName(methodName);
         invocation.setParameterTypes(parameterTypes);
         invocation.setParameters(parameters);
-        
-        return invocation.invoke(object); 
+
+        return invocation.invoke(object);
     }
 }

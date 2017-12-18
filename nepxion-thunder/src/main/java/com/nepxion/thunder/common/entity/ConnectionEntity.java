@@ -46,11 +46,11 @@ public class ConnectionEntity implements Serializable {
     public void setConnectionHandler(Object connectionHandler) {
         this.connectionHandler = connectionHandler;
     }
-    
+
     public boolean isAvailable() {
         return applicationEntity != null && connectionHandler != null;
     }
-    
+
     // 调试用
     public String getEntityString() {
         StringBuilder builder = new StringBuilder();
@@ -60,7 +60,7 @@ public class ConnectionEntity implements Serializable {
         builder.append(url);
         builder.append(", connectionHandler=");
         builder.append(connectionHandler);
-        
+
         return builder.toString();
     }
 

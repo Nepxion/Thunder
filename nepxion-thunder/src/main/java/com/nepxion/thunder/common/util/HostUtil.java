@@ -22,7 +22,7 @@ public class HostUtil {
     private static final Logger LOG = LoggerFactory.getLogger(HostUtil.class);
     private static final char COLON = ':';
     private static final String LOCAL_HOST = "127.0.0.1";
-     
+
     // 多网卡中获取IP地址
     public static String getLocalhost() {
         Enumeration<NetworkInterface> interfaces = null;
@@ -31,11 +31,11 @@ public class HostUtil {
         } catch (SocketException e) {
             LOG.error("Socket exception", e);
         }
-        
+
         if (interfaces == null) {
             return null;
         }
-        
+
         while (interfaces.hasMoreElements()) {
             NetworkInterface interfaze = interfaces.nextElement();
             Enumeration<InetAddress> addresses = interfaze.getInetAddresses();
@@ -46,7 +46,7 @@ public class HostUtil {
                 }
             }
         }
-        
+
         return LOCAL_HOST;
     }
 }

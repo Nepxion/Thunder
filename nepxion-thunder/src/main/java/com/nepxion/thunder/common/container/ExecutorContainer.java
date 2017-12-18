@@ -27,37 +27,37 @@ import com.nepxion.thunder.security.SecurityExecutor;
 public class ExecutorContainer {
     // 服务端启动适配器
     private ServerExecutorAdapter serverExecutorAdapter;
-    
+
     // 客户端启动适配器
     private ClientExecutorAdapter clientExecutorAdapter;
-    
+
     // 客户端调用拦截适配器
     private ClientInterceptorAdapter clientInterceptorAdapter;
-    
+
     // 服务端启动器
     private ServerExecutor serverExecutor;
-    
+
     // 客户端启动器
     private ClientExecutor clientExecutor;
-    
+
     // 注册中心初始器
     private RegistryInitializer registryInitializer;
-    
+
     // 注册中心执行器
     private RegistryExecutor registryExecutor;
-    
+
     // 集群同步器
     private ConsistencyExecutor consistencyExecutor;
-    
+
     // 负载均衡器
     private LoadBalanceExecutor loadBalanceExecutor;
-    
+
     // 安全控制器
     private SecurityExecutor securityExecutor;
-    
+
     // 监控器
     private List<MonitorExecutor> monitorExecutors;
-    
+
     public ServerExecutorAdapter getServerExecutorAdapter() {
         return serverExecutorAdapter;
     }
@@ -97,7 +97,7 @@ public class ExecutorContainer {
     public void setClientExecutor(ClientExecutor clientExecutor) {
         this.clientExecutor = clientExecutor;
     }
-    
+
     public RegistryInitializer getRegistryInitializer() {
         return registryInitializer;
     }
@@ -105,7 +105,7 @@ public class ExecutorContainer {
     public void setRegistryInitializer(RegistryInitializer registryInitializer) {
         this.registryInitializer = registryInitializer;
     }
-    
+
     public RegistryExecutor getRegistryExecutor() {
         return registryExecutor;
     }
@@ -113,7 +113,7 @@ public class ExecutorContainer {
     public void setRegistryExecutor(RegistryExecutor registryExecutor) {
         this.registryExecutor = registryExecutor;
     }
-    
+
     public ConsistencyExecutor getConsistencyExecutor() {
         return consistencyExecutor;
     }
@@ -129,7 +129,7 @@ public class ExecutorContainer {
     public void setLoadBalanceExecutor(LoadBalanceExecutor loadBalanceExecutor) {
         this.loadBalanceExecutor = loadBalanceExecutor;
     }
-    
+
     public SecurityExecutor getSecurityExecutor() {
         return securityExecutor;
     }

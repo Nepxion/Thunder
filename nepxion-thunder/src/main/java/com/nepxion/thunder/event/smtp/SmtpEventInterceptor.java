@@ -29,17 +29,17 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
 
     private ThunderProperties properties;
     private List<String> notificationExclusionList;
-    
+
     private SmtpExecutor smtpExecutor;
 
     public SmtpEventInterceptor(ThunderProperties properties) {
         this.properties = properties;
 
-        String notificationExclusion =  properties.getString(ThunderConstants.SMTP_NOTIFICATION_EXCLUSION_ATTRIBUTE_NAME);
+        String notificationExclusion = properties.getString(ThunderConstants.SMTP_NOTIFICATION_EXCLUSION_ATTRIBUTE_NAME);
         String host = properties.getString(ThunderConstants.SMTP_HOST_ATTRIBUTE_NAME);
         String user = properties.getString(ThunderConstants.SMTP_USER_ATTRIBUTE_NAME);
         String password = properties.getString(ThunderConstants.SMTP_PASSWORD_ATTRIBUTE_NAME);
-        
+
         notificationExclusionList = new ArrayList<String>();
         String[] notificationExclusionArray = StringUtils.split(notificationExclusion, ",");
         for (String exclusion : notificationExclusionArray) {
@@ -64,7 +64,7 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
                 return;
             }
         }
-        
+
         try {
             send(event);
         } catch (Exception e) {

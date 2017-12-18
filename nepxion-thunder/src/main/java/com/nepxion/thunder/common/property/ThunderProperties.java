@@ -64,7 +64,7 @@ public class ThunderProperties implements Serializable {
                 IOUtils.closeQuietly(inputStream);
             }
         }
-        
+
         content = new String(bytes, ThunderConstants.ENCODING_FORMAT).trim();
     }
 
@@ -140,7 +140,7 @@ public class ThunderProperties implements Serializable {
     public void mergeProperties(ThunderProperties properties) {
         map.putAll(properties.getMap());
     }
-    
+
     // 抽取全局配置中的配置分组，key为组名，例如kafka
     public Map<String, ThunderProperties> extractProperties(String group) {
         Map<String, ThunderProperties> propertiesMap = Maps.newConcurrentMap();
@@ -163,7 +163,7 @@ public class ThunderProperties implements Serializable {
                 subProperties.put(name, value);
             }
         }
-        
+
         return propertiesMap;
     }
 

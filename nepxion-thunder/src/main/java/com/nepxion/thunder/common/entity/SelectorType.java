@@ -23,14 +23,14 @@ public enum SelectorType {
     public String getValue() {
         return value;
     }
-    
+
     public static SelectorType fromString(String value) {
         for (SelectorType type : SelectorType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

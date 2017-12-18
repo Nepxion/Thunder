@@ -49,15 +49,15 @@ public abstract class AbstractLoadBalanceExecutor extends ThunderDelegateImpl im
 
                 connectionEntityList = getConnectionEntityList(interfaze);
                 cacheConnectionEntityList(connectionEntityList);
-                
+
                 i++;
             }
         } else {
             if (CollectionUtils.isEmpty(connectionEntityList)) {
                 LoadBalanceException loadBalanceException = new LoadBalanceException("Service instance [" + interfaze + "] can't be retrieved at Registry Center");
-                
+
                 LOG.error("Services are all offline", loadBalanceException);
-                
+
                 throw loadBalanceException;
             }
         }
@@ -71,16 +71,16 @@ public abstract class AbstractLoadBalanceExecutor extends ThunderDelegateImpl im
             TimeUnit.MILLISECONDS.sleep(3000);
 
             connectionEntity = loadBalance(interfaze, connectionEntityList);
-            
+
             j++;
         }
-        
+
         if (connectionEntity == null || !connectionEntity.isAvailable()) {
             LOG.error("Service is unavailable");
-            
+
             return null;
         }
-        
+
         boolean loadBalanceLogPrint = properties.getBoolean(ThunderConstants.LOAD_BALANCE_LOG_PRINT_ATTRIBUTE_NAME);
         if (loadBalanceLogPrint) {
             StrategyEntity strategyEntity = cacheContainer.getStrategyEntity();
@@ -88,7 +88,7 @@ public abstract class AbstractLoadBalanceExecutor extends ThunderDelegateImpl im
             ApplicationEntity applicationEntity = connectionEntity.getApplicationEntity();
             LOG.info("{} - Loadbalance to host={}, port={}, service={}", StringUtil.firstLetterToUpper(loadBalanceType.toString()), applicationEntity.getHost(), applicationEntity.getPort(), interfaze);
         }
-        
+
         return connectionEntity;
     }
 
@@ -98,8 +98,8 @@ public abstract class AbstractLoadBalanceExecutor extends ThunderDelegateImpl im
 
     // 用于更新一致性Hash的缓存，其它的负载均衡算法空实现
     protected void cacheConnectionEntityList(List<ConnectionEntity> connectionEntityList) {
-        
+
     }
-    
+
     protected abstract ConnectionEntity loadBalance(String interfaze, List<ConnectionEntity> connectionEntityList) throws Exception;
 }

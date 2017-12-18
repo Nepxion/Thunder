@@ -25,7 +25,7 @@ public class BlockingPolicyWithReport implements RejectedExecutionHandler {
     public BlockingPolicyWithReport() {
         this(null);
     }
-    
+
     public BlockingPolicyWithReport(String threadName) {
         this.threadName = threadName;
     }
@@ -44,7 +44,7 @@ public class BlockingPolicyWithReport implements RejectedExecutionHandler {
         if (threadName != null) {
             LOG.error("Thread pool [{}] is exhausted, executor={}", threadName, executor.toString());
         }
-        
+
         if (!executor.isShutdown()) {
             try {
                 // 添加一个元素， 如果队列满，则阻塞

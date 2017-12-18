@@ -17,11 +17,11 @@ import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class ObjectPoolFactory {
     private static ThunderProperties properties;
-    
+
     public static void initialize(ThunderProperties properties) {
         ObjectPoolFactory.properties = properties;
     }
-    
+
     public static GenericObjectPoolConfig createFSTObjectPoolConfig() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
         try {
@@ -46,7 +46,7 @@ public class ObjectPoolFactory {
 
         return config;
     }
-    
+
     public static GenericObjectPoolConfig createRedisObjectPoolConfig() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
         try {

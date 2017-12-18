@@ -18,7 +18,7 @@ import org.apache.commons.io.IOUtils;
 public class IOUtil {
     public static String read(String path, String encoding) throws Exception {
         String content = null;
-        
+
         InputStream inputStream = null;
         try {
             // 从Resource路径获取
@@ -28,7 +28,7 @@ public class IOUtil {
                 inputStream = new FileInputStream(path);
             }
             content = IOUtils.toString(inputStream, encoding);
-            
+
             /*List<String> lines = IOUtils.readLines(inputStream, encoding);
             StringBuilder builder = new StringBuilder();
             for (String line : lines) {
@@ -41,7 +41,7 @@ public class IOUtil {
                 IOUtils.closeQuietly(inputStream);
             }
         }
-        
+
         return content;
     }
 }

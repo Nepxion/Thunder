@@ -26,7 +26,7 @@ public class RejectedPolicyWithReport implements RejectedExecutionHandler {
     public RejectedPolicyWithReport() {
         this(null);
     }
-    
+
     public RejectedPolicyWithReport(String threadName) {
         this.threadName = threadName;
     }
@@ -36,7 +36,7 @@ public class RejectedPolicyWithReport implements RejectedExecutionHandler {
         if (threadName != null) {
             LOG.error("Thread pool [{}] is exhausted, executor={}", threadName, executor.toString());
         }
-        
+
         if (runnable instanceof RejectedRunnable) {
             ((RejectedRunnable) runnable).rejected(); // 交给用户来处理
         } else {
@@ -52,8 +52,8 @@ public class RejectedPolicyWithReport implements RejectedExecutionHandler {
                 try {
                     // 添加一个元素， 如果队列满，则阻塞
                     queue.put(runnable);
-                } catch (InterruptedException e) { 
-                    // should not be interrupted 
+                } catch (InterruptedException e) {
+                    // should not be interrupted
                 }
             }
         }

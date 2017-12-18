@@ -23,14 +23,14 @@ public enum InstanceEventType {
     public String getValue() {
         return value;
     }
-    
+
     public static InstanceEventType fromString(String value) {
         for (InstanceEventType type : InstanceEventType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

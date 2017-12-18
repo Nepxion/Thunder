@@ -21,10 +21,10 @@ public class PropertiesUtil {
     public static String read(String path, String encoding) throws Exception {
         return read(new PropertiesConfiguration(path), encoding);
     }
-    
+
     public static String read(PropertiesConfiguration configuration, String encoding) throws Exception {
         String content = null;
-        
+
         File file = configuration.getFile();
         if (file != null) {
             content = FileUtils.readFileToString(file, encoding);

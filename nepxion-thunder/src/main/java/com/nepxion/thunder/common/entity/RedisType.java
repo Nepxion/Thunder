@@ -23,14 +23,14 @@ public enum RedisType {
     public String getValue() {
         return value;
     }
-    
+
     public static RedisType fromString(String value) {
         for (RedisType type : RedisType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

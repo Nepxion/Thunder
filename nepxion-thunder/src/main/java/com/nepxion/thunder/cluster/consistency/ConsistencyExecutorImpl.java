@@ -26,14 +26,14 @@ public class ConsistencyExecutorImpl extends ThunderDelegateImpl implements Cons
     private static final Logger LOG = LoggerFactory.getLogger(ConsistencyExecutorImpl.class);
 
     private byte[] lock = new byte[0];
-    
+
     @Override
     public void consist(ServiceInstanceEvent event) throws Exception {
         synchronized (lock) {
             consistOnce(event);
         }
     }
-    
+
     protected void consistOnce(ServiceInstanceEvent event) {
         InstanceEventType eventType = event.getEventType();
         String interfaze = event.getInterface();
@@ -53,14 +53,14 @@ public class ConsistencyExecutorImpl extends ThunderDelegateImpl implements Cons
         } catch (Exception e) {
             LOG.error("Registry Center update failed", e);
         }
-        
+
         LOG.info("------------------------ 注册中心消息 ------------------------");
-   
+
         summary(interfaze);
 
         LOG.info("------------------------------------------------------------");
     }
-    
+
     protected void consistBatch(ServiceInstanceEvent event) throws Exception {
         InstanceEventType eventType = event.getEventType();
         String interfaze = event.getInterface();
@@ -88,7 +88,7 @@ public class ConsistencyExecutorImpl extends ThunderDelegateImpl implements Cons
 
         LOG.info("------------------------------------------------------------");
     }
-    
+
     private void consistBatch(String interfaze, List<ApplicationEntity> remoteList) throws Exception {
         List<ApplicationEntity> localList = cacheContainer.getConnectionCacheEntity().getApplicationEntityList(interfaze);
         if (!CollectionUtils.isEqualCollection(localList, remoteList)) {
@@ -100,13 +100,13 @@ public class ConsistencyExecutorImpl extends ThunderDelegateImpl implements Cons
             consistBatchClient(interfaze, offlineList, false);
         }
     }
-    
+
     private void consistBatchClient(String interfaze, List<ApplicationEntity> changedList, boolean online) throws Exception {
         for (ApplicationEntity applicationEntity : changedList) {
             consistClient(interfaze, applicationEntity, online);
         }
     }
-    
+
     private void consistClient(String interfaze, ApplicationEntity applicationEntity, boolean online) throws Exception {
         ClientExecutor clientExecutor = executorContainer.getClientExecutor();
         if (online) {

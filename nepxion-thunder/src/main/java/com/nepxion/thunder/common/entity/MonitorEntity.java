@@ -17,9 +17,9 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class MonitorEntity implements Serializable {
     private static final long serialVersionUID = 631345745107842496L;
-    
+
     private byte[] lock = new byte[0];
-    
+
     private List<MonitorType> types;
     private List<String> addresses;
 
@@ -30,13 +30,13 @@ public class MonitorEntity implements Serializable {
     public void setTypes(List<MonitorType> types) {
         this.types = types;
     }
-    
+
     public List<String> getAddresses() {
         synchronized (lock) {
             return addresses;
         }
     }
-    
+
     public void setAddresses(List<String> addresses) {
         synchronized (lock) {
             this.addresses = addresses;
@@ -50,7 +50,7 @@ public class MonitorEntity implements Serializable {
             }
         }
     }
-    
+
     public void removeAddress(String address) {
         synchronized (lock) {
             if (addresses.contains(address)) {
@@ -58,14 +58,14 @@ public class MonitorEntity implements Serializable {
             }
         }
     }
-    
+
     public boolean hasWebService() {
         for (MonitorType type : types) {
             if (type == MonitorType.WEB_SERVICE) {
                 return true;
             }
         }
-        
+
         return false;
     }
 

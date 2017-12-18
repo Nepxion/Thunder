@@ -17,19 +17,19 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ReferenceEntity implements Serializable {
     private static final long serialVersionUID = -862261059257935018L;
-    
+
     private String interfaze;
     private String server;
     private Map<MethodKey, MethodEntity> methodMap;
-    
+
     public String getInterface() {
         return interfaze;
     }
-    
+
     public void setInterface(String interfaze) {
         this.interfaze = interfaze;
     }
-    
+
     public String getServer() {
         return server;
     }
@@ -37,13 +37,13 @@ public class ReferenceEntity implements Serializable {
     public void setServer(String server) {
         this.server = server;
     }
-    
+
     public MethodEntity getMethodEntity(MethodKey methodKey) {
         MethodEntity methodEntity = methodMap.get(methodKey);
-        
+
         return methodEntity;
     }
-    
+
     public boolean hasFeedback() {
         for (Map.Entry<MethodKey, MethodEntity> entry : methodMap.entrySet()) {
             MethodEntity methodEntity = entry.getValue();
@@ -55,7 +55,7 @@ public class ReferenceEntity implements Serializable {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -66,22 +66,22 @@ public class ReferenceEntity implements Serializable {
     public void setMethodMap(Map<MethodKey, MethodEntity> methodMap) {
         this.methodMap = methodMap;
     }
-    
+
     @Override
     public int hashCode() {
         int result = 17;
         if (interfaze != null) {
             result = 37 * result + interfaze.hashCode();
         }
-        
+
         if (server != null) {
             result = 37 * result + server.hashCode();
         }
-        
+
         if (methodMap != null) {
             result = 37 * result + methodMap.hashCode();
         }
-        
+
         return result;
     }
 
@@ -90,17 +90,17 @@ public class ReferenceEntity implements Serializable {
         if (!(object instanceof ReferenceEntity)) {
             return false;
         }
-        
+
         ReferenceEntity referenceEntity = (ReferenceEntity) object;
         if (StringUtils.equals(this.interfaze, referenceEntity.interfaze)
                 && StringUtils.equals(this.server, referenceEntity.server)
                 && (this.methodMap == null ? referenceEntity.methodMap == null : this.methodMap.equals(referenceEntity.methodMap))) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -110,7 +110,7 @@ public class ReferenceEntity implements Serializable {
         builder.append(server);
         builder.append(", methodMap=");
         builder.append(methodMap);
-        
+
         return builder.toString();
     }
 }

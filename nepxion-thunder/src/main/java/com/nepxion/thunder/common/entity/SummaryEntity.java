@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class SummaryEntity implements Serializable {
     private static final long serialVersionUID = -3843119621145926019L;
-    
+
     private static final String NOT_STARTED = "Not Started";
     private static final String NOT_CONNECTED = "Not Connected";
 
@@ -115,7 +115,7 @@ public class SummaryEntity implements Serializable {
     public String getAddressString() {
         return addressString;
     }
-    
+
     public List<String> getTimes() {
         return times;
     }
@@ -142,7 +142,7 @@ public class SummaryEntity implements Serializable {
             timeString = getOfflineDescription();
         }
     }
-    
+
     private String getOfflineDescription() {
         switch (applicationType) {
             case SERVICE:
@@ -150,7 +150,7 @@ public class SummaryEntity implements Serializable {
             case REFERENCE:
                 return StringUtils.isNotEmpty(notConnectedDescription) ? notConnectedDescription : NOT_CONNECTED;
         }
-        
+
         return null;
     }
 

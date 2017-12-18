@@ -24,16 +24,16 @@ import com.nepxion.thunder.protocol.ProtocolMessage;
 
 public class ProtocolEventFactory {
     private static final Logger LOG = LoggerFactory.getLogger(ProtocolEventFactory.class);
-    
+
     private static boolean eventNotification = false;
-    
+
     public static void initialize(ThunderProperties properties) {
         eventNotification = properties.getBoolean(ThunderConstants.EVENT_NOTIFICATION_ATTRIBUTE_NAME);
         if (eventNotification) {
             LOG.info("Event notification is enabled...");
         }
     }
-    
+
     public static void postServerConsumerEvent(ProtocolType protocolType, ProtocolMessage message) {
         ApplicationType applicationType = ApplicationType.SERVICE;
 
@@ -69,19 +69,19 @@ public class ProtocolEventFactory {
 
         postEvent(applicationType, actionType, protocolType, message);
     }
-    
+
     public static void postServerSystemEvent(ProtocolType protocolType, ProtocolMessage message) {
         ApplicationType applicationType = ApplicationType.SERVICE;
 
         postSystemEvent(applicationType, protocolType, message);
     }
-    
+
     public static void postClientSystemEvent(ProtocolType protocolType, ProtocolMessage message) {
         ApplicationType applicationType = ApplicationType.REFERENCE;
 
         postSystemEvent(applicationType, protocolType, message);
     }
-    
+
     public static void postSystemEvent(ApplicationType applicationType, ProtocolType protocolType, ProtocolMessage message) {
         ActionType actionType = ActionType.SYSTEM;
 
@@ -94,7 +94,7 @@ public class ProtocolEventFactory {
         }
 
         ProtocolEvent protocolEvent = new ProtocolEvent(applicationType, actionType, protocolType, message);
-        
+
         if (eventNotification) {
             EventControllerFactory.getSingletonController(EventControllerType.ASYNC).post(protocolEvent);
         }

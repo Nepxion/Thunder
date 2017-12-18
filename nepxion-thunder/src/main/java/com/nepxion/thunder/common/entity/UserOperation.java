@@ -13,13 +13,13 @@ package com.nepxion.thunder.common.entity;
 public enum UserOperation {
     // 服务治理
     SERVICE_CONTROL,
-    
+
     // 远程配置
     REMOTE_CONTROL,
-    
+
     // 安全控制
     SAFETY_CONTROL,
-    
+
     // 用户管理
     USER_CONTROL
 }

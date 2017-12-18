@@ -27,14 +27,14 @@ public class SmtpExecutor {
     protected String host;
     protected String user;
     protected String password;
-    
+
     protected Session session;
 
     public SmtpExecutor(String host, String user, String password) {
         this.host = host;
         this.user = user;
         this.password = password;
-        
+
         this.session = createSession();
     }
 
@@ -48,7 +48,7 @@ public class SmtpExecutor {
 
         return properties;
     }
-    
+
     protected Authenticator createAuthenticator() {
         return new Authenticator() {
             @Override
@@ -57,7 +57,7 @@ public class SmtpExecutor {
             }
         };
     }
-    
+
     protected Session createSession() {
         Properties properties = createProperties();
         Authenticator authenticator = createAuthenticator();
@@ -70,11 +70,11 @@ public class SmtpExecutor {
     public void sendText(String from, String to, String cc, String bcc, String subject, String text) throws Exception {
         send(from, to, cc, bcc, subject, text, false, null);
     }
-    
+
     public void sendHtml(String from, String to, String cc, String bcc, String subject, String text, String encoding) throws Exception {
         send(from, to, cc, bcc, subject, text, true, encoding);
     }
-    
+
     /**
      * 发送邮件
      * @param from      发送者地址

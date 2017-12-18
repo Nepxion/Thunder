@@ -34,7 +34,7 @@ public class ServiceConfig implements Serializable {
     public void setInterface(String interfaze) {
         this.interfaze = interfaze;
     }
-    
+
     public List<String> getMethods() {
         return methods;
     }
@@ -80,7 +80,7 @@ public class ServiceConfig implements Serializable {
         if (interfaze != null) {
             result = 37 * result + interfaze.hashCode();
         }
-        
+
         if (methods != null) {
             result = 37 * result + methods.hashCode();
         }

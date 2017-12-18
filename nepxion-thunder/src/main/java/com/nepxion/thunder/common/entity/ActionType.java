@@ -24,14 +24,14 @@ public enum ActionType {
     public String getValue() {
         return value;
     }
-    
+
     public static ActionType fromString(String value) {
         for (ActionType type : ActionType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

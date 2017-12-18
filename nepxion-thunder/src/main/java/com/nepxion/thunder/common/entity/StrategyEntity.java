@@ -28,7 +28,7 @@ public class StrategyEntity implements Serializable {
     @Override
     public int hashCode() {
         int result = 17;
-        
+
         if (loadBalanceType != null) {
             result = 37 * result + loadBalanceType.hashCode();
         }

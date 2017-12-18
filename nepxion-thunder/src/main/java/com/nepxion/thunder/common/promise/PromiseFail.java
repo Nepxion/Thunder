@@ -13,4 +13,5 @@ package com.nepxion.thunder.common.promise;
 import org.jdeferred.FailCallback;
 
 public interface PromiseFail extends FailCallback<Exception> {
+
 }

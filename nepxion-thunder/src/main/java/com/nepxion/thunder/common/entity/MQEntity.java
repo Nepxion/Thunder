@@ -21,15 +21,15 @@ public class MQEntity implements Serializable {
     private static final long serialVersionUID = -6314150329885961836L;
 
     private ThunderProperties properties;
-    
+
     private String queueId;
     private String topicId;
     private String jndiInitialContextFactoryId;
     private String initialConnectionFactoryId;
     private String pooledConnectionFactoryId;
-    
+
     private Map<String, ThunderProperties> propertiesMap;
-        
+
     public String getQueueId() {
         return queueId;
     }
@@ -37,7 +37,7 @@ public class MQEntity implements Serializable {
     public void setQueueId(String queueId) {
         this.queueId = queueId;
     }
-    
+
     public String getQueueClass() {
         return properties.getString(queueId);
     }
@@ -49,7 +49,7 @@ public class MQEntity implements Serializable {
     public void setTopicId(String topicId) {
         this.topicId = topicId;
     }
-    
+
     public String getTopicClass() {
         return properties.getString(topicId);
     }
@@ -61,7 +61,7 @@ public class MQEntity implements Serializable {
     public void setJndiInitialContextFactoryId(String jndiInitialContextFactoryId) {
         this.jndiInitialContextFactoryId = jndiInitialContextFactoryId;
     }
-    
+
     public String getJndiInitialContextFactoryClass() {
         return properties.getString(jndiInitialContextFactoryId);
     }
@@ -73,11 +73,11 @@ public class MQEntity implements Serializable {
     public void setInitialConnectionFactoryId(String initialConnectionFactoryId) {
         this.initialConnectionFactoryId = initialConnectionFactoryId;
     }
-    
+
     public String getInitialConnectionFactoryClass() {
         return properties.getString(initialConnectionFactoryId);
     }
-    
+
     public String getPooledConnectionFactoryId() {
         return pooledConnectionFactoryId;
     }
@@ -85,24 +85,24 @@ public class MQEntity implements Serializable {
     public void setPooledConnectionFactoryId(String pooledConnectionFactoryId) {
         this.pooledConnectionFactoryId = pooledConnectionFactoryId;
     }
-    
+
     public String getPooledConnectionFactoryClass() {
         return properties.getString(pooledConnectionFactoryId);
     }
-    
+
     public ThunderProperties getProperties() {
         return properties;
     }
-    
+
     public void extractProperties(ThunderProperties properties, ProtocolType protocolType) {
         this.properties = properties;
         this.propertiesMap = properties.extractProperties(protocolType.toString());
     }
-    
-    public Map<String, ThunderProperties> getPropertiesMap() {        
+
+    public Map<String, ThunderProperties> getPropertiesMap() {
         return propertiesMap;
     }
-    
+
     @Override
     public int hashCode() {
         int result = 17;
@@ -118,15 +118,15 @@ public class MQEntity implements Serializable {
         if (jndiInitialContextFactoryId != null) {
             result = 37 * result + jndiInitialContextFactoryId.hashCode();
         }
-        
+
         if (initialConnectionFactoryId != null) {
             result = 37 * result + initialConnectionFactoryId.hashCode();
         }
-        
+
         if (pooledConnectionFactoryId != null) {
             result = 37 * result + pooledConnectionFactoryId.hashCode();
         }
-        
+
         if (propertiesMap != null) {
             result = 37 * result + propertiesMap.hashCode();
         }
@@ -168,7 +168,7 @@ public class MQEntity implements Serializable {
         builder.append(pooledConnectionFactoryId);
         builder.append(", propertiesMap=");
         builder.append(propertiesMap);
-        
+
         return builder.toString();
     }
 }

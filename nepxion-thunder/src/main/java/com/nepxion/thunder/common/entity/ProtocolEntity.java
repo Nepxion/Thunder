@@ -106,7 +106,7 @@ public class ProtocolEntity implements Serializable {
         builder.append(clientExecutorId);
         builder.append(", clientInterceptorId=");
         builder.append(clientInterceptorId);
-        
+
         return builder.toString();
     }
 }

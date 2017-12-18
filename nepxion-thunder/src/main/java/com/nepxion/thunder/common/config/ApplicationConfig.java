@@ -20,7 +20,7 @@ public class ApplicationConfig implements Serializable {
     private String application;
     private String group;
     private int frequency;
-    
+
     private byte[] lock = new byte[0];
 
     public String getApplication() {
@@ -38,7 +38,7 @@ public class ApplicationConfig implements Serializable {
     public void setGroup(String group) {
         this.group = group;
     }
-    
+
     public int getFrequency() {
         return frequency;
     }
@@ -91,7 +91,7 @@ public class ApplicationConfig implements Serializable {
         builder.append(group);
         builder.append(", frequency=");
         builder.append(frequency);
-        
+
         return builder.toString();
     }
 }

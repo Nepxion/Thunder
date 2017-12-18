@@ -16,11 +16,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public class RegistryEntity implements Serializable {
     private static final long serialVersionUID = -7164716570644944474L;
-    
+
     private RegistryType type;
     private String address;
     private PropertyType propertyType;
-    
+
     public RegistryType getType() {
         return type;
     }
@@ -36,7 +36,7 @@ public class RegistryEntity implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public PropertyType getPropertyType() {
         return propertyType;
     }
@@ -56,7 +56,7 @@ public class RegistryEntity implements Serializable {
         if (address != null) {
             result = 37 * result + address.hashCode();
         }
-        
+
         if (propertyType != null) {
             result = 37 * result + propertyType.hashCode();
         }

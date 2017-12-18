@@ -17,7 +17,7 @@ public enum DestinationType {
     RESPONSE_QUEUE_ASYNC("response-queue-async"),
     RESPONSE_QUEUE_SYNC("response-queue-sync"),
     RESPONSE_TOPIC_ASYNC("response-topic-async"),
-    
+
     // 非JMS类型的MQ，例如Kafka
     REQUEST_QUEUE("request-queue"),
     RESPONSE_QUEUE("response-queue"),
@@ -32,14 +32,14 @@ public enum DestinationType {
     public String getValue() {
         return value;
     }
-    
+
     public static DestinationType fromString(String value) {
         for (DestinationType type : DestinationType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

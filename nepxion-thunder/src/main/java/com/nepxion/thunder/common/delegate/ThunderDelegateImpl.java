@@ -23,7 +23,7 @@ public class ThunderDelegateImpl implements ThunderDelegate {
     public ThunderDelegateImpl() {
 
     }
-    
+
     @Override
     public ThunderProperties getProperties() {
         return properties;
@@ -53,18 +53,18 @@ public class ThunderDelegateImpl implements ThunderDelegate {
     public void setExecutorContainer(ExecutorContainer executorContainer) {
         this.executorContainer = executorContainer;
     }
-    
+
     @Override
     public <T> T createDelegate(String delegateClassId) throws Exception {
         String delegateClassName = properties.get(delegateClassId);
 
         T delegateInstance = ClassUtil.createInstance(delegateClassName);
-        
+
         ThunderDelegate delegate = (ThunderDelegate) delegateInstance;
         delegate.setProperties(properties);
         delegate.setCacheContainer(cacheContainer);
         delegate.setExecutorContainer(executorContainer);
-        
+
         return delegateInstance;
     }
 }

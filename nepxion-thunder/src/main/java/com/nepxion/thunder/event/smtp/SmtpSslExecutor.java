@@ -25,17 +25,17 @@ public class SmtpSslExecutor extends SmtpExecutor {
         Properties properties = super.createProperties();
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.socketFactory.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true");  
+        properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.starttls.enable", "true");
-        
+
         MailSSLSocketFactory sslSocketFactory = null;
         try {
             sslSocketFactory = new MailSSLSocketFactory();
         } catch (Exception e) {
             e.printStackTrace();
-        }  
-        sslSocketFactory.setTrustAllHosts(true);  
-        properties.put("mail.smtp.ssl.socketFactory", sslSocketFactory);  
+        }
+        sslSocketFactory.setTrustAllHosts(true);
+        properties.put("mail.smtp.ssl.socketFactory", sslSocketFactory);
 
         return properties;
     }

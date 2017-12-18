@@ -24,14 +24,14 @@ public enum LoadBalanceType {
     public String getValue() {
         return value;
     }
-    
+
     public static LoadBalanceType fromString(String value) {
         for (LoadBalanceType type : LoadBalanceType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

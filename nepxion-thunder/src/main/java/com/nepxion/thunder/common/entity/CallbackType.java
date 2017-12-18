@@ -23,14 +23,14 @@ public enum CallbackType {
     public String getValue() {
         return value;
     }
-    
+
     public static CallbackType fromString(String value) {
         for (CallbackType type : CallbackType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

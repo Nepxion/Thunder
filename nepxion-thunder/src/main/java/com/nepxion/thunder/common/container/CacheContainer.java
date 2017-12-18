@@ -37,7 +37,7 @@ import com.nepxion.thunder.security.SecurityBootstrap;
 
 public class CacheContainer {
     private static final Logger LOG = LoggerFactory.getLogger(CacheContainer.class);
-    
+
     // 缓存客户端所有可用连接
     private ConnectionCacheEntity connectionCacheEntity = new ConnectionCacheEntity();
 
@@ -49,10 +49,10 @@ public class CacheContainer {
 
     // 缓存客户端所有的同步处理响应结果，key为message id
     private Map<String, ResponseSyncEntity> responseSyncEntityMap = Maps.newConcurrentMap();
-    
+
     // 缓存客户端所有的异步处理响应结果，key为message id，用于链式调用
     private Map<String, ResponseAsyncEntity> responseAsyncEntityMap = Maps.newConcurrentMap();
-    
+
     public ConnectionCacheEntity getConnectionCacheEntity() {
         return connectionCacheEntity;
     }
@@ -64,27 +64,27 @@ public class CacheContainer {
     public Map<String, ReferenceEntity> getReferenceEntityMap() {
         return referenceEntityMap;
     }
-    
+
     public MethodEntity getMethodEntity(String interfaze, MethodKey methodKey) {
         ReferenceEntity referenceEntity = referenceEntityMap.get(interfaze);
-        
+
         return referenceEntity.getMethodEntity(methodKey);
     }
-    
+
     public MethodEntity getMethodEntity(String interfaze, String method, Class<?>[] parameterTypes) {
         MethodKey methodKey = MethodKey.create(method, parameterTypes);
-        
+
         return getMethodEntity(interfaze, methodKey);
     }
 
     public Map<String, ResponseSyncEntity> getResponseSyncEntityMap() {
         return responseSyncEntityMap;
     }
-    
+
     public Map<String, ResponseAsyncEntity> getResponseAsyncEntityMap() {
         return responseAsyncEntityMap;
     }
-        
+
     // 缓存应用实体
     private ApplicationEntity applicationEntity;
 
@@ -96,13 +96,13 @@ public class CacheContainer {
 
     // 缓存策略实体
     private StrategyEntity strategyEntity;
-    
+
     // 缓存监控实体
     private MonitorEntity monitorEntity;
-    
+
     // 缓存Web服务实体
     private WebServiceEntity webServiceEntity;
-    
+
     // 缓存MQ实体
     private MQEntity mqEntity;
 
@@ -145,51 +145,50 @@ public class CacheContainer {
 
         LOG.info("Strategy entity has been set...");
     }
-    
+
     public MonitorEntity getMonitorEntity() {
         return monitorEntity;
     }
 
     public void setMonitorEntity(MonitorEntity monitorEntity) {
         this.monitorEntity = monitorEntity;
-        
+
         LOG.info("Monitor entity has been set...");
     }
-    
+
     public WebServiceEntity getWebServiceEntity() {
         return webServiceEntity;
     }
 
     public void setWebServiceEntity(WebServiceEntity webServiceEntity) {
         this.webServiceEntity = webServiceEntity;
-        
+
         LOG.info("WebService entity has been set...");
     }
-    
-    public MQEntity getMQEntity() {        
+
+    public MQEntity getMQEntity() {
         return mqEntity;
     }
-    
+
     public void setMQEntity(MQEntity mqEntity) {
         this.mqEntity = mqEntity;
-        
+
         LOG.info("MQ entity has been set...");
     }
-    
+
     // 令牌控制器
     private SecurityBootstrap securityBootstrap;
-    
+
     public SecurityBootstrap getSecurityBootstrap() {
         return securityBootstrap;
     }
 
     public void setSecurityBootstrap(SecurityBootstrap securityBootstrap) {
         this.securityBootstrap = securityBootstrap;
-        
+
         LOG.info("Security bootstrap has been set...");
     }
 
-    
     // 缓存Application config，从注册中心获得和持久化
     private ApplicationConfig applicationConfig;
 

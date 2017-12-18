@@ -20,18 +20,18 @@ import com.nepxion.thunder.common.entity.CallbackType;
 //   2. 上一个链式调用方法的回调值方式从传入
 // R为出参，即onResult方法的实现体里的异步方法的所带来的回调值，它将是下个链式调用onResult方法的入参
 public abstract class PromisePipe<T, R> implements DonePipe<T, R, Exception, Void> {
-    
+
     @SuppressWarnings("unchecked")
     @Override
-    public Promise<R, Exception, Void> pipeDone(T result) {        
+    public Promise<R, Exception, Void> pipeDone(T result) {
         try {
             onResult(result);
-            
+
             Promise<R, Exception, Void> promise = (Promise<R, Exception, Void>) PromiseContext.currentPromise();
             if (promise == null) {
                 throw new IllegalArgumentException("Get next promise failed, do you set callback=\"" + CallbackType.PROMISE + "\" correctly?");
             }
-            
+
             return promise;
         } catch (Exception e) {
             return reject(e);
@@ -51,6 +51,6 @@ public abstract class PromisePipe<T, R> implements DonePipe<T, R, Exception, Voi
 
         return promise.reject(exception);
     }
-    
+
     public abstract void onResult(T result);
 }

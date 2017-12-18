@@ -47,13 +47,13 @@ public class FileUtil {
             file.delete();
         }
     }
-    
+
     public static String validatePath(String path) {
         path = path.replace("\\", "/");
         if (!path.endsWith("/")) {
             path += "/";
         }
-        
+
         return path;
     }
 }

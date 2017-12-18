@@ -22,7 +22,7 @@ import com.nepxion.thunder.common.util.EncryptionUtil;
 
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = 5359982137894996735L;
-    
+
     private String name;
     private String password;
     private UserType type;
@@ -39,22 +39,22 @@ public class UserEntity implements Serializable {
     public void setPassword(String password) {
         this.password = encryptPassword(password);
     }
-    
+
     public boolean validatePassword(String password) {
         return StringUtils.equals(this.password, encryptPassword(password));
     }
-    
+
     public boolean validatePassword(UserEntity userEntity) {
         return StringUtils.equals(this.password, userEntity.password);
     }
-    
+
     private String encryptPassword(String password) {
         try {
             password = EncryptionUtil.encryptSHA256(password);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return password;
     }
 
@@ -74,7 +74,7 @@ public class UserEntity implements Serializable {
         if (operations == null) {
             throw new IllegalArgumentException("Operations can't be null");
         }
-        
+
         this.operations = new ArrayList<UserOperation>();
 
         for (UserOperation operation : operations) {
@@ -83,18 +83,18 @@ public class UserEntity implements Serializable {
             }
         }
     }
-    
+
     public boolean hasOperation(UserOperation operation) {
         if (CollectionUtils.isEmpty(operations)) {
             return false;
         }
-        
+
         for (UserOperation userOperation : operations) {
             if (userOperation == operation) {
                 return true;
             }
         }
-        
+
         return false;
     }
 

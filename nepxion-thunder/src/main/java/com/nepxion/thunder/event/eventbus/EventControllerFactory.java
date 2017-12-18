@@ -23,7 +23,7 @@ public final class EventControllerFactory {
     private static final String SINGLETON = "Singleton";
     private static ConcurrentMap<Object, EventController> syncControllerMap = Maps.newConcurrentMap();
     private static ConcurrentMap<Object, EventController> asyncControllerMap = Maps.newConcurrentMap();
-    
+
     private EventControllerFactory() {
 
     }
@@ -31,10 +31,10 @@ public final class EventControllerFactory {
     public static EventController getSingletonController(EventControllerType type) {
         return getController(SINGLETON, type);
     }
-    
+
     public static EventController getController(Object id, EventControllerType type) {
         switch (type) {
-            case SYNC :
+            case SYNC:
                 EventController syncEventController = syncControllerMap.get(id);
                 if (syncEventController == null) {
                     EventController newEventController = createSyncController();
@@ -43,9 +43,9 @@ public final class EventControllerFactory {
                         syncEventController = newEventController;
                     }
                 }
-                
+
                 return syncEventController;
-            case ASYNC :
+            case ASYNC:
                 EventController asyncEventController = asyncControllerMap.get(id);
                 if (asyncEventController == null) {
                     EventController newEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, EventControllerFactory.class.getName()));
@@ -54,33 +54,33 @@ public final class EventControllerFactory {
                         asyncEventController = newEventController;
                     }
                 }
-                
+
                 return asyncEventController;
         }
-        
+
         return null;
     }
-    
+
     public static EventController createSyncController() {
         return new EventControllerImpl(new EventBus());
     }
-    
+
     public static EventController createSyncController(String identifier) {
         return new EventControllerImpl(new EventBus(identifier));
     }
-    
+
     public static EventController createSyncController(SubscriberExceptionHandler subscriberExceptionHandler) {
         return new EventControllerImpl(new EventBus(subscriberExceptionHandler));
     }
-    
+
     public static EventController createAsyncController(String identifier, Executor executor) {
         return new EventControllerImpl(new AsyncEventBus(identifier, executor));
     }
-    
+
     public static EventController createAsyncController(Executor executor, SubscriberExceptionHandler subscriberExceptionHandler) {
         return new EventControllerImpl(new AsyncEventBus(executor, subscriberExceptionHandler));
     }
-    
+
     public static EventController createAsyncController(Executor executor) {
         return new EventControllerImpl(new AsyncEventBus(executor));
     }

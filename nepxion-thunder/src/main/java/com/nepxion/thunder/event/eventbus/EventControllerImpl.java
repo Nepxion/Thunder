@@ -16,7 +16,7 @@ import com.google.common.eventbus.EventBus;
 
 public class EventControllerImpl implements EventController {
     private EventBus eventBus;
-    
+
     public EventControllerImpl(EventBus eventBus) {
         this.eventBus = eventBus;
     }

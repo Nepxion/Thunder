@@ -28,18 +28,18 @@ public enum ProtocolType {
     public String getValue() {
         return value;
     }
-    
+
     public boolean isLoadBalanceSupported() {
         return StringUtils.equals(value, NETTY.toString()) || StringUtils.equals(value, HESSIAN.toString());
     }
-    
+
     public static ProtocolType fromString(String value) {
         for (ProtocolType type : ProtocolType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 
