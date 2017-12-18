@@ -6,7 +6,7 @@
 @echo $                                                           $
 @echo $                                                           $
 @echo $  Nepxion Technologies All Right Reserved                  $
-@echo $  Copyright(C) 2015                                        $
+@echo $  Copyright(C) 2017                                        $
 @echo $                                                           $
 @echo =============================================================
 @echo.
