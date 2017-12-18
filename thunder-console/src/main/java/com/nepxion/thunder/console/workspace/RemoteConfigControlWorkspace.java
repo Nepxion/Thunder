@@ -50,13 +50,13 @@ public class RemoteConfigControlWorkspace extends ConfigWorkspace {
     @Override
     protected ButtonSpace createButtonSpace() {
         ButtonSpace buttonSpace = super.createButtonSpace();
-        
+
         JClassicButton savePropertyButton = new JClassicButton(createSavePropertyAction());
 
         buttonSpace.add(Box.createHorizontalStrut(5));
         buttonSpace.add(savePropertyButton);
         buttonSpace.updateLayout();
-        
+
         return buttonSpace;
     }
 
@@ -68,7 +68,7 @@ public class RemoteConfigControlWorkspace extends ConfigWorkspace {
                 if (propertyTextArea == null) {
                     return;
                 }
-                
+
                 String property = propertyTextArea.getText();
                 try {
                     PropertyController.modifyProperty(applicationEntity, property);
@@ -93,7 +93,7 @@ public class RemoteConfigControlWorkspace extends ConfigWorkspace {
             container.add(new JBasicScrollPane(createPropertyTextArea()));
 
             JSearchableFactory.installSearchableBar(propertyTextArea, container, true);
-            
+
             configContainer = new JPanel();
             configContainer.setBorder(createTitledBorder(ConsoleLocale.getString("remote_config")));
             configContainer.setLayout(new BorderLayout());

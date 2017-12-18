@@ -108,12 +108,12 @@ import com.nepxion.util.locale.LocaleContext;
 
 public class TraceTopology extends AbstractTopology {
     private static final long serialVersionUID = 1L;
-    private static final String[] TITLES = { 
-        "messageId", "messageType", "fromCluster", "fromUrl", "toCluster", "toUrl", 
-        "processStartTime", "processEndTime", "deliverStartTime", "deliverEndTime", "processedTime", "deliveredTime", "totalTime", 
-        "interface", "method", "parameterTypes", "protocol", "application", "group",
-        "async", "callback", "timeout", "broadcast", "loadBalance", "feedback", "exception"};
-    
+    private static final String[] TITLES = {
+            "messageId", "messageType", "fromCluster", "fromUrl", "toCluster", "toUrl",
+            "processStartTime", "processEndTime", "deliverStartTime", "deliverEndTime", "processedTime", "deliveredTime", "totalTime",
+            "interface", "method", "parameterTypes", "protocol", "application", "group",
+            "async", "callback", "timeout", "broadcast", "loadBalance", "feedback", "exception" };
+
     private int groupStartX = 100;
     private int groupStartY = 150; // 200
     private int groupHorizontalGap = 300; // 250
@@ -130,10 +130,10 @@ public class TraceTopology extends AbstractTopology {
     private Map<String, Point> groupLocationMap = new HashMap<String, Point>();
 
     private TGraphBackground background;
-    
+
     private JPanel container;
     private JSplitPane splitPane;
-    
+
     private JBasicTextField traceIdTextField;
     private JPanel infoPane;
     private JBasicTabbedPane infoTabbedPane;
@@ -146,35 +146,35 @@ public class TraceTopology extends AbstractTopology {
     private JBasicTable table;
     private JBasicScrollPane tableScrollPane;
     private boolean tableVisible;
-    
+
     private JBasicTable schematicTable;
     private JBasicScrollPane schematicTableScrollPane;
-    
+
     public TraceTopology() {
         initializeToolBar();
         initializeTopology();
         initializeTable();
     }
-    
+
     @Override
     protected void initializePopupMenu() {
         super.initializePopupMenu();
-        
+
         showInfoMenuItem = new JBasicMenuItem(createShowInfoAction());
         popupMenu.add(showInfoMenuItem, 0);
     }
-    
+
     @Override
     protected JBasicPopupMenu popupMenuGenerate() {
         TGroup group = TElementManager.getSelectedGroup(dataBox);
         pinSelectedGroupMenuItem.setVisible(group != null);
-        
+
         TNode node = TElementManager.getSelectedNode(dataBox);
         pinSelectedNodeMenuItem.setVisible(node != null);
-        
+
         TElement element = TElementManager.getSelectedElement(dataBox);
         showInfoMenuItem.setVisible(element != null);
-        
+
         if (group != null || node != null || element != null) {
             return popupMenu;
         }
@@ -191,7 +191,7 @@ public class TraceTopology extends AbstractTopology {
             String loggerTraceId = PropertiesContext.getLoggerTraceId();
             traceIdTextField.setText(loggerTraceId);
         }
-        
+
         JToolBar toolBar = getGraph().getToolbar();
         toolBar.addSeparator();
         toolBar.add(new JClassicButton(createConfigDataSourceAction()));
@@ -229,7 +229,7 @@ public class TraceTopology extends AbstractTopology {
             }
         });
     }
-    
+
     private void initializeTable() {
         table = new JBasicTable() {
             private static final long serialVersionUID = 1L;
@@ -244,39 +244,39 @@ public class TraceTopology extends AbstractTopology {
         table.setColumnWidthGap(3);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setFont(new Font(UIContext.getFontName(), Font.PLAIN, UIContext.getSmallFontSize()));
-        
+
         tableScrollPane = new JBasicScrollPane(table);
-        
+
         setTableModel(table, new ArrayList<MonitorStat>(), TITLES);
     }
-    
+
     public JPanel createContainer() {
         if (container == null) {
             splitPane = new JSplitPane();
             splitPane.setBorder(BorderFactory.createEmptyBorder());
             splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-            
+
             container = new JPanel();
             container.setLayout(new BorderLayout());
-            
+
             showTable(tableVisible);
         }
-        
+
         return container;
     }
-    
+
     private boolean isMessageIdEquals(MonitorStat monitorStat, String messageId) {
         return StringUtils.equals(monitorStat.getMessageId(), messageId);
     }
-    
+
     private boolean isMessageTypeEquals(MonitorStat monitorStat, String messageId) {
         return StringUtils.equals(monitorStat.getMessageType(), messageId);
     }
-    
+
     private boolean isInternal(MonitorStat monitorStat) {
         return StringUtils.equals(monitorStat.getFromUrl(), monitorStat.getToUrl());
     }
-    
+
     private boolean hasMessageId(List<MonitorStat> monitorStatList, String messageId) {
         if (CollectionUtils.isEmpty(monitorStatList)) {
             return false;
@@ -291,7 +291,7 @@ public class TraceTopology extends AbstractTopology {
 
         return false;
     }
-    
+
     private boolean hasExceptionMessageId(List<MonitorStat> monitorStatList, String messageId) {
         if (CollectionUtils.isEmpty(monitorStatList)) {
             return false;
@@ -306,14 +306,14 @@ public class TraceTopology extends AbstractTopology {
 
         return false;
     }
-    
+
     private boolean hasException(MonitorStat monitorStat) {
         // MonitorStat里是否含有异常
         String exception = monitorStat.getException();
         if (StringUtils.isNotEmpty(exception)) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -332,7 +332,7 @@ public class TraceTopology extends AbstractTopology {
 
         return false;
     }
-    
+
     @SuppressWarnings("unchecked")
     private boolean hasException(TNode node) {
         List<MonitorStat> monitorStatList = (List<MonitorStat>) node.getUserObject();
@@ -340,13 +340,13 @@ public class TraceTopology extends AbstractTopology {
         if (hasException(monitorStatList)) {
             return true;
         }
-        
+
         // 跟该Node关联的Link有异常
         List<TLink> links = node.getAllLinks();
         if (CollectionUtils.isEmpty(links)) {
             return false;
         }
-        
+
         for (TLink link : links) {
             // 该Node是Link的From，表示该Node是异常的触发源
             if (link.getFrom() == node) {
@@ -356,31 +356,31 @@ public class TraceTopology extends AbstractTopology {
                 }
             }
         }
-        
+
         return false;
     }
-    
+
     private boolean hasException(TLink link) {
         MonitorStat monitorStat = (MonitorStat) link.getUserObject();
         // 该Link本身拥有的Object里面有异常
         if (hasException(monitorStat)) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     @SuppressWarnings("unchecked")
     private boolean hasRelevantException(TLink link) {
         MonitorStat monitorStat = (MonitorStat) link.getUserObject();
         String messageId = monitorStat.getMessageId();
-        
+
         // 取该Link的To，表示该Link是跟异常Node具有关联性，或者说，正因为有该Link(调用)，才使Node产生异常
         List<MonitorStat> monitorStatList = (List<MonitorStat>) link.getTo().getUserObject();
         if (hasException(monitorStatList) && hasExceptionMessageId(monitorStatList, messageId)) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -410,7 +410,7 @@ public class TraceTopology extends AbstractTopology {
 
         return node;
     }
-    
+
     @SuppressWarnings("unchecked")
     private void addNodeUserObject(TElement element, MonitorStat monitorStat) {
         // Group和Node里面维护一个MonitorStat列表，当FromUrl==ToUrl时，该列表不为空
@@ -431,7 +431,7 @@ public class TraceTopology extends AbstractTopology {
         } else {
             link.putLinkToArrowColor(new Color(0, 255, 255));
         }
-        
+
         dataBox.addElement(link);
     }
 
@@ -447,13 +447,13 @@ public class TraceTopology extends AbstractTopology {
     }
 
     @SuppressWarnings("unchecked")
-    private void alarmNodes() {        
+    private void alarmNodes() {
         List<TNode> nodes = TElementManager.getNodes(dataBox);
         for (TNode node : nodes) {
             if (hasException(node)) {
                 node.getAlarmState().addAcknowledgedAlarm(AlarmSeverity.CRITICAL);
                 // node.getAlarmState().setNewAlarmCount(AlarmSeverity.CRITICAL, 1);
-                
+
                 TGroup group = (TGroup) node.getParent();
                 if (group != null) {
                     group.getAlarmState().addAcknowledgedAlarm(AlarmSeverity.CRITICAL);
@@ -462,7 +462,7 @@ public class TraceTopology extends AbstractTopology {
             }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     private void alarmLinks() {
         List<TLink> links = TElementManager.getLinks(dataBox);
@@ -484,7 +484,7 @@ public class TraceTopology extends AbstractTopology {
             }
         }
     }
-    
+
     private void select(int selectedRow) {
         if (selectedRow > -1) {
             BasicTableModel tableModel = (BasicTableModel) table.getModel();
@@ -498,11 +498,11 @@ public class TraceTopology extends AbstractTopology {
             }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     private void selectNodes(MonitorStat monitorStat) {
         String messageId = monitorStat.getMessageId();
-        
+
         List<TNode> nodes = TElementManager.getNodes(dataBox);
         for (TNode node : nodes) {
             List<MonitorStat> monitorStatList = (List<MonitorStat>) node.getUserObject();
@@ -510,20 +510,20 @@ public class TraceTopology extends AbstractTopology {
             node.setSelected(selected);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     private void selectLinks(MonitorStat monitorStat) {
         String messageId = monitorStat.getMessageId();
         String messageType = monitorStat.getMessageType();
-        
+
         List<TLink> links = TElementManager.getLinks(dataBox);
         for (TLink link : links) {
             MonitorStat stat = (MonitorStat) link.getUserObject();
             boolean selected = isMessageIdEquals(stat, messageId) && isMessageTypeEquals(stat, messageType);
             link.setSelected(selected);
-        }    
+        }
     }
-    
+
     @SuppressWarnings("unchecked")
     private void highlightLinks(String messageId) {
         List<TLink> links = TElementManager.getLinks(dataBox);
@@ -554,16 +554,16 @@ public class TraceTopology extends AbstractTopology {
             if (hint) {
                 JBasicOptionPane.showMessageDialog(HandleManager.getFrame(TraceTopology.this), ConsoleLocale.getString("trace_id_null"), SwingLocale.getString("error"), JBasicOptionPane.ERROR_MESSAGE);
             }
-            
+
             return;
         }
 
         String title = ConsoleLocale.getString("trace_view_title") + " [" + traceId + "]";
         background.setTitle(title);
-        
+
         dataBox.clear();
         groupLocationMap.clear();
-        
+
         BasicTableModel tableModel = (BasicTableModel) table.getModel();
         tableModel.clearRows();
 
@@ -605,10 +605,10 @@ public class TraceTopology extends AbstractTopology {
 
         locateGroups();
         TGraphManager.setGroupExpand(graph, isGroupAutoExpand());
-        
+
         alarmNodes();
         alarmLinks();
-        
+
         setTableModel(table, monitorStatList, TITLES);
     }
 
@@ -622,10 +622,10 @@ public class TraceTopology extends AbstractTopology {
         } else {
             container.add(this, BorderLayout.CENTER);
         }
-        
+
         ContainerManager.update(container);
     }
-    
+
     private void setTableModel(final JBasicTable table, final List<MonitorStat> rows, final String[] titles) {
         final BasicTableModel tableModel = new BasicTableModel(rows, titles) {
             private static final long serialVersionUID = 1L;
@@ -690,13 +690,13 @@ public class TraceTopology extends AbstractTopology {
 
                 return null;
             }
-            
+
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 if (columnIndex == 10 || columnIndex == 11 || columnIndex == 12 || columnIndex == 20) {
                     return Long.class;
                 }
-                
+
                 return super.getColumnClass(columnIndex);
             }
         };
@@ -708,14 +708,14 @@ public class TraceTopology extends AbstractTopology {
                 @Override
                 public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                     super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                    
-                    MonitorStat monitorStat = (MonitorStat) tableModel.getRow(table.convertRowIndexToModel(row));                    
-                    
+
+                    MonitorStat monitorStat = (MonitorStat) tableModel.getRow(table.convertRowIndexToModel(row));
+
                     if (hasException(monitorStat)) {
                         // super.setBackground(Color.red);
                         super.setForeground(Color.red);
                     }
-                    
+
                     return this;
                 }
             });
@@ -730,21 +730,21 @@ public class TraceTopology extends AbstractTopology {
 
             return;
         }
-        
+
         TElement element = TElementManager.getSelectedElement(dataBox);
         if (element == null) {
             JBasicOptionPane.showMessageDialog(HandleManager.getFrame(TraceTopology.this), ConsoleLocale.getString("select_one_element"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
             return;
         }
-        
+
         Object userObject = element.getUserObject();
         if (userObject == null) {
             JBasicOptionPane.showMessageDialog(HandleManager.getFrame(TraceTopology.this), ConsoleLocale.getString("invoke_info_null"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
 
             return;
         }
-        
+
         List<MonitorStat> monitorStatList = null;
         boolean highlightable = false;
         if (userObject instanceof List) {
@@ -784,7 +784,7 @@ public class TraceTopology extends AbstractTopology {
             infoHintPane = new JPanel();
             infoHintPane.setLayout(new FiledLayout(FiledLayout.ROW, FiledLayout.LEFT, 0));
             infoHintPane.add(infoHintLabel);
-            
+
             infoPane = new JPanel();
             infoPane.setLayout(new BoxLayout(infoPane, BoxLayout.Y_AXIS));
             infoPane.setPreferredSize(new Dimension(520, 520));
@@ -792,7 +792,7 @@ public class TraceTopology extends AbstractTopology {
             infoPane.add(Box.createVerticalStrut(5));
             infoPane.add(infoHintPane);
         }
-        
+
         infoTabbedPane.putClientProperty("highlightable", highlightable);
         infoTabbedPane.removeAll();
         infoHintPane.setVisible(highlightable);
@@ -804,7 +804,7 @@ public class TraceTopology extends AbstractTopology {
             if (hasException(monitorStat)) {
                 info += "\nexception=\n" + exception;
             }
-            
+
             JBasicTextArea textArea = new JBasicTextArea();
             textArea.setEditable(false);
             textArea.setText(info);
@@ -816,29 +816,30 @@ public class TraceTopology extends AbstractTopology {
             String tabTitle = ConsoleLocale.getString("invoke") + (monitorStatList.size() == 1 ? "" : " - " + (infoTabbedPane.getTabCount() + 1));
             infoTabbedPane.addTab(tabTitle, scrollPane, tabTitle);
         }
-        
+
         JBasicOptionPane.showOptionDialog(HandleManager.getFrame(this), infoPane, title, JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/" + icon), new Object[] { SwingLocale.getString("close") }, null, true);
 
         highlightLinks(null);
         select(table.getSelectedRow());
     }
-    
+
     private void showSchematic() {
         if (schematicTable == null) {
-            String[][] rowDatas = new String[][] {{"schematic_node_alarm_exception.png", "schematic_node_alarm_exception"}, 
-                                                  {"schematic_node_select.png", "schematic_node_select"}, 
-                                                  {"schematic_link_alarm_exception.png", "schematic_link_alarm_exception"}, 
-                                                  {"schematic_link_alarm_relevant_exception.png", "schematic_link_alarm_relevant_exception"},
-                                                  {"schematic_link_select.png", "schematic_link_select"}, 
-                                                  {"schematic_link_highlight.png", "schematic_link_highlight"},
-                                                  {"schematic_link_feedback.png", "schematic_link_feedback"}, 
-                                                  {"schematic_link_nofeedback.png", "schematic_link_nofeedback"}};                     
-            String[] columnTitles = new String[] {ConsoleLocale.getString("schematic"), ConsoleLocale.getString("schematic_indicator")};
-            
+            String[][] rowDatas = new String[][] {
+                    { "schematic_node_alarm_exception.png", "schematic_node_alarm_exception" },
+                    { "schematic_node_select.png", "schematic_node_select" },
+                    { "schematic_link_alarm_exception.png", "schematic_link_alarm_exception" },
+                    { "schematic_link_alarm_relevant_exception.png", "schematic_link_alarm_relevant_exception" },
+                    { "schematic_link_select.png", "schematic_link_select" },
+                    { "schematic_link_highlight.png", "schematic_link_highlight" },
+                    { "schematic_link_feedback.png", "schematic_link_feedback" },
+                    { "schematic_link_nofeedback.png", "schematic_link_nofeedback" } };
+            String[] columnTitles = new String[] { ConsoleLocale.getString("schematic"), ConsoleLocale.getString("schematic_indicator") };
+
             schematicTable = new JBasicTable();
-            DefaultTableModel schematicTableModel = new DefaultTableModel(rowDatas, columnTitles){
+            DefaultTableModel schematicTableModel = new DefaultTableModel(rowDatas, columnTitles) {
                 private static final long serialVersionUID = 1L;
-                
+
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
@@ -863,7 +864,7 @@ public class TraceTopology extends AbstractTopology {
 
                         return this;
                     }
-                }; 
+                };
                 if (i == 1 && LocaleContext.getLocale() != Locale.SIMPLIFIED_CHINESE) {
                     tableCellRenderer.setHorizontalTextPosition(SwingConstants.CENTER);
                     tableCellRenderer.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -878,7 +879,7 @@ public class TraceTopology extends AbstractTopology {
             schematicTableScrollPane = new JBasicScrollPane(schematicTable);
             schematicTableScrollPane.setPreferredSize(new Dimension(schematicTableScrollPane.getPreferredSize().width + 40, 615));
         }
-        
+
         JBasicOptionPane.showOptionDialog(HandleManager.getFrame(this), schematicTableScrollPane, ConsoleLocale.getString("show_schematic"), JBasicOptionPane.DEFAULT_OPTION, JBasicOptionPane.PLAIN_MESSAGE, ConsoleIconFactory.getSwingIcon("banner/mark.png"), new Object[] { SwingLocale.getString("close") }, null, true);
     }
 
@@ -886,7 +887,7 @@ public class TraceTopology extends AbstractTopology {
         if (dataSourcePane == null) {
             dataSourcePane = new DataSourcePane();
         }
-        
+
         int selectedValue = dataSourcePane.getSelectedValue();
         switch (selectedValue) {
             case 0:
@@ -929,14 +930,14 @@ public class TraceTopology extends AbstractTopology {
 
         return action;
     }
-    
+
     private JSecurityAction createShowTableAction() {
         JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("show_trace_table"), ConsoleIconFactory.getSwingIcon("component/table_16.png"), ConsoleLocale.getString("show_trace_table")) {
             private static final long serialVersionUID = 1L;
 
             public void execute(ActionEvent e) {
                 tableVisible = !tableVisible;
-                
+
                 showTable(tableVisible);
             }
         };
@@ -955,7 +956,7 @@ public class TraceTopology extends AbstractTopology {
 
         return action;
     }
-    
+
     private JSecurityAction createShowSchematicAction() {
         JSecurityAction action = new JSecurityAction(ConsoleLocale.getString("show_schematic"), ConsoleIconFactory.getSwingIcon("netbean/color_adjust_16.png"), ConsoleLocale.getString("show_schematic")) {
             private static final long serialVersionUID = 1L;
@@ -1065,7 +1066,7 @@ public class TraceTopology extends AbstractTopology {
             add(cacheRadioButtonPane);
             add(cacheTabbedPane);
             setPreferredSize(new Dimension(400, getPreferredSize().height));
-            
+
             boolean loggerTabSelection = PropertiesContext.isLoggerTabSelection();
             if (loggerTabSelection) {
                 loggerFileRadioButton.setSelected(true);

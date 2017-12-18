@@ -86,7 +86,7 @@ public class PropertiesContext {
             return null;
         }
     }
-    
+
     public static String getLoggerHost() {
         try {
             return properties.getString(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME);
@@ -94,7 +94,7 @@ public class PropertiesContext {
             return null;
         }
     }
-    
+
     public static int getLoggerPort() {
         try {
             return properties.getInteger(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME);
@@ -102,7 +102,7 @@ public class PropertiesContext {
             return -1;
         }
     }
-    
+
     public static String getLoggerUserName() {
         try {
             return properties.getString(ThunderConstants.SPLUNK_USER_NAME_ATTRIBUTE_NAME);
@@ -110,7 +110,7 @@ public class PropertiesContext {
             return null;
         }
     }
-    
+
     public static String getLoggerPassword() {
         try {
             return properties.getString(ThunderConstants.SPLUNK_PASSWORD_ATTRIBUTE_NAME);
@@ -118,7 +118,7 @@ public class PropertiesContext {
             return null;
         }
     }
-    
+
     public static boolean isLoggerTabSelection() {
         boolean loggerTabSelection = false;
         try {
@@ -126,10 +126,10 @@ public class PropertiesContext {
         } catch (Exception e) {
             return false;
         }
-        
+
         return loggerTabSelection;
     }
-    
+
     public static String getLoggerFilePath() {
         String loggerFilePath = null;
         try {
@@ -137,14 +137,14 @@ public class PropertiesContext {
         } catch (Exception e) {
             return null;
         }
-        
+
         if (StringUtils.isNotEmpty(loggerFilePath)) {
             loggerFilePath = loggerFilePath.replace("//", "\\");
         }
-        
+
         return loggerFilePath;
     }
-    
+
     public static String getLoggerTraceId() {
         try {
             return properties.getString(LOGGER_TRACE_ID_ATTRIBUTE_NAME);
@@ -152,7 +152,7 @@ public class PropertiesContext {
             return null;
         }
     }
-    
+
     public static void addPropertiesMap(Map<String, Object> value) {
         for (Map.Entry<String, Object> entry : value.entrySet()) {
             properties.put(entry.getKey(), entry.getValue());

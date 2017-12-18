@@ -26,7 +26,7 @@ public class TraceFrame extends JBasicFrame {
     public TraceFrame() {
         super(ConsoleLocale.getString("trace_title"), ConsoleIconFactory.getSwingIcon("ribbon/navigator_nepxion.png"), new Dimension(1280, 700));
     }
-        
+
     public void launch() {
         getContentPane().add(createWorkspace());
 
@@ -41,7 +41,7 @@ public class TraceFrame extends JBasicFrame {
         setVisible(true);
         toFront();
     }
-    
+
     protected TraceControlWorkspace createWorkspace() {
         return new TraceControlWorkspace();
     }

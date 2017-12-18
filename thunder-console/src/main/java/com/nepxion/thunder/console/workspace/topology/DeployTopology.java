@@ -418,7 +418,7 @@ public class DeployTopology extends AbstractTopology {
         if (referenceInstances == null) {
             builder.append("[" + ConsoleLocale.getString("reference_group_name") + "] " + ConsoleLocale.getString("not_register") + "\n");
         }
-        
+
         if (!hint) {
             return;
         }
@@ -436,13 +436,13 @@ public class DeployTopology extends AbstractTopology {
                 };
                 bubbleTip.setHeight(150);
             }
-            
+
             bubbleTip.show(null, null, message.trim());
-            
+
             // JBasicOptionPane.showMessageDialog(HandleManager.getFrame(this), message.trim(), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     @Override
     public void showLayout() {
         if (layoutDialog == null) {

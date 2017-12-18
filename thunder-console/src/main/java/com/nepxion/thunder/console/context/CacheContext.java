@@ -26,11 +26,11 @@ public class CacheContext {
     public static void stopSentinel() {
         RedisSentinelPoolFactory.close();
     }
-    
+
     public static boolean sentinelEnabled() {
         return RedisSentinelPoolFactory.enabled();
     }
-    
+
     public static void startCluster() {
         ThunderProperties properties = PropertiesContext.getProperties();
         RedisClusterFactory.initialize(properties);
@@ -43,11 +43,11 @@ public class CacheContext {
             e.printStackTrace();
         }
     }
-    
+
     public static boolean clusterEnabled() {
         return RedisClusterFactory.enabled();
     }
-    
+
     public static void stop() {
         stopSentinel();
         stopCluster();

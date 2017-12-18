@@ -171,7 +171,7 @@ public class TopologyController {
 
             return cacheUrls;
         }
-        
+
         String clusterValue = properties.getString(ThunderConstants.REDIS_CLUSTER_ATTRIBUTE_NAME);
         if (StringUtils.isNotEmpty(clusterValue)) {
             String[] clusterArray = StringUtils.split(clusterValue, ";");
@@ -188,10 +188,10 @@ public class TopologyController {
 
     public static List<String> getLoggerUrls(ApplicationEntity applicationEntity) throws Exception {
         ThunderProperties properties = PropertyController.getProperties(applicationEntity);
-        
+
         String host = properties.getString(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME);
         int port = properties.getInteger(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME);
-        
+
         return Arrays.asList(host + ":" + port);
     }
 }

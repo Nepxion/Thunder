@@ -122,7 +122,7 @@ public class DeploySummaryWorkspace extends Workspace {
         TableLayout tableLayout = new TableLayout(size);
         tableLayout.setHGap(0);
         tableLayout.setVGap(5);
-        
+
         setLayout(tableLayout);
         add(tabbedPane, "0, 0");
         add(createButtonSpace(), "0, 1");
@@ -285,11 +285,11 @@ public class DeploySummaryWorkspace extends Workspace {
                     { TableLayout.FILL },
                     { TableLayout.PREFERRED, TableLayout.FILL }
             };
-            
+
             TableLayout tableLayout = new TableLayout(size);
             tableLayout.setHGap(0);
             tableLayout.setVGap(5);
-            
+
             methodListPane = new JPanel();
             methodListPane.setLayout(new TableLayout(size));
             methodListPane.add(interfaceLabel, "0, 0");
@@ -328,9 +328,9 @@ public class DeploySummaryWorkspace extends Workspace {
 
                 BasicTableModel tableModel = (BasicTableModel) serviceSummaryTable.getModel();
                 SummaryEntity summaryEntity = (SummaryEntity) tableModel.getRow(serviceSummaryTable.getSelectedRow());
-                
+
                 interfaceLabel.setText(ConsoleLocale.getString("table_interface") + " : " + summaryEntity.getInterface());
-                
+
                 List<String> methods = summaryEntity.getMethods();
                 if (CollectionUtils.isEmpty(methods)) {
                     JBasicOptionPane.showMessageDialog(HandleManager.getFrame(DeploySummaryWorkspace.this), ConsoleLocale.getString("interface_not_injection"), SwingLocale.getString("warning"), JBasicOptionPane.WARNING_MESSAGE);

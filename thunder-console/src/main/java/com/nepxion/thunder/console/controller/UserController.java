@@ -36,7 +36,7 @@ public class UserController {
         if (userEntity == null) {
             return null;
         }
-        
+
         if (userEntity.validatePassword(password)) {
             return userEntity;
         }
@@ -161,7 +161,7 @@ public class UserController {
                 }
             }
         }
-        
+
         return operationNodes;
     }
 
@@ -183,7 +183,6 @@ public class UserController {
         return operationNodes;
     }
 
-    
     public static ElementNode createUserOperationNode(UserOperation operation) {
         String operationName = getUserOperationName(operation);
 

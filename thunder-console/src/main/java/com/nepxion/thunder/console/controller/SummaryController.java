@@ -100,13 +100,13 @@ public class SummaryController {
             addresses.add(serviceInstance.getHost() + ":" + serviceInstance.getPort());
         }
         summaryEntity.setAddresses(addresses);
-        
+
         List<String> times = new ArrayList<String>();
         for (ApplicationEntity serviceInstance : serviceInstanceList) {
             times.add(new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(serviceInstance.getTime())));
         }
         summaryEntity.setTimes(times);
-        
+
         return summaryEntity;
     }
 
@@ -123,13 +123,13 @@ public class SummaryController {
         summaryEntity.setInterface(interfaze);
         summaryEntity.setNotStartedDescription(ConsoleLocale.getString("not_start"));
         summaryEntity.setNotConnectedDescription(ConsoleLocale.getString("not_connect"));
-        
+
         List<String> addresses = new ArrayList<String>();
         for (ApplicationEntity referenceInstance : referenceInstanceList) {
             addresses.add(referenceInstance.getHost() + ":" + referenceInstance.getPort());
         }
         summaryEntity.setAddresses(addresses);
-        
+
         List<String> times = new ArrayList<String>();
         for (ApplicationEntity referenceInstance : referenceInstanceList) {
             times.add(new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(referenceInstance.getTime())));

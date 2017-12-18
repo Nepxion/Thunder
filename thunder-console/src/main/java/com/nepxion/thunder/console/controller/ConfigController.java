@@ -202,7 +202,7 @@ public class ConfigController {
             }
         }
     }
-    
+
     public static void deletePath(String path) throws Exception {
         ZookeeperRegistryExecutor registryExecutor = (ZookeeperRegistryExecutor) RegistryContext.getDefaultRegistryExecutor();
         registryExecutor.getInvoker().deletePath(registryExecutor.getClient(), path);

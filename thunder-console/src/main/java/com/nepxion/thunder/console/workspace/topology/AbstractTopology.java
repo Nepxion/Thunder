@@ -53,11 +53,11 @@ public abstract class AbstractTopology extends JPanel {
 
     protected TGraph graph;
     protected TDataBox dataBox = new TDataBox();
-    
+
     protected JBasicPopupMenu popupMenu;
     protected JBasicMenuItem pinSelectedGroupMenuItem;
     protected JBasicMenuItem pinSelectedNodeMenuItem;
-    
+
     protected JBasicRadioButtonMenuItem groupAutoExpandRadioButtonMenuItem;
     protected JBasicRadioButtonMenuItem linkAutoHideRadioButtonMenuItem;
 
@@ -65,7 +65,7 @@ public abstract class AbstractTopology extends JPanel {
         setLayout(new BorderLayout());
         add(createGraph());
         // add(createGisGraph());
-        
+
         initializePopupMenu();
     }
 
@@ -129,14 +129,14 @@ public abstract class AbstractTopology extends JPanel {
             }
         };
     }
-    
+
     protected JBasicPopupMenu popupMenuGenerate() {
         TGroup group = TElementManager.getSelectedGroup(dataBox);
         pinSelectedGroupMenuItem.setVisible(group != null);
-        
+
         TNode node = TElementManager.getSelectedNode(dataBox);
         pinSelectedNodeMenuItem.setVisible(node != null);
-        
+
         if (group != null || node != null) {
             return popupMenu;
         }
@@ -149,9 +149,9 @@ public abstract class AbstractTopology extends JPanel {
 
         JSecurityAction showLayoutAction = createShowLayoutAction();
         popupMenu.add(new JBasicMenuItem(showLayoutAction));
-        
+
         popupMenu.addSeparator();
-        
+
         JSecurityAction groupExpandAction = TGraphController.getGroupExpandAction(graph);
         groupExpandAction.setIcon(ConsoleIconFactory.getSwingIcon("rectangle_multi.png"));
         popupMenu.add(new JBasicMenuItem(groupExpandAction));
@@ -197,7 +197,7 @@ public abstract class AbstractTopology extends JPanel {
     }
 
     protected void showLayout() {
-        
+
     }
 
     protected boolean isGroupAutoExpand() {
