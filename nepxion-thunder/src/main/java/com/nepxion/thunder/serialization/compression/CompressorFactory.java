@@ -30,7 +30,7 @@ public class CompressorFactory {
             LOG.warn("Invalid compressor={}, use default={}", compressor, compressorType);
         }
         LOG.info("Compressor is {}", compressorType);
-        
+
         compress = properties.getBoolean(ThunderConstants.COMPRESS_ATTRIBUTE_NAME);
         LOG.info("Compress is {}", compress);
     }
@@ -42,11 +42,11 @@ public class CompressorFactory {
     public static void setCompressorType(CompressorType compressorType) {
         CompressorFactory.compressorType = compressorType;
     }
-    
+
     public static boolean isCompress() {
         return compress;
     }
-    
+
     public static void setCompress(boolean compress) {
         CompressorFactory.compress = compress;
     }

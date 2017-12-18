@@ -21,7 +21,7 @@ public class FSTSerializer {
 
         return serialize(fst, object);
     }
-    
+
     public static <T> byte[] serialize(FSTConfiguration fst, T object) {
         if (object == null) {
             throw new SerializerException("Object is null");

@@ -17,20 +17,20 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 
 public abstract class ZookeeperPathChildrenCacheListener extends ZookeeperCacheListener implements PathChildrenCacheListener {
     protected PathChildrenCache pathChildrenCache;
-    
+
     public ZookeeperPathChildrenCacheListener(CuratorFramework client, String path) throws Exception {
         super(client, path);
-        
+
         pathChildrenCache = new PathChildrenCache(client, path, false);
         pathChildrenCache.start(PathChildrenCache.StartMode.POST_INITIALIZED_EVENT);
-        
+
         addListener();
     }
-    
+
     public void addListener() {
         pathChildrenCache.getListenable().addListener(this);
     }
-    
+
     public void removeListener() {
         pathChildrenCache.getListenable().removeListener(this);
     }

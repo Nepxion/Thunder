@@ -27,7 +27,7 @@ public class FSTSerializerFactory {
     private static FSTConfiguration fst;
     private static ObjectPool<FSTConfiguration> pool;
     private static boolean usePool = false;
-    
+
     public static void initialize() {
         if (usePool) {
             pool = createPool();

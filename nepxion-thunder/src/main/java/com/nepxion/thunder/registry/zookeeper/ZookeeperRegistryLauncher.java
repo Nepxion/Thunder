@@ -44,13 +44,13 @@ public class ZookeeperRegistryLauncher implements RegistryLauncher {
         registryExecutor.setProtocolEntity(protocolEntity);
     }
 
-    @Override    
+    @Override
     public void stop() throws Exception {
         // 停止Zookeeper连接
         registryInitializer.stop();
     }
 
-    @Override    
+    @Override
     public RegistryExecutor getRegistryExecutor() {
         return registryExecutor;
     }

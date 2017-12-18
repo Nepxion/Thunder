@@ -78,92 +78,92 @@ public class ZookeeperInvoker {
 
         return stat;
     }
-    
+
     // 创建路径
     public void createPath(CuratorFramework client, String path) throws Exception {
         PathUtils.validatePath(path);
-        
+
         client.create().creatingParentsIfNeeded().forPath(path, null);
     }
-    
+
     // 创建路径，并写入数据
     public void createPath(CuratorFramework client, String path, byte[] data) throws Exception {
         PathUtils.validatePath(path);
-        
+
         client.create().creatingParentsIfNeeded().forPath(path, data);
     }
-    
+
     // 创建路径，并写入对象
     public void createPath(CuratorFramework client, String path, Serializable object) throws Exception {
         PathUtils.validatePath(path);
-        
+
         byte[] data = getData(object);
-        
+
         client.create().creatingParentsIfNeeded().forPath(path, data);
     }
-    
+
     // 创建路径
     public void createPath(CuratorFramework client, String path, CreateMode mode) throws Exception {
         PathUtils.validatePath(path);
-        
+
         client.create().creatingParentsIfNeeded().withMode(mode).forPath(path, null);
     }
-    
+
     // 创建路径，并写入数据
     public void createPath(CuratorFramework client, String path, byte[] data, CreateMode mode) throws Exception {
         PathUtils.validatePath(path);
-        
+
         client.create().creatingParentsIfNeeded().withMode(mode).forPath(path, data);
     }
-    
+
     // 创建路径，并写入对象
     public void createPath(CuratorFramework client, String path, Serializable object, CreateMode mode) throws Exception {
         PathUtils.validatePath(path);
-        
+
         byte[] data = getData(object);
-        
+
         client.create().creatingParentsIfNeeded().withMode(mode).forPath(path, data);
     }
-    
+
     // 删除路径
     public void deletePath(CuratorFramework client, String path) throws Exception {
         PathUtils.validatePath(path);
-        
+
         client.delete().deletingChildrenIfNeeded().forPath(path);
     }
-    
+
     // 获取数据
     public byte[] getData(CuratorFramework client, String path) throws Exception {
         PathUtils.validatePath(path);
-        
+
         return client.getData().forPath(path);
     }
-    
+
     // 获取对象
     public <T> T getObject(CuratorFramework client, String path, Class<T> clazz) throws Exception {
         PathUtils.validatePath(path);
-        
+
         byte[] data = client.getData().forPath(path);
-        
+
         return getObject(data, clazz);
     }
-    
+
     // 写入数据
     public void setData(CuratorFramework client, String path, byte[] data) throws Exception {
         PathUtils.validatePath(path);
-        
+
         client.setData().forPath(path, data);
     }
-    
+
     // 写入对象
     public void setData(CuratorFramework client, String path, Serializable object) throws Exception {
         PathUtils.validatePath(path);
-        
+
         byte[] data = getData(object);
-        
+
         client.setData().forPath(path, data);
     }
-    
+
     // 转换字节组数为对象
     public <T> T getObject(byte[] data, Class<T> clazz) throws SerializerException {
         try {
@@ -172,7 +172,7 @@ public class ZookeeperInvoker {
             throw new SerializerException("Class can't be compatible", e);
         }
     }
-    
+
     // 转换对象为字节组数
     public byte[] getData(Serializable object) throws SerializerException {
         try {
@@ -185,23 +185,23 @@ public class ZookeeperInvoker {
     // 获取子节点名称列表
     public List<String> getChildNameList(CuratorFramework client, String path) throws Exception {
         PathUtils.validatePath(path);
-        
+
         return client.getChildren().forPath(path);
     }
-    
+
     // 获取子节点路径列表
     public List<String> getChildPathList(CuratorFramework client, String path) throws Exception {
         List<String> childNameList = getChildNameList(client, path);
-        
+
         List<String> childPathList = new ArrayList<String>();
         for (String childName : childNameList) {
             String childPath = path + "/" + childName;
             childPathList.add(childPath);
         }
-        
+
         return childPathList;
     }
-    
+
     // ZooKeeper节点的路径必须存在，如果不存在则立即创建
     /*public boolean createPath(final CuratorFramework client, final String path) throws Exception {
         PathUtils.validatePath(path);

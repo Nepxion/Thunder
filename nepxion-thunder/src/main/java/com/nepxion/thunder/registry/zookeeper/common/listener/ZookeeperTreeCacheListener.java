@@ -17,10 +17,10 @@ import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 
 public abstract class ZookeeperTreeCacheListener extends ZookeeperCacheListener implements TreeCacheListener {
     protected TreeCache treeCache;
-    
+
     public ZookeeperTreeCacheListener(CuratorFramework client, String path) throws Exception {
         super(client, path);
-        
+
         treeCache = new TreeCache(client, path);
         treeCache.start();
         treeCache.getListenable().addListener(this);

@@ -81,15 +81,15 @@ public class ZookeeperInstanceWatcher extends ZookeeperPathChildrenCacheListener
     public void connectionLost(PathChildrenCacheEvent event) throws Exception {
 
     }
-    
+
     private void onEvent(PathChildrenCacheEvent event, InstanceEventType instanceEventType) throws Exception {
         String childPath = event.getData().getPath();
         String applicationJson = childPath.substring(childPath.lastIndexOf("/") + 1);
         ApplicationEntity applicationEntity = ZookeeperApplicationEntityFactory.fromJson(applicationJson);
-        
+
         List<String> applicationJsonList = invoker.getChildNameList(client, path);
         List<ApplicationEntity> applicationEntityList = ZookeeperApplicationEntityFactory.fromJson(applicationJsonList);
-        
+
         InstanceEvent instanceEvent = null;
         switch (applicationType) {
             case SERVICE:
@@ -105,7 +105,7 @@ public class ZookeeperInstanceWatcher extends ZookeeperPathChildrenCacheListener
                 instanceEvent = new ReferenceInstanceEvent(instanceEventType, interfaze, applicationEntity, applicationEntityList);
                 break;
         }
-        
+
         EventControllerFactory.getController(instanceEvent.toString(), EventControllerType.ASYNC).post(instanceEvent);
 
         LOG.info("Watched {} {} - interface={}, {}", applicationType.toString(), instanceEventType.toString(), interfaze, applicationEntity.toString());

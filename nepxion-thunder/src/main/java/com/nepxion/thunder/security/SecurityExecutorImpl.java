@@ -81,16 +81,16 @@ public class SecurityExecutorImpl extends ThunderDelegateImpl implements Securit
 
         return true;
     }
-    
+
     @Override
     public boolean execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String interfaze = request.getHeader(ThunderConstants.INTERFACE_ATTRIBUTE_NAME);
         String referenceSecretKey = request.getHeader(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME);
         int referenceVersion = Integer.parseInt(request.getHeader(ThunderConstants.VERSION_ATTRIBUTE_NAME));
-        
+
         Map<String, ServiceEntity> serviceEntityMap = cacheContainer.getServiceEntityMap();
         ServiceEntity serviceEntity = serviceEntityMap.get(interfaze);
-        
+
         ApplicationConfig applicationConfig = cacheContainer.getApplicationConfig();
         if (applicationConfig != null) {
             int frequency = applicationConfig.getFrequency();
@@ -99,7 +99,7 @@ public class SecurityExecutorImpl extends ThunderDelegateImpl implements Securit
             // 限流，frequency > 0 && defaultToken > 0代表接口限流是启用的
             if (frequency > 0 && defaultToken.get() > 0 && token.addAndGet(-1) < 0) {
                 response.sendError(SecurityExceptionFactory.SC_REACH_MAX_LIMITATION, SecurityExceptionFactory.SC_REACH_MAX_LIMITATION_DESC);
-                
+
                 return false;
             }
         }
@@ -123,7 +123,7 @@ public class SecurityExecutorImpl extends ThunderDelegateImpl implements Securit
                 return false;
             }
         }
-        
+
         return true;
     }
 }

@@ -15,13 +15,13 @@ import org.nustaq.serialization.FSTConfiguration;
 
 import com.nepxion.thunder.serialization.SerializerException;
 
-public class FSTJsonSerializer {    
+public class FSTJsonSerializer {
     public static <T> String toJson(T object) {
         FSTConfiguration fst = FSTJsonSerializerFactory.getDefaultFST();
-        
+
         return toJson(fst, object);
     }
-    
+
     public static <T> String toJson(FSTConfiguration fst, T object) {
         if (object == null) {
             throw new SerializerException("Object is null");
@@ -32,7 +32,7 @@ public class FSTJsonSerializer {
 
     public static <T> T fromJson(String json, Class<T> clazz) {
         FSTConfiguration fst = FSTJsonSerializerFactory.getDefaultFST();
-        
+
         return fromJson(fst, json, clazz);
     }
 

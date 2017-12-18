@@ -23,15 +23,15 @@ import com.nepxion.thunder.registry.zookeeper.common.listener.ZookeeperNodeCache
 
 public class ZookeeperReferenceConfigWatcher extends ZookeeperNodeCacheListener {
     private static final Logger LOG = LoggerFactory.getLogger(ZookeeperReferenceConfigWatcher.class);
-    
+
     private String interfaze;
-    
+
     private ZookeeperInvoker invoker;
     private CacheContainer cacheContainer;
-    
+
     public ZookeeperReferenceConfigWatcher(CuratorFramework client, String interfaze, ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
         super(client, path);
-        
+
         this.interfaze = interfaze;
         this.invoker = invoker;
         this.cacheContainer = cacheContainer;
@@ -43,7 +43,7 @@ public class ZookeeperReferenceConfigWatcher extends ZookeeperNodeCacheListener 
 
         Map<String, ReferenceConfig> referenceConfigMap = cacheContainer.getReferenceConfigMap();
         referenceConfigMap.put(interfaze, referenceConfig);
-        
+
         LOG.info("Watched - reference config is changed, interface={}", interfaze);
     }
 }

@@ -23,14 +23,14 @@ public enum CompressorType {
     public String getValue() {
         return value;
     }
-    
+
     public static CompressorType fromString(String value) {
         for (CompressorType type : CompressorType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 

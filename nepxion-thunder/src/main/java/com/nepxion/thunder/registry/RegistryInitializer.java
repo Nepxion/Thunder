@@ -15,7 +15,7 @@ import com.nepxion.thunder.common.entity.RegistryEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
 public interface RegistryInitializer extends ThunderDelegate {
-    
+
     // 启动和注册中心的连接
     void start(RegistryEntity registryEntity) throws Exception;
 

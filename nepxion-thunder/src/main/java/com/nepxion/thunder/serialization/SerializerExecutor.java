@@ -25,7 +25,7 @@ import com.nepxion.thunder.serialization.json.JacksonSerializer;
 
 public class SerializerExecutor {
     private static final Logger LOG = LoggerFactory.getLogger(SerializerExecutor.class);
-    
+
     public static <T> byte[] serialize(T object) {
         return serialize(object, CompressorFactory.isCompress());
     }
@@ -33,7 +33,7 @@ public class SerializerExecutor {
     public static <T> T deserialize(byte[] bytes) {
         return deserialize(bytes, CompressorFactory.isCompress());
     }
-    
+
     public static <T> byte[] serialize(T object, boolean compress) {
         return serialize(object, SerializerFactory.getBinarySerializerType(), CompressorFactory.getCompressorType(), compress, SerializerFactory.isSerializerLogPrint());
     }
@@ -61,12 +61,12 @@ public class SerializerExecutor {
         } else {
             throw new SerializerException("Invalid serializer type of binary : " + serializerType);
         }
-        
+
         if (compress) {
             print(bytes, null, true, false, serializerLogPrint);
-            
+
             bytes = compress(bytes, compressorType);
-            
+
             print(bytes, null, true, true, serializerLogPrint);
         } else {
             print(bytes, object.getClass(), true, false, serializerLogPrint);
@@ -76,14 +76,14 @@ public class SerializerExecutor {
     }
 
     public static <T> T deserialize(byte[] bytes, SerializerType serializerType, CompressorType compressorType, boolean compress, boolean serializerLogPrint) {
-        if (compress) {    
+        if (compress) {
             print(bytes, null, false, true, serializerLogPrint);
-            
+
             bytes = decompress(bytes, compressorType);
-            
+
             print(bytes, null, false, false, serializerLogPrint);
         }
-                
+
         T object = null;
         if (serializerType == SerializerType.FST_BINARY) {
             object = FSTSerializer.deserialize(bytes);
@@ -94,11 +94,11 @@ public class SerializerExecutor {
         } else {
             throw new SerializerException("Invalid serializer type of binary : " + serializerType);
         }
-        
+
         if (!compress) {
             print(bytes, object.getClass(), false, false, serializerLogPrint);
         }
-        
+
         return object;
     }
 
@@ -125,7 +125,7 @@ public class SerializerExecutor {
             throw new SerializerException("Invalid serializer type of json : " + serializerType);
         }
     }
-    
+
     public static byte[] compress(byte[] bytes, CompressorType compressorType) {
         return CompressorExecutor.compress(bytes, compressorType);
     }
@@ -133,7 +133,7 @@ public class SerializerExecutor {
     public static byte[] decompress(byte[] bytes, CompressorType compressorType) {
         return CompressorExecutor.decompress(bytes, compressorType);
     }
-    
+
     public static void print(byte[] bytes, Class<?> clazz, boolean serialize, boolean compress, boolean serializerLogPrint) {
         if (serializerLogPrint) {
             if (clazz != null) {

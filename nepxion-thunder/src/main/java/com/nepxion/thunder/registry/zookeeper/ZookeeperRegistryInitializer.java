@@ -13,7 +13,7 @@ package com.nepxion.thunder.registry.zookeeper;
 import org.apache.curator.framework.CuratorFramework;
 
 import com.nepxion.thunder.common.constant.ThunderConstants;
-import com.nepxion.thunder.common.delegate.ThunderDelegateImpl; 
+import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 import com.nepxion.thunder.common.entity.RegistryEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.registry.RegistryInitializer;

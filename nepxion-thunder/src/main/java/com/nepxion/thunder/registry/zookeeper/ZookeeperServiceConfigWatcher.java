@@ -24,15 +24,15 @@ import com.nepxion.thunder.registry.zookeeper.common.listener.ZookeeperNodeCache
 
 public class ZookeeperServiceConfigWatcher extends ZookeeperNodeCacheListener {
     private static final Logger LOG = LoggerFactory.getLogger(ZookeeperServiceConfigWatcher.class);
-    
+
     private String interfaze;
-    
+
     private ZookeeperInvoker invoker;
     private CacheContainer cacheContainer;
-    
+
     public ZookeeperServiceConfigWatcher(CuratorFramework client, String interfaze, ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
         super(client, path);
-        
+
         this.interfaze = interfaze;
         this.invoker = invoker;
         this.cacheContainer = cacheContainer;
@@ -44,13 +44,13 @@ public class ZookeeperServiceConfigWatcher extends ZookeeperNodeCacheListener {
 
         Map<String, ServiceConfig> serviceConfigMap = cacheContainer.getServiceConfigMap();
         serviceConfigMap.put(interfaze, serviceConfig);
-        
+
         Map<String, ServiceEntity> serviceEntityMap = cacheContainer.getServiceEntityMap();
         ServiceEntity serviceEntity = serviceEntityMap.get(interfaze);
         long token = serviceConfig.getToken();
         serviceEntity.setDefaultToken(token);
         serviceEntity.setToken(token);
-        
+
         LOG.info("Watched - service config is changed, interface={}", interfaze);
     }
 }

@@ -12,6 +12,6 @@ package com.nepxion.thunder.registry.zookeeper;
 
 public interface ZookeeperUserWatcherCallback<UserEntity> {
     void onUserDeleted();
-    
+
     void onUserChanged(UserEntity userEntity);
 }

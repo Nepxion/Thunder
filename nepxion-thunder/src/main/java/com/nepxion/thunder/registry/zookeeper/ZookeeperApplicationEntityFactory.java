@@ -32,7 +32,7 @@ public class ZookeeperApplicationEntityFactory {
         if (CollectionUtils.isNotEmpty(applicationJsonList)) {
             for (String applicationJson : applicationJsonList) {
                 ApplicationEntity applicationEntity = fromJson(applicationJson);
-                
+
                 // 在某个时刻，可能存在老节点未下线，而新节点又上线，并存的情况
                 ApplicationEntity entity = getApplicationEntity(applicationEntityList, applicationEntity);
                 if (entity != null) {
@@ -49,21 +49,21 @@ public class ZookeeperApplicationEntityFactory {
 
         return applicationEntityList;
     }
-    
+
     private static ApplicationEntity getApplicationEntity(List<ApplicationEntity> applicationEntityList, ApplicationEntity applicationEntity) {
         for (ApplicationEntity entity : applicationEntityList) {
             if (entity.equals(applicationEntity)) {
                 return entity;
             }
         }
-        
+
         return null;
     }
-    
+
     public static String toJson(ApplicationEntity applicationEntity) {
         applicationEntity.setId(RandomUtil.uuidRandom());
         applicationEntity.setTime(System.currentTimeMillis());
-        
+
         return SerializerExecutor.toJson(applicationEntity);
     }
 }

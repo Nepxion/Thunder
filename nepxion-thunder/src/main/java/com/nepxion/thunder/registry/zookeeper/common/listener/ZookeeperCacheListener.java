@@ -23,13 +23,13 @@ public abstract class ZookeeperCacheListener {
         if (client == null) {
             throw new ZookeeperException("Zookeeper client is null");
         }
-        
+
         PathUtils.validatePath(path);
-        
+
         this.client = client;
         this.path = path;
     }
-    
+
     public CuratorFramework getClient() {
         return client;
     }

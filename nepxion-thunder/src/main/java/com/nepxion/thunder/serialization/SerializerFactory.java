@@ -50,7 +50,7 @@ public class SerializerFactory {
         if (jsonSerializerType == SerializerType.FST_JSON) {
             FSTJsonSerializerFactory.initialize();
         }
-        
+
         serializerLogPrint = properties.getBoolean(ThunderConstants.SERIALIZER_LOG_PRINT_ATTRIBUTE_NAME);
     }
 
@@ -69,7 +69,7 @@ public class SerializerFactory {
     public static void setJsonSerializerType(SerializerType jsonSerializerType) {
         SerializerFactory.jsonSerializerType = jsonSerializerType;
     }
-    
+
     public static boolean isSerializerLogPrint() {
         return serializerLogPrint;
     }

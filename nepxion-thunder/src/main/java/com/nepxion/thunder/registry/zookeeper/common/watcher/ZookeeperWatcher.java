@@ -28,10 +28,10 @@ public abstract class ZookeeperWatcher implements CuratorWatcher {
         if (client == null) {
             throw new ZookeeperException("Zookeeper client is null");
         }
-        
+
         this.client = client;
     }
-    
+
     public CuratorFramework getClient() {
         return client;
     }

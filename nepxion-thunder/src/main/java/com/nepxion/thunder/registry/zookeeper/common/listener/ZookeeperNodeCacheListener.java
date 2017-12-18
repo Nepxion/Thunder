@@ -19,7 +19,7 @@ public abstract class ZookeeperNodeCacheListener extends ZookeeperCacheListener 
 
     public ZookeeperNodeCacheListener(CuratorFramework client, String path) throws Exception {
         super(client, path);
-        
+
         nodeCache = new NodeCache(client, path, false);
         nodeCache.start(true);
 

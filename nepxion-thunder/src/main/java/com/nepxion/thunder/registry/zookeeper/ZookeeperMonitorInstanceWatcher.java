@@ -71,9 +71,9 @@ public class ZookeeperMonitorInstanceWatcher extends ZookeeperPathChildrenCacheL
 
     }
 
-    private void onEvent(PathChildrenCacheEvent event, InstanceEventType instanceEventType) throws Exception { 
+    private void onEvent(PathChildrenCacheEvent event, InstanceEventType instanceEventType) throws Exception {
         MonitorEntity monitorEntity = cacheContainer.getMonitorEntity();
-        
+
         String childPath = event.getData().getPath();
         String address = childPath.substring(childPath.lastIndexOf("/") + 1);
         /*switch (instanceEventType) {
@@ -84,6 +84,7 @@ public class ZookeeperMonitorInstanceWatcher extends ZookeeperPathChildrenCacheL
                 monitorEntity.removeAddress(address);
                 break;
         }*/
+
         List<String> addresses = invoker.getChildNameList(client, path);
         monitorEntity.setAddresses(addresses);
 

@@ -30,9 +30,9 @@ public class SecurityBootstrap {
     private Map<String, ServiceEntity> serviceEntityMap;
 
     public SecurityBootstrap() {
-        
+
     }
-    
+
     public void setServiceEntityMap(Map<String, ServiceEntity> serviceEntityMap) {
         this.serviceEntityMap = serviceEntityMap;
     }
@@ -87,7 +87,7 @@ public class SecurityBootstrap {
         if (start.get()) {
             stop();
         }
-        
+
         start(frequency);
     }
 }

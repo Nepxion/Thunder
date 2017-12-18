@@ -22,29 +22,29 @@ import com.nepxion.thunder.registry.RegistryLauncher;
 
 public abstract class ZookeeperInstanceEventInterceptor {
     private RegistryLauncher registryLauncher;
-    
+
     public ZookeeperInstanceEventInterceptor() {
         EventControllerFactory.getController(ServiceInstanceEvent.getEventName(), EventControllerType.ASYNC).register(this);
         EventControllerFactory.getController(ReferenceInstanceEvent.getEventName(), EventControllerType.ASYNC).register(this);
     }
-    
+
     public void start(String address, ProtocolType protocolType) throws Exception {
         registryLauncher = new ZookeeperRegistryLauncher();
         registryLauncher.start(address, protocolType);
     }
-    
+
     public void stop() throws Exception {
         registryLauncher.stop();
     }
-    
+
     public RegistryExecutor getRegistryExecutor() {
         return registryLauncher.getRegistryExecutor();
     }
-    
+
     public void addServiceInstanceWatcher(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         getRegistryExecutor().addServiceInstanceWatcher(interfaze, applicationEntity);
     }
-    
+
     public void addReferenceInstanceWatcher(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         getRegistryExecutor().addReferenceInstanceWatcher(interfaze, applicationEntity);
     }
@@ -54,14 +54,14 @@ public abstract class ZookeeperInstanceEventInterceptor {
     public void listen(ServiceInstanceEvent event) {
         onEvent(event);
     }
-    
+
     // 监听Reference上下线
     @Subscribe
     public void listen(ReferenceInstanceEvent event) {
         onEvent(event);
     }
-    
+
     protected abstract void onEvent(ServiceInstanceEvent event);
-    
+
     protected abstract void onEvent(ReferenceInstanceEvent event);
 }

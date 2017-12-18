@@ -37,7 +37,7 @@ public class ZookeeperReconnectionListener implements ConnectionStateListener {
     public void stateChanged(CuratorFramework client, ConnectionState state) {
         if (state == ConnectionState.RECONNECTED) {
             LOG.info("Zookeeper session is timeout, register and add watcher again");
-            
+
             CacheContainer cacheContainer = registryExecutor.getCacheContainer();
             ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
 
@@ -49,7 +49,7 @@ public class ZookeeperReconnectionListener implements ConnectionStateListener {
             } catch (Exception e) {
                 LOG.error("Re-add application config watcher failed", e);
             }*/
-            
+
             try {
                 if (client.getZookeeperClient().blockUntilConnectedOrTimedOut()) {
                     Map<String, ServiceEntity> serviceEntityMap = cacheContainer.getServiceEntityMap();
@@ -80,7 +80,7 @@ public class ZookeeperReconnectionListener implements ConnectionStateListener {
             } catch (Exception e) {
                 LOG.error("Re-register references and add watcher failed", e);
             }
-            
+
             /*MonitorEntity monitorEntity = cacheContainer.getMonitorEntity();
             if (monitorEntity != null) {
                 boolean hasWebService = monitorEntity.hasWebService();

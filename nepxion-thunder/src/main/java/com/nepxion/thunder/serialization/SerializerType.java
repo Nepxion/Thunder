@@ -13,7 +13,7 @@ package com.nepxion.thunder.serialization;
 public enum SerializerType {
     FST_BINARY("fstBinarySerializer"),
     KRYO_BINARY("kryoBinarySerializer"),
-    JDK_BINARY("jdkBinarySerializer"),   
+    JDK_BINARY("jdkBinarySerializer"),
     JACKSON_JSON("jacksonJsonSerializer"),
     ALI_JSON("aliJsonSerializer"),
     FST_JSON("fstJsonSerializer");
@@ -27,14 +27,14 @@ public enum SerializerType {
     public String getValue() {
         return value;
     }
-    
+
     public static SerializerType fromString(String value) {
         for (SerializerType type : SerializerType.values()) {
             if (type.getValue().equalsIgnoreCase(value.trim())) {
                 return type;
             }
         }
-        
+
         throw new IllegalArgumentException("Mismatched type with value=" + value);
     }
 
