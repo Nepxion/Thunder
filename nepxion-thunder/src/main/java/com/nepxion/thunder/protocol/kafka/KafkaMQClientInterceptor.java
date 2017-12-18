@@ -24,11 +24,11 @@ public class KafkaMQClientInterceptor extends AbstractClientInterceptor {
     @Override
     public void invokeAsync(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
-        
+
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         String topic = KafkaMQDestinationUtil.createDestinationEntity(DestinationType.RESPONSE_QUEUE, interfaze, applicationEntity).toString();
-        
+
         KafkaMQProducer producer = getProducer(interfaze);
         producer.produceRequest(topic, applicationEntity, request);
     }
@@ -41,13 +41,13 @@ public class KafkaMQClientInterceptor extends AbstractClientInterceptor {
     }
 
     @Override
-    public void invokeBroadcast(ProtocolRequest request) throws Exception {        
+    public void invokeBroadcast(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
-        
+
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         String topic = KafkaMQDestinationUtil.createDestinationEntity(DestinationType.RESPONSE_TOPIC, interfaze, applicationEntity).toString();
-        
+
         KafkaMQProducer producer = getProducer(interfaze);
         producer.produceRequest(topic, applicationEntity, request);
     }

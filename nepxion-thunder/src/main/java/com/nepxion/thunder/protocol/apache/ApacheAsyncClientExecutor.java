@@ -30,7 +30,7 @@ import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class ApacheAsyncClientExecutor {
     private static final Logger LOG = LoggerFactory.getLogger(ApacheAsyncClientExecutor.class);
-    
+
     private CloseableHttpAsyncClient httpAsyncClient;
 
     public void initialize(final ThunderProperties properties) throws Exception {
@@ -56,9 +56,9 @@ public class ApacheAsyncClientExecutor {
 
                     httpAsyncClient = HttpAsyncClients.custom().setConnectionManager(httpManager).build();
                     httpAsyncClient.start();
-                    
+
                     LOG.info("Create apache async client successfully");
-                    
+
                     barrier.await();
                 } catch (IOReactorException e) {
                     LOG.error("Create apache async client failed", e);

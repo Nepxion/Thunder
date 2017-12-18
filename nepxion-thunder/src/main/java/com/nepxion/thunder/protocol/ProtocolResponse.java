@@ -12,11 +12,11 @@ package com.nepxion.thunder.protocol;
 
 public class ProtocolResponse extends ProtocolMessage {
     private static final long serialVersionUID = 9126534351826295998L;
-    
+
     private Object result;
 
     public ProtocolResponse() {
-        
+
     }
 
     public Object getResult() {

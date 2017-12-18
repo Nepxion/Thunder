@@ -12,6 +12,6 @@ package com.nepxion.thunder.protocol.kafka;
 
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 
-public interface KafkaMQExecutorDelegate extends ThunderDelegate {    
+public interface KafkaMQExecutorDelegate extends ThunderDelegate {
 
 }

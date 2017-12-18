@@ -20,7 +20,7 @@ public class KafkaMQCacheContainer {
 
     // 缓存Reference所有MQ的服务器配置，key为server(MQ配置名)，例如kafka-1
     private static Map<String, KafkaMQContext> referenceContextMap = Maps.newConcurrentMap();
-    
+
     public static Map<String, KafkaMQContext> getServiceContextMap() {
         return serviceContextMap;
     }

@@ -67,7 +67,7 @@ public class ClientExecutorAdapter extends AbstractDominationExecutor {
 
     private void handleSync(ProtocolResponse response) throws Exception {
         ClientInterceptorAdapter clientInterceptorAdapter = executorContainer.getClientInterceptorAdapter();
-        clientInterceptorAdapter.handleSync(response); 
+        clientInterceptorAdapter.handleSync(response);
     }
 
     private void handleException(Exception e, ProtocolResponse response) {

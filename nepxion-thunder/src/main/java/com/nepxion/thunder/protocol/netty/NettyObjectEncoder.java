@@ -21,9 +21,9 @@ import com.nepxion.thunder.serialization.SerializerExecutor;
 
 public class NettyObjectEncoder extends MessageToByteEncoder<Object> {
     public NettyObjectEncoder() {
-        
+
     }
-    
+
     @Override
     protected void encode(ChannelHandlerContext context, Object object, ByteBuf buf) throws Exception {
         byte[] bytes = null;
@@ -31,13 +31,13 @@ public class NettyObjectEncoder extends MessageToByteEncoder<Object> {
             if (buf == null) {
                 return;
             }
-            
+
             if (!(object instanceof Serializable)) {
                 return;
             }
             bytes = SerializerExecutor.serialize((Serializable) object);
-            
-			buf.writeInt(bytes.length);
+
+            buf.writeInt(bytes.length);
             buf.writeBytes(bytes);
         } catch (Exception e) {
             e.printStackTrace();

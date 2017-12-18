@@ -25,10 +25,10 @@ import com.nepxion.thunder.common.entity.MQPropertyEntity;
 
 public class KafkaMQConsumer extends ThunderDelegateImpl {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaMQConsumer.class);
-    
+
     protected MQPropertyEntity mqPropertyEntity;
     protected Consumer<String, byte[]> consumer;
-    
+
     public KafkaMQConsumer(MQPropertyEntity mqPropertyEntity, String groupId) {
         Map<String, Object> map = null;
         try {
@@ -45,7 +45,7 @@ public class KafkaMQConsumer extends ThunderDelegateImpl {
     public MQPropertyEntity getMQPropertyEntity() {
         return mqPropertyEntity;
     }
-    
+
     public Consumer<String, byte[]> getConsumer() {
         return consumer;
     }

@@ -25,7 +25,7 @@ import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.framework.bean.ApplicationFactoryBean;
 import com.nepxion.thunder.security.SecurityExecutor;
 
-public class HessianAuthServiceExporter extends HessianServiceExporter implements ApplicationContextAware {     
+public class HessianAuthServiceExporter extends HessianServiceExporter implements ApplicationContextAware {
     private ApplicationContext applicationContext;
     private SecurityExecutor securityExecutor;
 

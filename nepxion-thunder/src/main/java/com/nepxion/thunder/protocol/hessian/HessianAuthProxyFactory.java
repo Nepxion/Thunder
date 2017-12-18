@@ -38,12 +38,12 @@ public class HessianAuthProxyFactory extends HessianProxyFactory {
             @Override
             public HessianConnection open(URL url) throws IOException {
                 HessianConnection connection = super.open(url);
-                
+
                 String interfaze = HessianUrlUtil.extractInterface(url.toString());
                 ReferenceConfig referenceConfig = referenceConfigMap.get(interfaze);
                 String secretKey = referenceConfig.getSecretKey();
                 int version = referenceConfig.getVersion();
-                
+
                 connection.addHeader(ThunderConstants.INTERFACE_ATTRIBUTE_NAME, interfaze);
                 connection.addHeader(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME, secretKey);
                 connection.addHeader(ThunderConstants.VERSION_ATTRIBUTE_NAME, String.valueOf(version));
@@ -52,7 +52,7 @@ public class HessianAuthProxyFactory extends HessianProxyFactory {
             }
         };
     }
-    
+
     protected void setReferenceConfigMap(Map<String, ReferenceConfig> referenceConfigMap) {
         this.referenceConfigMap = referenceConfigMap;
     }

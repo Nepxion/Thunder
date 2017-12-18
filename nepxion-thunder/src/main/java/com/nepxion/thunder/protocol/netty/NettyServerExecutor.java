@@ -44,9 +44,9 @@ import com.nepxion.thunder.protocol.redis.sentinel.RedisSubscriber;
 
 public class NettyServerExecutor extends AbstractServerExecutor {
     private static final Logger LOG = LoggerFactory.getLogger(NettyServerExecutor.class);
-    
+
     private AtomicBoolean start = new AtomicBoolean(false);
-    
+
     @Override
     public void start(String interfaze, final ApplicationEntity applicationEntity) throws Exception {
         boolean redisEnabled = RedisSentinelPoolFactory.enabled();
@@ -54,17 +54,17 @@ public class NettyServerExecutor extends AbstractServerExecutor {
             RedisSubscriber subscriber = new RedisSubscriber(executorContainer);
             subscriber.subscribe(interfaze, applicationEntity);
         }
-        
+
         boolean started = started(interfaze, applicationEntity);
         if (started) {
             return;
         }
-        
+
         final String host = applicationEntity.getHost();
         final int port = applicationEntity.getPort();
-        
+
         LOG.info("Attempt to start server with host={}, port={}", host, port);
-        
+
         final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         // From https://github.com/netty/netty/wiki/Thread-Affinity
         final ThreadFactory threadFactory = new AffinityThreadFactory("ServerAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
@@ -90,24 +90,24 @@ public class NettyServerExecutor extends AbstractServerExecutor {
                                 @Override
                                 public void initChannel(SocketChannel channel) throws Exception {
                                     channel.pipeline()
-                                           .addLast(new NettyObjectDecoder(properties.getInteger(ThunderConstants.NETTY_MAX_MESSAGE_SIZE_ATTRIBUTE_NAME)))
-                                           .addLast(new NettyObjectEncoder())
-                                           .addLast(new JdkZlibDecoder())
-                                           .addLast(new JdkZlibEncoder())
-                                           .addLast(new NettyServerHandler(cacheContainer, executorContainer, properties.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME)));
+                                            .addLast(new NettyObjectDecoder(properties.getInteger(ThunderConstants.NETTY_MAX_MESSAGE_SIZE_ATTRIBUTE_NAME)))
+                                            .addLast(new NettyObjectEncoder())
+                                            .addLast(new JdkZlibDecoder())
+                                            .addLast(new JdkZlibEncoder())
+                                            .addLast(new NettyServerHandler(cacheContainer, executorContainer, properties.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME)));
                                 }
                             });
-    
+
                     ChannelFuture channelFuture = server.bind(port).sync();
-                    
+
                     LOG.info("Server has started with port={} successfully", port);
-                    
+
                     start.set(true);
-    
+
                     // 问题： 如果执行下面的代码，会把主线程给阻塞，导致容器后面代码无法执行下去，容器会支撑主线程始终运行
                     // 作用：监听端口关闭，做阻塞线程用，一直等待Channel关闭，然后结束线程
                     // channelFuture.channel().closeFuture().sync();
-                    
+
                     return channelFuture;
                 } finally {
                     // 作为服务器，资源始终不能被释放，否则会触发Unregister事件
@@ -115,10 +115,10 @@ public class NettyServerExecutor extends AbstractServerExecutor {
                     // workerGroup.shutdownGracefully().sync();
                 }
             }
-        // 同步等待，因为newSingleThreadExecutor(线程数只有一个)，所以不会等待
+            // 同步等待，因为newSingleThreadExecutor(线程数只有一个)，所以不会等待
         }).get();
     }
-    
+
     @Override
     public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         return start.get();

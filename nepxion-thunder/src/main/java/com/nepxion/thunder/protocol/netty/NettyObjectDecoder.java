@@ -32,7 +32,7 @@ public class NettyObjectDecoder extends LengthFieldBasedFrameDecoder {
             if (decode == null) {
                 return null;
             }
-            
+
             buf = (ByteBuf) decode;
 
             int startIndex = buf.readerIndex();
@@ -41,7 +41,7 @@ public class NettyObjectDecoder extends LengthFieldBasedFrameDecoder {
 
             byte[] bytes = new byte[endIndex - startIndex];
             buf.readBytes(bytes);
-                              
+
             object = SerializerExecutor.deserialize(bytes);
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,7 +49,7 @@ public class NettyObjectDecoder extends LengthFieldBasedFrameDecoder {
         } finally {
             ReferenceCountUtil.release(buf);
         }
-        
+
         return object;
     }
 }

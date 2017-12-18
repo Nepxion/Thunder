@@ -16,7 +16,7 @@ import com.nepxion.thunder.common.entity.ConnectionEntity;
 
 public abstract class AbstractClientExecutor extends ThunderDelegateImpl implements ClientExecutor {
     @Override
-    public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {        
+    public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         return cacheContainer.getConnectionCacheEntity().contains(interfaze, applicationEntity);
     }
 

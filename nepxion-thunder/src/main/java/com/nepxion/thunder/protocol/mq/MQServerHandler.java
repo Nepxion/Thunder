@@ -27,14 +27,14 @@ import com.nepxion.thunder.protocol.ServerExecutorAdapter;
 
 public class MQServerHandler extends MQConsumer {
     private static final Logger LOG = LoggerFactory.getLogger(MQServerHandler.class);
-    
+
     private MQBytesMessageConverter mqMessageConverter = new MQBytesMessageConverter();
     private MQProducer mqProducer;
     private boolean transportLogPrint;
-    
+
     public MQServerHandler(MQProducer mqProducer, MQPropertyEntity mqPropertyEntity) {
         this.mqProducer = mqProducer;
-        
+
         try {
             transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
         } catch (Exception e) {
@@ -54,11 +54,11 @@ public class MQServerHandler extends MQConsumer {
             @Override
             public Object call() throws Exception {*/
                 String requestSelector = MQSelectorUtil.getRequestSelector(message);
-                
+
                 if (transportLogPrint) {
                     LOG.info("Request from client={}, service={}", requestSelector, interfaze);
                 }
-                
+
                 final ProtocolResponse response = new ProtocolResponse();
                 try {
                     ServerExecutorAdapter serverExecutorAdapter = executorContainer.getServerExecutorAdapter();
@@ -70,8 +70,8 @@ public class MQServerHandler extends MQConsumer {
                 boolean feedback = request.isFeedback();
                 if (feedback) {
                     try {
-                        Destination requestDestination = message.getJMSReplyTo();                    
-       
+                        Destination requestDestination = message.getJMSReplyTo();
+
                         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
 
                         mqProducer.produceResponse(requestDestination, applicationEntity, response, requestSelector);
@@ -79,7 +79,7 @@ public class MQServerHandler extends MQConsumer {
                         message.setJMSReplyTo(null);
                     }
                 }
-                
+
                 /*return null;
             }
         });*/

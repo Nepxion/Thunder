@@ -17,7 +17,7 @@ import javax.jms.Destination;
 import com.google.common.collect.Maps;
 
 public class MQTopicDestinationContainer {
-    
+
     // 缓存所有的异步响应Destination，对应为持久化容器(Topic)，key为interface
     private Map<String, Destination> asyncResponseDestinationMap = Maps.newConcurrentMap();
 

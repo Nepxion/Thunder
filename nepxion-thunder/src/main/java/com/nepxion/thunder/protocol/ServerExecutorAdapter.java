@@ -29,7 +29,7 @@ public class ServerExecutorAdapter extends AbstractDominationExecutor {
         long startTimestamp = System.currentTimeMillis();
         request.setDeliverEndTime(startTimestamp);
         response.setProcessStartTime(startTimestamp);
-        
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("Request={}", SerializerExecutor.toJson(request));
         }
@@ -44,14 +44,14 @@ public class ServerExecutorAdapter extends AbstractDominationExecutor {
             if (heartbeat) {
                 return;
             }
-            
+
             long endTimestamp = System.currentTimeMillis();
             response.setProcessEndTime(endTimestamp);
             response.setDeliverStartTime(endTimestamp);
-            
+
             handleMonitor(request);
             handleNoFeedbackMonitor(response);
-            
+
             handleNoFeedbackEvent(response, ApplicationType.SERVICE);
         }
     }
@@ -62,9 +62,9 @@ public class ServerExecutorAdapter extends AbstractDominationExecutor {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Receive heart beat request...");
             }
-            
+
             response.setHeartbeat(heartbeat);
-            
+
             return;
         }
 
@@ -79,16 +79,16 @@ public class ServerExecutorAdapter extends AbstractDominationExecutor {
         long timeout = request.getTimeout();
         boolean broadcast = request.isBroadcast();
         boolean feedback = request.isFeedback();
-        
+
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
         String responseCluster = applicationEntity.getCluster();
         String responseUrl = applicationEntity.toUrl();
         String requestCluster = request.getFromCluster();
         String requestUrl = request.getFromUrl();
-        
+
         request.setToCluster(responseCluster);
         request.setToUrl(responseUrl);
-        
+
         response.setMessageId(messageId);
         response.setTraceId(traceId);
         response.setInterface(interfaze);
@@ -126,24 +126,24 @@ public class ServerExecutorAdapter extends AbstractDominationExecutor {
     private void handleException(Exception e, ProtocolResponse response) {
         response.setException(e);
     }
-        
+
     private void handleNoFeedbackMonitor(ProtocolResponse response) {
         if (response.isFeedback()) {
             return;
         }
-        
+
         response.setDeliverEndTime(response.getDeliverStartTime());
         response.setToCluster(response.getFromCluster());
         response.setToUrl(response.getFromUrl());
-        
+
         handleMonitor(response);
     }
-    
+
     private void handleNoFeedbackEvent(ProtocolResponse response, ApplicationType applicationType) {
         if (response.isFeedback()) {
             return;
         }
-        
+
         handleEvent(response, applicationType);
     }
 }

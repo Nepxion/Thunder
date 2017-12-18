@@ -40,7 +40,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<ProtocolResp
     private ExecutorContainer executorContainer;
     private boolean transportLogPrint;
     private boolean heartBeatLogPrint;
-    
+
     public NettyClientHandler(CacheContainer cacheContainer, ExecutorContainer executorContainer, boolean transportLogPrint, boolean heartBeatLogPrint) {
         this.cacheContainer = cacheContainer;
         this.executorContainer = executorContainer;
@@ -60,7 +60,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<ProtocolResp
                 if (transportLogPrint) {
                     LOG.info("Response from server={}, service={}", getRemoteAddress(context), interfaze);
                 }
-                
+
                 try {
                     ClientExecutorAdapter clientExecutorAdapter = executorContainer.getClientExecutorAdapter();
                     clientExecutorAdapter.handle(response);
@@ -79,20 +79,20 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<ProtocolResp
     public void exceptionCaught(ChannelHandlerContext context, Throwable cause) throws Exception {
         // LOG.error("Unexpected exception from downstream, cause={}", cause.getMessage(), cause);
         // LOG.warn("Unexpected exception from downstream, remote address={}, cause={}", getRemoteAddress(context), cause.getClass().getName(), cause);
-        
+
         if (cause instanceof ChannelException) {
             LOG.error("Channel will be closed for {}", cause.getClass().getName());
-            
+
             context.close();
         }
-        
+
         ProtocolMessage message = new ProtocolMessage();
         message.setFromUrl(getRemoteAddress(context).toString());
         message.setToUrl(getLocalAddress(context).toString());
         message.setException((Exception) cause);
         ProtocolEventFactory.postClientSystemEvent(ProtocolType.NETTY, message);
     }
-    
+
     @Override
     public void userEventTriggered(ChannelHandlerContext context, Object e) throws Exception {
         // 读写空闲时,发送心跳信息
@@ -116,11 +116,11 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<ProtocolResp
             super.userEventTriggered(context, e);
         }*/
     }
-    
+
     public SocketAddress getLocalAddress(ChannelHandlerContext context) {
         return context.channel().localAddress();
     }
-    
+
     public SocketAddress getRemoteAddress(ChannelHandlerContext context) {
         return context.channel().remoteAddress();
     }

@@ -30,7 +30,7 @@ public class HessianClientExecutor extends AbstractClientExecutor {
         if (started) {
             return;
         }
-        
+
         proxyFactory.setReferenceConfigMap(cacheContainer.getReferenceConfigMap());
 
         Class<?> interfaceClass = Class.forName(interfaze);
@@ -43,7 +43,7 @@ public class HessianClientExecutor extends AbstractClientExecutor {
 
         online(interfaze, applicationEntity, proxy);
     }
-    
+
     @Override
     public void setProperties(ThunderProperties properties) {
         super.setProperties(properties);
@@ -55,7 +55,7 @@ public class HessianClientExecutor extends AbstractClientExecutor {
         proxyFactory.setReadTimeout(readTimeout);
         proxyFactory.setConnectTimeout(connectTimeout);
     }
-    
+
     @Override
     public ConnectionEntity online(String interfaze, ApplicationEntity applicationEntity, Object proxy) throws Exception {
         ConnectionEntity connectionEntity = super.online(interfaze, applicationEntity, proxy);

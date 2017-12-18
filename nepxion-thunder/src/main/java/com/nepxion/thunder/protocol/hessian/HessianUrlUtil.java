@@ -49,11 +49,11 @@ public class HessianUrlUtil {
 
         return toUrl(interfaceName, applicationEntity, cacheContainer);
     }
-    
+
     // 萃取Interface
     // 例如，http://192.168.0.1:8080/thunder/hessian/com.nepxion.thunder.xxxService，
     // 萃取为com.nepxion.thunder.xxxService
-    public static String extractInterface(String url) {        
+    public static String extractInterface(String url) {
         return url.substring(url.lastIndexOf("/") + 1);
     }
 }

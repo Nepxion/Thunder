@@ -25,11 +25,11 @@ import com.nepxion.thunder.protocol.ProtocolException;
 
 public class MQServerExecutor extends AbstractServerExecutor implements MQExecutorDelegate {
     private static final Logger LOG = LoggerFactory.getLogger(MQServerExecutor.class);
-    
+
     @Override
     public void start(final String interfaze, final ApplicationEntity applicationEntity) throws Exception {
         final String server = getServer(interfaze);
-        
+
         final Map<String, MQContext> contextMap = MQCacheContainer.getServiceContextMap();
 
         final CyclicBarrier barrier = new CyclicBarrier(2);
@@ -47,7 +47,7 @@ public class MQServerExecutor extends AbstractServerExecutor implements MQExecut
                 } catch (Exception e) {
                     LOG.error("Start MQ failed", e);
                 }
-                
+
                 barrier.await();
 
                 return null;
@@ -55,27 +55,27 @@ public class MQServerExecutor extends AbstractServerExecutor implements MQExecut
         });
 
         barrier.await();
-        
+
         try {
             contextMap.get(server).stopRetryNotification();
         } catch (Exception e) {
             throw new ProtocolException("Get MQ server failed, check it in config file", e);
         }
     }
-    
+
     @Override
     public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         String server = getServer(interfaze);
-        
+
         Map<String, MQContext> contextMap = MQCacheContainer.getServiceContextMap();
-                
+
         return contextMap.get(server) != null;
     }
-    
+
     private String getServer(String interfaze) {
         Map<String, ServiceEntity> serviceEntityMap = cacheContainer.getServiceEntityMap();
         ServiceEntity serviceEntity = serviceEntityMap.get(interfaze);
-        
+
         return serviceEntity.getServer();
     }
 }

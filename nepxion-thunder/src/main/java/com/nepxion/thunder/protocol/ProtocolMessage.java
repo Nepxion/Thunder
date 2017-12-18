@@ -29,7 +29,7 @@ public class ProtocolMessage implements Serializable {
     protected boolean broadcast;
     protected boolean heartbeat;
     protected boolean feedback;
-    
+
     // 调用的业务处理起始时间
     protected long processStartTime;
     // 调用的业务处理结束时间
@@ -38,18 +38,18 @@ public class ProtocolMessage implements Serializable {
     protected long deliverStartTime;
     // 调用的网络传输结束时间
     protected long deliverEndTime;
-    
+
     protected String fromCluster;
     protected String fromUrl;
     protected String toCluster;
     protected String toUrl;
-    
+
     protected Exception exception;
-    
+
     // 只作为MQ Selector用
     protected Object requestSource;
     protected Object responseSource;
-    
+
     public String getMessageId() {
         return messageId;
     }
@@ -57,7 +57,7 @@ public class ProtocolMessage implements Serializable {
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
-    
+
     public String getTraceId() {
         return traceId;
     }
@@ -65,7 +65,7 @@ public class ProtocolMessage implements Serializable {
     public void setTraceId(String traceId) {
         this.traceId = traceId;
     }
-    
+
     public String getInterface() {
         return interfaze;
     }
@@ -73,7 +73,7 @@ public class ProtocolMessage implements Serializable {
     public void setInterface(String interfaze) {
         this.interfaze = interfaze;
     }
-    
+
     public String getMethod() {
         return method;
     }
@@ -81,7 +81,7 @@ public class ProtocolMessage implements Serializable {
     public void setMethod(String method) {
         this.method = method;
     }
-    
+
     public Class<?>[] getParameterTypes() {
         return parameterTypes;
     }
@@ -105,7 +105,7 @@ public class ProtocolMessage implements Serializable {
     public void setAsync(boolean async) {
         this.async = async;
     }
-    
+
     public String getCallback() {
         return callback;
     }
@@ -145,7 +145,7 @@ public class ProtocolMessage implements Serializable {
     public void setFeedback(boolean feedback) {
         this.feedback = feedback;
     }
-    
+
     public long getProcessStartTime() {
         return processStartTime;
     }
@@ -161,7 +161,7 @@ public class ProtocolMessage implements Serializable {
     public void setProcessEndTime(long processEndTime) {
         this.processEndTime = processEndTime;
     }
-    
+
     public long getDeliverStartTime() {
         return deliverStartTime;
     }
@@ -177,7 +177,7 @@ public class ProtocolMessage implements Serializable {
     public void setDeliverEndTime(long deliverEndTime) {
         this.deliverEndTime = deliverEndTime;
     }
-    
+
     public String getFromCluster() {
         return fromCluster;
     }
@@ -185,7 +185,7 @@ public class ProtocolMessage implements Serializable {
     public void setFromCluster(String fromCluster) {
         this.fromCluster = fromCluster;
     }
-    
+
     public String getFromUrl() {
         return fromUrl;
     }
@@ -193,7 +193,7 @@ public class ProtocolMessage implements Serializable {
     public void setFromUrl(String fromUrl) {
         this.fromUrl = fromUrl;
     }
-    
+
     public String getToCluster() {
         return toCluster;
     }
@@ -209,7 +209,7 @@ public class ProtocolMessage implements Serializable {
     public void setToUrl(String toUrl) {
         this.toUrl = toUrl;
     }
-    
+
     public Exception getException() {
         return exception;
     }
@@ -217,7 +217,7 @@ public class ProtocolMessage implements Serializable {
     public void setException(Exception exception) {
         this.exception = exception;
     }
-    
+
     public Object getRequestSource() {
         return requestSource;
     }
@@ -233,8 +233,8 @@ public class ProtocolMessage implements Serializable {
     public void setResponseSource(Object responseSource) {
         this.responseSource = responseSource;
     }
-    
-    public MethodKey createMethodKey() {        
+
+    public MethodKey createMethodKey() {
         return MethodKey.create(method, parameterTypes);
     }
 }

@@ -39,7 +39,7 @@ public class KafkaMQProducer {
 
     protected MQPropertyEntity mqPropertyEntity;
     protected Producer<String, byte[]> producer;
-    
+
     public KafkaMQProducer(MQPropertyEntity mqPropertyEntity) {
         Map<String, Object> map = null;
         try {
@@ -47,7 +47,7 @@ public class KafkaMQProducer {
         } catch (Exception e) {
             LOG.error("Extract properties failed", e);
         }
-        
+
         this.mqPropertyEntity = mqPropertyEntity;
         this.producer = new KafkaProducer<String, byte[]>(map, new StringSerializer(), new ByteArraySerializer());
     }
@@ -55,7 +55,7 @@ public class KafkaMQProducer {
     public MQPropertyEntity getMQPropertyEntity() {
         return mqPropertyEntity;
     }
-    
+
     public Producer<String, byte[]> getProducer() {
         return producer;
     }
@@ -78,16 +78,16 @@ public class KafkaMQProducer {
 
                     return null;
                 }
-                
+
                 request.setRequestSource(url);
-                
+
                 final ProducerRecord<String, byte[]> record = new ProducerRecord<String, byte[]>(topic, SerializerExecutor.serialize(request));
                 producer.send(record, new Callback() {
                     public void onCompletion(RecordMetadata metadata, Exception e) {
                         if (e == null) {
                             return;
                         }
-                        
+
                         LOG.error("Produce request failed", e);
 
                         ProtocolEventFactory.postClientProducerEvent(ProtocolType.KAFKA, request);
@@ -105,13 +105,13 @@ public class KafkaMQProducer {
 
             return;
         }
-        
+
         if (StringUtils.isEmpty(requestSource)) {
             LOG.error("Request source can't be null");
 
             return;
         }
-        
+
         String responseSource = applicationEntity.toUrl();
         response.setRequestSource(requestSource);
         response.setResponseSource(responseSource);
@@ -122,7 +122,7 @@ public class KafkaMQProducer {
                 if (e == null) {
                     return;
                 }
-                
+
                 LOG.error("Produce response failed", e);
 
                 ProtocolEventFactory.postServerProducerEvent(ProtocolType.KAFKA, response);

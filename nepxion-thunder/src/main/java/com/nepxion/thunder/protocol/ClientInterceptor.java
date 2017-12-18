@@ -17,7 +17,7 @@ import com.nepxion.thunder.common.delegate.ThunderDelegate;
 public interface ClientInterceptor extends ThunderDelegate, MethodInterceptor {
     // 设置要调用的接口
     void setInterface(String interfaze);
-    
+
     // 异步调用
     void invokeAsync(ProtocolRequest request) throws Exception;
 

@@ -47,7 +47,7 @@ public class AbstractDominationExecutor extends ThunderDelegateImpl implements D
     @Override
     public void handleEvent(ProtocolMessage message, ApplicationType applicationType) {
         ProtocolType protocolType = getCacheContainer().getProtocolEntity().getType();
-        
+
         ProtocolEventFactory.postConsumerEvent(applicationType, protocolType, message);
     }
 }

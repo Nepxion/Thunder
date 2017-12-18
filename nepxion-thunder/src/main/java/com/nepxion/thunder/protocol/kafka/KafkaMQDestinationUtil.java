@@ -20,7 +20,7 @@ public class KafkaMQDestinationUtil {
 
         return destinationEntity;
     }
-    
+
     public static DestinationEntity createDestinationEntity(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         DestinationEntity destinationEntity = new DestinationEntity(interfaze, applicationEntity);
 

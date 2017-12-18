@@ -21,15 +21,15 @@ import com.nepxion.thunder.protocol.ClientInterceptorAdapter;
 import com.nepxion.thunder.protocol.ProtocolRequest;
 
 public class MQClientInterceptor extends AbstractClientInterceptor {
-    
+
     @Override
     public void invokeAsync(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
         boolean isAsync = request.isAsync();
-        
+
         Destination queueResponseDestination = null;
         Destination queueRequestDestination = null;
-        
+
         if (isAsync) {
             queueResponseDestination = MQCacheContainer.getMQQueueDestinationContainer().getAsyncResponseDestinationMap().get(interfaze);
             queueRequestDestination = MQCacheContainer.getMQQueueDestinationContainer().getAsyncRequestDestinationMap().get(interfaze);
@@ -37,9 +37,9 @@ public class MQClientInterceptor extends AbstractClientInterceptor {
             queueResponseDestination = MQCacheContainer.getMQQueueDestinationContainer().getSyncResponseDestinationMap().get(interfaze);
             queueRequestDestination = MQCacheContainer.getMQQueueDestinationContainer().getSyncRequestDestinationMap().get(interfaze);
         }
-        
+
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         MQProducer mqProducer = getMQProducer(interfaze);
         mqProducer.produceRequest(queueResponseDestination, queueRequestDestination, applicationEntity, request);
     }
@@ -47,27 +47,27 @@ public class MQClientInterceptor extends AbstractClientInterceptor {
     @Override
     public Object invokeSync(ProtocolRequest request) throws Exception {
         ClientInterceptorAdapter clientInterceptorAdapter = executorContainer.getClientInterceptorAdapter();
-        
+
         return clientInterceptorAdapter.invokeSync(this, request);
     }
 
     @Override
     public void invokeBroadcast(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
-        
+
         Destination topicResponseDestination = MQCacheContainer.getMQTopicDestinationContainer().getAsyncResponseDestinationMap().get(interfaze);
-        
+
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         MQProducer mqProducer = getMQProducer(interfaze);
         mqProducer.produceRequest(topicResponseDestination, null, applicationEntity, request);
     }
-    
+
     private MQProducer getMQProducer(String interfaze) {
         Map<String, ReferenceEntity> referenceEntityMap = cacheContainer.getReferenceEntityMap();
         ReferenceEntity referenceEntity = referenceEntityMap.get(interfaze);
         String server = referenceEntity.getServer();
-        
+
         return MQCacheContainer.getReferenceContextMap().get(server).getMQProducer();
     }
 }

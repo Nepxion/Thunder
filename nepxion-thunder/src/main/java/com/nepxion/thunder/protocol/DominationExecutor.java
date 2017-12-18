@@ -17,7 +17,7 @@ public interface DominationExecutor extends ThunderDelegate {
 
     // 监控处理
     void handleMonitor(ProtocolMessage message);
-    
+
     // EventBus异步事件处理
     void handleEvent(ProtocolMessage message, ApplicationType applicationType);
 }

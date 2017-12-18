@@ -12,6 +12,6 @@ package com.nepxion.thunder.protocol.mq;
 
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 
-public interface MQExecutorDelegate extends ThunderDelegate {    
+public interface MQExecutorDelegate extends ThunderDelegate {
 
 }

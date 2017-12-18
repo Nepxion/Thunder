@@ -19,7 +19,7 @@ import com.nepxion.thunder.protocol.redis.sentinel.RedisSubscriber;
 
 public class HessianServerExecutor extends AbstractServerExecutor {
     private AtomicBoolean start = new AtomicBoolean(false);
-    
+
     @Override
     public void start(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         boolean redisEnabled = RedisSentinelPoolFactory.enabled();
@@ -27,12 +27,12 @@ public class HessianServerExecutor extends AbstractServerExecutor {
             RedisSubscriber subscriber = new RedisSubscriber(executorContainer);
             subscriber.subscribe(interfaze, applicationEntity);
         }
-        
+
         boolean started = started(interfaze, applicationEntity);
         if (started) {
             return;
         }
-        
+
         start.set(true);
     }
 

@@ -24,11 +24,11 @@ import com.nepxion.thunder.protocol.AbstractServerExecutor;
 
 public class KafkaMQServerExecutor extends AbstractServerExecutor implements KafkaMQExecutorDelegate {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaMQServerExecutor.class);
-    
+
     @Override
     public void start(final String interfaze, final ApplicationEntity applicationEntity) throws Exception {
         final String server = getServer(interfaze);
-        
+
         final Map<String, KafkaMQContext> contextMap = KafkaMQCacheContainer.getServiceContextMap();
 
         final CyclicBarrier barrier = new CyclicBarrier(2);
@@ -46,7 +46,7 @@ public class KafkaMQServerExecutor extends AbstractServerExecutor implements Kaf
                 } catch (Exception e) {
                     LOG.error("Start MQ failed", e);
                 }
-                
+
                 barrier.await();
 
                 return null;
@@ -55,20 +55,20 @@ public class KafkaMQServerExecutor extends AbstractServerExecutor implements Kaf
 
         barrier.await();
     }
-    
+
     @Override
     public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         String server = getServer(interfaze);
-        
+
         Map<String, KafkaMQContext> contextMap = KafkaMQCacheContainer.getServiceContextMap();
-                
+
         return contextMap.get(server) != null;
     }
-    
+
     private String getServer(String interfaze) {
         Map<String, ServiceEntity> serviceEntityMap = cacheContainer.getServiceEntityMap();
         ServiceEntity serviceEntity = serviceEntityMap.get(interfaze);
-        
+
         return serviceEntity.getServer();
     }
 }

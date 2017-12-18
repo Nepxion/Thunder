@@ -41,7 +41,7 @@ public class MQTemplate extends JmsTemplate {
             Message message = messageCreator.createMessage(session);
             boolean async = message.getBooleanProperty(ThunderConstants.ASYNC_ATTRIBUTE_NAME);
             long timeout = message.getLongProperty(ThunderConstants.TIMEOUT_ATTRIBUTE_NAME);
-            
+
             producer = createProducer(session, destination);
             // DeliveryMode.PERSISTENT:持久化模式，消息在硬盘堆积模式
             // DeliveryMode.NON_PERSISTENT:非持久化模式，消息在内存堆积模式

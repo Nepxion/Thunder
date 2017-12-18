@@ -51,7 +51,7 @@ public class MQProducer {
                     LOG.error("Response and request destinations can't be same");
                     return null;
                 }
-                
+
                 try {
                     mqTemplate.send(responseDestination, new MessageCreator() {
                         @Override
@@ -63,7 +63,7 @@ public class MQProducer {
                             if (requestDestination != null) {
                                 message.setJMSReplyTo(requestDestination);
                             }
-                            
+
                             MQSelectorUtil.setRequestSelector(message, applicationEntity);
 
                             return message;
@@ -71,7 +71,7 @@ public class MQProducer {
                     });
                 } catch (Exception e) {
                     LOG.error("Produce request failed", e);
-                    
+
                     ProtocolEventFactory.postClientProducerEvent(protocolType, request);
                 }
 
@@ -79,7 +79,7 @@ public class MQProducer {
             }
         });
     }
-    
+
     public void produceResponse(final Destination requestDestination, final ApplicationEntity applicationEntity, final ProtocolResponse response, final String selector) {
         if (requestDestination == null) {
             LOG.error("Response destination can't be null");
@@ -103,7 +103,7 @@ public class MQProducer {
             });
         } catch (Exception e) {
             LOG.error("Produce response failed", e);
-            
+
             ProtocolEventFactory.postServerProducerEvent(protocolType, response);
         }
     }

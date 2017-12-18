@@ -32,13 +32,13 @@ import com.nepxion.thunder.serialization.SerializerExecutor;
 
 public class KafkaMQClientHandler extends KafkaMQConsumer {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaMQClientHandler.class);
-    
+
     private int consumerClientPollTimeout = 500;
     private boolean transportLogPrint;
-    
+
     public KafkaMQClientHandler(MQPropertyEntity mqPropertyEntity, String groupId) {
         super(mqPropertyEntity, groupId);
-        
+
         try {
             consumerClientPollTimeout = mqPropertyEntity.getInteger(ThunderConstants.KAFKA_CONSUMER_CLIENT_POLL_TIMEOUT_ATTRIBUTE_NAME);
             transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
@@ -47,7 +47,7 @@ public class KafkaMQClientHandler extends KafkaMQConsumer {
         }
     }
 
-    public void consume(final String topic, final String interfaze, final ApplicationEntity applicationEntity) throws Exception {  
+    public void consume(final String topic, final String interfaze, final ApplicationEntity applicationEntity) throws Exception {
         final String url = applicationEntity.toUrl();
         ThreadPoolFactory.createThreadPoolClientExecutor(url, interfaze).submit(new Callable<Object>() {
             @Override
@@ -55,7 +55,7 @@ public class KafkaMQClientHandler extends KafkaMQConsumer {
                 int partitionIndex = getPartitionIndex(consumer, topic, url);
                 TopicPartition partition = new TopicPartition(topic, partitionIndex);
                 consumer.assign(Arrays.asList(partition));
-                
+
                 while (true) {
                     ConsumerRecords<String, byte[]> records = consumer.poll(consumerClientPollTimeout);
                     if (records != null && records.count() != 0) {
@@ -64,11 +64,11 @@ public class KafkaMQClientHandler extends KafkaMQConsumer {
                             try {
                                 String responseSource = response.getResponseSource().toString();
                                 // String requestSource = response.getRequestSource().toString();
-                                
+
                                 if (transportLogPrint) {
                                     LOG.info("Response from server={}, service={}", responseSource, interfaze);
                                 }
-                                
+
                                 ClientExecutorAdapter clientExecutorAdapter = executorContainer.getClientExecutorAdapter();
                                 clientExecutorAdapter.handle(response);
                             } catch (Exception e) {
@@ -80,11 +80,11 @@ public class KafkaMQClientHandler extends KafkaMQConsumer {
             }
         });
     }
-    
+
     @SuppressWarnings("resource")
     private int getPartitionIndex(Consumer<String, byte[]> consumer, String topic, String key) {
         int partitionNumber = consumer.partitionsFor(topic).size();
-        
+
         StringSerializer keySerializer = new StringSerializer();
         byte[] serializedKey = keySerializer.serialize(topic, key);
 

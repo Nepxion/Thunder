@@ -20,25 +20,25 @@ import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.CallbackType;
 import com.nepxion.thunder.common.entity.MethodEntity;
 
-public abstract class AbstractClientInterceptor extends ThunderDelegateImpl implements ClientInterceptor {    
+public abstract class AbstractClientInterceptor extends ThunderDelegateImpl implements ClientInterceptor {
     protected String interfaze;
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         long timestamp = System.currentTimeMillis();
-        
+
         ProtocolRequest request = new ProtocolRequest();
         request.setProcessStartTime(timestamp);
         request.setProcessEndTime(timestamp);
         request.setDeliverStartTime(timestamp);
-        
+
         String methodName = invocation.getMethod().getName();
         Class<?>[] parameterTypes = invocation.getMethod().getParameterTypes();
         Object[] arguments = invocation.getArguments();
         // Class<?> returnType = invocation.getMethod().getReturnType();
 
         MethodEntity methodEntity = cacheContainer.getMethodEntity(interfaze, methodName, parameterTypes);
-                
+
         int traceIdIndex = methodEntity.getTraceIdIndex();
         boolean async = methodEntity.isAsync();
         String callback = null;
@@ -54,11 +54,11 @@ public abstract class AbstractClientInterceptor extends ThunderDelegateImpl impl
         boolean broadcast = methodEntity.isBroadcast();
         boolean heartbeat = false;
         boolean feedback = !(broadcast || heartbeat || (async && !methodEntity.isCallback()));
-        
+
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
         String fromCluster = applicationEntity.getCluster();
         String fromUrl = applicationEntity.toUrl();
- 
+
         request.setFromCluster(fromCluster);
         request.setFromUrl(fromUrl);
         if (arguments.length > traceIdIndex) {
@@ -74,7 +74,7 @@ public abstract class AbstractClientInterceptor extends ThunderDelegateImpl impl
         request.setBroadcast(broadcast);
         request.setHeartbeat(heartbeat);
         request.setFeedback(feedback);
-        
+
         Map<String, ReferenceConfig> referenceConfigMap = cacheContainer.getReferenceConfigMap();
         ReferenceConfig referenceConfig = referenceConfigMap.get(interfaze);
         request.setReferenceConfig(referenceConfig);
@@ -85,10 +85,10 @@ public abstract class AbstractClientInterceptor extends ThunderDelegateImpl impl
             } else {
                 ClientInterceptorAdapter clientInterceptorAdapter = executorContainer.getClientInterceptorAdapter();
                 clientInterceptorAdapter.persistAsync(request, methodEntity);
-                
+
                 invokeAsync(request);
             }
-            
+
             return null;
         } else {
             return invokeSync(request);

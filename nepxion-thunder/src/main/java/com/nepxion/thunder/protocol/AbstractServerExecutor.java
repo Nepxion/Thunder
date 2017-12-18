@@ -13,5 +13,5 @@ package com.nepxion.thunder.protocol;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 
 public abstract class AbstractServerExecutor extends ThunderDelegateImpl implements ServerExecutor {
-    
+
 }

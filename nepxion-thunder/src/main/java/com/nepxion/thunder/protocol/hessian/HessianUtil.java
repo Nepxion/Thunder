@@ -27,7 +27,7 @@ public class HessianUtil {
             }
         }
     }
-    
+
     public static boolean available(String interfaze, String address, int connectTimeout) {
         int status = -1;
         try {

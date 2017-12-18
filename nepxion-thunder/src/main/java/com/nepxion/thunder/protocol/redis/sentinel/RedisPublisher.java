@@ -29,10 +29,10 @@ public class RedisPublisher extends RedisHierachy {
         final Jedis jedis = RedisSentinelPoolFactory.getResource();
         if (jedis == null) {
             LOG.error("No redis sentinel resource found, publish failed");
-            
+
             return;
         }
-        
+
         final String url = applicationEntity.toUrl();
         final String interfaze = request.getInterface();
         ThreadPoolFactory.createThreadPoolClientExecutor(url, interfaze).submit(new Callable<Object>() {

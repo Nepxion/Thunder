@@ -35,11 +35,11 @@ public class MQHierachy {
 
     protected ConnectionFactory connectionFactory;
     protected ConnectionFactoryType connectionFactoryType;
-    
+
     protected MQPropertyEntity mqPropertyEntity;
     protected MQTemplate mqTemplate;
     protected MQProducer mqProducer;
-    
+
     public void initialize() throws Exception {
         String type = mqPropertyEntity.getString(ThunderConstants.MQ_CONNECTION_FACTORY_TYPE_ATTRIBUTE_NAME);
         connectionFactoryType = ConnectionFactoryType.fromString(type);
@@ -54,7 +54,7 @@ public class MQHierachy {
                 initializePooledConnectionFactory();
                 break;
         }
-        
+
         mqTemplate = new MQTemplate();
         mqTemplate.setConnectionFactory(connectionFactory);
 
@@ -62,22 +62,22 @@ public class MQHierachy {
         mqProducer.setProtocolType(protocolType);
         mqProducer.setMQTemplate(mqTemplate);
     }
-    
+
     private void initializeSingleConnectionFactory() throws Exception {
         boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstants.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
-        
+
         SingleConnectionFactory singleConnectionFactory = new SingleConnectionFactory();
         singleConnectionFactory.setReconnectOnException(reconnectOnException);
-        
+
         connectionFactory = singleConnectionFactory;
     }
-    
+
     private void initializeCachingConnectionFactory() throws Exception {
         int sessionCacheSize = mqPropertyEntity.getInteger(ThunderConstants.MQ_SESSION_CACHE_SIZE_ATTRIBUTE_NAME);
         boolean cacheConsumers = mqPropertyEntity.getBoolean(ThunderConstants.MQ_CACHE_CONSUMERS_ATTRIBUTE_NAME);
         boolean cacheProducers = mqPropertyEntity.getBoolean(ThunderConstants.MQ_CACHE_PRODUCERS_ATTRIBUTE_NAME);
         boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstants.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
-        
+
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory();
         cachingConnectionFactory.setSessionCacheSize(sessionCacheSize);
         cachingConnectionFactory.setCacheConsumers(cacheConsumers);
@@ -86,7 +86,7 @@ public class MQHierachy {
 
         connectionFactory = cachingConnectionFactory;
     }
-    
+
     private void initializePooledConnectionFactory() throws Exception {
         String pooledConnectionFactoryClass = mqPropertyEntity.getMQEntity().getPooledConnectionFactoryClass();
         int maxConnections = mqPropertyEntity.getInteger(ThunderConstants.MQ_MAX_CONNECTIONS_ATTRIBUTE_NAME);
@@ -100,33 +100,33 @@ public class MQHierachy {
         boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstants.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
 
         ConnectionFactory pooledConnectionFactory = ClassUtil.createInstance(pooledConnectionFactoryClass);
-        ClassUtil.invoke(pooledConnectionFactory, "setMaxConnections", new Class<?>[] {int.class}, new Object[] {maxConnections});
-        ClassUtil.invoke(pooledConnectionFactory, "setMaximumActiveSessionPerConnection", new Class<?>[] {int.class}, new Object[] {maximumActiveSessionPerConnection});
-        ClassUtil.invoke(pooledConnectionFactory, "setIdleTimeout", new Class<?>[] {int.class}, new Object[] {idleTimeout});
-        ClassUtil.invoke(pooledConnectionFactory, "setExpiryTimeout", new Class<?>[] {long.class}, new Object[] {expiryTimeout});
-        ClassUtil.invoke(pooledConnectionFactory, "setBlockIfSessionPoolIsFull", new Class<?>[] {boolean.class}, new Object[] {blockIfSessionPoolIsFull});
-        ClassUtil.invoke(pooledConnectionFactory, "setBlockIfSessionPoolIsFullTimeout", new Class<?>[] {long.class}, new Object[] {blockIfSessionPoolIsFullTimeout});
-        ClassUtil.invoke(pooledConnectionFactory, "setTimeBetweenExpirationCheckMillis", new Class<?>[] {long.class}, new Object[] {timeBetweenExpirationCheckMillis});
-        ClassUtil.invoke(pooledConnectionFactory, "setCreateConnectionOnStartup", new Class<?>[] {boolean.class}, new Object[] {createConnectionOnStartup});
-        ClassUtil.invoke(pooledConnectionFactory, "setReconnectOnException", new Class<?>[] {boolean.class}, new Object[] {reconnectOnException});
-        
+        ClassUtil.invoke(pooledConnectionFactory, "setMaxConnections", new Class<?>[] { int.class }, new Object[] { maxConnections });
+        ClassUtil.invoke(pooledConnectionFactory, "setMaximumActiveSessionPerConnection", new Class<?>[] { int.class }, new Object[] { maximumActiveSessionPerConnection });
+        ClassUtil.invoke(pooledConnectionFactory, "setIdleTimeout", new Class<?>[] { int.class }, new Object[] { idleTimeout });
+        ClassUtil.invoke(pooledConnectionFactory, "setExpiryTimeout", new Class<?>[] { long.class }, new Object[] { expiryTimeout });
+        ClassUtil.invoke(pooledConnectionFactory, "setBlockIfSessionPoolIsFull", new Class<?>[] { boolean.class }, new Object[] { blockIfSessionPoolIsFull });
+        ClassUtil.invoke(pooledConnectionFactory, "setBlockIfSessionPoolIsFullTimeout", new Class<?>[] { long.class }, new Object[] { blockIfSessionPoolIsFullTimeout });
+        ClassUtil.invoke(pooledConnectionFactory, "setTimeBetweenExpirationCheckMillis", new Class<?>[] { long.class }, new Object[] { timeBetweenExpirationCheckMillis });
+        ClassUtil.invoke(pooledConnectionFactory, "setCreateConnectionOnStartup", new Class<?>[] { boolean.class }, new Object[] { createConnectionOnStartup });
+        ClassUtil.invoke(pooledConnectionFactory, "setReconnectOnException", new Class<?>[] { boolean.class }, new Object[] { reconnectOnException });
+
         connectionFactory = pooledConnectionFactory;
     }
 
     public void setTargetConnectionFactory(ConnectionFactory targetConnectionFactory) throws Exception {
         switch (connectionFactoryType) {
             case SINGLE_CONNECTION_FACTORY:
-                ClassUtil.invoke(connectionFactory, "setTargetConnectionFactory", new Class<?>[] {ConnectionFactory.class}, new Object[] {targetConnectionFactory});
+                ClassUtil.invoke(connectionFactory, "setTargetConnectionFactory", new Class<?>[] { ConnectionFactory.class }, new Object[] { targetConnectionFactory });
                 break;
             case CACHING_CONNECTION_FACTORY:
-                ClassUtil.invoke(connectionFactory, "setTargetConnectionFactory", new Class<?>[] {ConnectionFactory.class}, new Object[] {targetConnectionFactory});
+                ClassUtil.invoke(connectionFactory, "setTargetConnectionFactory", new Class<?>[] { ConnectionFactory.class }, new Object[] { targetConnectionFactory });
                 break;
             case POOLED_CONNECTION_FACTORY:
-                ClassUtil.invoke(connectionFactory, "setConnectionFactory", new Class<?>[] {Object.class}, new Object[] {targetConnectionFactory});
+                ClassUtil.invoke(connectionFactory, "setConnectionFactory", new Class<?>[] { Object.class }, new Object[] { targetConnectionFactory });
                 break;
         }
     }
-    
+
     public void afterPropertiesSet() throws Exception {
         if (connectionFactory instanceof InitializingBean) {
             InitializingBean initializingBean = (InitializingBean) connectionFactory;
@@ -134,7 +134,7 @@ public class MQHierachy {
         }
         mqTemplate.afterPropertiesSet();
     }
-    
+
     public void listen(Destination destination, SessionAwareMessageListener<BytesMessage> messageListener, String requestSelector, boolean topic) throws Exception {
         int concurrentConsumers = mqPropertyEntity.getInteger(ThunderConstants.MQ_CONCURRENT_CONSUMERS_ATTRIBUTE_NAME);
         int maxConcurrentConsumers = mqPropertyEntity.getInteger(ThunderConstants.MQ_MAX_CONCURRENT_CONSUMERS_ATTRIBUTE_NAME);

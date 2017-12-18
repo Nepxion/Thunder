@@ -40,7 +40,7 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
     @Override
     public void invokeAsync(final ProtocolRequest request) throws Exception {
         final String interfaze = request.getInterface();
-        
+
         LoadBalanceExecutor loadBalanceExecutor = executorContainer.getLoadBalanceExecutor();
         ConnectionEntity connectionEntity = null;
         try {
@@ -48,14 +48,14 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
         } catch (Exception e) {
             request.setException(e);
             ProtocolEventFactory.postClientProducerEvent(cacheContainer.getProtocolEntity().getType(), request);
-            
+
             throw e;
         }
-        
+
         if (connectionEntity == null) {
             return;
         }
-        
+
         final ConnectionEntity connectEntity = connectionEntity;
         ApplicationEntity applicationEntity = connectionEntity.getApplicationEntity();
         String url = applicationEntity.toUrl();
@@ -75,18 +75,18 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
                     ApplicationEntity applicationEntity = connectEntity.getApplicationEntity();
                     if (HessianUtil.isConnectionException(e)) {
                         LOG.error("Invoke failed for server [{}:{}]", applicationEntity.getHost(), applicationEntity.getPort(), e);
-                        
+
                         ClientExecutor clientExecutor = executorContainer.getClientExecutor();
                         clientExecutor.offline(interfaze, applicationEntity);
-                        
+
                         LOG.info("Try to re-invoke for connection exception...");
-                        
+
                         // 为单次调用补偿和重试
                         invokeAsync(request);
-                        
+
                         exception = e;
                     }
-                    
+
                     SecurityException securityException = SecurityExceptionFactory.createException(interfaze, applicationEntity, e);
                     if (securityException != null) {
                         exception = securityException;
@@ -105,7 +105,7 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
     @Override
     public Object invokeSync(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
-        
+
         LoadBalanceExecutor loadBalanceExecutor = executorContainer.getLoadBalanceExecutor();
         ConnectionEntity connectionEntity = null;
         try {
@@ -113,14 +113,14 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
         } catch (Exception e) {
             request.setException(e);
             ProtocolEventFactory.postClientProducerEvent(cacheContainer.getProtocolEntity().getType(), request);
-            
+
             throw e;
         }
-        
+
         if (connectionEntity == null) {
             return null;
         }
-                
+
         Object result = null;
         try {
             result = invokeSync(request, connectionEntity);
@@ -128,27 +128,27 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
             ApplicationEntity applicationEntity = connectionEntity.getApplicationEntity();
             if (HessianUtil.isConnectionException(e)) {
                 LOG.error("Invoke failed for server [{}:{}]", applicationEntity.getHost(), applicationEntity.getPort(), e);
-                
+
                 ClientExecutor clientExecutor = executorContainer.getClientExecutor();
                 clientExecutor.offline(interfaze, applicationEntity);
-                
+
                 LOG.info("Try to re-invoke for connection exception...");
-                
+
                 // 为单次调用补偿和重试
                 return invokeSync(request);
             }
-            
+
             SecurityException securityException = SecurityExceptionFactory.createException(interfaze, applicationEntity, e);
             if (securityException != null) {
                 throw securityException;
             }
-            
+
             throw e;
         }
 
         return result;
     }
-    
+
     private void invokeAsync(final ProtocolRequest request, final ConnectionEntity connectionEntity) throws Exception {
         ApplicationEntity applicationEntity = connectionEntity.getApplicationEntity();
         String url = applicationEntity.toUrl();
@@ -162,7 +162,7 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
             }
         });
     }
-    
+
     private Object invokeSync(ProtocolRequest request, ConnectionEntity connectionEntity) throws Exception {
         String interfaze = request.getInterface();
         String methodName = request.getMethod();
@@ -171,7 +171,7 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
 
         Class<?> interfaceClass = Class.forName(interfaze);
         Method method = interfaceClass.getMethod(methodName, parameterTypes);
-        
+
         Object proxy = connectionEntity.getConnectionHandler();
         Object result = method.invoke(proxy, arguments);
 
@@ -185,18 +185,18 @@ public class HessianClientInterceptor extends AbstractClientInterceptor {
             invokeRedisBroadcast(request);
         } else {
             LOG.info("Redis broadcast is disabled, use round broadcast");
-            
+
             invokeRoundBroadcast(request);
         }
     }
-    
+
     private void invokeRedisBroadcast(ProtocolRequest request) throws Exception {
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         RedisPublisher publisher = new RedisPublisher();
         publisher.publish(request, applicationEntity);
     }
-    
+
     private void invokeRoundBroadcast(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
 

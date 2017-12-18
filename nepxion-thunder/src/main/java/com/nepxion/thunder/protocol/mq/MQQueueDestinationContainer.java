@@ -22,10 +22,10 @@ public class MQQueueDestinationContainer extends MQTopicDestinationContainer {
 
     // 缓存所有的同步响应Destination，对应为非持久化容器(Queue)，key为interface
     private Map<String, Destination> syncResponseDestinationMap = Maps.newConcurrentMap();
-    
+
     // 缓存所有的异步请求Destination，对应为持久化容器(Queue)，key为interface
     private Map<String, Destination> asyncRequestDestinationMap = Maps.newConcurrentMap();
-    
+
     // 缓存所有的异步响应Destination，对应为持久化容器(Queue)，key为interface
     private Map<String, Destination> asyncResponseDestinationMap = Maps.newConcurrentMap();
 

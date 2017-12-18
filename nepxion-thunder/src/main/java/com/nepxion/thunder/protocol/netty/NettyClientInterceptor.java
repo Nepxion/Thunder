@@ -41,10 +41,10 @@ public class NettyClientInterceptor extends AbstractClientInterceptor {
         } catch (Exception e) {
             request.setException(e);
             ProtocolEventFactory.postClientProducerEvent(cacheContainer.getProtocolEntity().getType(), request);
-            
+
             throw e;
         }
-        
+
         if (connectionEntity == null) {
             return;
         }
@@ -83,7 +83,7 @@ public class NettyClientInterceptor extends AbstractClientInterceptor {
 
     private void invokeRoundBroadcast(ProtocolRequest request) throws Exception {
         String interfaze = request.getInterface();
-        
+
         List<ConnectionEntity> connectionEntityList = cacheContainer.getConnectionCacheEntity().getConnectionEntityList(interfaze);
         for (ConnectionEntity connectionEntity : connectionEntityList) {
             ApplicationEntity applicationEntity = connectionEntity.getApplicationEntity();

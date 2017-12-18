@@ -24,13 +24,13 @@ public class MQJndiHierachy extends MQHierachy {
     @Override
     public void initialize() throws Exception {
         super.initialize();
-        
+
         String jndiInitialContextFactoryClass = mqPropertyEntity.getMQEntity().getJndiInitialContextFactoryClass();
         String url = mqPropertyEntity.getString(ThunderConstants.MQ_URL_ATTRIBUTE_NAME);
         String userName = mqPropertyEntity.getString(ThunderConstants.MQ_USER_NAME_ATTRIBUTE_NAME);
         String password = mqPropertyEntity.getString(ThunderConstants.MQ_PASSWORD_ATTRIBUTE_NAME);
         String jndiName = mqPropertyEntity.getString(ThunderConstants.MQ_JNDI_NAME_ATTRIBUTE_NAME);
-        
+
         Properties environment = new Properties();
         environment.put("java.naming.factory.initial", jndiInitialContextFactoryClass);
         environment.put("java.naming.provider.url", url);
@@ -45,9 +45,9 @@ public class MQJndiHierachy extends MQHierachy {
         targetConnectionFactory.setJndiName(jndiName);
         targetConnectionFactory.setLookupOnStartup(true);
         targetConnectionFactory.afterPropertiesSet();
-        
+
         setTargetConnectionFactory((ConnectionFactory) targetConnectionFactory.getObject());
-        
+
         afterPropertiesSet();
     }
 }

@@ -30,9 +30,9 @@ public class KafkaMQClientExecutor extends AbstractClientExecutor implements Kaf
     @Override
     public void start(final String interfaze, final ApplicationEntity applicationEntity) throws Exception {
         final String server = getServer(interfaze);
-        
+
         final Map<String, KafkaMQContext> contextMap = KafkaMQCacheContainer.getReferenceContextMap();
-        
+
         final CyclicBarrier barrier = new CyclicBarrier(2);
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
             @Override
@@ -57,23 +57,23 @@ public class KafkaMQClientExecutor extends AbstractClientExecutor implements Kaf
 
         barrier.await();
     }
-        
+
     private String getServer(String interfaze) {
         Map<String, ReferenceEntity> referenceEntityMap = cacheContainer.getReferenceEntityMap();
         ReferenceEntity referenceEntity = referenceEntityMap.get(interfaze);
-        
+
         return referenceEntity.getServer();
     }
-    
+
     @Override
     public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         String server = getServer(interfaze);
-        
+
         Map<String, KafkaMQContext> contextMap = KafkaMQCacheContainer.getReferenceContextMap();
-        
+
         return contextMap.get(server) != null;
     }
-    
+
     @Override
     public ConnectionEntity online(String interfaze, ApplicationEntity applicationEntity, Object connnectionHandler) throws Exception {
         throw new ProtocolException("Online feature isn't supported in KafkaMQClientExecutor");

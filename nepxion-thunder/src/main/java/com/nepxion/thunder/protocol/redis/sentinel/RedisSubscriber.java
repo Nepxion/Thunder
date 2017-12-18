@@ -31,9 +31,9 @@ import com.nepxion.thunder.serialization.SerializerExecutor;
 
 public class RedisSubscriber extends RedisHierachy {
     private static final Logger LOG = LoggerFactory.getLogger(RedisSubscriber.class);
-    
+
     private ExecutorContainer executorContainer;
-    
+
     public RedisSubscriber(ExecutorContainer executorContainer) {
         this.executorContainer = executorContainer;
     }
@@ -42,10 +42,10 @@ public class RedisSubscriber extends RedisHierachy {
         final Jedis jedis = RedisSentinelPoolFactory.getResource();
         if (jedis == null) {
             LOG.error("No redis sentinel resource found, subscribe failed");
-            
+
             return;
         }
-        
+
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
             @Override
             public Object call() throws Exception {

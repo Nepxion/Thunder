@@ -25,7 +25,7 @@ import com.nepxion.thunder.common.util.RandomUtil;
 public class KafkaMQContext {
     private CacheContainer cacheContainer;
     private ExecutorContainer executorContainer;
-    
+
     private MQEntity mqEntity;
     private MQPropertyEntity mqPropertyEntity;
 
@@ -36,14 +36,14 @@ public class KafkaMQContext {
         this.executorContainer = executorDelegate.getExecutorContainer();
         this.mqEntity = cacheContainer.getMQEntity();
     }
-    
+
     public void initializeContext(String interfaze, String server) throws Exception {
         mqPropertyEntity = new MQPropertyEntity(interfaze, server, mqEntity);
     }
 
     public void initializeRequestContext(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         producer = new KafkaMQProducer(mqPropertyEntity);
-        
+
         Map<String, ReferenceEntity> referenceEntityMap = cacheContainer.getReferenceEntityMap();
         ReferenceEntity referenceEntity = referenceEntityMap.get(interfaze);
         boolean hasFeedback = referenceEntity.hasFeedback();
@@ -69,7 +69,7 @@ public class KafkaMQContext {
         DestinationEntity responseQueueDestinationEntity = KafkaMQDestinationUtil.createDestinationEntity(DestinationType.RESPONSE_QUEUE, interfaze, applicationEntity);
         DestinationEntity responseTopicDestinationEntity = KafkaMQDestinationUtil.createDestinationEntity(DestinationType.RESPONSE_TOPIC, interfaze, applicationEntity);
         DestinationEntity requestQueueDestinationEntity = KafkaMQDestinationUtil.createDestinationEntity(DestinationType.REQUEST_QUEUE, interfaze, applicationEntity);
-        
+
         initializeServerHandler(responseQueueDestinationEntity, requestQueueDestinationEntity, interfaze, applicationEntity, false);
         initializeServerHandler(responseTopicDestinationEntity, requestQueueDestinationEntity, interfaze, applicationEntity, true);
     }
@@ -77,7 +77,7 @@ public class KafkaMQContext {
     private void initializeServerHandler(DestinationEntity responseDestinationEntity, DestinationEntity requestDestinationEntity, String interfaze, ApplicationEntity applicationEntity, boolean topic) throws Exception {
         String responseTopic = responseDestinationEntity.toString();
         String requestTopic = requestDestinationEntity.toString();
-        
+
         KafkaMQServerHandler serveHandler = new KafkaMQServerHandler(mqPropertyEntity, responseTopic + (topic ? "-" + RandomUtil.uuidRandom() : ""));
         serveHandler.setCacheContainer(cacheContainer);
         serveHandler.setExecutorContainer(executorContainer);

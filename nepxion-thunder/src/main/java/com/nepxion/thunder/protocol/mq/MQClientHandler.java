@@ -26,9 +26,9 @@ public class MQClientHandler extends MQConsumer {
     private static final Logger LOG = LoggerFactory.getLogger(MQClientHandler.class);
 
     private MQBytesMessageConverter mqMessageConverter = new MQBytesMessageConverter();
-    
+
     private boolean transportLogPrint;
-    
+
     public MQClientHandler(MQPropertyEntity mqPropertyEntity) {
         try {
             transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
@@ -36,7 +36,7 @@ public class MQClientHandler extends MQConsumer {
             LOG.error("Get properties failed", e);
         }
     }
-    
+
     @Override
     public void onMessage(final BytesMessage message, final Session session) throws JMSException {
         final ProtocolResponse response = (ProtocolResponse) mqMessageConverter.fromMessage(message);
@@ -51,11 +51,11 @@ public class MQClientHandler extends MQConsumer {
                 try {
                     String responseSelector = MQSelectorUtil.getResponseSelector(message);
                     // String requestSelector = MQSelectorUtil.getRequestSelector(message);
-                    
+
                     if (transportLogPrint) {
                         LOG.info("Response from server={}, service={}", responseSelector, interfaze);
                     }
-                    
+
                     ClientExecutorAdapter clientExecutorAdapter = executorContainer.getClientExecutorAdapter();
                     clientExecutorAdapter.handle(response);
                 } catch (Exception e) {

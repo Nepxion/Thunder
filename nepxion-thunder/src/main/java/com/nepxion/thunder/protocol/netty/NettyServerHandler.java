@@ -59,7 +59,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<ProtocolRequ
                         LOG.info("Request from client={}, service={}", getRemoteAddress(context), interfaze);
                     }
                 }
-                
+
                 ProtocolResponse response = new ProtocolResponse();
                 try {
                     ServerExecutorAdapter serverExecutorAdapter = executorContainer.getServerExecutorAdapter();
@@ -72,7 +72,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<ProtocolRequ
                         if (feedback) {
                             context.writeAndFlush(response);
                         }
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         LOG.error("Channel write and flush failed", e);
                     } finally {
                         ReferenceCountUtil.release(request);
@@ -88,22 +88,22 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<ProtocolRequ
     public void exceptionCaught(ChannelHandlerContext context, Throwable cause) throws Exception {
         // LOG.error("Unexpected exception from downstream, cause={}", cause.getMessage(), cause);
         // LOG.warn("Unexpected exception from downstream, remote address={}, cause={}", getRemoteAddress(context), cause.getClass().getName(), cause);
-        
+
         if (cause instanceof IOException) {
             LOG.warn("Channel is closed, remote address={}...", getRemoteAddress(context));
         }
-        
+
         ProtocolMessage message = new ProtocolMessage();
         message.setFromUrl(getRemoteAddress(context).toString());
         message.setToUrl(getLocalAddress(context).toString());
         message.setException((Exception) cause);
         ProtocolEventFactory.postServerSystemEvent(ProtocolType.NETTY, message);
     }
-    
+
     public SocketAddress getLocalAddress(ChannelHandlerContext context) {
         return context.channel().localAddress();
     }
-    
+
     public SocketAddress getRemoteAddress(ChannelHandlerContext context) {
         return context.channel().remoteAddress();
     }

@@ -34,7 +34,7 @@ public class ApacheSyncClientExecutor {
     private static final Logger LOG = LoggerFactory.getLogger(ApacheSyncClientExecutor.class);
 
     private CloseableHttpClient httpSyncClient;
-    
+
     public void initialize(ThunderProperties properties) throws Exception {
         initialize(properties, false);
     }

@@ -30,9 +30,9 @@ public class MQClientExecutor extends AbstractClientExecutor implements MQExecut
     @Override
     public void start(final String interfaze, final ApplicationEntity applicationEntity) throws Exception {
         final String server = getServer(interfaze);
-        
+
         final Map<String, MQContext> contextMap = MQCacheContainer.getReferenceContextMap();
-        
+
         final CyclicBarrier barrier = new CyclicBarrier(2);
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
             @Override
@@ -57,27 +57,27 @@ public class MQClientExecutor extends AbstractClientExecutor implements MQExecut
         });
 
         barrier.await();
-        
+
         try {
             contextMap.get(server).stopRetryNotification();
         } catch (Exception e) {
             throw new ProtocolException("Get MQ server failed, check it in config file", e);
         }
     }
-    
+
     private String getServer(String interfaze) {
         Map<String, ReferenceEntity> referenceEntityMap = cacheContainer.getReferenceEntityMap();
         ReferenceEntity referenceEntity = referenceEntityMap.get(interfaze);
-        
+
         return referenceEntity.getServer();
     }
-    
+
     @Override
     public boolean started(String interfaze, ApplicationEntity applicationEntity) throws Exception {
         String server = getServer(interfaze);
-        
+
         Map<String, MQContext> contextMap = MQCacheContainer.getReferenceContextMap();
-        
+
         return contextMap.get(server) != null;
     }
 

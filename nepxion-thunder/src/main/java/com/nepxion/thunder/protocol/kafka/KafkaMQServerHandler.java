@@ -60,11 +60,11 @@ public class KafkaMQServerHandler extends KafkaMQConsumer {
                         for (ConsumerRecord<String, byte[]> record : records) {
                             ProtocolRequest request = SerializerExecutor.deserialize(record.value());
                             String requestSource = request.getRequestSource().toString();
-                            
+
                             if (transportLogPrint) {
                                 LOG.info("Request from client={}, service={}", requestSource, interfaze);
                             }
-                            
+
                             ProtocolResponse response = new ProtocolResponse();
                             try {
                                 ServerExecutorAdapter serverExecutorAdapter = executorContainer.getServerExecutorAdapter();
