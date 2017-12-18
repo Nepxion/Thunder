@@ -40,14 +40,14 @@ public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
         System.out.println("Nepxion Thunder  v1.0.0.RELEASE");
         System.out.println("");
     }
-    
+
     @Override
     public void init() {
         ThunderProperties properties = ThunderPropertiesManager.getProperties();
-                
+
         CacheContainer cacheContainer = new CacheContainer();
         ExecutorContainer executorContainer = new ExecutorContainer();
-        
+
         ThunderDelegate delegate = new ThunderDelegateImpl();
         delegate.setProperties(properties);
         delegate.setCacheContainer(cacheContainer);

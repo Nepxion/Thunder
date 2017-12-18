@@ -49,20 +49,20 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
         String methodElementName = ThunderConstants.METHOD_ELEMENT_NAME;
         String interfaceAttributeName = ThunderConstants.INTERFACE_ATTRIBUTE_NAME;
         String serverAttributeName = ThunderConstants.SERVER_ATTRIBUTE_NAME;
-        
+
         String interfaze = element.getAttribute(interfaceAttributeName);
         String server = element.getAttribute(serverAttributeName);
-        
+
         if (StringUtils.isEmpty(interfaze)) {
             throw FrameworkExceptionFactory.createAttributeMissingException(namespaceElementName, referenceElementName, interfaceAttributeName);
         }
-        
+
         MethodEntity methodEntity = new MethodEntity();
         MethodBeanDefinitionParser methodBeanDefinitionParser = new MethodBeanDefinitionParser(delegate, methodEntity);
         methodBeanDefinitionParser.parseMethod(element, null, null);
 
         Map methodMap = parseMethodElements(element, parserContext, builder);
-        
+
         ReferenceEntity referenceEntity = new ReferenceEntity();
         referenceEntity.setInterface(interfaze);
         referenceEntity.setServer(server);
@@ -71,13 +71,13 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
         builder.addPropertyValue(createBeanName(MethodEntity.class), methodEntity);
         builder.addPropertyValue(methodElementName, methodMap);
         builder.addPropertyValue(createBeanName(ReferenceEntity.class), referenceEntity);
-        
+
         ClientExecutor clientExecutor = createClientExecutor();
         builder.addPropertyValue(createBeanName(ClientExecutor.class), clientExecutor);
-        
+
         ClientExecutorAdapter clientExecutorAdapter = createClientExecutorAdapter();
         builder.addPropertyValue(createBeanName(ClientExecutorAdapter.class), clientExecutorAdapter);
-        
+
         ClientInterceptorAdapter clientInterceptorAdapter = createClientInterceptorAdapter();
         builder.addPropertyValue(createBeanName(ClientInterceptorAdapter.class), clientInterceptorAdapter);
     }
@@ -96,20 +96,20 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
         for (Element methodElement : methodElements) {
             String method = methodElement.getAttribute(methodAttributeName);
             String parameterTypes = methodElement.getAttribute(parameterTypesAttributeName);
-            
+
             MethodKey methodKey = new MethodKey();
             methodKey.setMethod(method);
             methodKey.setParameterTypes(parameterTypes);
             if (methodMap.containsKey(methodKey)) {
                 throw FrameworkExceptionFactory.createMethodDuplicatedException(methodElementName, methodKey);
             }
-            
+
             methodMap.put(methodKey, parserContext.getDelegate().parseCustomElement(methodElement, builder.getRawBeanDefinition()));
         }
 
         return methodMap;
     }
-    
+
     protected ClientExecutor createClientExecutor() {
         ClientExecutor clientExecutor = executorContainer.getClientExecutor();
         if (clientExecutor == null) {
@@ -121,13 +121,13 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
             } catch (Exception e) {
                 throw new FrameworkException("Creat ClientExecutor failed", e);
             }
-            
+
             executorContainer.setClientExecutor(clientExecutor);
         }
-        
+
         return clientExecutor;
     }
-    
+
     protected ClientExecutorAdapter createClientExecutorAdapter() {
         ClientExecutorAdapter clientExecutorAdapter = executorContainer.getClientExecutorAdapter();
         if (clientExecutorAdapter == null) {
@@ -137,13 +137,13 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
             } catch (Exception e) {
                 throw new FrameworkException("Creat ClientExecutorAdapter failed", e);
             }
-            
+
             executorContainer.setClientExecutorAdapter(clientExecutorAdapter);
         }
-        
+
         return clientExecutorAdapter;
     }
-    
+
     protected ClientInterceptorAdapter createClientInterceptorAdapter() {
         ClientInterceptorAdapter clientInterceptorAdapter = executorContainer.getClientInterceptorAdapter();
         if (clientInterceptorAdapter == null) {
@@ -153,10 +153,10 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
             } catch (Exception e) {
                 throw new FrameworkException("Creat ClientInterceptorAdapter failed", e);
             }
-            
+
             executorContainer.setClientInterceptorAdapter(clientInterceptorAdapter);
         }
-        
+
         return clientInterceptorAdapter;
     }
 

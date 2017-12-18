@@ -15,7 +15,7 @@ import java.util.List;
 import com.nepxion.thunder.common.entity.MonitorStat;
 
 public interface MonitorRetriever {
-    
+
     // 解析Json成MonitorStat对象
     MonitorStat create(String monitorStatJson);
 

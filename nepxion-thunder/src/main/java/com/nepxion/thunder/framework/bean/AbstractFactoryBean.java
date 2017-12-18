@@ -20,12 +20,11 @@ import com.nepxion.thunder.common.container.CacheContainer;
 import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.property.ThunderProperties;
-import com.nepxion.thunder.common.util.ClassUtil;
 
 @SuppressWarnings("all")
 public abstract class AbstractFactoryBean implements ApplicationContextAware, FactoryBean, InitializingBean {
     protected ApplicationContext applicationContext;
-    
+
     protected ThunderDelegate delegate;
     protected ThunderProperties properties;
     protected CacheContainer cacheContainer;
@@ -50,7 +49,7 @@ public abstract class AbstractFactoryBean implements ApplicationContextAware, Fa
         this.cacheContainer = delegate.getCacheContainer();
         this.executorContainer = delegate.getExecutorContainer();
     }
-    
+
     public ThunderProperties getProperties() {
         return properties;
     }
@@ -62,8 +61,8 @@ public abstract class AbstractFactoryBean implements ApplicationContextAware, Fa
     public ExecutorContainer getExecutorContainer() {
         return executorContainer;
     }
-    
-    protected <T> T createDelegate(String delegateClassId) throws Exception {        
+
+    protected <T> T createDelegate(String delegateClassId) throws Exception {
         return delegate.createDelegate(delegateClassId);
     }
 }

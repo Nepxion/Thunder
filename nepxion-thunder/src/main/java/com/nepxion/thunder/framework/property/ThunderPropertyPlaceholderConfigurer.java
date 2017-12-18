@@ -25,7 +25,7 @@ public class ThunderPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
     @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties properties) throws BeansException {
         super.processProperties(beanFactoryToProcess, properties);
-        
+
         this.properties = properties;
         for (Iterator<?> iterator = properties.keySet().iterator(); iterator.hasNext();) {
             Object key = iterator.next();
@@ -36,7 +36,7 @@ public class ThunderPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
             }
         }
     }
-    
+
     public Properties getProperties() {
         return properties;
     }

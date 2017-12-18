@@ -40,10 +40,10 @@ public class MonitorBeanDefinitionParser extends AbstractExtensionBeanDefinition
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
-        
+
         String typeAttributeName = ThunderConstants.TYPE_ATTRIBUTE_NAME;
-        
-        String type = element.getAttribute(typeAttributeName);        
+
+        String type = element.getAttribute(typeAttributeName);
         List<MonitorType> monitorTypes = null;
         if (StringUtils.isNotEmpty(type)) {
             monitorTypes = new ArrayList<MonitorType>();
@@ -56,12 +56,12 @@ public class MonitorBeanDefinitionParser extends AbstractExtensionBeanDefinition
         } else {
             monitorTypes = Arrays.asList(MonitorType.LOG_SERVICE);
         }
-        
+
         LOG.info("Monitor types are {}", monitorTypes);
 
         MonitorEntity monitorEntity = new MonitorEntity();
         monitorEntity.setTypes(monitorTypes);
-                
+
         cacheContainer.setMonitorEntity(monitorEntity);
         builder.addPropertyValue(createBeanName(MonitorEntity.class), monitorEntity);
 
@@ -75,7 +75,7 @@ public class MonitorBeanDefinitionParser extends AbstractExtensionBeanDefinition
             String logServiceMonitorExecutorId = ThunderConstants.LOG_SERVICE_MONITOR_EXECUTOR_ID;
             String redisServiceMonitorExecutorId = ThunderConstants.REDIS_SERVICE_MONITOR_EXECUTOR_ID;
             String webServiceMonitorExecutorId = ThunderConstants.WEB_SERVICE_MONITOR_EXECUTOR_ID;
-            
+
             monitorExecutors = new ArrayList<MonitorExecutor>();
             MonitorExecutor monitorExecutor = null;
             try {

@@ -28,12 +28,12 @@ public class MonitorFactoryBean extends AbstractFactoryBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         registerMonitor();
-        
+
         watchMonitorInstance();
-        
+
         LOG.info("MonitorFactoryBean has been initialized...");
     }
-    
+
     // 初始化Monitor的注册信息
     protected void registerMonitor() throws Exception {
         boolean hasWebService = monitorEntity.hasWebService();
@@ -48,13 +48,13 @@ public class MonitorFactoryBean extends AbstractFactoryBean {
             }
         }
     }
-    
+
     // 监听Monitor上下线，用来保持注册中心和本地缓存一致
     protected void watchMonitorInstance() throws Exception {
         boolean hasWebService = monitorEntity.hasWebService();
         if (hasWebService) {
             RegistryExecutor registryExecutor = executorContainer.getRegistryExecutor();
-            
+
             try {
                 registryExecutor.addMonitorInstanceWatcher();
             } catch (Exception e) {

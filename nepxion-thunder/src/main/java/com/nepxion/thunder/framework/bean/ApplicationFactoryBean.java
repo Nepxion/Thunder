@@ -21,7 +21,7 @@ public class ApplicationFactoryBean extends AbstractFactoryBean {
     private ApplicationEntity applicationEntity;
 
     @Override
-    public void afterPropertiesSet() throws Exception {        
+    public void afterPropertiesSet() throws Exception {
         LOG.info("ApplicationFactoryBean has been initialized...");
     }
 

@@ -28,10 +28,10 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
     public MethodBeanDefinitionParser(ThunderDelegate delegate) {
         super(delegate);
     }
-    
+
     public MethodBeanDefinitionParser(ThunderDelegate delegate, MethodEntity methodEntity) {
         super(delegate);
-        
+
         this.methodEntity = methodEntity;
     }
 
@@ -39,7 +39,7 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         parseMethod(element, parserContext, builder);
     }
-    
+
     protected void parseMethod(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         String namespaceElementName = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
         String referenceElementName = ThunderConstants.REFERENCE_ELEMENT_NAME;
@@ -54,7 +54,7 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
         String broadcastAttributeName = ThunderConstants.BROADCAST_ATTRIBUTE_NAME;
         String callbackAttributeName = ThunderConstants.CALLBACK_ATTRIBUTE_NAME;
         String callbackTypeAttributeName = ThunderConstants.CALLBACK_TYPE_ATTRIBUTE_NAME;
-        
+
         String method = element.getAttribute(methodAttributeName);
         String parameterTypes = element.getAttribute(parameterTypesAttributeName);
         String traceIdIndex = element.getAttribute(traceIdIndexAttributeName);
@@ -62,15 +62,15 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
         String timeout = element.getAttribute(timeoutAttributeName);
         String broadcast = element.getAttribute(broadcastAttributeName);
         String callback = element.getAttribute(callbackAttributeName);
-        
+
         if (StringUtils.isEmpty(async)) {
             async = properties.getString(asyncAttributeName);
         }
-        
+
         if (StringUtils.isEmpty(broadcast)) {
             broadcast = properties.getString(broadcastAttributeName);
         }
-        
+
         if (StringUtils.isEmpty(timeout) && !Boolean.valueOf(broadcast)) {
             if (Boolean.valueOf(async)) {
                 timeout = properties.getString(asyncTimeoutAttributeName);
@@ -80,7 +80,7 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
         }
 
         if (Boolean.valueOf(async)) {
-            if (Boolean.valueOf(broadcast)) {            
+            if (Boolean.valueOf(broadcast)) {
                 if (StringUtils.isNotEmpty(callback)) {
                     throw FrameworkExceptionFactory.createMethodAttributeForbiddenException(asyncAttributeName, method, callbackAttributeName, broadcastAttributeName);
                 }
@@ -96,7 +96,7 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
                 throw FrameworkExceptionFactory.createMethodAttributeForbiddenException(syncAttributeName, method, callbackAttributeName);
             }
         }
-        
+
         if (builder != null) {
             builder.addPropertyValue(methodAttributeName, method);
         }
@@ -134,7 +134,7 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
         } else {
             methodEntity.setBroadcast(Boolean.valueOf(broadcast));
         }
-        
+
         if (StringUtils.isNotEmpty(callback)) {
             // "promise"是关键字，如果把callback所对应bean id命名成"promise"，则会被认为无效，仍将Promise方式进行调用
             if (builder != null) {
@@ -144,8 +144,8 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
                 } else {
                     callbackType = CallbackType.CALLBACK;
                     builder.addPropertyValue(callbackAttributeName, new RuntimeBeanReference(callback));
-                } 
-                
+                }
+
                 builder.addPropertyValue(callbackTypeAttributeName, callbackType);
             } else {
                 // 在reference节点上，callback只能定义为"promise"

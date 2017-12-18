@@ -19,12 +19,12 @@ public class FrameworkExceptionFactory {
     public static FrameworkException createAttributeMissingException(String namespaceName, String elementName, String attributeName) {
         return new FrameworkException("<" + namespaceName + ":" + elementName + "> attribute '" + attributeName + "' is missing");
     }
-    
+
     // 必要属性值不可缺失，否则抛异常
     public static FrameworkException createValueNullException(String namespaceName, String elementName, String attributeName) {
         return new FrameworkException("<" + namespaceName + ":" + elementName + "> attribute '" + attributeName + "' value is null");
     }
-    
+
     // 必要属性必须为指定值，否则抛异常
     public static FrameworkException createValueLimitedException(String namespaceName, String elementName, String attributeName, String attributeValue) {
         return new FrameworkException("<" + namespaceName + ":" + elementName + "> attribute '" + attributeName + "' value is only limited to " + attributeValue);
@@ -32,12 +32,12 @@ public class FrameworkExceptionFactory {
 
     // 某种类型方法在某种调用方式下不允许某种属性存在，否则抛异常
     public static FrameworkException createMethodAttributeForbiddenException(String invokeMode, String methodName, String attributeName) {
-        return new FrameworkException("Attribute '" + attributeName + "' in " + invokeMode + (StringUtils.isNotEmpty(methodName)? " method [" + methodName + "]" : " mode") + " is forbidden");
+        return new FrameworkException("Attribute '" + attributeName + "' in " + invokeMode + (StringUtils.isNotEmpty(methodName) ? " method [" + methodName + "]" : " mode") + " is forbidden");
     }
 
     // 某种类型方法在某种调用方式下不允许某种属性存在，否则抛异常
     public static FrameworkException createMethodAttributeForbiddenException(String invokeMode, String methodName, String attributeName, String situationName) {
-        return new FrameworkException("Attribute '" + attributeName + "' in " + invokeMode + (StringUtils.isNotEmpty(methodName)? " method [" + methodName + "]" : " mode") + " with " + situationName + " is forbidden");
+        return new FrameworkException("Attribute '" + attributeName + "' in " + invokeMode + (StringUtils.isNotEmpty(methodName) ? " method [" + methodName + "]" : " mode") + " with " + situationName + " is forbidden");
     }
 
     // 方法名未找到，抛异常

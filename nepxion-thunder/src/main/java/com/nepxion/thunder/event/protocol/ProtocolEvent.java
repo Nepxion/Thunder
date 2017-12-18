@@ -41,6 +41,8 @@ public class ProtocolEvent extends Event implements Serializable {
     private ProtocolMessage protocolMessage;
 
     public ProtocolEvent(ApplicationType applicationType, ActionType actionType, ProtocolType protocolType, ProtocolMessage protocolMessage) {
+        super();
+
         this.applicationType = applicationType;
         this.actionType = actionType;
         this.protocolType = protocolType;

@@ -31,7 +31,7 @@ import com.nepxion.thunder.serialization.SerializerExecutor;
 
 public class WebServiceMonitorExecutor extends AbstractMonitorExecutor {
     private static final Logger LOG = LoggerFactory.getLogger(WebServiceMonitorExecutor.class);
-    
+
     private CloseableHttpAsyncClient httpAsyncClient;
 
     @Override
@@ -40,10 +40,10 @@ public class WebServiceMonitorExecutor extends AbstractMonitorExecutor {
         List<String> addresses = monitorEntity.getAddresses();
         if (CollectionUtils.isEmpty(addresses)) {
             LOG.error("Webservice monitor addresses are null");
-            
+
             return;
         }
-        
+
         for (String address : addresses) {
             if (!address.startsWith("http://")) {
                 address = "http://" + address;
@@ -92,7 +92,7 @@ public class WebServiceMonitorExecutor extends AbstractMonitorExecutor {
         @Override
         public void failed(Exception e) {
             httpPost.reset();
-            
+
             LOG.error("Monitor web service invoke failed, url={}", httpPost.getURI(), e);
         }
 

@@ -23,7 +23,7 @@ public class LogServiceMonitorExecutor extends AbstractMonitorExecutor {
     public void execute(MonitorStat monitorStat) throws Exception {
         executeJson(monitorStat);
     }
-    
+
     protected void executeString(MonitorStat monitorStat) {
         String value = monitorStat.toString();
         String exception = monitorStat.getException();
@@ -33,7 +33,7 @@ public class LogServiceMonitorExecutor extends AbstractMonitorExecutor {
             LOG.info(value);
         }
     }
-    
+
     protected void executeJson(MonitorStat monitorStat) {
         String value = SerializerExecutor.toJson(monitorStat);
         String exception = monitorStat.getException();

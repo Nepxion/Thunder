@@ -56,13 +56,13 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
         String kafkaServerExecutorId = ThunderConstants.KAFKA_SERVER_EXECUTOR_ID;
         String kafkaClientExecutorId = ThunderConstants.KAFKA_CLIENT_EXECUTOR_ID;
         String kafkaClientInterceptorId = ThunderConstants.KAFKA_CLIENT_INTERCEPTOR_ID;
-        
+
         String activeMQQueueId = ThunderConstants.ACTIVE_MQ_QUEUE_ID;
         String activeMQTopicId = ThunderConstants.ACTIVE_MQ_TOPIC_ID;
         String activeMQJndiInitialContextFactoryId = ThunderConstants.ACTIVE_MQ_JNDI_INITIAL_CONTEXT_FACTORY_ID;
         String activeMQInitialConnectionFactory = ThunderConstants.ACTIVE_MQ_INITIAL_CONNECTION_FACTORY_ID;
         String activeMQPooledConnectionFactoryId = ThunderConstants.ACTIVE_MQ_POOLED_CONNECTION_FACTORY_ID;
-        
+
         String tibcoQueueId = ThunderConstants.TIBCO_QUEUE_ID;
         String tibcoTopicId = ThunderConstants.TIBCO_TOPIC_ID;
         String tibcoJndiInitialContextFactoryId = ThunderConstants.TIBCO_JNDI_INITIAL_CONTEXT_FACTORY_ID;
@@ -92,7 +92,7 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
                 protocolEntity.setServerExecutorId(hessianServerExecutorId);
                 protocolEntity.setClientExecutorId(hessianClientExecutorId);
                 protocolEntity.setClientInterceptorId(hessianClientInterceptorId);
-                
+
                 String path = properties.getString(pathAttributeName);
                 if (StringUtils.isEmpty(path)) {
                     throw new FrameworkException("Web path is missing for " + protocolType);
@@ -105,7 +105,7 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
                 protocolEntity.setServerExecutorId(kafkaServerExecutorId);
                 protocolEntity.setClientExecutorId(kafkaClientExecutorId);
                 protocolEntity.setClientInterceptorId(kafkaClientInterceptorId);
-                
+
                 MQEntity kafkaEntity = new MQEntity();
                 kafkaEntity.extractProperties(properties, protocolType);
                 cacheContainer.setMQEntity(kafkaEntity);
@@ -114,7 +114,7 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
                 protocolEntity.setServerExecutorId(mqServerExecutorId);
                 protocolEntity.setClientExecutorId(mqClientExecutorId);
                 protocolEntity.setClientInterceptorId(mqClientInterceptorId);
-                
+
                 MQEntity activeMQEntity = new MQEntity();
                 activeMQEntity.setQueueId(activeMQQueueId);
                 activeMQEntity.setTopicId(activeMQTopicId);
@@ -128,7 +128,7 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
                 protocolEntity.setServerExecutorId(mqServerExecutorId);
                 protocolEntity.setClientExecutorId(mqClientExecutorId);
                 protocolEntity.setClientInterceptorId(mqClientInterceptorId);
-                
+
                 MQEntity tibcoEntity = new MQEntity();
                 tibcoEntity.setQueueId(tibcoQueueId);
                 tibcoEntity.setTopicId(tibcoTopicId);

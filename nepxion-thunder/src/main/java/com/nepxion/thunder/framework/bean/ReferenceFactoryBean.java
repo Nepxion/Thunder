@@ -47,7 +47,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     private Class<?> interfaze;
     private ClassLoader classLoader;
     private Object proxy;
-    
+
     // 全局方法实体
     private MethodEntity methodEntity;
     private Map<MethodKey, MethodEntity> method;
@@ -59,15 +59,15 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     @Override
     public void afterPropertiesSet() throws Exception {
         cacheReference();
-        
+
         registerReference();
-        
+
         startClients();
-        
+
         watchServiceInstance();
-        
+
         initializeClientInterceptor();
-        
+
         LOG.info("ReferenceFactoryBean has been initialized...");
     }
 
@@ -76,7 +76,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         String interfaceName = interfaze.getName();
 
         String namespace = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
-        
+
         // 如果用户在Spring Xml未定义对应的Method，系统将自动创建全局方法的配置
         // 如果用户在Spring Xml只定义部分的Method，那么系统创建和用户自定义将Merge在一起，用户自定义的将覆盖系统自动创建的方法
         Map<MethodKey, MethodEntity> methodMap = ClassUtil.convertMethodMap(interfaze, methodEntity);
@@ -84,7 +84,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         for (Map.Entry<MethodKey, MethodEntity> entry : method.entrySet()) {
             MethodKey methodKey = entry.getKey();
             MethodEntity methodEntity = entry.getValue();
-            
+
             // 首先，判断用户的Method是否定义正确，即是否可以在接口类中找到对应的方法名
             MethodKey key = ClassUtil.getMethodKey(methodMap, methodKey.getMethod());
             if (key != null) {
@@ -101,7 +101,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
                     if (duplicatedMethodKey) {
                         throw FrameworkExceptionFactory.createMethodParameterTypesMissingException(namespace, methodKey);
                     }
-                    
+
                     // 然后，把接口类中的ParameterTypes覆盖到用户定义的MethodKey和MethodEntity
                     String parameterTypes = key.getParameterTypes();
                     methodKey.setParameterTypes(parameterTypes);
@@ -111,7 +111,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
                 // 用户定义的Method无法在接口类中找到
                 throw FrameworkExceptionFactory.createMethodNameNotFoundException(namespace, methodKey);
             }
-            
+
             cloneMethod.put(methodKey.clone(), methodEntity.clone());
         }
 
@@ -123,25 +123,25 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
                 cloneMethod.put(methodKey, methodEntity);
             }
         }
-        
+
         referenceEntity.setMethodMap(cloneMethod);
 
         Map<String, ReferenceEntity> referenceEntityMap = cacheContainer.getReferenceEntityMap();
         referenceEntityMap.put(interfaceName, referenceEntity);
     }
-    
+
     // 注册Reference，并把服务的应用信息写入
     protected void registerReference() throws Exception {
         String interfaceName = interfaze.getName();
 
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         RegistryExecutor registryExecutor = executorContainer.getRegistryExecutor();
-        
+
         // 注册Service目录，用于ServiceInstanceWatcher监听
         // 当注册中心未注册该Service，需要在Reference代替注册该Service，才能实现监听
         registryExecutor.registerServiceCategory(interfaceName, applicationEntity);
-        
+
         // 持久化Service配置信息
         // 当Reference代替注册该Service的时候，需要给给默认值，但method方法列表为空
         ServiceConfig serviceConfig = null;
@@ -159,10 +159,10 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
 
             registryExecutor.persistService(serviceConfig, applicationEntity);
         }
-        
+
         // 注册Reference
         registryExecutor.registerReference(interfaceName, applicationEntity);
-        
+
         // 持久化Reference配置信息
         ReferenceConfig referenceConfig = null;
         try {
@@ -178,14 +178,14 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
 
             registryExecutor.persistReference(referenceConfig, applicationEntity);
         }
-        
+
         Map<String, ReferenceConfig> referenceConfigMap = cacheContainer.getReferenceConfigMap();
         referenceConfigMap.put(interfaceName, referenceConfig);
-        
+
         // Reference配置信息更改后通知客户端，包括密钥
         registryExecutor.addReferenceConfigWatcher(interfaceName, applicationEntity);
     }
-    
+
     // 找到所有可连的应用
     protected List<ApplicationEntity> retrieveServiceInstanceList() throws Exception {
         String interfaceName = interfaze.getName();
@@ -196,7 +196,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
 
         return registryExecutor.getServiceInstanceList(interfaceName, applicationEntity);
     }
-    
+
     // 启动客户端集群
     protected void startClients() throws Exception {
         ProtocolEntity protocolEntity = cacheContainer.getProtocolEntity();
@@ -221,14 +221,14 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     // 启动客户端
     protected void startClient(ApplicationEntity applicationEntity) throws Exception {
         String interfaceName = interfaze.getName();
-        
+
         try {
             clientExecutor.start(interfaceName, applicationEntity);
         } catch (Exception e) {
             LOG.error("Start client failed", e);
         }
     }
-    
+
     // 监听Service上下线，用来保持注册中心和本地缓存一致
     protected void watchServiceInstance() throws Exception {
         ProtocolEntity protocolEntity = cacheContainer.getProtocolEntity();
@@ -236,11 +236,11 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         if (!protocolType.isLoadBalanceSupported()) {
             return;
         }
-        
+
         String interfaceName = interfaze.getName();
 
         ApplicationEntity applicationEntity = cacheContainer.getApplicationEntity();
-        
+
         RegistryExecutor registryExecutor = executorContainer.getRegistryExecutor();
         registryExecutor.addServiceInstanceWatcher(interfaceName, applicationEntity);
     }
@@ -255,14 +255,14 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         proxyFactory.addAdvice(clientInterceptor);
         proxy = proxyFactory.getProxy(classLoader);
     }
-    
+
     // 创建反射
     protected ClientInterceptor createClientInterceptor() throws Exception {
         String interfaceName = interfaze.getName();
-        
+
         ProtocolEntity protocolEntity = cacheContainer.getProtocolEntity();
         String clientInterceptorId = protocolEntity.getClientInterceptorId();
-        
+
         ClientInterceptor clientInterceptor = null;
         try {
             clientInterceptor = createDelegate(clientInterceptorId);
@@ -271,7 +271,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         }
 
         clientInterceptor.setInterface(interfaceName);
-        
+
         return clientInterceptor;
     }
 
@@ -302,11 +302,11 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     public Class<?> getInterface() {
         return interfaze;
     }
-    
+
     public void setMethodEntity(MethodEntity methodEntity) {
         this.methodEntity = methodEntity;
     }
-    
+
     public MethodEntity getMethodEntity() {
         return methodEntity;
     }
@@ -326,15 +326,15 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     public ReferenceEntity getReferenceEntity() {
         return referenceEntity;
     }
-    
+
     public void setClientExecutor(ClientExecutor clientExecutor) {
         this.clientExecutor = clientExecutor;
     }
-    
+
     public ClientExecutor getClientExecutor() {
         return clientExecutor;
     }
-    
+
     public void setClientExecutorAdapter(ClientExecutorAdapter clientExecutorAdapter) {
         this.clientExecutorAdapter = clientExecutorAdapter;
     }
@@ -342,7 +342,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     public ClientExecutorAdapter getClientExecutorAdapter() {
         return clientExecutorAdapter;
     }
-    
+
     public void setClientInterceptorAdapter(ClientInterceptorAdapter clientInterceptorAdapter) {
         this.clientInterceptorAdapter = clientInterceptorAdapter;
     }

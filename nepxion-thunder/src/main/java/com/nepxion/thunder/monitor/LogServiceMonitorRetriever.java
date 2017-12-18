@@ -37,11 +37,11 @@ public class LogServiceMonitorRetriever extends AbstractMonitorRetriever {
         if (StringUtils.isEmpty(traceId)) {
             throw new MonitorException("Trace ID is null");
         }
-        
+
         if (StringUtils.isEmpty(filePath)) {
             throw new MonitorException("File path is null");
         }
-        
+
         List<MonitorStat> monitorStatList = new ArrayList<MonitorStat>();
 
         String key = "\"" + ThunderConstants.TRACE_ID + "\":\"" + traceId + "\"";

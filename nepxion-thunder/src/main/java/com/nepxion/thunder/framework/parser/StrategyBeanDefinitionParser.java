@@ -40,12 +40,12 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
         super.doParse(element, parserContext, builder);
 
         StrategyEntity strategyEntity = new StrategyEntity();
-        
+
         ProtocolEntity protocolEntity = cacheContainer.getProtocolEntity();
         ProtocolType protocolType = protocolEntity.getType();
         if (protocolType.isLoadBalanceSupported()) {
             String loadBalanceAttributeName = ThunderConstants.LOAD_BALANCE_ATTRIBUTE_NAME;
-            
+
             String loadBalance = element.getAttribute(loadBalanceAttributeName);
             LoadBalanceType loadBalanceType = null;
             if (StringUtils.isNotEmpty(loadBalance)) {
@@ -59,15 +59,15 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
             strategyEntity.setLoadBalanceType(loadBalanceType);
             LoadBalanceExecutor loadBalanceExecutor = createLoadBalanceExecutor(loadBalanceType);
             builder.addPropertyValue(createBeanName(LoadBalanceExecutor.class), loadBalanceExecutor);
-            
+
             ConsistencyExecutor consistencyExecutor = createConsistencyExecutor();
             builder.addPropertyValue(createBeanName(ConsistencyExecutor.class), consistencyExecutor);
         }
-        
+
         cacheContainer.setStrategyEntity(strategyEntity);
         builder.addPropertyValue(createBeanName(StrategyEntity.class), strategyEntity);
     }
-    
+
     protected LoadBalanceExecutor createLoadBalanceExecutor(LoadBalanceType loadBalanceType) {
         LoadBalanceExecutor loadBalanceExecutor = executorContainer.getLoadBalanceExecutor();
         if (loadBalanceExecutor == null) {
@@ -92,10 +92,10 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
 
             executorContainer.setLoadBalanceExecutor(loadBalanceExecutor);
         }
-        
+
         return loadBalanceExecutor;
     }
-    
+
     protected ConsistencyExecutor createConsistencyExecutor() {
         ConsistencyExecutor consistencyExecutor = executorContainer.getConsistencyExecutor();
         if (consistencyExecutor == null) {
@@ -105,10 +105,10 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
             } catch (Exception e) {
                 throw new FrameworkException("Creat ConsistencyExecutor failed", e);
             }
-            
+
             executorContainer.setConsistencyExecutor(consistencyExecutor);
         }
-        
+
         return consistencyExecutor;
     }
 

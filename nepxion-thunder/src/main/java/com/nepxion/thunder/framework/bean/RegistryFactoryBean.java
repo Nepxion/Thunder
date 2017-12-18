@@ -69,7 +69,7 @@ public class RegistryFactoryBean extends AbstractFactoryBean implements Disposab
     public void setRegistryExecutor(RegistryExecutor registryExecutor) {
         this.registryExecutor = registryExecutor;
     }
-    
+
     public RegistryExecutor getRegistryExecutor() {
         return registryExecutor;
     }

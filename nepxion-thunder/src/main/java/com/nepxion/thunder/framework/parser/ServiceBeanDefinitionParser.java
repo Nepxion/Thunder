@@ -28,15 +28,15 @@ import com.nepxion.thunder.protocol.ServerExecutorAdapter;
 import com.nepxion.thunder.security.SecurityExecutor;
 
 public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinitionParser {
-    
+
     public ServiceBeanDefinitionParser(ThunderDelegate delegate) {
         super(delegate);
     }
-    
+
     @Override
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
-        
+
         String namespaceElementName = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
         String serviceElementName = ThunderConstants.SERVICE_ELEMENT_NAME;
         String interfaceAttributeName = ThunderConstants.INTERFACE_ATTRIBUTE_NAME;
@@ -46,7 +46,7 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
         String interfaze = element.getAttribute(interfaceAttributeName);
         String server = element.getAttribute(serverAttributeName);
         String ref = element.getAttribute(refAttributeName);
-        
+
         if (StringUtils.isEmpty(interfaze)) {
             throw FrameworkExceptionFactory.createAttributeMissingException(namespaceElementName, serviceElementName, interfaceAttributeName);
         }
@@ -54,43 +54,43 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
         if (StringUtils.isEmpty(ref)) {
             throw FrameworkExceptionFactory.createAttributeMissingException(namespaceElementName, serviceElementName, refAttributeName);
         }
-        
+
         ServiceEntity serviceEntity = new ServiceEntity();
         serviceEntity.setInterface(interfaze);
         serviceEntity.setServer(server);
-        
+
         builder.addPropertyValue(interfaceAttributeName, interfaze);
-		builder.addPropertyValue(serviceElementName, new RuntimeBeanReference(ref));
+        builder.addPropertyValue(serviceElementName, new RuntimeBeanReference(ref));
         builder.addPropertyValue(createBeanName(ServiceEntity.class), serviceEntity);
-        
+
         ServerExecutor serverExecutor = createServerExecutor();
         builder.addPropertyValue(createBeanName(ServerExecutor.class), serverExecutor);
-        
+
         ServerExecutorAdapter serverExecutorAdapter = createServerExecutorAdapter();
         builder.addPropertyValue(createBeanName(ServerExecutorAdapter.class), serverExecutorAdapter);
-        
+
         SecurityExecutor securityExecutor = createSecurityExecutor();
         builder.addPropertyValue(createBeanName(SecurityExecutor.class), securityExecutor);
     }
-    
+
     protected ServerExecutor createServerExecutor() {
         ServerExecutor serverExecutor = executorContainer.getServerExecutor();
         if (serverExecutor == null) {
             ProtocolEntity protocolEntity = cacheContainer.getProtocolEntity();
             String serverExecutorId = protocolEntity.getServerExecutorId();
-            
+
             try {
                 serverExecutor = createDelegate(serverExecutorId);
             } catch (Exception e) {
                 throw new FrameworkException("Creat ServerExecutor failed", e);
             }
-            
+
             executorContainer.setServerExecutor(serverExecutor);
         }
-        
+
         return serverExecutor;
     }
-    
+
     protected ServerExecutorAdapter createServerExecutorAdapter() {
         ServerExecutorAdapter serverExecutorAdapter = executorContainer.getServerExecutorAdapter();
         if (serverExecutorAdapter == null) {
@@ -100,13 +100,13 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
             } catch (Exception e) {
                 throw new FrameworkException("Creat ServerExecutorAdapter failed", e);
             }
-            
+
             executorContainer.setServerExecutorAdapter(serverExecutorAdapter);
         }
-        
+
         return serverExecutorAdapter;
     }
-    
+
     protected SecurityExecutor createSecurityExecutor() {
         SecurityExecutor securityExecutor = executorContainer.getSecurityExecutor();
         if (securityExecutor == null) {
@@ -116,13 +116,13 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
             } catch (Exception e) {
                 throw new FrameworkException("Creat SecurityExecutor failed", e);
             }
-            
+
             executorContainer.setSecurityExecutor(securityExecutor);
         }
 
         return securityExecutor;
     }
-    
+
     @Override
     protected Class<?> getBeanClass(Element element) {
         return ServiceFactoryBean.class;

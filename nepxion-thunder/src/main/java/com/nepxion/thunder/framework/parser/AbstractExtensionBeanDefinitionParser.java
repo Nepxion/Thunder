@@ -23,12 +23,12 @@ import com.nepxion.thunder.common.util.ClassUtil;
 
 public abstract class AbstractExtensionBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
     private static final String DELEGATE = "delegate";
-    
+
     protected ThunderDelegate delegate;
     protected ThunderProperties properties;
     protected CacheContainer cacheContainer;
     protected ExecutorContainer executorContainer;
-    
+
     public AbstractExtensionBeanDefinitionParser(ThunderDelegate delegate) {
         this.delegate = delegate;
         this.properties = delegate.getProperties();
@@ -37,14 +37,14 @@ public abstract class AbstractExtensionBeanDefinitionParser extends AbstractSing
     }
 
     @Override
-    protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) { 
+    protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         builder.addPropertyValue(DELEGATE, delegate);
     }
-    
-    protected <T> T createDelegate(String delegateClassId) throws Exception {        
+
+    protected <T> T createDelegate(String delegateClassId) throws Exception {
         return delegate.createDelegate(delegateClassId);
     }
-    
+
     protected String createBeanName(Class<?> clazz) {
         return ClassUtil.convertBeanName(clazz);
     }

@@ -53,19 +53,19 @@ public class ApplicationBeanDefinitionParser extends AbstractExtensionBeanDefini
         }
 
         LOG.info("Application is {}", application);
-        
+
         String group = element.getAttribute(groupAttributeName);
         if (StringUtils.isEmpty(group)) {
             throw FrameworkExceptionFactory.createAttributeMissingException(namespaceElementName, applicationElementName, groupAttributeName);
         }
-        
+
         LOG.info("Group is {}", group);
-        
+
         String cluster = element.getAttribute(clusterAttributeName);
         if (StringUtils.isEmpty(cluster)) {
             throw FrameworkExceptionFactory.createAttributeMissingException(namespaceElementName, applicationElementName, clusterAttributeName);
         }
-        
+
         LOG.info("Cluster is {}", cluster);
 
         // 通过-DThunderHost获取值
@@ -76,7 +76,7 @@ public class ApplicationBeanDefinitionParser extends AbstractExtensionBeanDefini
                 host = HostUtil.getLocalhost();
             }
         }
-        
+
         LOG.info("Host is {}", host);
 
         // 通过-DThunderPort获取值
@@ -87,9 +87,9 @@ public class ApplicationBeanDefinitionParser extends AbstractExtensionBeanDefini
                 throw new FrameworkException("Port value is null");
             }
         }
-        
+
         LOG.info("Port is {}", port);
-        
+
         ApplicationEntity applicationEntity = new ApplicationEntity();
         applicationEntity.setApplication(application);
         applicationEntity.setGroup(group);

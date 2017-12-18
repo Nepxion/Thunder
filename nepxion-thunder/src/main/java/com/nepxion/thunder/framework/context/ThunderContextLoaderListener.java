@@ -27,20 +27,20 @@ public class ThunderContextLoaderListener extends ContextLoaderListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
         super.contextInitialized(event);
-        
+
         ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
-        
+
         String path = event.getServletContext().getRealPath("");
-        
+
         generateHessianServlet(applicationContext, path);
     }
-    
+
     private void generateHessianServlet(ApplicationContext applicationContext, String path) {
         ApplicationFactoryBean applicationFactoryBean = applicationContext.getBean(ApplicationFactoryBean.class);
-        
+
         Map<String, ServiceEntity> serviceEntityMap = applicationFactoryBean.getCacheContainer().getServiceEntityMap();
         ThunderProperties properties = applicationFactoryBean.getProperties();
-        
+
         HessianServletGenerator servletGenerator = new HessianServletGenerator(serviceEntityMap, properties, path);
         servletGenerator.generate();
     }

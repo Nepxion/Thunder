@@ -36,7 +36,7 @@ import com.splunk.ServiceArgs;
 
 public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
     private static final Logger LOG = LoggerFactory.getLogger(SplunkLogServiceMonitorRetriever.class);
-    
+
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:m:ss";
     public static final String DATE_FORMAT_SPLUNK = "yyyy-MM-dd'T'HH:mm:ss";
 
@@ -61,19 +61,19 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
             }
         }
     }
-    
+
     public void dispose() {
         service = null;
     }
-    
+
     public boolean enabled() {
         return service != null;
     }
-    
+
     public List<MonitorStat> retrieve(String traceId) throws Exception {
         return retrieve(traceId, null);
     }
-    
+
     public List<MonitorStat> retrieve(String traceId, Map<String, Object> conditions) throws Exception {
         return retrieve(traceId, conditions, ThunderConstants.ENCODING_FORMAT);
     }
@@ -82,7 +82,7 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
         if (StringUtils.isEmpty(traceId)) {
             throw new MonitorException("Trace ID is null");
         }
-        
+
         if (service == null) {
             throw new MonitorException("Splunk service is null");
         }
@@ -96,17 +96,16 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
             if (sourceTypeObject != null) {
                 sourceType = sourceTypeObject.toString();
             }
-            
+
             Object maximumTimeObject = conditions.get(ThunderConstants.SPLUNK_MAXIMUM_TIME_ATTRIBUTE_NAME);
             if (maximumTimeObject != null) {
                 maximumTime = (Integer) maximumTimeObject;
             }
-            
+
             Object earliestTimeObject = conditions.get(ThunderConstants.SPLUNK_EARLIEST_TIME_ATTRIBUTE_NAME);
             if (earliestTimeObject != null) {
                 earliestTime = new SimpleDateFormat(DATE_FORMAT_SPLUNK).format((Date) earliestTimeObject);
             }
-
 
             Object latestTimeObject = conditions.get(ThunderConstants.SPLUNK_LATEST_TIME_ATTRIBUTE_NAME);
             if (latestTimeObject != null) {

@@ -55,11 +55,11 @@ public class StrategyFactoryBean extends AbstractFactoryBean {
     public void setLoadBalanceExecutor(LoadBalanceExecutor loadBalanceExecutor) {
         this.loadBalanceExecutor = loadBalanceExecutor;
     }
-    
+
     public LoadBalanceExecutor getLoadBalanceExecutor() {
         return loadBalanceExecutor;
     }
-    
+
     public void setConsistencyExecutor(ConsistencyExecutor consistencyExecutor) {
         this.consistencyExecutor = consistencyExecutor;
     }

@@ -20,22 +20,22 @@ import org.apache.commons.lang3.StringUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 
-import com.nepxion.thunder.common.entity.RedisType;
 import com.nepxion.thunder.common.entity.MonitorStat;
+import com.nepxion.thunder.common.entity.RedisType;
 import com.nepxion.thunder.protocol.redis.cluster.RedisClusterFactory;
 import com.nepxion.thunder.protocol.redis.sentinel.RedisSentinelPoolFactory;
 
 public class RedisServiceMonitorRetriever extends AbstractMonitorRetriever {
-    
+
     public List<MonitorStat> retrieve(String traceId, RedisType redisType) throws Exception {
         if (StringUtils.isEmpty(traceId)) {
             throw new MonitorException("Trace ID is null");
         }
-        
+
         if (redisType == null) {
             throw new MonitorException("Redis type is null");
         }
-        
+
         Map<String, String> monitorStatMap = null;
         switch (redisType) {
             case REDIS_SENTINEL:
