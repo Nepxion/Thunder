@@ -1,5 +1,0 @@
-Dubbo压力测试
-
-1. copy.bat，拷贝thunder.jar到本工程lib目录下
-2. install.bat，执行maven编译
-3. all.bat，上面二个命令的批量执行

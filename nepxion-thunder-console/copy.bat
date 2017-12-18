@@ -1,1 +1,0 @@
-copy ..\nepxion-thunder\target\nepxion-thunder-1.0.0.jar lib\
