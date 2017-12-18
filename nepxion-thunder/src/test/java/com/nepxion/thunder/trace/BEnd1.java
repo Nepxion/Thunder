@@ -16,11 +16,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.nepxion.thunder.common.constant.ThunderConstants;
 
-public class BEnd1 {    
+public class BEnd1 {
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         System.setProperty(ThunderConstants.PORT_PARAMETER_NAME, "2000");
-        
+
         // new FileSystemXmlApplicationContext("file://192.168.15.82\\Thunder\\Trace\\trace-b-context.xml"); 
         // new ClassPathXmlApplicationContext("http://www.nepxion.com/Thunder/Trace/trace-b-context.xml");
         new ClassPathXmlApplicationContext("classpath*:trace-b-context.xml");

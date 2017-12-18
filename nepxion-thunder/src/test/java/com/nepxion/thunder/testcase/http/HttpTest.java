@@ -122,7 +122,7 @@ public class HttpTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         httpGet.reset();
         httpPost.reset();
         try {
@@ -130,10 +130,10 @@ public class HttpTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         System.in.read();
     }
-    
+
     @Test
     public void test() throws Exception {
         ThunderProperties properties = ThunderPropertiesManager.getProperties();

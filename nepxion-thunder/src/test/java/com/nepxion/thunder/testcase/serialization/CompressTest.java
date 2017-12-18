@@ -33,13 +33,13 @@ public class CompressTest {
 
         ThunderProperties properties = ThunderPropertiesManager.getProperties();
         SerializerFactory.initialize(properties);
-        
+
         FSTSerializerFactory.initialize();
         SerializerExecutor.serialize(map, SerializerType.FST_BINARY, CompressorType.QUICK_LZ_COMPRESSOR, true, true);
-        
+
         KryoSerializerFactory.initialize();
         SerializerExecutor.serialize(map, SerializerType.KRYO_BINARY, CompressorType.QUICK_LZ_COMPRESSOR, true, true);
-        
+
         SerializerExecutor.serialize(map, SerializerType.JDK_BINARY, CompressorType.QUICK_LZ_COMPRESSOR, true, true);
     }
 }

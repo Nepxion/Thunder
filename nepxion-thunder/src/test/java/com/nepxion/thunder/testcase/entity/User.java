@@ -13,9 +13,9 @@ package com.nepxion.thunder.testcase.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {    
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private String id;
     private String name;
     private int age;
@@ -82,12 +82,12 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + getId() + 
-                " name=" + getName() + 
-                " age=" + getAge() + 
-                " birthday=" + getBirthday() + 
-                " phone=" + getPhone() + 
-                " email=" + getEmail() + 
+        return "id=" + getId() +
+                " name=" + getName() +
+                " age=" + getAge() +
+                " birthday=" + getBirthday() +
+                " phone=" + getPhone() +
+                " email=" + getEmail() +
                 " address=" + getAddress();
     }
 }

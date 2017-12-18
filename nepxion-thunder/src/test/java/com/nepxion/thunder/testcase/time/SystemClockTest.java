@@ -20,7 +20,7 @@ import com.nepxion.thunder.common.time.SystemClock;
 
 public class SystemClockTest {
     private static final Logger LOG = LoggerFactory.getLogger(SystemClockTest.class);
-    
+
     @Test
     public void test() throws Exception {
         long precision = 10L;
@@ -30,7 +30,7 @@ public class SystemClockTest {
 
         long nowFromSystem = System.currentTimeMillis();
         long nowFromClock = clock.now();
-        
+
         LOG.info("{}", nowFromClock - nowFromSystem);
     }
 }

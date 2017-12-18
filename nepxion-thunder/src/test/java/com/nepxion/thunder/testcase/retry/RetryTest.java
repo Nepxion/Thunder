@@ -50,7 +50,7 @@ public class RetryTest {
                 invoke2(invokeRetryTimes);
             }
         } else {
-            System.out.println("result"); 
+            System.out.println("result");
         }
     }
 

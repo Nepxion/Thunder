@@ -19,11 +19,11 @@ import com.nepxion.thunder.common.callback.ThunderCallback;
 
 public class UserCallback extends ThunderCallback<List<User>> {
     private static final Logger LOG = LoggerFactory.getLogger(UserCallback.class);
-    
+
     @Override
-	public void onResult(List<User> result) {
+    public void onResult(List<User> result) {
         LOG.info("客户端-异步回调结果：返回值={}", result);
-	}
+    }
 
     @Override
     public void onError(Exception exception) {

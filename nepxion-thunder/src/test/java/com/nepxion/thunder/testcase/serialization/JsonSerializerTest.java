@@ -28,7 +28,7 @@ import com.nepxion.thunder.testcase.entity.User;
 
 public class JsonSerializerTest {
     private static final Logger LOG = LoggerFactory.getLogger(JsonSerializerTest.class);
-    
+
     @Test
     public void testJacksonFunction() throws Exception {
         User user1 = EntityFactory.createUser1();
@@ -39,7 +39,7 @@ public class JsonSerializerTest {
         User user2 = JacksonSerializer.fromJson(json, User.class);
         LOG.info(user2.toString());
     }
-    
+
     @Test
     public void testAliFunction() throws Exception {
         User user1 = EntityFactory.createUser1();
@@ -49,35 +49,35 @@ public class JsonSerializerTest {
 
         User user2 = AliSerializer.fromJson(json, User.class);
         LOG.info(user2.toString());
-        
+
         User user3 = AliSerializer.fromJson(json);
         LOG.info(user3.toString());
-        
+
         JSONObject jsonObject = AliSerializer.parseJson(json);
         LOG.info(jsonObject.getString("name"));
     }
-    
+
     @Test
     public void testFSTFunction() throws Exception {
         User user1 = EntityFactory.createUser1();
 
         FSTConfiguration fst = FSTJsonSerializerFactory.createFST();
-                
+
         String json = FSTJsonSerializer.toJson(fst, user1);
         LOG.info(json);
 
         User user2 = FSTJsonSerializer.fromJson(fst, json, User.class);
         LOG.info(user2.toString());
     }
-    
+
     @Test
     public void testPerformance() throws Exception {
         User user1 = EntityFactory.createUser1();
-        
+
         ThunderProperties properties = ThunderPropertiesManager.getProperties();
         ObjectPoolFactory.initialize(properties);
         FSTJsonSerializerFactory.initialize();
-        
+
         long value1 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             String json = JacksonSerializer.toJson(user1);
@@ -85,7 +85,7 @@ public class JsonSerializerTest {
             JacksonSerializer.fromJson(json, User.class);
         }
         LOG.info("JacksonSerializer time spent : {}", System.currentTimeMillis() - value1);
-        
+
         long value2 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             String json = AliSerializer.toJson(user1);
@@ -93,9 +93,9 @@ public class JsonSerializerTest {
             AliSerializer.fromJson(json, User.class);
         }
         LOG.info("AliSerializer time spent : {}", System.currentTimeMillis() - value2);
-        
+
         FSTConfiguration fst = FSTJsonSerializerFactory.createFST();
-        
+
         long value3 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             String json = FSTJsonSerializer.toJson(fst, user1);
@@ -103,7 +103,7 @@ public class JsonSerializerTest {
             FSTJsonSerializer.fromJson(fst, json, User.class);
         }
         LOG.info("FSTJsonSerializer time spent : {}", System.currentTimeMillis() - value3);
-        
+
         long value4 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             String json = FSTJsonSerializer.toJson(user1);

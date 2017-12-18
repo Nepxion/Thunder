@@ -19,7 +19,7 @@ import com.nepxion.thunder.registry.RegistryLauncher;
 import com.nepxion.thunder.registry.zookeeper.ZookeeperRegistryLauncher;
 
 public class RegistryController {
-    
+
     @Test
     public void test() throws Exception {
         // 启动注册中心连接
@@ -32,7 +32,7 @@ public class RegistryController {
         applicationEntity.setApplication("APP-IOS");
         applicationEntity.setGroup("MY_GROUP");
         String interfaze = "com.nepxion.thunder.test.service.UserService";
-        
+
         registryExecutor.resetApplication(applicationEntity);
         registryExecutor.resetService(interfaze, applicationEntity);
         registryExecutor.resetReference(interfaze, applicationEntity);
@@ -42,10 +42,10 @@ public class RegistryController {
 //        registryExecutor.modifyServiceToken(interfaze, applicationEntity, 10);
 //        registryExecutor.modifyReferenceSecretKey(interfaze, applicationEntity, "123456");
 //        registryExecutor.modifyReferenceVersion(interfaze, applicationEntity, 1);
-      
+
         // 停止注册中心连接
         // registryLauncher.stop();
-        
+
         System.in.read();
     }
 }

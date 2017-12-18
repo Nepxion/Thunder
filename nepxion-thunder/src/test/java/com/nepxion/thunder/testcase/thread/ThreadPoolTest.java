@@ -29,7 +29,7 @@ public class ThreadPoolTest {
             }
         });
     }
-    
+
     @Test
     public void test2() throws Exception {
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
@@ -46,7 +46,7 @@ public class ThreadPoolTest {
         });
         System.out.println("Pass2"); // 打印
     }
-    
+
     @Test
     public void test3() throws Exception {
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
@@ -63,7 +63,7 @@ public class ThreadPoolTest {
         }).get();
         System.out.println("Pass2"); // 阻塞，直到线程池里面所有的线程都执行完，不打印
     }
-    
+
     @Test
     public void test4() throws Exception {
         Executors.newSingleThreadExecutor().submit(new Callable<Object>() {

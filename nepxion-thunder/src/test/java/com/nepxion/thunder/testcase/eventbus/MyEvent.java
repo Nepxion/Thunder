@@ -13,7 +13,7 @@ package com.nepxion.thunder.testcase.eventbus;
 import com.nepxion.thunder.event.eventbus.Event;
 
 public class MyEvent extends Event {
-    
+
     public MyEvent(Object source) {
         super(source);
     }

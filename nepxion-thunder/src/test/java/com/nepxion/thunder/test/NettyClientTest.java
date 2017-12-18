@@ -29,7 +29,7 @@ import com.nepxion.thunder.test.service.UserService;
 public class NettyClientTest {
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private AnimalService animalService;
 

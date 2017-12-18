@@ -54,9 +54,9 @@ public class Animal implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + getId() + 
-                " name=" + getName() + 
-                " type=" + getType() + 
+        return "id=" + getId() +
+                " name=" + getName() +
+                " type=" + getType() +
                 " height=" + getHeight();
     }
 }

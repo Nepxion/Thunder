@@ -44,58 +44,58 @@ public class UserTest {
 
         RegistryEntity registryEntity = new RegistryEntity();
         registryEntity.setAddress("localhost:2181");
-        
+
         ProtocolEntity protocolEntity = new ProtocolEntity();
         protocolEntity.setType(ProtocolType.NETTY);
 
         RegistryInitializer registryInitializer = new ZookeeperRegistryInitializer();
         registryInitializer.start(registryEntity, properties);
-        
+
         RegistryExecutor registryExecutor = new ZookeeperRegistryExecutor();
         registryExecutor.setRegistryInitializer(registryInitializer);
         registryExecutor.setProtocolEntity(protocolEntity);
 
         UserEntity administrator = UserFactory.createAdministrator();
         registryExecutor.persistUser(administrator);
-        
+
         UserEntity admin_user1 = UserFactory.createAdminUser("admin_user1", "111111");
         registryExecutor.persistUser(admin_user1);
-        
+
         UserEntity admin_user2 = UserFactory.createAdminUser("admin_user2", "111111");
         registryExecutor.persistUser(admin_user2);
-        
+
         UserEntity admin_user3 = UserFactory.createAdminUser("admin_user3", "111111");
         registryExecutor.persistUser(admin_user3);
-        
+
         UserEntity user1 = UserFactory.createUser("user1", "111111", Arrays.asList(UserOperation.SERVICE_CONTROL, UserOperation.SERVICE_CONTROL));
         registryExecutor.persistUser(user1);
-        
+
         UserEntity user2 = UserFactory.createUser("user2", "111111", Arrays.asList(UserOperation.REMOTE_CONTROL));
         registryExecutor.persistUser(user2);
-        
+
         UserEntity user3 = UserFactory.createUser("user3", "111111", Arrays.asList(UserOperation.SAFETY_CONTROL));
         registryExecutor.persistUser(user3);
-        
+
         UserEntity user4 = UserFactory.createUser("user4", "111111", Arrays.asList(UserOperation.SERVICE_CONTROL, UserOperation.REMOTE_CONTROL));
         registryExecutor.persistUser(user4);
-        
+
         UserEntity user5 = UserFactory.createUser("user5", "111111", Arrays.asList(UserOperation.REMOTE_CONTROL, UserOperation.SAFETY_CONTROL));
         registryExecutor.persistUser(user5);
-        
+
         UserEntity user6 = UserFactory.createUser("user6", "111111", new ArrayList<UserOperation>());
         registryExecutor.persistUser(user6);
-        
+
         LOG.info(registryExecutor.retrieveUserList().toString());
-        
+
         /*UserEntity admin_user4 = UserFactory.createAdminUser("admin", "111111");
         registryExecutor.persistUser(admin_user4);
-        
+
         UserEntity user7 = UserFactory.createUser("user7", "111111", Arrays.asList(UserOperation.USER_CONTROL));
         registryExecutor.persistUser(user7);
-        
+
         UserEntity user8 = UserFactory.createUser("admin", "111111", Arrays.asList(UserOperation.SERVICE_CONTROL));
         registryExecutor.persistUser(user8);
-        
+
         registryExecutor.deleteUser(administrator);*/
     }
 }

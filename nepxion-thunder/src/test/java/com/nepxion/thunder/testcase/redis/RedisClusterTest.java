@@ -49,7 +49,7 @@ public class RedisClusterTest {
         LOG.info("Clear all data");
     }
 
-    protected void hget(JedisCluster cluster) {        
+    protected void hget(JedisCluster cluster) {
         Map<String, String> records = cluster.hgetAll("A1(1)");
         for (Map.Entry<String, String> entry : records.entrySet()) {
             MonitorStat monitorStat = JacksonSerializer.fromJson(entry.getValue(), MonitorStat.class);

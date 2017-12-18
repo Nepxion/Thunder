@@ -16,15 +16,15 @@ public class AInterfaceImpl implements AInterface {
     public AInterfaceImpl() {
 
     }
-    
+
     @Override
     public void asyncToA(String traceId, String path) {
         path += " -> A";
-        
+
         if (Constants.PRINT) {
             System.out.println("异步：A端收到B端消息：" + path);
         }
-        
+
         try {
             TimeUnit.MILLISECONDS.sleep(2000);
         } catch (InterruptedException e) {

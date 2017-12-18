@@ -10,7 +10,7 @@ package com.nepxion.thunder.trace.service;
  * @version 1.0
  */
 
-public interface BInterface2 {    
+public interface BInterface2 {
     // 异步调用
     // B端收到C端消息，并发送到A端
     void asyncToB(String traceId, String path);

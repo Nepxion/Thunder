@@ -40,9 +40,9 @@ public class PromiseChainTest {
     // 回调完成 [2] : String=1970-01-03 08:03:00.000
     // 回调完成 [3] : String=1970-01-04 08:04:00.000
     // 回调完成 [4] : String=1970-01-05 08:05:00.000
-    private static final Long[] ORIGIN_TIMES = new Long[] {0L, 60000L * 60 * 24, 60000L * 60 * 24 * 2, 60000L * 60 * 24 * 3, 60000L * 60 * 24 * 4};
-    private static final Long[] ADDED_TIMES = new Long[] {60000L, 60000L * 2, 60000L * 3, 60000L * 4, 60000L * 5};
-    
+    private static final Long[] ORIGIN_TIMES = new Long[] { 0L, 60000L * 60 * 24, 60000L * 60 * 24 * 2, 60000L * 60 * 24 * 3, 60000L * 60 * 24 * 4 };
+    private static final Long[] ADDED_TIMES = new Long[] { 60000L, 60000L * 2, 60000L * 3, 60000L * 4, 60000L * 5 };
+
     @Test
     public void test() throws Exception {
         System.out.println(new Date(0L));
@@ -58,7 +58,7 @@ public class PromiseChainTest {
                         public void onResult(Void result) {
                             LOG.info("调用开始 [{}]", index);
                             // throw new IllegalArgumentException("开始就出现异常");
-                        
+
                             step0(originTime);
                         }
                     }).then(new PromisePipe<Long, Date>() {
@@ -72,7 +72,7 @@ public class PromiseChainTest {
                         @Override
                         public void onResult(Date result) {
                             LOG.info("调用第二步 [{}] : Date={}", index, result);
-                         // throw new IllegalArgumentException("调用第二步异常");
+                            // throw new IllegalArgumentException("调用第二步异常");
                             step2(result);
                         }
                     }).done(new PromiseDone<String>() {
@@ -88,28 +88,28 @@ public class PromiseChainTest {
                         }
                     });
                     promiseExecutor.execute();
-                    
+
                     LOG.info("Promise looping {} end", index);
                 }
             });
         }
-        
+
         LOG.info("Promise chain invoking starts");
-        
+
         System.in.read();
     }
-    
+
     private String store() {
         PromiseEntity<Object> promise = new PromiseEntity<Object>();
-        
+
         PromiseContext.setPromise(promise);
-        
+
         String messageId = RandomUtil.uuidRandom();
         PROMISE_MAP.put(messageId, promise);
-        
+
         return messageId;
     }
-    
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private void execute(String messageId, Object result, Exception exception) {
         PromiseEntity promise = PROMISE_MAP.get(messageId);
@@ -120,10 +120,10 @@ public class PromiseChainTest {
         }
         PROMISE_MAP.remove(messageId);
     }
-    
+
     private void step0(final Long result) {
         final String messageId = store();
-        
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -135,7 +135,7 @@ public class PromiseChainTest {
 
     private void step1(final Long result) {
         final String messageId = store();
-        
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -147,7 +147,7 @@ public class PromiseChainTest {
 
     private void step2(final Date result) {
         final String messageId = store();
-        
+
         new Thread(new Runnable() {
             @Override
             public void run() {

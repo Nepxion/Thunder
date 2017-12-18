@@ -40,7 +40,7 @@ public class InvocationEntity {
     public void setIps(long[] ips) {
         this.ips = ips;
     }
-    
+
     public int getWeight() {
         return weight;
     }
@@ -56,7 +56,7 @@ public class InvocationEntity {
     public void setHeight(int height) {
         this.height = height;
     }
-    
+
     public void setFacade(int weight, int height) {
         this.setWeight(weight);
         this.setHeight(height);

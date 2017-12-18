@@ -25,7 +25,7 @@ public class KafkaTest {
         LOG.info("对应的分区={}", getPartitionIndex(10, "abc", "10.0.0.3:1000"));
         LOG.info("对应的分区={}", getPartitionIndex(10, "abc", "10.0.0.3:1001"));
     }
-    
+
     @SuppressWarnings("resource")
     private int getPartitionIndex(int partitionNumber, String topic, String key) {
         StringSerializer keySerializer = new StringSerializer();

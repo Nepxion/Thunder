@@ -23,29 +23,29 @@ public class InvocationTest {
     public void test() throws Exception {
         InvocationEntity entity = new InvocationEntity();
         LOG.info("First name={}, age={}, ips={}, weight={}, height={}", entity.getName(), entity.getAge(), entity.getIps(), entity.getWeight(), entity.getHeight());
-        
+
         MethodInvocation invocation1 = new MethodInvocation();
         invocation1.setMethodName("setName");
-        invocation1.setParameterTypes(new Class<?>[] {String.class});
-        invocation1.setParameters(new Object[] {"Zhangsan"});
+        invocation1.setParameterTypes(new Class<?>[] { String.class });
+        invocation1.setParameters(new Object[] { "Zhangsan" });
         System.out.println(invocation1.invoke(entity));
-        
+
         MethodInvocation invocation2 = new MethodInvocation();
         invocation2.setMethodName("setAge");
-        invocation2.setParameterTypes(new Class<?>[] {int.class});
-        invocation2.setParameters(new Object[] {18});
+        invocation2.setParameterTypes(new Class<?>[] { int.class });
+        invocation2.setParameters(new Object[] { 18 });
         System.out.println(invocation2.invoke(entity));
-        
+
         MethodInvocation invocation3 = new MethodInvocation();
         invocation3.setMethodName("setIps");
-        invocation3.setParameterTypes(new Class<?>[] {long[].class});
-        invocation3.setParameters(new Object[] {new long[]{19216801, 19216802}});
+        invocation3.setParameterTypes(new Class<?>[] { long[].class });
+        invocation3.setParameters(new Object[] { new long[] { 19216801, 19216802 } });
         System.out.println(invocation3.invoke(entity));
-        
+
         MethodInvocation invocation4 = new MethodInvocation();
         invocation4.setMethodName("setFacade");
-        invocation4.setParameterTypes(new Class<?>[] {int.class, int.class});
-        invocation4.setParameters(new Object[] {100, 170});
+        invocation4.setParameterTypes(new Class<?>[] { int.class, int.class });
+        invocation4.setParameters(new Object[] { 100, 170 });
         System.out.println(invocation4.invoke(entity));
 
         LOG.info("Last name={}, age={}, ips={}, weight={}, height={}", entity.getName(), entity.getAge(), entity.getIps(), entity.getWeight(), entity.getHeight());

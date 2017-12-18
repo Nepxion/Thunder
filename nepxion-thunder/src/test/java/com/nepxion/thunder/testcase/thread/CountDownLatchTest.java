@@ -57,7 +57,7 @@ public class CountDownLatchTest {
         });
 
         print(0);
-        
+
         System.in.read();
     }
 
@@ -84,7 +84,7 @@ public class CountDownLatchTest {
                 TimeUnit.MILLISECONDS.sleep(20000);
 
                 latch.countDown();
-                
+
                 System.out.println("强势线程结束...");
             } finally {
                 latch = null;

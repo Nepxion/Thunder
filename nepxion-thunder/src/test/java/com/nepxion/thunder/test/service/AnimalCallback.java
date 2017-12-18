@@ -17,11 +17,11 @@ import com.nepxion.thunder.common.callback.ThunderCallback;
 
 public class AnimalCallback extends ThunderCallback<Animal> {
     private static final Logger LOG = LoggerFactory.getLogger(AnimalCallback.class);
-    
+
     @Override
-	public void onResult(Animal result) {
+    public void onResult(Animal result) {
         LOG.info("客户端-异步回调结果：返回值={}", result);
-	}
+    }
 
     @Override
     public void onError(Exception exception) {

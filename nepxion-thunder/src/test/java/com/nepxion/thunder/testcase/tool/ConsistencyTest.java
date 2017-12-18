@@ -28,7 +28,7 @@ public class ConsistencyTest {
     private int referenceEventCount = 0;
 
     @Test
-    public void test() throws Exception {        
+    public void test() throws Exception {
         ZookeeperInstanceEventInterceptor eventInterceptor = new ZookeeperInstanceEventInterceptor() {
             @Override
             protected void onEvent(ServiceInstanceEvent event) {
@@ -36,7 +36,7 @@ public class ConsistencyTest {
                 InstanceEventType eventType = event.getEventType();
                 String interfaze = event.getInterface();
                 ApplicationEntity applicationEntity = event.getApplicationEntity();
-                
+
                 switch (eventType) {
                     case ONLINE:
                         LOG.info("服务端 [{}] 上线 ：[{}]", interfaze, applicationEntity);
@@ -45,7 +45,7 @@ public class ConsistencyTest {
                         LOG.info("服务端 [{}] 下线 ：[{}]", interfaze, applicationEntity);
                         break;
                 }
-                
+
                 serviceEventCount++;
                 LOG.info("事件总数={}", serviceEventCount);
             }
@@ -56,7 +56,7 @@ public class ConsistencyTest {
                 InstanceEventType eventType = event.getEventType();
                 String interfaze = event.getInterface();
                 ApplicationEntity applicationEntity = event.getApplicationEntity();
-                
+
                 switch (eventType) {
                     case ONLINE:
                         LOG.info("客户端 [{}] 上线 ：[{}]", interfaze, applicationEntity);
@@ -65,15 +65,15 @@ public class ConsistencyTest {
                         LOG.info("客户端 [{}] 下线 ：[{}]", interfaze, applicationEntity);
                         break;
                 }
-                
+
                 referenceEventCount++;
                 LOG.info("事件总数={}", referenceEventCount);
             }
         };
-        
+
         // 启动注册中心连接
         eventInterceptor.start("localhost:2181", ProtocolType.NETTY);
-        
+
         ApplicationEntity applicationEntity = new ApplicationEntity();
         applicationEntity.setApplication("APP-IOS");
         applicationEntity.setGroup("MY_GROUP");
@@ -81,7 +81,7 @@ public class ConsistencyTest {
         String interfaze1 = "com.nepxion.thunder.test.service.UserService";
         eventInterceptor.addServiceInstanceWatcher(interfaze1, applicationEntity);
         eventInterceptor.addReferenceInstanceWatcher(interfaze1, applicationEntity);
-        
+
         String interfaze2 = "com.nepxion.thunder.test.service.AnimalService";
         eventInterceptor.addServiceInstanceWatcher(interfaze2, applicationEntity);
         eventInterceptor.addReferenceInstanceWatcher(interfaze2, applicationEntity);

@@ -41,7 +41,7 @@ public class BinarySerializerTest {
         User user1 = EntityFactory.createUser1();
 
         FSTConfiguration fst = FSTSerializerFactory.createFST();
-        
+
         byte[] bytes = FSTSerializer.serialize(fst, user1);
         LOG.info(bytes.toString());
 
@@ -58,7 +58,7 @@ public class BinarySerializerTest {
         Map<String, String> m2 = Collections.unmodifiableMap(m1);
 
         FSTConfiguration fst = FSTSerializerFactory.createFST();
-        
+
         byte[] bytes = FSTSerializer.serialize(fst, (Serializable) m2);
         LOG.info(bytes.toString());
 
@@ -71,14 +71,14 @@ public class BinarySerializerTest {
         User user1 = EntityFactory.createUser1();
 
         Kryo kryo = KryoSerializerFactory.createKryo();
-        
+
         byte[] bytes = KryoSerializer.serialize(kryo, user1);
         LOG.info(bytes.toString());
 
         User user2 = KryoSerializer.deserialize(kryo, bytes);
         LOG.info(user2.toString());
     }
-    
+
     @Test
     public void testKyroFunction2() throws Exception {
         // 不能序列化不可变类
@@ -89,18 +89,18 @@ public class BinarySerializerTest {
         Map<String, String> m2 = Collections.unmodifiableMap(m1);
 
         Kryo kryo = KryoSerializerFactory.createKryo();
-        
+
         byte[] bytes = KryoSerializer.serialize(kryo, (Serializable) m2);
         LOG.info(bytes.toString());
 
         Map<String, String> m3 = KryoSerializer.deserialize(kryo, bytes);
         LOG.info(m3.toString());
     }
-    
+
     @Test
     public void testProtoStuffFunction1() throws Exception {
         User user1 = EntityFactory.createUser1();
-        
+
         byte[] bytes = ProtoStuffSerializer.serialize(user1);
         LOG.info(bytes.toString());
 
@@ -123,7 +123,7 @@ public class BinarySerializerTest {
         Map<String, String> m3 = ProtoStuffSerializer.deserialize(bytes, Map.class);
         LOG.info(m3.toString());
     }
-    
+
     @Test
     public void testJDKFunction1() throws Exception {
         User user1 = EntityFactory.createUser1();
@@ -134,7 +134,7 @@ public class BinarySerializerTest {
         User user2 = JDKSerializer.deserialize(bytes);
         LOG.info(user2.toString());
     }
-    
+
     @Test
     public void testJDKFunction2() throws Exception {
         Map<String, String> m1 = new HashMap<String, String>();
@@ -153,14 +153,14 @@ public class BinarySerializerTest {
     @Test
     public void testPerformance() throws Exception {
         User user1 = EntityFactory.createUser1();
-        
+
         ThunderProperties properties = ThunderPropertiesManager.getProperties();
         ObjectPoolFactory.initialize(properties);
         FSTSerializerFactory.initialize();
         KryoSerializerFactory.initialize();
-        
+
         FSTConfiguration fst = FSTSerializerFactory.createFST();
-        
+
         long value1 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             byte[] bytes = FSTSerializer.serialize(fst, user1);
@@ -168,7 +168,7 @@ public class BinarySerializerTest {
             FSTSerializer.deserialize(fst, bytes);
         }
         LOG.info("FSTSerializer time spent : {}", System.currentTimeMillis() - value1);
-        
+
         long value2 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             byte[] bytes = FSTSerializer.serialize(user1);
@@ -178,7 +178,7 @@ public class BinarySerializerTest {
         LOG.info("FSTSerializer (pool) time spent : {}", System.currentTimeMillis() - value2);
 
         Kryo kryo = KryoSerializerFactory.createKryo();
-        
+
         long value3 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             byte[] bytes = KryoSerializer.serialize(kryo, user1);
@@ -186,7 +186,7 @@ public class BinarySerializerTest {
             KryoSerializer.deserialize(kryo, bytes);
         }
         LOG.info("KryoSerializer time spent : {}", System.currentTimeMillis() - value3);
-        
+
         long value4 = System.currentTimeMillis();
         for (int i = 0; i < 5000000; i++) {
             byte[] bytes = KryoSerializer.serialize(user1);

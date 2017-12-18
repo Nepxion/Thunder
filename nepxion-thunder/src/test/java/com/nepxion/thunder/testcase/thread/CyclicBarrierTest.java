@@ -42,7 +42,7 @@ public class CyclicBarrierTest {
         });
 
         System.out.println("Pass3");
-        
+
         // 在所有参与者都已经在此屏障上调用 await 方法之前将一直等待,或者超出了指定的等待时间
         try {
             barrier.await(5000, TimeUnit.MILLISECONDS);
@@ -56,9 +56,9 @@ public class CyclicBarrierTest {
 
         System.out.println("Pass4");
     }
-    
+
     @Test
-    public void test2() throws Exception {        
+    public void test2() throws Exception {
         // 在所有参与者都已经在此屏障上调用 await 方法之前将一直等待,或者超出了指定的等待时间后结束线程
         try {
             barrier.await(5000, TimeUnit.MILLISECONDS);

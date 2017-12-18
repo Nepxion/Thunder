@@ -75,17 +75,17 @@ public class HashAlgorithmPercentTest {
                 LOG.error("It's wrong size of list, key is {}, size is {}", entry.getKey(), list.size());
             }
         }
-        
+
         // 在节点增加和删除情况下，同一个key分配在相同节点上的比例(命中率)
         // 命中率与节点数目和增减的节点数量有关
         // 同样增删节点数目情况下，节点多时命中率高
         // 同样节点数目，增删结点越少，命中率越高
         LOG.info("Added select times : {}", addCount);
         LOG.info("Same percent in added case : {}%", (float) addCount * 100 / LAUNCH_TIMES);
-        
+
         LOG.info("Reduced select times : {}", reduceCount);
         LOG.info("Same percent in reduced case : {}%", (float) reduceCount * 100 / LAUNCH_TIMES);
-        
+
         System.in.read();
     }
 

@@ -20,7 +20,7 @@ public class CEnd2 {
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         System.setProperty(ThunderConstants.PORT_PARAMETER_NAME, "3001");
-        
+
         // new FileSystemXmlApplicationContext("file://192.168.15.82\\Thunder\\Trace\\trace-c-context.xml"); 
         // new ClassPathXmlApplicationContext("http://www.nepxion.com/Thunder/Trace/trace-c-context.xml");
         new ClassPathXmlApplicationContext("classpath*:trace-c-context.xml");

@@ -12,9 +12,9 @@ package com.nepxion.thunder.testcase.entity;
 
 import java.io.Serializable;
 
-public class Animal implements Serializable {    
+public class Animal implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private String id;
     private String name;
     private String type;
@@ -54,9 +54,9 @@ public class Animal implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + getId() + 
-                " name=" + getName() + 
-                " type=" + getType() + 
+        return "id=" + getId() +
+                " name=" + getName() +
+                " type=" + getType() +
                 " height=" + getHeight();
     }
 }

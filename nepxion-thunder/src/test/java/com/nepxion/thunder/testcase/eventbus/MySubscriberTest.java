@@ -21,27 +21,27 @@ import com.nepxion.thunder.event.eventbus.EventControllerType;
 public class MySubscriberTest {
 
     @Test
-    public void testAsync() throws Exception {        
+    public void testAsync() throws Exception {
         ThunderProperties properties = ThunderPropertiesManager.getProperties();
         ThreadPoolFactory.initialize(properties);
-        
+
         new MySyncSubscriber1();
         new MySyncSubscriber2();
         new MyAsyncSubscriber1();
         new MyAsyncSubscriber2();
-        
+
         new Runnable() {
             @Override
             public void run() {
                 EventControllerFactory.getSingletonController(EventControllerType.SYNC).post(new MyEvent("A"));
-            } 
+            }
         }.run();
-        
+
         new Runnable() {
             @Override
             public void run() {
                 EventControllerFactory.getSingletonController(EventControllerType.ASYNC).post(new MyEvent("B"));
-            } 
+            }
         }.run();
 
         System.in.read();

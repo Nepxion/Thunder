@@ -43,13 +43,13 @@ public class PropertyTest {
     @Test
     public void testMQPropertyEntity() throws Exception {
         ThunderProperties properties = ThunderPropertiesManager.getProperties();
-        
+
         MQEntity entity = new MQEntity();
         entity.extractProperties(properties, ProtocolType.TIBCO);
-        
+
         MQPropertyEntity propertyEntity = new MQPropertyEntity("com.nepxion.test", "tibco-1", entity);
         LOG.info("mqUrl : {}", propertyEntity.getString("mqUrl"));
-        
+
         LOG.info("summarizeProperties : {}", propertyEntity.summarizeProperties(ThunderConstants.KAFKA_CONSUMER_ATTRIBUTE_NAME));
     }
 }

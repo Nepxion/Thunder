@@ -27,23 +27,23 @@ public class MapTest {
     @Test
     public void test() throws Exception {
         LinkedHashMap<MethodKey, String> map = new LinkedHashMap<MethodKey, String>();
-        
+
         MethodKey key1 = new MethodKey();
         key1.setMethod("1");
         key1.setParameterTypes("1");
-        
+
         MethodKey key2 = new MethodKey();
         key2.setMethod("2");
         key2.setParameterTypes("1");
-        
+
         map.put(key1, "a");
         key1.setMethod("2");
         // 不Put，不会Rehash
         map.put(key1, "a");
-        
+
         LOG.info(map.containsKey(key2) + "");
     }
-    
+
     @Test
     public void test1() throws Exception {
         Map<Integer, String> map = Maps.newConcurrentMap();
@@ -64,8 +64,8 @@ public class MapTest {
             Map.Entry<Integer, String> entry = iterator.next();
             int key = entry.getKey();
             if (key % 2 == 1) {
-                // map.put(key, "eleven"); //ConcurrentModificationException
-                // map.remove(key); //ConcurrentModificationException
+                // map.put(key, "eleven"); // ConcurrentModificationException
+                // map.remove(key); // ConcurrentModificationException
                 iterator.remove(); // OK
             }
         }

@@ -25,12 +25,12 @@ import com.nepxion.thunder.trace.service.BInterface1;
 import com.nepxion.thunder.trace.service.CInterface;
 import com.nepxion.thunder.trace.service.Constants;
 
-public class AEnd4 {    
+public class AEnd4 {
     // 本地链式两次异步调用
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         System.setProperty(ThunderConstants.PORT_PARAMETER_NAME, "1005");
-        
+
         // ApplicationContext applicationContext = new FileSystemXmlApplicationContext("file://192.168.15.82\\Thunder\\Trace\\trace-a-context.xml"); 
         // ApplicationContext applicationContext = new ClassPathXmlApplicationContext("http://www.nepxion.com/Thunder/Trace/trace-a-context.xml");
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:trace-a-context.xml");
@@ -38,11 +38,11 @@ public class AEnd4 {
         final CInterface cInterface = (CInterface) applicationContext.getBean("cInterface");
         for (int i = 0; i < Constants.COUNT; i++) {
             final String traceId = "A4(" + i + ")";
-            
+
             PromiseExecutor promiseExecutor = new PromiseExecutor();
             promiseExecutor.then(new PromisePipe<Void, String[]>() {
                 @Override
-                public void onResult(Void origin) {                    
+                public void onResult(Void origin) {
                     bInterface1.async1ToB(traceId, traceId);
                 }
             }).then(new PromisePipe<String[], String[]>() {
@@ -50,18 +50,18 @@ public class AEnd4 {
                 public void onResult(String[] result) {
                     String traceId = result[0];
                     String path = result[1] + " -> A";
-                    
+
                     if (Constants.PRINT) {
                         System.out.println("链式调用：收到B端返回消息：" + path + "，并返回到A端");
                     }
-                
+
                     cInterface.async1ToC(traceId, path);
                 }
             }).done(new PromiseDone<String[]>() {
                 @Override
                 public void onDone(String[] result) {
                     String path = result[1] + " -> A";
-                    
+
                     if (Constants.PRINT) {
                         System.out.println("链式调用：收到C端返回消息：" + path + "，并返回到A端");
                         System.out.println("链式调用结束");

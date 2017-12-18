@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 public class AnimalServiceImpl implements AnimalService {
     private static final Logger LOG = LoggerFactory.getLogger(AnimalServiceImpl.class);
-    
+
     private List<Animal> animals;
 
     public AnimalServiceImpl() {
@@ -43,7 +43,7 @@ public class AnimalServiceImpl implements AnimalService {
                 return animal;
             }
         }
-        
+
         return null;
     }
 }

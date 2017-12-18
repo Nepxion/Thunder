@@ -45,13 +45,13 @@ public class HashAlgorithmSchedulerTest {
             public void run() {
                 ApplicationEntity node = locator.getPrimary(RandomUtil.uuidRandom());
                 LOG.info("Select node : {}", node);
-                
+
                 times.addAndGet(1);
                 if (times.get() == 50) {
                     LOG.info("Added node count : {}", NODE_ADDED_COUNT);
                     nodeAdded(locator);
                 }
-                
+
                 if (times.get() == 100) {
                     LOG.info("Reduced node count : {}", NODE_REDUCED_COUNT);
                     nodeReduced(locator);
@@ -61,25 +61,25 @@ public class HashAlgorithmSchedulerTest {
 
         System.in.read();
     }
-    
+
     private void nodeAdded(NodeLocator<ApplicationEntity> locator) {
         List<ApplicationEntity> nodeList = locator.getAll();
-        
+
         List<ApplicationEntity> nodeAddedList = HashAlgorithmFactory.getNodeList(NODE_ADDED_COUNT, NODE_COUNT + 1);
         nodeList.addAll(nodeAddedList);
-        
+
         locator.updateLocator(nodeList);
     }
-    
+
     private void nodeReduced(NodeLocator<ApplicationEntity> locator) {
         List<ApplicationEntity> nodeList = locator.getAll();
-        
+
         List<ApplicationEntity> nodeReducedList = new ArrayList<ApplicationEntity>();
         for (int i = 0; i < NODE_REDUCED_COUNT; i++) {
             nodeReducedList.add(nodeList.get(i));
         }
         nodeList.removeAll(nodeReducedList);
-                
+
         locator.updateLocator(nodeList);
     }
 }

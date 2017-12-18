@@ -20,12 +20,12 @@ import com.nepxion.thunder.common.constant.ThunderConstants;
 import com.nepxion.thunder.trace.service.BInterface1;
 import com.nepxion.thunder.trace.service.Constants;
 
-public class AEnd1 {    
+public class AEnd1 {
     // 跨服务器两次异步调用(和AEnd2组成集群)
     @SuppressWarnings("resource")
     public static void main(String[] args) {
         System.setProperty(ThunderConstants.PORT_PARAMETER_NAME, "1000");
-        
+
         // ApplicationContext applicationContext = new FileSystemXmlApplicationContext("file://192.168.15.82\\Thunder\\Trace\\trace-a-context.xml"); 
         // ApplicationContext applicationContext = new ClassPathXmlApplicationContext("http://www.nepxion.com/Thunder/Trace/trace-a-context.xml");
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:trace-a-context.xml");

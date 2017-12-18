@@ -82,12 +82,12 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "id=" + getId() + 
-                " name=" + getName() + 
-                " age=" + getAge() + 
-                " birthday=" + getBirthday() + 
-                " phone=" + getPhone() + 
-                " email=" + getEmail() + 
+        return "id=" + getId() +
+                " name=" + getName() +
+                " age=" + getAge() +
+                " birthday=" + getBirthday() +
+                " phone=" + getPhone() +
+                " email=" + getEmail() +
                 " address=" + getAddress();
     }
 }

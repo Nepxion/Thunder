@@ -31,7 +31,7 @@ public class CollectionTest {
             ApplicationEntity applicationEntity = new ApplicationEntity();
             applicationEntity.setApplication(i + "");
             applicationEntity.setGroup(i + "");
-            
+
             localList.add(applicationEntity);
         }
 
@@ -40,18 +40,18 @@ public class CollectionTest {
             ApplicationEntity applicationEntity = new ApplicationEntity();
             applicationEntity.setApplication(i + "");
             applicationEntity.setGroup(i + "");
-            
+
             remoteList.add(applicationEntity);
         }
 
         List<ApplicationEntity> intersectedList = (List<ApplicationEntity>) CollectionUtils.intersection(localList, remoteList);
         List<ApplicationEntity> onlineList = (List<ApplicationEntity>) CollectionUtils.subtract(remoteList, intersectedList);
         List<ApplicationEntity> offlineList = (List<ApplicationEntity>) CollectionUtils.subtract(localList, intersectedList);
-        
+
         LOG.info("Online list:{}", onlineList);
         LOG.info("Offline list:{}", offlineList);
     }
-    
+
     @Test
     public void testEquals() throws Exception {
         List<ApplicationEntity> localList = new ArrayList<ApplicationEntity>();
@@ -60,7 +60,7 @@ public class CollectionTest {
             applicationEntity.setApplication(i + "");
             applicationEntity.setGroup(i + "");
             applicationEntity.setId(RandomUtil.uuidRandom());
-            
+
             localList.add(applicationEntity);
         }
 
@@ -70,13 +70,13 @@ public class CollectionTest {
             applicationEntity.setApplication(i + "");
             applicationEntity.setGroup(i + "");
             applicationEntity.setId(RandomUtil.uuidRandom());
-            
+
             remoteList.add(applicationEntity);
         }
-        
+
         boolean isEqual = CollectionUtils.isEqualCollection(localList, remoteList);
         LOG.info("Is equal:{}", isEqual);
-        
+
         ApplicationEntity applicationEntity = localList.get(0);
         LOG.info("Remote list:{}", remoteList);
         if (remoteList.contains(applicationEntity)) {

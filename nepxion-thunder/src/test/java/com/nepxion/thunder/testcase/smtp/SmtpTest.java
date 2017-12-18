@@ -22,15 +22,15 @@ public class SmtpTest {
         String host = "smtp.sohu.com";
         String user = "********@sohu.com";
         String password = "********";
-        
+
         SmtpExecutor smtpExecutor = new SmtpExecutor(host, user, password);
-        
+
         String from = "********@sohu.com";
         String to = "********@sohu.com";
         String cc = "";
         String bcc = "";
         String subject = "Thunder调用异常通知";
-        
+
         StringBuilder builder = new StringBuilder();
         builder.append("<h2>Exception Notification</h2>");
         builder.append("<br>");
@@ -38,10 +38,10 @@ public class SmtpTest {
         builder.append("<br>");
         builder.append("消息2");
         String text = builder.toString();
-        
+
         smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstants.ENCODING_FORMAT);
     }
-    
+
     @Test
     public void testSsl() throws Exception {
         String host = "smtp.qq.com";
@@ -49,7 +49,7 @@ public class SmtpTest {
         String password = "********";
 
         SmtpSslExecutor smtpExecutor = new SmtpSslExecutor(host, user, password);
-        
+
         String from = "********@qq.com";
         String to = "********@qq.com";
         String cc = "";
@@ -63,7 +63,7 @@ public class SmtpTest {
         builder.append("<br>");
         builder.append("消息2");
         String text = builder.toString();
-        
+
         smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstants.ENCODING_FORMAT);
     }
 }

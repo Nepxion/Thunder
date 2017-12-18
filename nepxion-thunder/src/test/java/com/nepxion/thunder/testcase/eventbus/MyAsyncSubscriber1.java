@@ -22,11 +22,11 @@ import com.nepxion.thunder.testcase.http.HttpTest;
 
 public class MyAsyncSubscriber1 {
     private static final Logger LOG = LoggerFactory.getLogger(HttpTest.class);
-    
+
     public MyAsyncSubscriber1() {
         EventControllerFactory.getSingletonController(EventControllerType.ASYNC).register(this);
     }
-    
+
     @Subscribe
     public void listen(MyEvent event) {
         LOG.info("Listen:{}", event.getSource());

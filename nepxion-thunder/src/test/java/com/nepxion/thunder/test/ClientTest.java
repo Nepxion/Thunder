@@ -31,7 +31,7 @@ public class ClientTest {
         test2(userService, animalService);
         // test3(userService);
     }
-    
+
     public static void test2(final UserService userService, final AnimalService animalService) throws Exception {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -84,12 +84,12 @@ public class ClientTest {
 
         System.in.read();
     }
-    
+
     private static int index = 0;
-    
+
     public static void test3(final UserService userService) throws Exception {
         LOG.info("下面程序测试是否丢消息");
-        
+
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -102,7 +102,7 @@ public class ClientTest {
                 } catch (Exception e) {
                     LOG.error("::::userService.getUser():::", e);
                 }
-                
+
                 index++;
                 try {
                     TimeUnit.MILLISECONDS.sleep(1000);
@@ -134,7 +134,7 @@ public class ClientTest {
                         }
                     }
                     LOG.info("客户端-计数器:" + barrier.getNumberWaiting());
-                    
+
                     try {
                         barrier.await();
                     } catch (Exception e) {
@@ -143,16 +143,16 @@ public class ClientTest {
                 }
             });
         }
-        
+
         try {
             barrier.await();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         long t2 = System.currentTimeMillis();
-        LOG.info("耗费时间：{}", t2-t1);
-        
+        LOG.info("耗费时间：{}", t2 - t1);
+
         System.in.read();
     }
 }
