@@ -11,6 +11,7 @@
 
     <modules>
         <module>thunder-framework</module>
+        <module>thunder-console</module>
     </modules>
 
     <properties>
