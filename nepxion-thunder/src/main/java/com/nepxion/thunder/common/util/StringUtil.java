@@ -26,14 +26,14 @@ public class StringUtil {
     /*public static String firstLetterToUpper(String value){
         char[] array = value.toCharArray();
         array[0] -= 32;
-        
+
         return String.valueOf(array);
     }
 
     public static String firstLetterToLower(String value){
         char[] array = value.toCharArray();
         array[0] += 32;
-        
+
         return String.valueOf(array);
     }*/
 }
