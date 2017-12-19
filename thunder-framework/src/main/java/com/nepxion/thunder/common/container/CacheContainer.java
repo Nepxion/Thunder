@@ -189,6 +189,7 @@ public class CacheContainer {
         LOG.info("Security bootstrap has been set...");
     }
 
+
     // 缓存Application config，从注册中心获得和持久化
     private ApplicationConfig applicationConfig;
 
