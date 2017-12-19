@@ -24,15 +24,15 @@ import com.nepxion.thunder.test.core.AnimalService;
 import com.nepxion.thunder.test.core.User;
 import com.nepxion.thunder.test.core.UserService;
 
-public class ClientTest {
-    private static final Logger LOG = LoggerFactory.getLogger(ClientTest.class);
+public class CoreInvoker {
+    private static final Logger LOG = LoggerFactory.getLogger(CoreInvoker.class);
 
-    public static void test1(UserService userService, AnimalService animalService) throws Exception {
-        test2(userService, animalService);
-        // test3(userService);
+    public static void invoke1(UserService userService, AnimalService animalService) throws Exception {
+        invoke2(userService, animalService);
+        // invoke3(userService);
     }
 
-    public static void test2(final UserService userService, final AnimalService animalService) throws Exception {
+    public static void invoke2(final UserService userService, final AnimalService animalService) throws Exception {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -87,7 +87,7 @@ public class ClientTest {
 
     private static int index = 0;
 
-    public static void test3(final UserService userService) throws Exception {
+    public static void invoke3(final UserService userService) throws Exception {
         LOG.info("下面程序测试是否丢消息");
 
         Timer timer = new Timer();
@@ -115,7 +115,7 @@ public class ClientTest {
         System.in.read();
     }
 
-    public static void test4(final UserService userService) throws Exception {
+    public static void invoke4(final UserService userService) throws Exception {
         int number = 50;
         final CyclicBarrier barrier = new CyclicBarrier(number + 1);
         ExecutorService executor = Executors.newFixedThreadPool(number + 1);

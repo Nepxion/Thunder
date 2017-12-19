@@ -35,6 +35,6 @@ public class HessianClientTest {
 
     @Test
     public void test() throws Exception {
-        ClientTest.test1(userService, animalService);
+        CoreInvoker.invoke1(userService, animalService);
     }
 }
