@@ -6,7 +6,7 @@
 @echo $                                                           $
 @echo $                                                           $
 @echo $  Nepxion Technologies All Right Reserved                  $
-@echo $  Copyright(C) 2015                                        $
+@echo $  Copyright(C) 2017                                        $
 @echo $                                                           $
 @echo =============================================================
 @echo.
@@ -24,3 +24,5 @@ rem if "%JAVA_HOME%"=="" goto noJava
 if "%JAVA_HOME%"=="" set JAVA_HOME=D:\JDK1.6.0
 
 %JAVA_HOME%\bin\native2ascii -encoding gbk Locale.properties Locale_zh_CN.properties
+
+pause
