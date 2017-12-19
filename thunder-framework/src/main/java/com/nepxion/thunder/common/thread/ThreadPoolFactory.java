@@ -10,9 +10,9 @@ package com.nepxion.thunder.common.thread;
  * @version 1.0
  */
 
-import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.SynchronousQueue;
@@ -22,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
 import com.nepxion.thunder.common.constant.ThunderConstants;
@@ -33,10 +35,12 @@ import com.nepxion.thunder.common.util.ClassUtil;
 import com.nepxion.thunder.common.util.StringUtil;
 
 public class ThreadPoolFactory {
+    private static final Logger LOG = LoggerFactory.getLogger(ThreadPoolFactory.class);
+
     private static ThunderProperties properties;
 
-    private static Map<String, ThreadPoolExecutor> threadPoolServerExecutorMap = Maps.newConcurrentMap();
-    private static Map<String, ThreadPoolExecutor> threadPoolClientExecutorMap = Maps.newConcurrentMap();
+    private static ConcurrentMap<String, ThreadPoolExecutor> threadPoolServerExecutorMap = Maps.newConcurrentMap();
+    private static ConcurrentMap<String, ThreadPoolExecutor> threadPoolClientExecutorMap = Maps.newConcurrentMap();
 
     public static void initialize(ThunderProperties properties) {
         ThreadPoolFactory.properties = properties;
@@ -83,18 +87,23 @@ public class ThreadPoolFactory {
         }
     }
 
-    public static ThreadPoolExecutor createThreadPoolExecutor(final Map<String, ThreadPoolExecutor> threadPoolExecutorMap, final String url, final String interfaze, final int corePoolSize, final int maximumPoolSize, final long keepAliveTime, final boolean allowCoreThreadTimeOut) {
+    public static ThreadPoolExecutor createThreadPoolExecutor(final ConcurrentMap<String, ThreadPoolExecutor> threadPoolExecutorMap, final String url, final String interfaze, final int corePoolSize, final int maximumPoolSize, final long keepAliveTime, final boolean allowCoreThreadTimeOut) {
         ThreadPoolExecutor threadPoolExecutor = threadPoolExecutorMap.get(interfaze);
         if (threadPoolExecutor == null) {
-            threadPoolExecutor = createThreadPoolExecutor(url, interfaze, corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeOut);
-            threadPoolExecutorMap.put(interfaze, threadPoolExecutor);
+            ThreadPoolExecutor newThreadPoolExecutor = createThreadPoolExecutor(url, interfaze, corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeOut);
+            threadPoolExecutor = threadPoolExecutorMap.putIfAbsent(interfaze, newThreadPoolExecutor);
+            if (threadPoolExecutor == null) {
+                threadPoolExecutor = newThreadPoolExecutor;
+            }
         }
 
         return threadPoolExecutor;
     }
 
     public static ThreadPoolExecutor createThreadPoolExecutor(final String url, final String interfaze, final int corePoolSize, final int maximumPoolSize, final long keepAliveTime, final boolean allowCoreThreadTimeOut) {
-        final String threadName = (StringUtils.isNotEmpty(url) ? url + "-" : "") + StringUtil.firstLetterToUpper(ClassUtil.convertBeanName(interfaze));
+        final String threadName = StringUtil.firstLetterToUpper(ClassUtil.convertBeanName(interfaze)) + "-" + (StringUtils.isNotEmpty(url) ? url + "-" : "") + "thread";
+
+        LOG.info("Thread pool executor is created, threadName={}, corePoolSize={}, maximumPoolSize={}, keepAliveTime={}, allowCoreThreadTimeOut={}", threadName, corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeOut);
 
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
                 maximumPoolSize,
@@ -116,6 +125,8 @@ public class ThreadPoolFactory {
     }
 
     public static ThreadPoolExecutor createThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, boolean allowCoreThreadTimeOut) {
+        LOG.info("Thread pool executor is created, corePoolSize={}, maximumPoolSize={}, keepAliveTime={}, allowCoreThreadTimeOut={}", corePoolSize, maximumPoolSize, keepAliveTime, allowCoreThreadTimeOut);
+
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
                 maximumPoolSize,
                 keepAliveTime,
