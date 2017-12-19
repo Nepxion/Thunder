@@ -12,6 +12,7 @@
     <modules>
         <module>thunder-framework</module>
         <module>thunder-console</module>
+		<module>thunder-stock</module>
     </modules>
 
     <properties>
