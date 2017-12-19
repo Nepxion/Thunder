@@ -12,6 +12,8 @@
     </parent>
 
     <properties>
+        <tibco.version>7.0.1</tibco.version>
+        <splunk.version>1.5.0</splunk.version>
         <swing.worker.version>1.2</swing.worker.version>
         <swingx.version>1.0</swingx.version>
         <jide.version>2.9.7</jide.version>
@@ -66,6 +68,22 @@
             <version>${project.version}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/nepxion-cots-${project.version}.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>tibco</groupId>
+            <artifactId>tibjms</artifactId>
+            <version>${tibco.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/tibjms-${tibco.version}.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>splunk</groupId>
+            <artifactId>splunk-sdk-java</artifactId>
+            <version>${splunk.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/splunk-sdk-java-${splunk.version}.jar</systemPath>
         </dependency>
 
         <dependency>
