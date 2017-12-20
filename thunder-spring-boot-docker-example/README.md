@@ -11,15 +11,14 @@
 
    1.2 开启非TLS访问模式
        1)在Docker Settings中把“Expose daemon on tcp//localhost:2375 without TLS”打勾
-       2)在docker.bat中把“set DOCKER_CERT_PATH=...”注释掉
+       2)禁止Docker认证，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
    1.3 修改配置
        把thunder-spring-boot-docker-example\src\main\resources下的thunder-ext.properties中Zookeeper地址改成对应你本地的真实IP
        因为部署到Docker后，Docker中localhost并非对应Zookeeper的localhost地址
 
    1.4 部署Docker
-       1)在thunder-spring-boot-docker-example上级目录下执行install.bat里的语句
-       2)在thunder-spring-boot-docker-example目录下执行docker.bat里的语句(切记mvn package，别加clean)
+       1)在根目录下执行install-docker.bat里的语句
 
    1.5 启动Docker
        在Kitematic界面上进行操作
