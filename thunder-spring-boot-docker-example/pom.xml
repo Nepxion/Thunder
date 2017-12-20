@@ -91,6 +91,9 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                    <exposes>
+                        <expose>8888</expose>
+                    </exposes>
                 </configuration>
             </plugin>
         </plugins>
