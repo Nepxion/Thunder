@@ -10,7 +10,7 @@
        2)安装Kitematic
 
    1.2 开启非TLS访问模式
-       1)在Docker Settings中把“Expose daemon on tcp//localhost:2375 without TLS”打勾
+       1)在Kitematic的Docker Settings中把“Expose daemon on tcp//localhost:2375 without TLS”打勾
        2)禁止Docker认证，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
    1.3 修改配置
