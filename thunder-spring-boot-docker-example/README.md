@@ -1,7 +1,7 @@
-注册Docker Hub账号
+# 注册Docker Hub账号
 Docker Hub账号登录(在https://hub.docker.com/先注册账户)，账户名在登录的时候必须是全部小写
 
-安装和部署Docker
+# 安装和部署Docker
 1. Win10环境下(此方式最简单，强烈推荐，但不支持Win7)
    1.1 安装Docker
        1)在Docker官网下载并安装Docker
