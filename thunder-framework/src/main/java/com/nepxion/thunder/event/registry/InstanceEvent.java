@@ -16,6 +16,8 @@ import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.event.eventbus.Event;
 
 public abstract class InstanceEvent extends Event {
+    private static final long serialVersionUID = -2273461322050768818L;
+
     private InstanceEventType eventType;
     private String interfaze;
     // 某个节点上下线事件触发后，回调返回该节点的服务/调用信息

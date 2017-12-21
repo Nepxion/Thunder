@@ -15,6 +15,8 @@ import java.util.List;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 
 public class ReferenceInstanceEvent extends InstanceEvent {
+    private static final long serialVersionUID = -4374144609470814666L;
+
     public ReferenceInstanceEvent(InstanceEventType eventType, String interfaze, ApplicationEntity applicationEntity, List<ApplicationEntity> applicationEntityList) {
         super(eventType, interfaze, applicationEntity, applicationEntityList);
     }
