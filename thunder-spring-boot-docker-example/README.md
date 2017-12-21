@@ -46,19 +46,19 @@
        1)在容器(Containers)列表，把鼠标移上去，会出现“X”的按钮，点击它，即可删除容器，见图3
 
 图1
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/Docker1.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
 
 图2
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/Docker2.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker2.jpg)
 
 图3
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/Docker3.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker3.jpg)
 
 图4
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/Docker4.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker4.jpg)
 
 图5
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/Docker5.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker5.jpg)
 
 2. Win7环境下(此方式较复杂)
    请参考http://nepxion.iteye.com/blog/2321596
