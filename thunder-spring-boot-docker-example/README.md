@@ -69,6 +69,7 @@
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker5.jpg)
 
 2. Win7环境下(此方式较复杂)
+```java
    请参考http://nepxion.iteye.com/blog/2321596
-
    因为thunder-spring-boot-docker-example模块已经重构过，故有些地方有出入，例如类名等，相信你能看得懂
+```
