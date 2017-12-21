@@ -16,7 +16,6 @@ import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.common.property.ThunderPropertiesManager;
 import com.nepxion.thunder.common.thread.ThreadPoolFactory;
 import com.nepxion.thunder.event.eventbus.EventControllerFactory;
-import com.nepxion.thunder.event.eventbus.EventControllerType;
 
 public class MySubscriberTest {
 
@@ -33,14 +32,14 @@ public class MySubscriberTest {
         new Runnable() {
             @Override
             public void run() {
-                EventControllerFactory.getSingletonController(EventControllerType.SYNC).post(new MyEvent("A"));
+                EventControllerFactory.getSyncController().post(new MyEvent("A"));
             }
         }.run();
 
         new Runnable() {
             @Override
             public void run() {
-                EventControllerFactory.getSingletonController(EventControllerType.ASYNC).post(new MyEvent("B"));
+                EventControllerFactory.getAsyncController().post(new MyEvent("B"));
             }
         }.run();
 

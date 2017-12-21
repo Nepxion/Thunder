@@ -22,7 +22,6 @@ import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ApplicationType;
 import com.nepxion.thunder.event.eventbus.EventControllerFactory;
-import com.nepxion.thunder.event.eventbus.EventControllerType;
 import com.nepxion.thunder.event.registry.InstanceEvent;
 import com.nepxion.thunder.event.registry.InstanceEventType;
 import com.nepxion.thunder.event.registry.ReferenceInstanceEvent;
@@ -106,7 +105,7 @@ public class ZookeeperInstanceWatcher extends ZookeeperPathChildrenCacheListener
                 break;
         }
 
-        EventControllerFactory.getController(instanceEvent.toString(), EventControllerType.ASYNC).post(instanceEvent);
+        EventControllerFactory.getAsyncController(instanceEvent.toString()).post(instanceEvent);
 
         LOG.info("Watched {} {} - interface={}, {}", applicationType.toString(), instanceEventType.toString(), interfaze, applicationEntity.toString());
     }

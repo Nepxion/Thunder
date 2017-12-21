@@ -17,28 +17,45 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.SubscriberExceptionHandler;
+import com.nepxion.thunder.common.constant.ThunderConstants;
 import com.nepxion.thunder.common.thread.ThreadPoolFactory;
 
 public final class EventControllerFactory {
-    private static final String SINGLETON = "Singleton";
-    private static ConcurrentMap<Object, EventController> syncControllerMap = Maps.newConcurrentMap();
-    private static ConcurrentMap<Object, EventController> asyncControllerMap = Maps.newConcurrentMap();
+    private static final String SHARED_CONTROLLER = "SharedController";
+    private static final ConcurrentMap<Object, EventController> SYNC_CONTROLLER_MAP = Maps.newConcurrentMap();
+    private static final ConcurrentMap<Object, EventController> ASYNC_CONTROLLER_MAP = Maps.newConcurrentMap();
 
     private EventControllerFactory() {
 
     }
 
-    public static EventController getSingletonController(EventControllerType type) {
-        return getController(SINGLETON, type);
+    public static EventController getAsyncController() {
+        return getAsyncController(SHARED_CONTROLLER);
     }
 
-    public static EventController getController(Object id, EventControllerType type) {
+    public static EventController getAsyncController(String identifier) {
+        return getController(identifier, true);
+    }
+
+    public static EventController getSyncController() {
+        return getSyncController(SHARED_CONTROLLER);
+    }
+
+    public static EventController getSyncController(String identifier) {
+        return getController(identifier, false);
+    }
+
+    public static EventController getController(String identifier, boolean async) {
+        return getController(identifier, async ? EventType.ASYNC : EventType.SYNC);
+    }
+
+    public static EventController getController(String identifier, EventType type) {
         switch (type) {
             case SYNC:
-                EventController syncEventController = syncControllerMap.get(id);
+                EventController syncEventController = SYNC_CONTROLLER_MAP.get(identifier);
                 if (syncEventController == null) {
-                    EventController newEventController = createSyncController();
-                    syncEventController = syncControllerMap.putIfAbsent(id, newEventController);
+                    EventController newEventController = createSyncController(identifier);
+                    syncEventController = SYNC_CONTROLLER_MAP.putIfAbsent(identifier, newEventController);
                     if (syncEventController == null) {
                         syncEventController = newEventController;
                     }
@@ -46,10 +63,10 @@ public final class EventControllerFactory {
 
                 return syncEventController;
             case ASYNC:
-                EventController asyncEventController = asyncControllerMap.get(id);
+                EventController asyncEventController = ASYNC_CONTROLLER_MAP.get(identifier);
                 if (asyncEventController == null) {
-                    EventController newEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, EventControllerFactory.class.getName()));
-                    asyncEventController = asyncControllerMap.putIfAbsent(id, newEventController);
+                    EventController newEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, ThunderConstants.EVENT_BUS));
+                    asyncEventController = ASYNC_CONTROLLER_MAP.putIfAbsent(identifier, newEventController);
                     if (asyncEventController == null) {
                         asyncEventController = newEventController;
                     }

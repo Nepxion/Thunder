@@ -10,7 +10,11 @@ package com.nepxion.thunder.event.eventbus;
  * @version 1.0
  */
 
-public class Event {
+import java.io.Serializable;
+
+public class Event implements Serializable {
+    private static final long serialVersionUID = 7090050666419528496L;
+
     protected Object source;
 
     public Event() {

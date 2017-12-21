@@ -14,7 +14,6 @@ import com.google.common.eventbus.Subscribe;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.event.eventbus.EventControllerFactory;
-import com.nepxion.thunder.event.eventbus.EventControllerType;
 import com.nepxion.thunder.event.registry.ReferenceInstanceEvent;
 import com.nepxion.thunder.event.registry.ServiceInstanceEvent;
 import com.nepxion.thunder.registry.RegistryExecutor;
@@ -24,8 +23,8 @@ public abstract class ZookeeperInstanceEventInterceptor {
     private RegistryLauncher registryLauncher;
 
     public ZookeeperInstanceEventInterceptor() {
-        EventControllerFactory.getController(ServiceInstanceEvent.getEventName(), EventControllerType.ASYNC).register(this);
-        EventControllerFactory.getController(ReferenceInstanceEvent.getEventName(), EventControllerType.ASYNC).register(this);
+        EventControllerFactory.getAsyncController(ServiceInstanceEvent.getEventName()).register(this);
+        EventControllerFactory.getAsyncController(ReferenceInstanceEvent.getEventName()).register(this);
     }
 
     public void start(String address, ProtocolType protocolType) throws Exception {

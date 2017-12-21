@@ -13,6 +13,7 @@ package com.nepxion.thunder.testcase.eventbus;
 import com.nepxion.thunder.event.eventbus.Event;
 
 public class MyEvent extends Event {
+    private static final long serialVersionUID = -2555621013042771921L;
 
     public MyEvent(Object source) {
         super(source);

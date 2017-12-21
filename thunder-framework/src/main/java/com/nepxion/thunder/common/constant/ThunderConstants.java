@@ -254,6 +254,8 @@ public class ThunderConstants {
 
     public static final String TRACE_ID = "traceId";
 
+    public static final String EVENT_BUS = "eventBus";
+
     public static final String LOAD_BALANCE_LOG_PRINT_ATTRIBUTE_NAME = "loadBalanceLogPrint";
     public static final String TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME = "transportLogPrint";
     public static final String HEART_BEAT_LOG_PRINT_ATTRIBUTE_NAME = "heartBeatLogPrint";

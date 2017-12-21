@@ -17,14 +17,13 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 import com.nepxion.thunder.event.eventbus.EventControllerFactory;
-import com.nepxion.thunder.event.eventbus.EventControllerType;
 import com.nepxion.thunder.testcase.http.HttpTest;
 
 public class MyAsyncSubscriber2 {
     private static final Logger LOG = LoggerFactory.getLogger(HttpTest.class);
 
     public MyAsyncSubscriber2() {
-        EventControllerFactory.getSingletonController(EventControllerType.ASYNC).register(this);
+        EventControllerFactory.getAsyncController().register(this);
     }
 
     @Subscribe

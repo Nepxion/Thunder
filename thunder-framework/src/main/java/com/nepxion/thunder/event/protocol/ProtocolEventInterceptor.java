@@ -12,11 +12,10 @@ package com.nepxion.thunder.event.protocol;
 
 import com.google.common.eventbus.Subscribe;
 import com.nepxion.thunder.event.eventbus.EventControllerFactory;
-import com.nepxion.thunder.event.eventbus.EventControllerType;
 
 public abstract class ProtocolEventInterceptor {
     public ProtocolEventInterceptor() {
-        EventControllerFactory.getSingletonController(EventControllerType.ASYNC).register(this);
+        EventControllerFactory.getAsyncController().register(this);
     }
 
     @Subscribe

@@ -19,7 +19,6 @@ import com.nepxion.thunder.common.entity.ApplicationType;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.event.eventbus.EventControllerFactory;
-import com.nepxion.thunder.event.eventbus.EventControllerType;
 import com.nepxion.thunder.protocol.ProtocolMessage;
 
 public class ProtocolEventFactory {
@@ -96,7 +95,7 @@ public class ProtocolEventFactory {
         ProtocolEvent protocolEvent = new ProtocolEvent(applicationType, actionType, protocolType, message);
 
         if (eventNotification) {
-            EventControllerFactory.getSingletonController(EventControllerType.ASYNC).post(protocolEvent);
+            EventControllerFactory.getAsyncController().post(protocolEvent);
         }
     }
 }
