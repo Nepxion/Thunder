@@ -4,9 +4,9 @@
 # 安装和部署Docker
 1. Win10环境下(此方式最简单，强烈推荐，但该方式不支持Win7)
    1.1 安装Docker
-       1)在官网下载Docker
-       2)安装Docker
-       3)安装Kitematic
+       1.1.1 在官网下载Docker
+       1.1.2 安装Docker
+       1.1.3 安装Kitematic
 
    1.2 开启非TLS访问模式
        1)在Docker图标上右键菜单，选Settings，进入设置界面，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图1
