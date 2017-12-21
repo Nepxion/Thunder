@@ -42,7 +42,7 @@ public class RegistryFactoryBean extends AbstractFactoryBean implements Disposab
 
     @Override
     public void destroy() throws Exception {
-        registryInitializer.stop();
+        // registryInitializer.stop();
     }
 
     @Override
