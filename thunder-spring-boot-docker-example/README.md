@@ -45,6 +45,11 @@
    1.8 删除容器
        1)在容器(Containers)列表，把鼠标移上去，会出现“X”的按钮，点击它，即可删除容器，见图3
 
+   1.9 验证容器
+       1)运行Zookeeper
+       2)在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
+       3)观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！
+
 图1
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
 
