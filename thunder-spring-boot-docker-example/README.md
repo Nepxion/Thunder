@@ -1,12 +1,15 @@
 # 注册Docker Hub账号
+```java
 1. Docker Hub注册账户，https://hub.docker.com/
+```
 
 # 安装和部署Docker
+```java
 1. Win10环境下(此方式最简单，强烈推荐，但该方式不支持Win7)
    1.1 安装Docker
-       1.1.1 在官网下载Docker
-       1.1.2 安装Docker
-       1.1.3 安装Kitematic
+       1)在官网下载Docker
+       2)安装Docker
+       3)安装Kitematic
 
    1.2 开启非TLS访问模式
        1)在Docker图标上右键菜单，选Settings，进入设置界面，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图1
@@ -49,7 +52,7 @@
        1)运行Zookeeper
        2)在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
        3)观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！
-
+```
 图1
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
 
