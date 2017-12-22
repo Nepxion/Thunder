@@ -51,7 +51,7 @@
    1.9 验证容器
        1)运行Zookeeper
        2)在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
-       3)观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！
+       3)观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图6
 ```
 图1
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
@@ -67,6 +67,9 @@
 
 图5
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker5.jpg)
+
+图6
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker6.jpg)
 
 2. Win7环境下(此方式较复杂)
 ```java
