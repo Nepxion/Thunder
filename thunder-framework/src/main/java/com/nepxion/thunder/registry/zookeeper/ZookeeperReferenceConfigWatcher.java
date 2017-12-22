@@ -12,7 +12,6 @@ package com.nepxion.thunder.registry.zookeeper;
 
 import java.util.Map;
 
-import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,8 +28,8 @@ public class ZookeeperReferenceConfigWatcher extends ZookeeperNodeCacheListener 
     private ZookeeperInvoker invoker;
     private CacheContainer cacheContainer;
 
-    public ZookeeperReferenceConfigWatcher(CuratorFramework client, String interfaze, ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
-        super(client, path);
+    public ZookeeperReferenceConfigWatcher(String interfaze, ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
+        super(invoker.getClient(), path);
 
         this.interfaze = interfaze;
         this.invoker = invoker;
@@ -39,7 +38,7 @@ public class ZookeeperReferenceConfigWatcher extends ZookeeperNodeCacheListener 
 
     @Override
     public void nodeChanged() throws Exception {
-        ReferenceConfig referenceConfig = invoker.getObject(client, path, ReferenceConfig.class);
+        ReferenceConfig referenceConfig = invoker.getObject(path, ReferenceConfig.class);
 
         Map<String, ReferenceConfig> referenceConfigMap = cacheContainer.getReferenceConfigMap();
         referenceConfigMap.put(interfaze, referenceConfig);

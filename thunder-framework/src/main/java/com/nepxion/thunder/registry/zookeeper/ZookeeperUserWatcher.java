@@ -10,7 +10,6 @@ package com.nepxion.thunder.registry.zookeeper;
  * @version 1.0
  */
 
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.TreeCacheEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +24,8 @@ public class ZookeeperUserWatcher extends ZookeeperTreeCacheListener {
     private ZookeeperInvoker invoker;
     private ZookeeperUserWatcherCallback<UserEntity> callback;
 
-    public ZookeeperUserWatcher(CuratorFramework client, ZookeeperInvoker invoker, ZookeeperUserWatcherCallback<UserEntity> callback, String path) throws Exception {
-        super(client, path);
+    public ZookeeperUserWatcher(ZookeeperInvoker invoker, ZookeeperUserWatcherCallback<UserEntity> callback, String path) throws Exception {
+        super(invoker.getClient(), path);
 
         this.invoker = invoker;
         this.callback = callback;
@@ -44,7 +43,7 @@ public class ZookeeperUserWatcher extends ZookeeperTreeCacheListener {
 
     @Override
     public void nodeUpdated(TreeCacheEvent event) throws Exception {
-        UserEntity userEntity = invoker.getObject(client, path, UserEntity.class);
+        UserEntity userEntity = invoker.getObject(path, UserEntity.class);
 
         LOG.info("Watched - user [{}] is changed", userEntity.getName());
 

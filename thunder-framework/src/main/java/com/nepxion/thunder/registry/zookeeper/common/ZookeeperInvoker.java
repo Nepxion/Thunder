@@ -14,6 +14,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
@@ -33,6 +35,10 @@ import com.nepxion.thunder.serialization.SerializerException;
 import com.nepxion.thunder.serialization.SerializerExecutor;
 
 public class ZookeeperInvoker {
+    private CuratorFramework client;
+
+    private final Lock lock = new ReentrantLock();
+
     // 重试指定的次数, 且每一次重试之间停顿的时间逐渐增加
     public RetryPolicy createExponentialBackoffRetry(int baseSleepTimeMs, int maxRetries) {
         RetryPolicy retryPolicy = new ExponentialBackoffRetry(baseSleepTimeMs, maxRetries);
@@ -69,60 +75,116 @@ public class ZookeeperInvoker {
     }
 
     // 创建ZooKeeper客户端实例
-    public CuratorFramework create(String address, int sessionTimeout, int connectTimeout, int connectWaitTime) {
-        // RetryPolicy retryPolicy = createExponentialBackoffRetry(connectWaitTime, 29);
-        RetryPolicy retryPolicy = createRetryNTimes(Integer.MAX_VALUE, connectWaitTime);
-        CuratorFramework client = CuratorFrameworkFactory.newClient(address, sessionTimeout, connectTimeout, retryPolicy);
+    public void create(String address, int sessionTimeout, int connectTimeout, int connectWaitTime) throws Exception {
+        try {
+            lock.lock();
 
-        return client;
+            if (client != null) {
+                throw new ZookeeperException("Zookeeper client isn't null, it has been initialized already");
+            }
+
+            // RetryPolicy retryPolicy = createExponentialBackoffRetry(connectWaitTime, 29);
+            RetryPolicy retryPolicy = createRetryNTimes(Integer.MAX_VALUE, connectWaitTime);
+            client = CuratorFrameworkFactory.newClient(address, sessionTimeout, connectTimeout, retryPolicy);
+        } finally {
+            lock.unlock();
+        }
     }
 
     // 启动ZooKeeper客户端
-    public void start(CuratorFramework client) {
-        client.start();
+    public void start() throws Exception {
+        try {
+            lock.lock();
+
+            validateClosedStatus();
+
+            client.start();
+        } finally {
+            lock.unlock();
+        }
     }
 
     // 启动ZooKeeper客户端，直到第一次连接成功
-    public void startAndBlock(CuratorFramework client) throws InterruptedException {
-        client.start();
-        client.blockUntilConnected();
+    public void startAndBlock() throws Exception {
+        try {
+            lock.lock();
+
+            validateClosedStatus();
+
+            client.start();
+            client.blockUntilConnected();
+        } finally {
+            lock.unlock();
+        }
     }
 
     // 启动ZooKeeper客户端，直到第一次连接成功，为每一次连接配置超时
-    public void startAndBlock(CuratorFramework client, int maxWaitTime, TimeUnit units) throws InterruptedException {
-        client.start();
-        client.blockUntilConnected(maxWaitTime, units);
+    public void startAndBlock(int maxWaitTime, TimeUnit units) throws Exception {
+        try {
+            lock.lock();
+
+            validateClosedStatus();
+
+            client.start();
+            client.blockUntilConnected(maxWaitTime, units);
+        } finally {
+            lock.unlock();
+        }
     }
 
     // 关闭ZooKeeper客户端连接
-    public void close(CuratorFramework client) {
-        client.close();
+    public void close() throws Exception {
+        try {
+            lock.lock();
+
+            validateStartedStatus();
+
+            client.close();
+        } finally {
+            lock.unlock();
+        }
     }
 
     // 获取ZooKeeper客户端连接是否正常
-    public static boolean isStarted(CuratorFramework client) {
+    public boolean isStarted() {
         return client.getState() == CuratorFrameworkState.STARTED;
     }
 
-    // 检查ZooKeeper启动状态
-    public static void validateStatus(CuratorFramework client) throws Exception {
+    // 检查ZooKeeper是否是启动状态
+    public void validateStartedStatus() throws Exception {
         if (client == null) {
-            throw new ZookeeperException("Zookeeper isn't initialized");
+            throw new ZookeeperException("Zookeeper client is null");
         }
 
-        if (!isStarted(client)) {
-            throw new ZookeeperException("Zookeeper isn't started");
+        if (!isStarted()) {
+            throw new ZookeeperException("Zookeeper client isn't started");
         }
+    }
+
+    // 检查ZooKeeper是否是关闭状态
+    public void validateClosedStatus() throws Exception {
+        if (client == null) {
+            throw new ZookeeperException("Zookeeper client is null");
+        }
+
+        if (isStarted()) {
+            throw new ZookeeperException("Zookeeper client is started");
+        }
+    }
+
+    // 获取ZooKeeper客户端
+    public CuratorFramework getClient() {
+        return client;
     }
 
     // 判断路径是否存在
-    public boolean pathExist(CuratorFramework client, String path) throws Exception {
-        return getPathStat(client, path) != null;
+    public boolean pathExist(String path) throws Exception {
+        return getPathStat(path) != null;
     }
 
     // 判断stat是否存在
-    public Stat getPathStat(CuratorFramework client, String path) throws Exception {
-        validateStatus(client);
+    public Stat getPathStat(String path) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         ExistsBuilder builder = client.checkExists();
@@ -136,24 +198,24 @@ public class ZookeeperInvoker {
     }
 
     // 创建路径
-    public void createPath(CuratorFramework client, String path) throws Exception {
-        validateStatus(client);
+    public void createPath(String path) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         client.create().creatingParentsIfNeeded().forPath(path, null);
     }
 
     // 创建路径，并写入数据
-    public void createPath(CuratorFramework client, String path, byte[] data) throws Exception {
-        validateStatus(client);
+    public void createPath(String path, byte[] data) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         client.create().creatingParentsIfNeeded().forPath(path, data);
     }
 
     // 创建路径，并写入对象
-    public void createPath(CuratorFramework client, String path, Serializable object) throws Exception {
-        validateStatus(client);
+    public void createPath(String path, Serializable object) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         byte[] data = getData(object);
@@ -162,24 +224,24 @@ public class ZookeeperInvoker {
     }
 
     // 创建路径
-    public void createPath(CuratorFramework client, String path, CreateMode mode) throws Exception {
-        validateStatus(client);
+    public void createPath(String path, CreateMode mode) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         client.create().creatingParentsIfNeeded().withMode(mode).forPath(path, null);
     }
 
     // 创建路径，并写入数据
-    public void createPath(CuratorFramework client, String path, byte[] data, CreateMode mode) throws Exception {
-        validateStatus(client);
+    public void createPath(String path, byte[] data, CreateMode mode) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         client.create().creatingParentsIfNeeded().withMode(mode).forPath(path, data);
     }
 
     // 创建路径，并写入对象
-    public void createPath(CuratorFramework client, String path, Serializable object, CreateMode mode) throws Exception {
-        validateStatus(client);
+    public void createPath(String path, Serializable object, CreateMode mode) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         byte[] data = getData(object);
@@ -188,24 +250,24 @@ public class ZookeeperInvoker {
     }
 
     // 删除路径
-    public void deletePath(CuratorFramework client, String path) throws Exception {
-        validateStatus(client);
+    public void deletePath(String path) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         client.delete().deletingChildrenIfNeeded().forPath(path);
     }
 
     // 获取数据
-    public byte[] getData(CuratorFramework client, String path) throws Exception {
-        validateStatus(client);
+    public byte[] getData(String path) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         return client.getData().forPath(path);
     }
 
     // 获取对象
-    public <T> T getObject(CuratorFramework client, String path, Class<T> clazz) throws Exception {
-        validateStatus(client);
+    public <T> T getObject(String path, Class<T> clazz) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         byte[] data = client.getData().forPath(path);
@@ -214,16 +276,16 @@ public class ZookeeperInvoker {
     }
 
     // 写入数据
-    public void setData(CuratorFramework client, String path, byte[] data) throws Exception {
-        validateStatus(client);
+    public void setData(String path, byte[] data) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         client.setData().forPath(path, data);
     }
 
     // 写入对象
-    public void setData(CuratorFramework client, String path, Serializable object) throws Exception {
-        validateStatus(client);
+    public void setData(String path, Serializable object) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         byte[] data = getData(object);
@@ -250,16 +312,16 @@ public class ZookeeperInvoker {
     }
 
     // 获取子节点名称列表
-    public List<String> getChildNameList(CuratorFramework client, String path) throws Exception {
-        validateStatus(client);
+    public List<String> getChildNameList(String path) throws Exception {
+        validateStartedStatus();
         PathUtils.validatePath(path);
 
         return client.getChildren().forPath(path);
     }
 
     // 获取子节点路径列表
-    public List<String> getChildPathList(CuratorFramework client, String path) throws Exception {
-        List<String> childNameList = getChildNameList(client, path);
+    public List<String> getChildPathList(String path) throws Exception {
+        List<String> childNameList = getChildNameList(path);
 
         List<String> childPathList = new ArrayList<String>();
         for (String childName : childNameList) {

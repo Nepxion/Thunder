@@ -12,7 +12,6 @@ package com.nepxion.thunder.registry.zookeeper;
 
 import java.util.List;
 
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +28,8 @@ public class ZookeeperMonitorInstanceWatcher extends ZookeeperPathChildrenCacheL
     private ZookeeperInvoker invoker;
     private CacheContainer cacheContainer;
 
-    public ZookeeperMonitorInstanceWatcher(CuratorFramework client, ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
-        super(client, path);
+    public ZookeeperMonitorInstanceWatcher(ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
+        super(invoker.getClient(), path);
 
         this.invoker = invoker;
         this.cacheContainer = cacheContainer;
@@ -85,7 +84,7 @@ public class ZookeeperMonitorInstanceWatcher extends ZookeeperPathChildrenCacheL
                 break;
         }*/
 
-        List<String> addresses = invoker.getChildNameList(client, path);
+        List<String> addresses = invoker.getChildNameList(path);
         monitorEntity.setAddresses(addresses);
 
         LOG.info("Watched {} - address={}", instanceEventType.toString(), address);

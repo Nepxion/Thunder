@@ -12,7 +12,6 @@ package com.nepxion.thunder.registry.zookeeper;
 
 import java.util.List;
 
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +36,8 @@ public class ZookeeperInstanceWatcher extends ZookeeperPathChildrenCacheListener
     private ApplicationType applicationType;
     private String interfaze;
 
-    public ZookeeperInstanceWatcher(CuratorFramework client, ZookeeperInvoker invoker, ExecutorContainer executorContainer, ApplicationType applicationType, String interfaze, String path) throws Exception {
-        super(client, path);
+    public ZookeeperInstanceWatcher(ZookeeperInvoker invoker, ExecutorContainer executorContainer, ApplicationType applicationType, String interfaze, String path) throws Exception {
+        super(invoker.getClient(), path);
 
         this.invoker = invoker;
         this.executorContainer = executorContainer;
@@ -86,7 +85,7 @@ public class ZookeeperInstanceWatcher extends ZookeeperPathChildrenCacheListener
         String applicationJson = childPath.substring(childPath.lastIndexOf("/") + 1);
         ApplicationEntity applicationEntity = ZookeeperApplicationEntityFactory.fromJson(applicationJson);
 
-        List<String> applicationJsonList = invoker.getChildNameList(client, path);
+        List<String> applicationJsonList = invoker.getChildNameList(path);
         List<ApplicationEntity> applicationEntityList = ZookeeperApplicationEntityFactory.fromJson(applicationJsonList);
 
         InstanceEvent instanceEvent = null;

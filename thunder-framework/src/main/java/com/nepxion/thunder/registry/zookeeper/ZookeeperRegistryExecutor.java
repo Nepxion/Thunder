@@ -18,7 +18,6 @@ import java.util.concurrent.Executors;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,6 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     private static final Logger LOG = LoggerFactory.getLogger(ZookeeperRegistryExecutor.class);
 
     private ZookeeperInvoker invoker;
-    private CuratorFramework client;
 
     private ProtocolEntity protocolEntity;
     private String namespace;
@@ -72,8 +70,8 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         }
 
         ZookeeperRegistryInitializer initializer = (ZookeeperRegistryInitializer) registryInitializer;
+
         this.invoker = initializer.getInvoker();
-        this.client = initializer.getClient();
     }
 
     @Override
@@ -90,130 +88,98 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         return invoker;
     }
 
-    public CuratorFramework getClient() {
-        return client;
-    }
-
     @Override
     public void registerApplicationEnvironment(ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createApplicationCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register application environment [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerConfigurationEnvironment() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createConfigurationCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register configuration environment [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerMonitorEnvironment() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createMonitorCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register monitor environment [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerUserEnvironment() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createUserCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register user environment [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerApplication(ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createApplicationPath(application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register application [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerServiceCategory(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register service category [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerService(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+        if (!invoker.pathExist(path)) {
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
 
-        List<String> childPathList = invoker.getChildPathList(client, path);
+        List<String> childPathList = invoker.getChildPathList(path);
         for (String childPath : childPathList) {
             String applicationJson = childPath.substring(childPath.lastIndexOf("/") + 1);
             ApplicationEntity entity = ZookeeperApplicationEntityFactory.fromJson(applicationJson);
             if (entity.equals(applicationEntity)) {
                 LOG.info("Delete expired service [{}]", childPath);
-                if (invoker.pathExist(client, childPath)) {
-                    invoker.deletePath(client, childPath);
+                if (invoker.pathExist(childPath)) {
+                    invoker.deletePath(childPath);
                 }
             }
         }
@@ -223,51 +189,43 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         path = builder.toString();
 
         LOG.info("Register service [{}]", path);
-        invoker.createPath(client, path, CreateMode.EPHEMERAL);
+        invoker.createPath(path, CreateMode.EPHEMERAL);
     }
 
     @Override
     public void registerReferenceCategory(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register reference category [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerReference(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+        if (!invoker.pathExist(path)) {
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
 
-        List<String> childPathList = invoker.getChildPathList(client, path);
+        List<String> childPathList = invoker.getChildPathList(path);
         for (String childPath : childPathList) {
             String applicationJson = childPath.substring(childPath.lastIndexOf("/") + 1);
             ApplicationEntity entity = ZookeeperApplicationEntityFactory.fromJson(applicationJson);
             if (entity.equals(applicationEntity)) {
                 LOG.info("Delete expired reference [{}]", childPath);
-                if (invoker.pathExist(client, childPath)) {
-                    invoker.deletePath(client, childPath);
+                if (invoker.pathExist(childPath)) {
+                    invoker.deletePath(childPath);
                 }
             }
         }
@@ -277,60 +235,48 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         path = builder.toString();
 
         LOG.info("Register reference [{}]", path);
-        invoker.createPath(client, path, CreateMode.EPHEMERAL);
+        invoker.createPath(path, CreateMode.EPHEMERAL);
     }
 
     @Override
     public void registerConfiguration(ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createConfigurationApplicationPath(application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             LOG.info("Register configuration [{}]", path);
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
     }
 
     @Override
     public void registerMonitor(String address) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createMonitorCategoryPath();
         builder.append("/");
         builder.append(address);
         String path = builder.toString();
 
-        if (invoker.pathExist(client, path)) {
+        if (invoker.pathExist(path)) {
             LOG.info("Delete expired monitor [{}]", path);
-            invoker.deletePath(client, path);
+            invoker.deletePath(path);
         }
 
         LOG.info("Register monitor [{}]", path);
-        invoker.createPath(client, path, CreateMode.EPHEMERAL);
+        invoker.createPath(path, CreateMode.EPHEMERAL);
     }
 
     @Override
     public ApplicationConfig retrieveApplication(ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createApplicationPath(application, group);
         String path = builder.toString();
 
-        byte[] data = invoker.getData(client, path);
+        byte[] data = invoker.getData(path);
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved application config [{}]", path);
 
@@ -344,17 +290,13 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public ServiceConfig retrieveService(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        byte[] data = invoker.getData(client, path);
+        byte[] data = invoker.getData(path);
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved service config [{}]", path);
 
@@ -368,17 +310,13 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public ReferenceConfig retrieveReference(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        byte[] data = invoker.getData(client, path);
+        byte[] data = invoker.getData(path);
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved reference config [{}]", path);
 
@@ -392,17 +330,13 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public String retrieveProperty(ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createConfigurationApplicationPath(application, group);
         String path = builder.toString();
 
-        byte[] data = invoker.getData(client, path);
+        byte[] data = invoker.getData(path);
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved property [{}]", path);
 
@@ -416,10 +350,6 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public void persistApplication(ApplicationConfig applicationConfig) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationConfig.getApplication();
         String group = applicationConfig.getGroup();
 
@@ -427,15 +357,11 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         String path = builder.toString();
 
         LOG.info("Persist application config [{}]", path);
-        invoker.setData(client, path, applicationConfig);
+        invoker.setData(path, applicationConfig);
     }
 
     @Override
     public void persistService(ServiceConfig serviceConfig, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
         String interfaze = serviceConfig.getInterface();
@@ -444,15 +370,11 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         String path = builder.toString();
 
         LOG.info("Persist service config [{}]", path);
-        invoker.setData(client, path, serviceConfig);
+        invoker.setData(path, serviceConfig);
     }
 
     @Override
     public void persistReference(ReferenceConfig referenceConfig, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
         String interfaze = referenceConfig.getInterface();
@@ -461,15 +383,11 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         String path = builder.toString();
 
         LOG.info("Persist reference config [{}]", path);
-        invoker.setData(client, path, referenceConfig);
+        invoker.setData(path, referenceConfig);
     }
 
     @Override
     public void persistProperty(String property, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
@@ -477,26 +395,22 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         String path = builder.toString();
 
         LOG.info("Persist property [{}]", path);
-        invoker.setData(client, path, property.getBytes());
+        invoker.setData(path, property.getBytes());
     }
 
     @Override
     public List<ApplicationEntity> getServiceInstanceList(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> applicationJsonList = invoker.getChildNameList(client, path);
+        List<String> applicationJsonList = invoker.getChildNameList(path);
         List<ApplicationEntity> applicationEntityList = ZookeeperApplicationEntityFactory.fromJson(applicationJsonList);
 
         return applicationEntityList;
@@ -504,21 +418,17 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public List<ApplicationEntity> getReferenceInstanceList(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> applicationJsonList = invoker.getChildNameList(client, path);
+        List<String> applicationJsonList = invoker.getChildNameList(path);
         List<ApplicationEntity> applicationEntityList = ZookeeperApplicationEntityFactory.fromJson(applicationJsonList);
 
         return applicationEntityList;
@@ -526,35 +436,27 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public List<String> getMonitorInstanceList() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createMonitorCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> monitorList = invoker.getChildNameList(client, path);
+        List<String> monitorList = invoker.getChildNameList(path);
 
         return monitorList;
     }
 
     @Override
     public boolean isServiceInstanceOnline(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        List<String> applicationJsonList = invoker.getChildNameList(client, path);
+        List<String> applicationJsonList = invoker.getChildNameList(path);
         List<ApplicationEntity> applicationEntityList = ZookeeperApplicationEntityFactory.fromJson(applicationJsonList);
 
         return applicationEntityList.contains(applicationEntity);
@@ -562,17 +464,13 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public boolean isReferenceInstanceOnline(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        List<String> applicationJsonList = invoker.getChildNameList(client, path);
+        List<String> applicationJsonList = invoker.getChildNameList(path);
         List<ApplicationEntity> applicationEntityList = ZookeeperApplicationEntityFactory.fromJson(applicationJsonList);
 
         return applicationEntityList.contains(applicationEntity);
@@ -580,37 +478,29 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public boolean isMonitorInstanceOnline(String monitorInstance) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createMonitorCategoryPath();
         builder.append("/");
         builder.append(monitorInstance);
         String path = builder.toString();
 
-        return invoker.pathExist(client, path);
+        return invoker.pathExist(path);
     }
 
     @Override
     public List<UserEntity> retrieveUserList() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createUserCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Get user list [{}]", path);
 
         List<UserEntity> userEntityList = new ArrayList<UserEntity>();
-        List<String> childPathList = invoker.getChildPathList(client, path);
+        List<String> childPathList = invoker.getChildPathList(path);
         for (String childPath : childPathList) {
-            byte[] data = invoker.getData(client, childPath);
+            byte[] data = invoker.getData(childPath);
             if (ArrayUtils.isNotEmpty(data)) {
                 UserEntity userEntity = invoker.getObject(data, UserEntity.class);
                 userEntityList.add(userEntity);
@@ -647,18 +537,14 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public UserEntity retrieveUser(String name) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createUserPath(name);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        byte[] data = invoker.getData(client, path);
+        byte[] data = invoker.getData(path);
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved user [{}]", path);
 
@@ -672,10 +558,6 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
 
     @Override
     public void persistUser(UserEntity userEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String name = userEntity.getName();
         UserType type = userEntity.getType();
         List<UserOperation> operations = userEntity.getOperations();
@@ -693,20 +575,16 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         builder.append(name);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
-            invoker.createPath(client, path, CreateMode.PERSISTENT);
+        if (!invoker.pathExist(path)) {
+            invoker.createPath(path, CreateMode.PERSISTENT);
         }
 
         LOG.info("Persist user [{}]", path);
-        invoker.setData(client, path, userEntity);
+        invoker.setData(path, userEntity);
     }
 
     @Override
     public void deleteUser(UserEntity userEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String name = userEntity.getName();
         if (StringUtils.equals(name, ThunderConstants.USER_ADMIN_NAME)) {
             throw new ZookeeperException("Administrator [" + name + "] can't be deleted");
@@ -717,19 +595,15 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         builder.append(name);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("User [" + name + "] doesn't exist");
         }
 
         LOG.info("Delete user [{}]", path);
-        invoker.deletePath(client, path);
+        invoker.deletePath(path);
     }
 
     public void addUserWatcher(UserEntity userEntity, ZookeeperUserWatcherCallback<UserEntity> callback) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String name = userEntity.getName();
 
         StringBuilder builder = createUserCategoryPath();
@@ -737,287 +611,231 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         builder.append(name);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("User [" + name + "] doesn't exist");
         }
 
         LOG.info("Add user watcher [{}]", path);
 
-        new ZookeeperUserWatcher(client, invoker, callback, path);
+        new ZookeeperUserWatcher(invoker, callback, path);
     }
 
     @Override
     public void addApplicationConfigWatcher(ApplicationConfig applicationConfig) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationConfig.getApplication();
         String group = applicationConfig.getGroup();
 
         StringBuilder builder = createApplicationPath(application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Add application config watcher [{}]", path);
 
-        new ZookeeperApplicationConfigWatcher(client, invoker, cacheContainer, path);
+        new ZookeeperApplicationConfigWatcher(invoker, cacheContainer, path);
     }
 
     @Override
     public void addServiceConfigWatcher(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Add service config watcher [{}]", path);
 
-        new ZookeeperServiceConfigWatcher(client, interfaze, invoker, cacheContainer, path);
+        new ZookeeperServiceConfigWatcher(interfaze, invoker, cacheContainer, path);
     }
 
     @Override
     public void addReferenceConfigWatcher(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Add reference config watcher [{}]", path);
 
-        new ZookeeperReferenceConfigWatcher(client, interfaze, invoker, cacheContainer, path);
+        new ZookeeperReferenceConfigWatcher(interfaze, invoker, cacheContainer, path);
     }
 
     @Override
     public void addServiceInstanceWatcher(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createServiceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Add service instance watcher [{}]", path);
 
-        new ZookeeperInstanceWatcher(client, invoker, executorContainer, ApplicationType.SERVICE, interfaze, path);
+        new ZookeeperInstanceWatcher(invoker, executorContainer, ApplicationType.SERVICE, interfaze, path);
     }
 
     @Override
     public void addReferenceInstanceWatcher(String interfaze, ApplicationEntity applicationEntity) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         String application = applicationEntity.getApplication();
         String group = applicationEntity.getGroup();
 
         StringBuilder builder = createReferenceInterfacePath(interfaze, application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Add reference instance watcher [{}]", path);
 
-        new ZookeeperInstanceWatcher(client, invoker, executorContainer, ApplicationType.REFERENCE, interfaze, path);
+        new ZookeeperInstanceWatcher(invoker, executorContainer, ApplicationType.REFERENCE, interfaze, path);
     }
 
     @Override
     public void addMonitorInstanceWatcher() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createMonitorCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
         LOG.info("Add monitor instance watcher [{}]", path);
 
-        new ZookeeperMonitorInstanceWatcher(client, invoker, cacheContainer, path);
+        new ZookeeperMonitorInstanceWatcher(invoker, cacheContainer, path);
     }
 
     @Override
     public void addReconnectionListener() {
-        if (client == null) {
+        if (invoker.getClient() == null) {
             throw new ZookeeperException("Zookeeper client is null");
         }
 
-        client.getConnectionStateListenable().addListener(new ZookeeperReconnectionListener(this), Executors.newFixedThreadPool(1));
+        invoker.getClient().getConnectionStateListenable().addListener(new ZookeeperReconnectionListener(this), Executors.newFixedThreadPool(1));
     }
 
     @Override
     public List<String> getCategoryList() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createRootPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getProtocolList() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createApplicationCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getGroupList() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createProtocolCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getApplicationList(String group) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createGroupPath(group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getServiceList(String application, String group) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createServiceCategoryPath(application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getReferenceList(String application, String group) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createReferenceCategoryPath(application, group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getConfigurationGroupList() throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createConfigurationCategoryPath();
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }
 
     @Override
     public List<String> getConfigurationApplicationList(String group) throws Exception {
-        if (client == null) {
-            throw new ZookeeperException("Zookeeper client is null");
-        }
-
         StringBuilder builder = createConfigurationGroupPath(group);
         String path = builder.toString();
 
-        if (!invoker.pathExist(client, path)) {
+        if (!invoker.pathExist(path)) {
             throw new ZookeeperException("Path [" + path + "] doesn't exist");
         }
 
-        List<String> childNameList = invoker.getChildNameList(client, path);
+        List<String> childNameList = invoker.getChildNameList(path);
 
         return childNameList;
     }

@@ -10,7 +10,6 @@ package com.nepxion.thunder.registry.zookeeper;
  * @version 1.0
  */
 
-import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +25,8 @@ public class ZookeeperApplicationConfigWatcher extends ZookeeperNodeCacheListene
     private ZookeeperInvoker invoker;
     private CacheContainer cacheContainer;
 
-    public ZookeeperApplicationConfigWatcher(CuratorFramework client, ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
-        super(client, path);
+    public ZookeeperApplicationConfigWatcher(ZookeeperInvoker invoker, CacheContainer cacheContainer, String path) throws Exception {
+        super(invoker.getClient(), path);
 
         this.invoker = invoker;
         this.cacheContainer = cacheContainer;
@@ -35,7 +34,7 @@ public class ZookeeperApplicationConfigWatcher extends ZookeeperNodeCacheListene
 
     @Override
     public void nodeChanged() throws Exception {
-        ApplicationConfig applicationConfig = invoker.getObject(client, path, ApplicationConfig.class);
+        ApplicationConfig applicationConfig = invoker.getObject(path, ApplicationConfig.class);
 
         ApplicationConfig config = cacheContainer.getApplicationConfig();
 
