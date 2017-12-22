@@ -23,7 +23,7 @@ import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.jms.listener.adapter.MessageListenerAdapter;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ConnectionFactoryType;
 import com.nepxion.thunder.common.entity.MQPropertyEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
@@ -41,7 +41,7 @@ public class MQHierachy {
     protected MQProducer mqProducer;
 
     public void initialize() throws Exception {
-        String type = mqPropertyEntity.getString(ThunderConstants.MQ_CONNECTION_FACTORY_TYPE_ATTRIBUTE_NAME);
+        String type = mqPropertyEntity.getString(ThunderConstant.MQ_CONNECTION_FACTORY_TYPE_ATTRIBUTE_NAME);
         connectionFactoryType = ConnectionFactoryType.fromString(type);
         switch (connectionFactoryType) {
             case SINGLE_CONNECTION_FACTORY:
@@ -64,7 +64,7 @@ public class MQHierachy {
     }
 
     private void initializeSingleConnectionFactory() throws Exception {
-        boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstants.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
+        boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstant.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
 
         SingleConnectionFactory singleConnectionFactory = new SingleConnectionFactory();
         singleConnectionFactory.setReconnectOnException(reconnectOnException);
@@ -73,10 +73,10 @@ public class MQHierachy {
     }
 
     private void initializeCachingConnectionFactory() throws Exception {
-        int sessionCacheSize = mqPropertyEntity.getInteger(ThunderConstants.MQ_SESSION_CACHE_SIZE_ATTRIBUTE_NAME);
-        boolean cacheConsumers = mqPropertyEntity.getBoolean(ThunderConstants.MQ_CACHE_CONSUMERS_ATTRIBUTE_NAME);
-        boolean cacheProducers = mqPropertyEntity.getBoolean(ThunderConstants.MQ_CACHE_PRODUCERS_ATTRIBUTE_NAME);
-        boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstants.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
+        int sessionCacheSize = mqPropertyEntity.getInteger(ThunderConstant.MQ_SESSION_CACHE_SIZE_ATTRIBUTE_NAME);
+        boolean cacheConsumers = mqPropertyEntity.getBoolean(ThunderConstant.MQ_CACHE_CONSUMERS_ATTRIBUTE_NAME);
+        boolean cacheProducers = mqPropertyEntity.getBoolean(ThunderConstant.MQ_CACHE_PRODUCERS_ATTRIBUTE_NAME);
+        boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstant.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
 
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory();
         cachingConnectionFactory.setSessionCacheSize(sessionCacheSize);
@@ -89,15 +89,15 @@ public class MQHierachy {
 
     private void initializePooledConnectionFactory() throws Exception {
         String pooledConnectionFactoryClass = mqPropertyEntity.getMQEntity().getPooledConnectionFactoryClass();
-        int maxConnections = mqPropertyEntity.getInteger(ThunderConstants.MQ_MAX_CONNECTIONS_ATTRIBUTE_NAME);
-        int maximumActiveSessionPerConnection = mqPropertyEntity.getInteger(ThunderConstants.MQ_MAXIMUM_ACTIVE_SESSION_PER_CONNECTION_ATTRIBUTE_NAME);
-        int idleTimeout = mqPropertyEntity.getInteger(ThunderConstants.MQ_IDLE_TIMEOUT_ATTRIBUTE_NAME);
-        long expiryTimeout = mqPropertyEntity.getLong(ThunderConstants.MQ_EXPIRY_TIMEOUT_ATTRIBUTE_NAME);
-        boolean blockIfSessionPoolIsFull = mqPropertyEntity.getBoolean(ThunderConstants.MQ_BLOCK_IF_SESSION_POOL_IS_FULL_ATTRIBUTE_NAME);
-        long blockIfSessionPoolIsFullTimeout = mqPropertyEntity.getLong(ThunderConstants.MQ_BLOCK_IF_SESSION_POOL_IS_FULL_TIMEOUT_ATTRIBUTE_NAME);
-        long timeBetweenExpirationCheckMillis = mqPropertyEntity.getLong(ThunderConstants.MQ_TIME_BETWEEN_EXPIRATION_CHECK_MILLIS_ATTRIBUTE_NAME);
-        boolean createConnectionOnStartup = mqPropertyEntity.getBoolean(ThunderConstants.MQ_CREATE_CONNECTION_ON_STARTUP_ATTRIBUTE_NAME);
-        boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstants.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
+        int maxConnections = mqPropertyEntity.getInteger(ThunderConstant.MQ_MAX_CONNECTIONS_ATTRIBUTE_NAME);
+        int maximumActiveSessionPerConnection = mqPropertyEntity.getInteger(ThunderConstant.MQ_MAXIMUM_ACTIVE_SESSION_PER_CONNECTION_ATTRIBUTE_NAME);
+        int idleTimeout = mqPropertyEntity.getInteger(ThunderConstant.MQ_IDLE_TIMEOUT_ATTRIBUTE_NAME);
+        long expiryTimeout = mqPropertyEntity.getLong(ThunderConstant.MQ_EXPIRY_TIMEOUT_ATTRIBUTE_NAME);
+        boolean blockIfSessionPoolIsFull = mqPropertyEntity.getBoolean(ThunderConstant.MQ_BLOCK_IF_SESSION_POOL_IS_FULL_ATTRIBUTE_NAME);
+        long blockIfSessionPoolIsFullTimeout = mqPropertyEntity.getLong(ThunderConstant.MQ_BLOCK_IF_SESSION_POOL_IS_FULL_TIMEOUT_ATTRIBUTE_NAME);
+        long timeBetweenExpirationCheckMillis = mqPropertyEntity.getLong(ThunderConstant.MQ_TIME_BETWEEN_EXPIRATION_CHECK_MILLIS_ATTRIBUTE_NAME);
+        boolean createConnectionOnStartup = mqPropertyEntity.getBoolean(ThunderConstant.MQ_CREATE_CONNECTION_ON_STARTUP_ATTRIBUTE_NAME);
+        boolean reconnectOnException = mqPropertyEntity.getBoolean(ThunderConstant.MQ_RECONNECT_ON_EXCEPTION_ATTRIBUTE_NAME);
 
         ConnectionFactory pooledConnectionFactory = ClassUtil.createInstance(pooledConnectionFactoryClass);
         ClassUtil.invoke(pooledConnectionFactory, "setMaxConnections", new Class<?>[] { int.class }, new Object[] { maxConnections });
@@ -136,14 +136,14 @@ public class MQHierachy {
     }
 
     public void listen(Destination destination, SessionAwareMessageListener<BytesMessage> messageListener, String requestSelector, boolean topic) throws Exception {
-        int concurrentConsumers = mqPropertyEntity.getInteger(ThunderConstants.MQ_CONCURRENT_CONSUMERS_ATTRIBUTE_NAME);
-        int maxConcurrentConsumers = mqPropertyEntity.getInteger(ThunderConstants.MQ_MAX_CONCURRENT_CONSUMERS_ATTRIBUTE_NAME);
-        long receiveTimeout = mqPropertyEntity.getLong(ThunderConstants.MQ_RECEIVE_TIMEOUT_ATTRIBUTE_NAME);
-        long recoveryInterval = mqPropertyEntity.getLong(ThunderConstants.MQ_RECOVERY_INTERVAL_ATTRIBUTE_NAME);
-        int idleConsumerLimit = mqPropertyEntity.getInteger(ThunderConstants.MQ_IDLE_CONSUMER_LIMIT_ATTRIBUTE_NAME);
-        int idleTaskExecutionLimit = mqPropertyEntity.getInteger(ThunderConstants.MQ_IDLE_TASK_EXECUTION_LIMIT_ATTRIBUTE_NAME);
-        int cacheLevel = mqPropertyEntity.getInteger(ThunderConstants.MQ_CACHE_LEVEL_ATTRIBUTE_NAME);
-        boolean acceptMessagesWhileStopping = mqPropertyEntity.getBoolean(ThunderConstants.MQ_ACCEPT_MESSAGES_WHILE_STOPPING_ATTRIBUTE_NAME);
+        int concurrentConsumers = mqPropertyEntity.getInteger(ThunderConstant.MQ_CONCURRENT_CONSUMERS_ATTRIBUTE_NAME);
+        int maxConcurrentConsumers = mqPropertyEntity.getInteger(ThunderConstant.MQ_MAX_CONCURRENT_CONSUMERS_ATTRIBUTE_NAME);
+        long receiveTimeout = mqPropertyEntity.getLong(ThunderConstant.MQ_RECEIVE_TIMEOUT_ATTRIBUTE_NAME);
+        long recoveryInterval = mqPropertyEntity.getLong(ThunderConstant.MQ_RECOVERY_INTERVAL_ATTRIBUTE_NAME);
+        int idleConsumerLimit = mqPropertyEntity.getInteger(ThunderConstant.MQ_IDLE_CONSUMER_LIMIT_ATTRIBUTE_NAME);
+        int idleTaskExecutionLimit = mqPropertyEntity.getInteger(ThunderConstant.MQ_IDLE_TASK_EXECUTION_LIMIT_ATTRIBUTE_NAME);
+        int cacheLevel = mqPropertyEntity.getInteger(ThunderConstant.MQ_CACHE_LEVEL_ATTRIBUTE_NAME);
+        boolean acceptMessagesWhileStopping = mqPropertyEntity.getBoolean(ThunderConstant.MQ_ACCEPT_MESSAGES_WHILE_STOPPING_ATTRIBUTE_NAME);
 
         MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter();
         messageListenerAdapter.setDelegate(messageListener);

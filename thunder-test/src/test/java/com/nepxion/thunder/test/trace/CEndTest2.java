@@ -14,12 +14,12 @@ import java.io.IOException;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 
 public class CEndTest2 {
     @SuppressWarnings("resource")
     public static void main(String[] args) {
-        System.setProperty(ThunderConstants.PORT_PARAMETER_NAME, "3001");
+        System.setProperty(ThunderConstant.PORT_PARAMETER_NAME, "3001");
 
         // new FileSystemXmlApplicationContext("file://192.168.15.82\\Thunder\\Trace\\trace-c-context.xml"); 
         // new ClassPathXmlApplicationContext("http://www.nepxion.com/Thunder/Trace/trace-c-context.xml");

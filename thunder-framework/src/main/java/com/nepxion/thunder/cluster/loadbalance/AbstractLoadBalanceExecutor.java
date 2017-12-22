@@ -17,7 +17,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ConnectionEntity;
@@ -31,9 +31,9 @@ public abstract class AbstractLoadBalanceExecutor extends ThunderDelegateImpl im
     // 只允许在主线程中运行
     @Override
     public ConnectionEntity loadBalance(String interfaze) throws Exception {
-        boolean retry = properties.getBoolean(ThunderConstants.LOAD_BALANCE_RETRY_ATTRIBUTE_NAME);
-        int retryTimes = properties.getInteger(ThunderConstants.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME);
-        int retryDelay = properties.getInteger(ThunderConstants.LOAD_BALANCE_RETRY_DELAY_ATTRIBUTE_NAME);
+        boolean retry = properties.getBoolean(ThunderConstant.LOAD_BALANCE_RETRY_ATTRIBUTE_NAME);
+        int retryTimes = properties.getInteger(ThunderConstant.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME);
+        int retryDelay = properties.getInteger(ThunderConstant.LOAD_BALANCE_RETRY_DELAY_ATTRIBUTE_NAME);
 
         // 当服务集群全挂掉，提供两种方式：
         // 1. 不断的堵塞重试，等待集群恢复，Failover机制
@@ -81,7 +81,7 @@ public abstract class AbstractLoadBalanceExecutor extends ThunderDelegateImpl im
             return null;
         }
 
-        boolean loadBalanceLogPrint = properties.getBoolean(ThunderConstants.LOAD_BALANCE_LOG_PRINT_ATTRIBUTE_NAME);
+        boolean loadBalanceLogPrint = properties.getBoolean(ThunderConstant.LOAD_BALANCE_LOG_PRINT_ATTRIBUTE_NAME);
         if (loadBalanceLogPrint) {
             StrategyEntity strategyEntity = cacheContainer.getStrategyEntity();
             LoadBalanceType loadBalanceType = strategyEntity.getLoadBalanceType();

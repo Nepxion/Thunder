@@ -16,7 +16,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.ProtocolEntity;
 import com.nepxion.thunder.common.entity.ServiceEntity;
@@ -37,11 +37,11 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
 
-        String namespaceElementName = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
-        String serviceElementName = ThunderConstants.SERVICE_ELEMENT_NAME;
-        String interfaceAttributeName = ThunderConstants.INTERFACE_ATTRIBUTE_NAME;
-        String serverAttributeName = ThunderConstants.SERVER_ATTRIBUTE_NAME;
-        String refAttributeName = ThunderConstants.REF_ATTRIBUTE_NAME;
+        String namespaceElementName = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
+        String serviceElementName = ThunderConstant.SERVICE_ELEMENT_NAME;
+        String interfaceAttributeName = ThunderConstant.INTERFACE_ATTRIBUTE_NAME;
+        String serverAttributeName = ThunderConstant.SERVER_ATTRIBUTE_NAME;
+        String refAttributeName = ThunderConstant.REF_ATTRIBUTE_NAME;
 
         String interfaze = element.getAttribute(interfaceAttributeName);
         String server = element.getAttribute(serverAttributeName);
@@ -94,7 +94,7 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
     protected ServerExecutorAdapter createServerExecutorAdapter() {
         ServerExecutorAdapter serverExecutorAdapter = executorContainer.getServerExecutorAdapter();
         if (serverExecutorAdapter == null) {
-            String serverExecutorAdapterId = ThunderConstants.SERVER_EXECUTOR_ADAPTER_ID;
+            String serverExecutorAdapterId = ThunderConstant.SERVER_EXECUTOR_ADAPTER_ID;
             try {
                 serverExecutorAdapter = createDelegate(serverExecutorAdapterId);
             } catch (Exception e) {
@@ -110,7 +110,7 @@ public class ServiceBeanDefinitionParser extends AbstractExtensionBeanDefinition
     protected SecurityExecutor createSecurityExecutor() {
         SecurityExecutor securityExecutor = executorContainer.getSecurityExecutor();
         if (securityExecutor == null) {
-            String securityExecutorId = ThunderConstants.SECURITY_EXECUTOR_ID;
+            String securityExecutorId = ThunderConstant.SECURITY_EXECUTOR_ID;
             try {
                 securityExecutor = createDelegate(securityExecutorId);
             } catch (Exception e) {

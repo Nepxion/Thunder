@@ -18,7 +18,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.MQPropertyEntity;
 import com.nepxion.thunder.common.thread.ThreadPoolFactory;
@@ -38,8 +38,8 @@ public class KafkaMQServerHandler extends KafkaMQConsumer {
         super(mqPropertyEntity, groupId);
 
         try {
-            consumerServerPollTimeout = mqPropertyEntity.getInteger(ThunderConstants.KAFKA_CONSUMER_SERVER_POLL_TIMEOUT_ATTRIBUTE_NAME);
-            transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
+            consumerServerPollTimeout = mqPropertyEntity.getInteger(ThunderConstant.KAFKA_CONSUMER_SERVER_POLL_TIMEOUT_ATTRIBUTE_NAME);
+            transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstant.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
         } catch (Exception e) {
             LOG.error("Get properties failed", e);
         }

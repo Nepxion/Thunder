@@ -25,7 +25,7 @@ import org.apache.http.nio.reactor.IOReactorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class ApacheAsyncClientExecutor {
@@ -40,19 +40,19 @@ public class ApacheAsyncClientExecutor {
             public Object call() throws Exception {
                 try {
                     IOReactorConfig ioReactorConfig = IOReactorConfig.custom()
-                            .setIoThreadCount(ThunderConstants.CPUS)
-                            .setConnectTimeout(properties.getInteger(ThunderConstants.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
-                            .setSoTimeout(properties.getInteger(ThunderConstants.APACHE_SO_TIMEOUT_ATTRIBUTE_NAME))
-                            .setSndBufSize(properties.getInteger(ThunderConstants.APACHE_SNDBUF_SIZE_ATTRIBUTE_NAME))
-                            .setRcvBufSize(properties.getInteger(ThunderConstants.APACHE_RCVBUF_SIZE_ATTRIBUTE_NAME))
-                            .setBacklogSize(properties.getInteger(ThunderConstants.APACHE_BACKLOG_SIZE_ATTRIBUTE_NAME))
+                            .setIoThreadCount(ThunderConstant.CPUS)
+                            .setConnectTimeout(properties.getInteger(ThunderConstant.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
+                            .setSoTimeout(properties.getInteger(ThunderConstant.APACHE_SO_TIMEOUT_ATTRIBUTE_NAME))
+                            .setSndBufSize(properties.getInteger(ThunderConstant.APACHE_SNDBUF_SIZE_ATTRIBUTE_NAME))
+                            .setRcvBufSize(properties.getInteger(ThunderConstant.APACHE_RCVBUF_SIZE_ATTRIBUTE_NAME))
+                            .setBacklogSize(properties.getInteger(ThunderConstant.APACHE_BACKLOG_SIZE_ATTRIBUTE_NAME))
                             .setTcpNoDelay(true)
                             .setSoReuseAddress(true)
                             .setSoKeepAlive(true)
                             .build();
                     ConnectingIOReactor ioReactor = new DefaultConnectingIOReactor(ioReactorConfig);
                     PoolingNHttpClientConnectionManager httpManager = new PoolingNHttpClientConnectionManager(ioReactor);
-                    httpManager.setMaxTotal(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.APACHE_MAX_TOTAL_ATTRIBUTE_NAME));
+                    httpManager.setMaxTotal(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.APACHE_MAX_TOTAL_ATTRIBUTE_NAME));
 
                     httpAsyncClient = HttpAsyncClients.custom().setConnectionManager(httpManager).build();
                     httpAsyncClient.start();
@@ -68,7 +68,7 @@ public class ApacheAsyncClientExecutor {
             }
         });
 
-        barrier.await(properties.getLong(ThunderConstants.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME) * 2, TimeUnit.MILLISECONDS);
+        barrier.await(properties.getLong(ThunderConstant.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME) * 2, TimeUnit.MILLISECONDS);
     }
 
     public CloseableHttpAsyncClient getClient() {

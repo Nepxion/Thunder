@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.object.ObjectPoolFactory;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
@@ -38,7 +38,7 @@ public class RedisClusterFactory {
 
         String clusterValue = null;
         try {
-            clusterValue = properties.getString(ThunderConstants.REDIS_CLUSTER_ATTRIBUTE_NAME);
+            clusterValue = properties.getString(ThunderConstant.REDIS_CLUSTER_ATTRIBUTE_NAME);
         } catch (Exception e) {
             LOG.warn("Redis cluster address is null, redis won't start");
 
@@ -60,9 +60,9 @@ public class RedisClusterFactory {
             }
 
             cluster = new JedisCluster(clusterSet,
-                    properties.getInteger(ThunderConstants.REDIS_CONNECTION_TIMEOUT_ATTRIBUTE_NAME),
-                    properties.getInteger(ThunderConstants.REDIS_SO_TIMEOUT_ATTRIBUTE_NAME),
-                    properties.getInteger(ThunderConstants.REDIS_MAX_REDIRECTIONS_ATTRIBUTE_NAME),
+                    properties.getInteger(ThunderConstant.REDIS_CONNECTION_TIMEOUT_ATTRIBUTE_NAME),
+                    properties.getInteger(ThunderConstant.REDIS_SO_TIMEOUT_ATTRIBUTE_NAME),
+                    properties.getInteger(ThunderConstant.REDIS_MAX_REDIRECTIONS_ATTRIBUTE_NAME),
                     ObjectPoolFactory.createRedisObjectPoolConfig());
             LOG.info("Redis cluster is initialized...");
         } catch (Exception e) {

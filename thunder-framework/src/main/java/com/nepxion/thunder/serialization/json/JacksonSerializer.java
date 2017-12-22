@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.serialization.SerializerException;
 
 public class JacksonSerializer {
@@ -27,7 +27,7 @@ public class JacksonSerializer {
 
     static {
         mapper = new ObjectMapper();
-        mapper.setDateFormat(new SimpleDateFormat(ThunderConstants.DATE_FORMAT));
+        mapper.setDateFormat(new SimpleDateFormat(ThunderConstant.DATE_FORMAT));
     }
 
     public static <T> String toJson(T object) {

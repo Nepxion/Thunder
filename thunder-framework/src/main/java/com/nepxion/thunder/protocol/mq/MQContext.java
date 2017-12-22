@@ -20,7 +20,7 @@ import javax.jms.Destination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.container.CacheContainer;
 import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
@@ -66,7 +66,7 @@ public class MQContext {
 
         // Context配置方式有两种：JNDI和非JNDI，如果配置jndiName，则选用JNDI模式，否则选择非JNDI模式
         try {
-            String jndiName = mqPropertyEntity.getString(ThunderConstants.MQ_JNDI_NAME_ATTRIBUTE_NAME);
+            String jndiName = mqPropertyEntity.getString(ThunderConstant.MQ_JNDI_NAME_ATTRIBUTE_NAME);
 
             LOG.info("Use Jndi mode, Jndi name={}", jndiName);
             mqHierachy = new MQJndiHierachy();
@@ -75,10 +75,10 @@ public class MQContext {
         }
 
         try {
-            url = mqPropertyEntity.getString(ThunderConstants.MQ_URL_ATTRIBUTE_NAME);
+            url = mqPropertyEntity.getString(ThunderConstant.MQ_URL_ATTRIBUTE_NAME);
             LOG.info("Attempt to connect to {}", url);
 
-            String type = mqPropertyEntity.getString(ThunderConstants.MQ_CONNECTION_FACTORY_TYPE_ATTRIBUTE_NAME);
+            String type = mqPropertyEntity.getString(ThunderConstant.MQ_CONNECTION_FACTORY_TYPE_ATTRIBUTE_NAME);
             ConnectionFactoryType connectionFactoryType = ConnectionFactoryType.fromString(type);
             LOG.info("Connection factory type is {}", connectionFactoryType);
 
@@ -101,7 +101,7 @@ public class MQContext {
             executor = Executors.newSingleThreadScheduledExecutor();
         }
 
-        final int retryNotificationDelay = mqPropertyEntity.getInteger(ThunderConstants.MQ_RETRY_NOTIFICATION_DELAY_ATTRIBUTE_NAME);
+        final int retryNotificationDelay = mqPropertyEntity.getInteger(ThunderConstant.MQ_RETRY_NOTIFICATION_DELAY_ATTRIBUTE_NAME);
         executor.scheduleAtFixedRate(new Runnable() {
             public void run() {
                 LOG.info("Wait for connection response from {}, retry in {} ms...", url, retryNotificationDelay);

@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.MessageCreator;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.common.thread.ThreadPoolFactory;
@@ -57,8 +57,8 @@ public class MQProducer {
                         @Override
                         public Message createMessage(Session session) throws JMSException {
                             Message message = mqMessageConverter.toMessage(request, session);
-                            message.setBooleanProperty(ThunderConstants.ASYNC_ATTRIBUTE_NAME, request.isAsync());
-                            message.setLongProperty(ThunderConstants.TIMEOUT_ATTRIBUTE_NAME, request.getTimeout());
+                            message.setBooleanProperty(ThunderConstant.ASYNC_ATTRIBUTE_NAME, request.isAsync());
+                            message.setLongProperty(ThunderConstant.TIMEOUT_ATTRIBUTE_NAME, request.getTimeout());
 
                             if (requestDestination != null) {
                                 message.setJMSReplyTo(requestDestination);
@@ -92,8 +92,8 @@ public class MQProducer {
                 @Override
                 public Message createMessage(Session session) throws JMSException {
                     Message message = mqMessageConverter.toMessage(response, session);
-                    message.setBooleanProperty(ThunderConstants.ASYNC_ATTRIBUTE_NAME, response.isAsync());
-                    message.setLongProperty(ThunderConstants.TIMEOUT_ATTRIBUTE_NAME, response.getTimeout());
+                    message.setBooleanProperty(ThunderConstant.ASYNC_ATTRIBUTE_NAME, response.isAsync());
+                    message.setLongProperty(ThunderConstant.TIMEOUT_ATTRIBUTE_NAME, response.getTimeout());
 
                     MQSelectorUtil.setRequestSelector(message, selector);
                     MQSelectorUtil.setResponseSelector(message, applicationEntity);

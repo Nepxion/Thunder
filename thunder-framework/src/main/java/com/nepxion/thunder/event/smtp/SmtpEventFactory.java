@@ -13,14 +13,14 @@ package com.nepxion.thunder.event.smtp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class SmtpEventFactory {
     private static final Logger LOG = LoggerFactory.getLogger(SmtpEventFactory.class);
 
     public static void initialize(ThunderProperties properties) {
-        boolean smtpNotification = properties.getBoolean(ThunderConstants.SMTP_NOTIFICATION_ATTRIBUTE_NAME);
+        boolean smtpNotification = properties.getBoolean(ThunderConstant.SMTP_NOTIFICATION_ATTRIBUTE_NAME);
         if (smtpNotification) {
             new SmtpEventInterceptor(properties);
 

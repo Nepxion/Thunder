@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationType;
 import com.nepxion.thunder.common.entity.ThreadQueueType;
 import com.nepxion.thunder.common.entity.ThreadRejectedPolicyType;
@@ -48,15 +48,15 @@ public class ThreadPoolFactory {
 
     public static ThreadPoolExecutor createThreadPoolDefaultExecutor(String url, String interfaze) {
         return createThreadPoolExecutor(url, interfaze,
-                ThunderConstants.CPUS * 1,
-                ThunderConstants.CPUS * 2,
+                ThunderConstant.CPUS * 1,
+                ThunderConstant.CPUS * 2,
                 15 * 60 * 1000,
                 false);
     }
 
     public static ThreadPoolExecutor createThreadPoolDefaultExecutor() {
-        return createThreadPoolExecutor(ThunderConstants.CPUS * 1,
-                ThunderConstants.CPUS * 2,
+        return createThreadPoolExecutor(ThunderConstant.CPUS * 1,
+                ThunderConstant.CPUS * 2,
                 15 * 60 * 1000,
                 false);
     }
@@ -64,11 +64,11 @@ public class ThreadPoolFactory {
     public static ThreadPoolExecutor createThreadPoolServerExecutor(String url, String interfaze) {
         try {
             return createThreadPoolExecutor(threadPoolServerExecutorMap, url,
-                    properties.getBoolean(ThunderConstants.THREAD_POOL_MULTI_MODE_ATTRIBUTE_NAME) ? interfaze : properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME) + "-" + ApplicationType.SERVICE,
-                    ThunderConstants.CPUS * properties.getInteger(ThunderConstants.THREAD_POOL_SERVER_CORE_POOL_SIZE_ATTRIBUTE_NAME),
-                    ThunderConstants.CPUS * properties.getInteger(ThunderConstants.THREAD_POOL_SERVER_MAXIMUM_POOL_SIZE_ATTRIBUTE_NAME),
-                    properties.getLong(ThunderConstants.THREAD_POOL_SERVER_KEEP_ALIVE_TIME_ATTRIBUTE_NAME),
-                    properties.getBoolean(ThunderConstants.THREAD_POOL_SERVER_ALLOW_CORE_THREAD_TIMEOUT_ATTRIBUTE_NAME));
+                    properties.getBoolean(ThunderConstant.THREAD_POOL_MULTI_MODE_ATTRIBUTE_NAME) ? interfaze : properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME) + "-" + ApplicationType.SERVICE,
+                    ThunderConstant.CPUS * properties.getInteger(ThunderConstant.THREAD_POOL_SERVER_CORE_POOL_SIZE_ATTRIBUTE_NAME),
+                    ThunderConstant.CPUS * properties.getInteger(ThunderConstant.THREAD_POOL_SERVER_MAXIMUM_POOL_SIZE_ATTRIBUTE_NAME),
+                    properties.getLong(ThunderConstant.THREAD_POOL_SERVER_KEEP_ALIVE_TIME_ATTRIBUTE_NAME),
+                    properties.getBoolean(ThunderConstant.THREAD_POOL_SERVER_ALLOW_CORE_THREAD_TIMEOUT_ATTRIBUTE_NAME));
         } catch (Exception e) {
             throw new IllegalArgumentException("Properties maybe isn't initialized", e);
         }
@@ -77,11 +77,11 @@ public class ThreadPoolFactory {
     public static ThreadPoolExecutor createThreadPoolClientExecutor(String url, String interfaze) {
         try {
             return createThreadPoolExecutor(threadPoolClientExecutorMap, url,
-                    properties.getBoolean(ThunderConstants.THREAD_POOL_MULTI_MODE_ATTRIBUTE_NAME) ? interfaze : properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME) + "-" + ApplicationType.REFERENCE,
-                    ThunderConstants.CPUS * properties.getInteger(ThunderConstants.THREAD_POOL_CLIENT_CORE_POOL_SIZE_ATTRIBUTE_NAME),
-                    ThunderConstants.CPUS * properties.getInteger(ThunderConstants.THREAD_POOL_CLIENT_MAXIMUM_POOL_SIZE_ATTRIBUTE_NAME),
-                    properties.getLong(ThunderConstants.THREAD_POOL_CLIENT_KEEP_ALIVE_TIME_ATTRIBUTE_NAME),
-                    properties.getBoolean(ThunderConstants.THREAD_POOL_CLIENT_ALLOW_CORE_THREAD_TIMEOUT_ATTRIBUTE_NAME));
+                    properties.getBoolean(ThunderConstant.THREAD_POOL_MULTI_MODE_ATTRIBUTE_NAME) ? interfaze : properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME) + "-" + ApplicationType.REFERENCE,
+                    ThunderConstant.CPUS * properties.getInteger(ThunderConstant.THREAD_POOL_CLIENT_CORE_POOL_SIZE_ATTRIBUTE_NAME),
+                    ThunderConstant.CPUS * properties.getInteger(ThunderConstant.THREAD_POOL_CLIENT_MAXIMUM_POOL_SIZE_ATTRIBUTE_NAME),
+                    properties.getLong(ThunderConstant.THREAD_POOL_CLIENT_KEEP_ALIVE_TIME_ATTRIBUTE_NAME),
+                    properties.getBoolean(ThunderConstant.THREAD_POOL_CLIENT_ALLOW_CORE_THREAD_TIMEOUT_ATTRIBUTE_NAME));
         } catch (Exception e) {
             throw new IllegalArgumentException("Properties maybe isn't initialized");
         }
@@ -139,10 +139,10 @@ public class ThreadPoolFactory {
     }
 
     private static BlockingQueue<Runnable> createBlockingQueue() {
-        String queue = properties.getString(ThunderConstants.THREAD_POOL_QUEUE_ATTRIBUTE_NAME);
+        String queue = properties.getString(ThunderConstant.THREAD_POOL_QUEUE_ATTRIBUTE_NAME);
         ThreadQueueType queueType = ThreadQueueType.fromString(queue);
 
-        int queueCapacity = ThunderConstants.CPUS * properties.getInteger(ThunderConstants.THREAD_POOL_QUEUE_CAPACITY_ATTRIBUTE_NAME);
+        int queueCapacity = ThunderConstant.CPUS * properties.getInteger(ThunderConstant.THREAD_POOL_QUEUE_CAPACITY_ATTRIBUTE_NAME);
 
         switch (queueType) {
             case LINKED_BLOCKING_QUEUE:
@@ -157,7 +157,7 @@ public class ThreadPoolFactory {
     }
 
     private static RejectedExecutionHandler createRejectedPolicy() {
-        String rejectedPolicy = properties.getString(ThunderConstants.THREAD_POOL_REJECTED_POLICY_ATTRIBUTE_NAME);
+        String rejectedPolicy = properties.getString(ThunderConstant.THREAD_POOL_REJECTED_POLICY_ATTRIBUTE_NAME);
         ThreadRejectedPolicyType rejectedPolicyType = ThreadRejectedPolicyType.fromString(rejectedPolicy);
 
         switch (rejectedPolicyType) {

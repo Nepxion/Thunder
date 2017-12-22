@@ -93,7 +93,7 @@ import com.nepxion.swing.textarea.JBasicTextArea;
 import com.nepxion.swing.textfield.JBasicPasswordField;
 import com.nepxion.swing.textfield.JBasicTextField;
 import com.nepxion.swing.textfield.number.JNumberTextField;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MonitorStat;
 import com.nepxion.thunder.common.entity.RedisType;
 import com.nepxion.thunder.console.context.CacheContext;
@@ -1095,9 +1095,9 @@ public class TraceTopology extends AbstractTopology {
 
         public Map<String, Object> getConditions() {
             conditions.clear();
-            conditions.put(ThunderConstants.SPLUNK_SOURCE_TYPE_ATTRIBUTE_NAME, sourceTypeTextField.getText());
-            conditions.put(ThunderConstants.SPLUNK_EARLIEST_TIME_ATTRIBUTE_NAME, earliestDateTimeSelector.getDate());
-            conditions.put(ThunderConstants.SPLUNK_LATEST_TIME_ATTRIBUTE_NAME, latestDateTimeSelector.getDate());
+            conditions.put(ThunderConstant.SPLUNK_SOURCE_TYPE_ATTRIBUTE_NAME, sourceTypeTextField.getText());
+            conditions.put(ThunderConstant.SPLUNK_EARLIEST_TIME_ATTRIBUTE_NAME, earliestDateTimeSelector.getDate());
+            conditions.put(ThunderConstant.SPLUNK_LATEST_TIME_ATTRIBUTE_NAME, latestDateTimeSelector.getDate());
 
             return conditions;
         }
@@ -1155,7 +1155,7 @@ public class TraceTopology extends AbstractTopology {
                 }
 
                 sourceTypeTextField = new JBasicTextField();
-                sourceTypeTextField.setText(ThunderConstants.NAMESPACE_ELEMENT_NAME);
+                sourceTypeTextField.setText(ThunderConstant.NAMESPACE_ELEMENT_NAME);
                 earliestDateTimeSelector = new JDateTimeSelector(new Date(), SplunkLogServiceMonitorRetriever.DATE_FORMAT, new JSpinnerDateTimeEditor());
                 latestDateTimeSelector = new JDateTimeSelector(new Date(), SplunkLogServiceMonitorRetriever.DATE_FORMAT, new JSpinnerDateTimeEditor());
 
@@ -1163,10 +1163,10 @@ public class TraceTopology extends AbstractTopology {
                 startButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Map<String, String> splunkValue = new HashMap<String, String>();
-                        splunkValue.put(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME, hostComboBox.getSelectedItem().toString());
-                        splunkValue.put(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME, portTextField.getText().trim());
-                        splunkValue.put(ThunderConstants.SPLUNK_USER_NAME_ATTRIBUTE_NAME, userNameTextField.getText().trim());
-                        splunkValue.put(ThunderConstants.SPLUNK_PASSWORD_ATTRIBUTE_NAME, passwordField.getPasswordText().trim());
+                        splunkValue.put(ThunderConstant.SPLUNK_HOST_ATTRIBUTE_NAME, hostComboBox.getSelectedItem().toString());
+                        splunkValue.put(ThunderConstant.SPLUNK_PORT_ATTRIBUTE_NAME, portTextField.getText().trim());
+                        splunkValue.put(ThunderConstant.SPLUNK_USER_NAME_ATTRIBUTE_NAME, userNameTextField.getText().trim());
+                        splunkValue.put(ThunderConstant.SPLUNK_PASSWORD_ATTRIBUTE_NAME, passwordField.getPasswordText().trim());
                         PropertiesContext.addPropertiesMap(splunkValue);
 
                         try {
@@ -1311,10 +1311,10 @@ public class TraceTopology extends AbstractTopology {
                 startButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Map<String, String> sentinelValue = new HashMap<String, String>();
-                        sentinelValue.put(ThunderConstants.REDIS_SENTINEL_ATTRIBUTE_NAME, sentinelComboBox.getSelectedItem().toString());
-                        sentinelValue.put(ThunderConstants.REDIS_MASTER_NAME_ATTRIBUTE_NAME, masterNameTextField.getText().trim());
-                        sentinelValue.put(ThunderConstants.REDIS_CLIENT_NAME_ATTRIBUTE_NAME, clientNameTextField.getText().trim());
-                        sentinelValue.put(ThunderConstants.REDIS_PASSWORD_ATTRIBUTE_NAME, passwordField.getPasswordText().trim());
+                        sentinelValue.put(ThunderConstant.REDIS_SENTINEL_ATTRIBUTE_NAME, sentinelComboBox.getSelectedItem().toString());
+                        sentinelValue.put(ThunderConstant.REDIS_MASTER_NAME_ATTRIBUTE_NAME, masterNameTextField.getText().trim());
+                        sentinelValue.put(ThunderConstant.REDIS_CLIENT_NAME_ATTRIBUTE_NAME, clientNameTextField.getText().trim());
+                        sentinelValue.put(ThunderConstant.REDIS_PASSWORD_ATTRIBUTE_NAME, passwordField.getPasswordText().trim());
 
                         PropertiesContext.addPropertiesMap(sentinelValue);
                         CacheContext.startSentinel();
@@ -1410,7 +1410,7 @@ public class TraceTopology extends AbstractTopology {
                 startButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Map<String, String> sentinelValue = new HashMap<String, String>();
-                        sentinelValue.put(ThunderConstants.REDIS_CLUSTER_ATTRIBUTE_NAME, clusterComboBox.getSelectedItem().toString());
+                        sentinelValue.put(ThunderConstant.REDIS_CLUSTER_ATTRIBUTE_NAME, clusterComboBox.getSelectedItem().toString());
 
                         PropertiesContext.addPropertiesMap(sentinelValue);
                         CacheContext.startCluster();

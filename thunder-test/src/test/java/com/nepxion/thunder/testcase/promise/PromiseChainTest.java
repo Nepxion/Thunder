@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.promise.PromiseContext;
 import com.nepxion.thunder.common.promise.PromiseDone;
 import com.nepxion.thunder.common.promise.PromiseEntity;
@@ -151,7 +151,7 @@ public class PromiseChainTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                execute(messageId, new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(result), null);
+                execute(messageId, new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(result), null);
                 // execute(messageId, new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(result), new IllegalArgumentException("Step2 Exception"));
             }
         }).run();

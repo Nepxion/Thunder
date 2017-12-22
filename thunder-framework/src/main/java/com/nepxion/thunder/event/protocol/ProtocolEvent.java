@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ActionType;
 import com.nepxion.thunder.common.entity.ApplicationType;
 import com.nepxion.thunder.common.entity.MethodKey;
@@ -81,10 +81,10 @@ public class ProtocolEvent extends Event implements Serializable {
         }
         map.put("toUrl", protocolMessage.getToUrl());
         if (actionType != ActionType.SYSTEM) {
-            map.put("processStartTime", new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(protocolMessage.getProcessStartTime())));
-            map.put("processEndTime", new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(protocolMessage.getProcessEndTime())));
-            map.put("deliverStartTime", new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(protocolMessage.getDeliverStartTime())));
-            map.put("deliverEndTime", new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(protocolMessage.getDeliverEndTime())));
+            map.put("processStartTime", new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(new Date(protocolMessage.getProcessStartTime())));
+            map.put("processEndTime", new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(new Date(protocolMessage.getProcessEndTime())));
+            map.put("deliverStartTime", new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(new Date(protocolMessage.getDeliverStartTime())));
+            map.put("deliverEndTime", new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(new Date(protocolMessage.getDeliverEndTime())));
             map.put("processedTime", (protocolMessage.getProcessEndTime() - protocolMessage.getProcessStartTime()) + " ms");
             map.put("deliveredTime", (protocolMessage.getDeliverEndTime() - protocolMessage.getDeliverStartTime()) + " ms");
             map.put("totalTime", (protocolMessage.getProcessEndTime() - protocolMessage.getProcessStartTime() + protocolMessage.getDeliverEndTime() - protocolMessage.getDeliverStartTime()) + " ms");

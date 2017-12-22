@@ -19,7 +19,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.nepxion.swing.element.ElementNode;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.common.property.ThunderProperties;
@@ -119,13 +119,13 @@ public class TopologyController {
                 String mqUrl = null;
                 switch (protocolType) {
                     case KAFKA:
-                        mqUrl = mqProperties.getString(ThunderConstants.KAFKA_PRODUCER_BOOTSTRAP_SERVERS_ATTRIBUTE_NAME);
+                        mqUrl = mqProperties.getString(ThunderConstant.KAFKA_PRODUCER_BOOTSTRAP_SERVERS_ATTRIBUTE_NAME);
                         break;
                     case ACTIVE_MQ:
-                        mqUrl = mqProperties.getString(ThunderConstants.MQ_URL_ATTRIBUTE_NAME);
+                        mqUrl = mqProperties.getString(ThunderConstant.MQ_URL_ATTRIBUTE_NAME);
                         break;
                     case TIBCO:
-                        mqUrl = mqProperties.getString(ThunderConstants.MQ_URL_ATTRIBUTE_NAME);
+                        mqUrl = mqProperties.getString(ThunderConstant.MQ_URL_ATTRIBUTE_NAME);
                         break;
                 }
 
@@ -138,13 +138,13 @@ public class TopologyController {
             String mqUrl = null;
             switch (protocolType) {
                 case KAFKA:
-                    mqUrl = properties.getString(ThunderConstants.KAFKA_PRODUCER_BOOTSTRAP_SERVERS_ATTRIBUTE_NAME);
+                    mqUrl = properties.getString(ThunderConstant.KAFKA_PRODUCER_BOOTSTRAP_SERVERS_ATTRIBUTE_NAME);
                     break;
                 case ACTIVE_MQ:
-                    mqUrl = properties.getString(ThunderConstants.MQ_URL_ATTRIBUTE_NAME);
+                    mqUrl = properties.getString(ThunderConstant.MQ_URL_ATTRIBUTE_NAME);
                     break;
                 case TIBCO:
-                    mqUrl = properties.getString(ThunderConstants.MQ_URL_ATTRIBUTE_NAME);
+                    mqUrl = properties.getString(ThunderConstant.MQ_URL_ATTRIBUTE_NAME);
                     break;
             }
 
@@ -161,7 +161,7 @@ public class TopologyController {
     public static List<String> getCacheUrls(ApplicationEntity applicationEntity) throws Exception {
         ThunderProperties properties = PropertyController.getProperties(applicationEntity);
 
-        String sentinelValue = properties.getString(ThunderConstants.REDIS_SENTINEL_ATTRIBUTE_NAME);
+        String sentinelValue = properties.getString(ThunderConstant.REDIS_SENTINEL_ATTRIBUTE_NAME);
         if (StringUtils.isNotEmpty(sentinelValue)) {
             String[] sentinelArray = StringUtils.split(sentinelValue, ";");
             List<String> cacheUrls = new ArrayList<String>();
@@ -172,7 +172,7 @@ public class TopologyController {
             return cacheUrls;
         }
 
-        String clusterValue = properties.getString(ThunderConstants.REDIS_CLUSTER_ATTRIBUTE_NAME);
+        String clusterValue = properties.getString(ThunderConstant.REDIS_CLUSTER_ATTRIBUTE_NAME);
         if (StringUtils.isNotEmpty(clusterValue)) {
             String[] clusterArray = StringUtils.split(clusterValue, ";");
             List<String> cacheUrls = new ArrayList<String>();
@@ -189,8 +189,8 @@ public class TopologyController {
     public static List<String> getLoggerUrls(ApplicationEntity applicationEntity) throws Exception {
         ThunderProperties properties = PropertyController.getProperties(applicationEntity);
 
-        String host = properties.getString(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME);
-        int port = properties.getInteger(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME);
+        String host = properties.getString(ThunderConstant.SPLUNK_HOST_ATTRIBUTE_NAME);
+        int port = properties.getInteger(ThunderConstant.SPLUNK_PORT_ATTRIBUTE_NAME);
 
         return Arrays.asList(host + ":" + port);
     }

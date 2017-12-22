@@ -16,7 +16,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.CallbackType;
 import com.nepxion.thunder.common.entity.MethodEntity;
@@ -41,19 +41,19 @@ public class MethodBeanDefinitionParser extends AbstractExtensionBeanDefinitionP
     }
 
     protected void parseMethod(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        String namespaceElementName = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
-        String referenceElementName = ThunderConstants.REFERENCE_ELEMENT_NAME;
-        String methodAttributeName = ThunderConstants.METHOD_ATTRIBUTE_NAME;
-        String parameterTypesAttributeName = ThunderConstants.PARAMETER_TYPES_ATTRIBUTE_NAME;
-        String traceIdIndexAttributeName = ThunderConstants.TRACE_ID_INDEX_ATTRIBUTE_NAME;
-        String asyncAttributeName = ThunderConstants.ASYNC_ATTRIBUTE_NAME;
-        String syncAttributeName = ThunderConstants.SYNC_ATTRIBUTE_NAME;
-        String timeoutAttributeName = ThunderConstants.TIMEOUT_ATTRIBUTE_NAME;
-        String asyncTimeoutAttributeName = ThunderConstants.ASYNC_TIMEOUT_ATTRIBUTE_NAME;
-        String syncTimeoutAttributeName = ThunderConstants.SYNC_TIMEOUT_ATTRIBUTE_NAME;
-        String broadcastAttributeName = ThunderConstants.BROADCAST_ATTRIBUTE_NAME;
-        String callbackAttributeName = ThunderConstants.CALLBACK_ATTRIBUTE_NAME;
-        String callbackTypeAttributeName = ThunderConstants.CALLBACK_TYPE_ATTRIBUTE_NAME;
+        String namespaceElementName = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
+        String referenceElementName = ThunderConstant.REFERENCE_ELEMENT_NAME;
+        String methodAttributeName = ThunderConstant.METHOD_ATTRIBUTE_NAME;
+        String parameterTypesAttributeName = ThunderConstant.PARAMETER_TYPES_ATTRIBUTE_NAME;
+        String traceIdIndexAttributeName = ThunderConstant.TRACE_ID_INDEX_ATTRIBUTE_NAME;
+        String asyncAttributeName = ThunderConstant.ASYNC_ATTRIBUTE_NAME;
+        String syncAttributeName = ThunderConstant.SYNC_ATTRIBUTE_NAME;
+        String timeoutAttributeName = ThunderConstant.TIMEOUT_ATTRIBUTE_NAME;
+        String asyncTimeoutAttributeName = ThunderConstant.ASYNC_TIMEOUT_ATTRIBUTE_NAME;
+        String syncTimeoutAttributeName = ThunderConstant.SYNC_TIMEOUT_ATTRIBUTE_NAME;
+        String broadcastAttributeName = ThunderConstant.BROADCAST_ATTRIBUTE_NAME;
+        String callbackAttributeName = ThunderConstant.CALLBACK_ATTRIBUTE_NAME;
+        String callbackTypeAttributeName = ThunderConstant.CALLBACK_TYPE_ATTRIBUTE_NAME;
 
         String method = element.getAttribute(methodAttributeName);
         String parameterTypes = element.getAttribute(parameterTypesAttributeName);

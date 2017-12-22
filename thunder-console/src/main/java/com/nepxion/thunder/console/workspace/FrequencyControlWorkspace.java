@@ -21,7 +21,7 @@ import com.nepxion.swing.handle.HandleManager;
 import com.nepxion.swing.layout.filed.FiledLayout;
 import com.nepxion.thunder.common.config.ApplicationConfig;
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.console.controller.ConfigController;
@@ -153,7 +153,7 @@ public class FrequencyControlWorkspace extends ConfigWorkspace {
 
     @Override
     protected String createCategory() {
-        return ThunderConstants.APPLICATION_ELEMENT_NAME;
+        return ThunderConstant.APPLICATION_ELEMENT_NAME;
     }
 
     @Override

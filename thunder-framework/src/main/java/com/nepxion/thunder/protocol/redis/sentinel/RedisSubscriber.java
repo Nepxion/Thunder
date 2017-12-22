@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
@@ -74,7 +74,7 @@ public class RedisSubscriber extends RedisHierachy {
                 } finally {
                     try {
                         ThunderProperties properties = RedisSentinelPoolFactory.getProperties();
-                        TimeUnit.SECONDS.sleep(properties.getLong(ThunderConstants.REDIS_RECONNECTION_WAIT_ATTRIBUTE_NAME));
+                        TimeUnit.SECONDS.sleep(properties.getLong(ThunderConstant.REDIS_RECONNECTION_WAIT_ATTRIBUTE_NAME));
                     } catch (InterruptedException e) {
                     }
                     subscribe(interfaze, applicationEntity);

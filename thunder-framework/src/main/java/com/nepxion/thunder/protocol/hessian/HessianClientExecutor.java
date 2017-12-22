@@ -13,7 +13,7 @@ package com.nepxion.thunder.protocol.hessian;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ConnectionEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
@@ -48,8 +48,8 @@ public class HessianClientExecutor extends AbstractClientExecutor {
     public void setProperties(ThunderProperties properties) {
         super.setProperties(properties);
 
-        long readTimeout = properties.getLong(ThunderConstants.HESSIAN_READ_TIMEOUT_ATTRIBUTE_NAME);
-        long connectTimeout = properties.getLong(ThunderConstants.HESSIAN_CONNECT_TIMEOUT_ATTRIBUTE_NAME);
+        long readTimeout = properties.getLong(ThunderConstant.HESSIAN_READ_TIMEOUT_ATTRIBUTE_NAME);
+        long connectTimeout = properties.getLong(ThunderConstant.HESSIAN_CONNECT_TIMEOUT_ATTRIBUTE_NAME);
 
         proxyFactory.setOverloadEnabled(true);
         proxyFactory.setReadTimeout(readTimeout);

@@ -13,7 +13,7 @@ package com.nepxion.thunder.event.protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ActionType;
 import com.nepxion.thunder.common.entity.ApplicationType;
 import com.nepxion.thunder.common.entity.ProtocolType;
@@ -27,7 +27,7 @@ public class ProtocolEventFactory {
     private static boolean eventNotification = false;
 
     public static void initialize(ThunderProperties properties) {
-        eventNotification = properties.getBoolean(ThunderConstants.EVENT_NOTIFICATION_ATTRIBUTE_NAME);
+        eventNotification = properties.getBoolean(ThunderConstant.EVENT_NOTIFICATION_ATTRIBUTE_NAME);
         if (eventNotification) {
             LOG.info("Event notification is enabled...");
         }

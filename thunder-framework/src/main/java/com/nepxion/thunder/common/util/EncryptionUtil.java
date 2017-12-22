@@ -19,7 +19,7 @@ import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 
 public class EncryptionUtil {
     public static final String ALGORITHM_MD5 = "MD5";
@@ -60,7 +60,7 @@ public class EncryptionUtil {
     }
 
     public static String encrypt(String text, String algorithm) throws Exception {
-        return encrypt(text, algorithm, ThunderConstants.ENCODING_FORMAT);
+        return encrypt(text, algorithm, ThunderConstant.ENCODING_FORMAT);
     }
 
     public static String encrypt(String text, String algorithm, String charset) throws Exception {

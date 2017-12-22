@@ -22,7 +22,7 @@ import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MonitorEntity;
 import com.nepxion.thunder.common.entity.MonitorStat;
 import com.nepxion.thunder.common.property.ThunderProperties;
@@ -51,10 +51,10 @@ public class WebServiceMonitorExecutor extends AbstractMonitorExecutor {
 
             String value = SerializerExecutor.toJson(monitorStat);
 
-            HttpEntity entity = new StringEntity(value, ThunderConstants.ENCODING_FORMAT);
+            HttpEntity entity = new StringEntity(value, ThunderConstant.ENCODING_FORMAT);
 
             HttpPost httpPost = new HttpPost(address);
-            httpPost.addHeader("content-type", "application/json;charset=" + ThunderConstants.ENCODING_FORMAT);
+            httpPost.addHeader("content-type", "application/json;charset=" + ThunderConstant.ENCODING_FORMAT);
             httpPost.setEntity(entity);
 
             HttpAsyncCallback httpAsyncCallback = new HttpAsyncCallback();

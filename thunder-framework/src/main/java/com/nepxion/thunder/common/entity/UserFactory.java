@@ -13,13 +13,13 @@ package com.nepxion.thunder.common.entity;
 import java.util.Arrays;
 import java.util.List;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 
 public class UserFactory {
     public static UserEntity createAdministrator() {
         UserEntity userEntity = new UserEntity();
-        userEntity.setName(ThunderConstants.USER_ADMIN_NAME);
-        userEntity.setPassword(ThunderConstants.USER_ADMIN_PASSWORD);
+        userEntity.setName(ThunderConstant.USER_ADMIN_NAME);
+        userEntity.setPassword(ThunderConstant.USER_ADMIN_PASSWORD);
         userEntity.setType(UserType.ADMINISTRATOR);
         userEntity.setOperations(getAllOperations());
 

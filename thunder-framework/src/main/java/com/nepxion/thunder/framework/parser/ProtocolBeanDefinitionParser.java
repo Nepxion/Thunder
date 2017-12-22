@@ -17,7 +17,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.MQEntity;
 import com.nepxion.thunder.common.entity.ProtocolEntity;
@@ -38,36 +38,36 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
 
-        String typeAttributeName = ThunderConstants.TYPE_ATTRIBUTE_NAME;
-        String pathAttributeName = ThunderConstants.PATH_ATTRIBUTE_NAME;
+        String typeAttributeName = ThunderConstant.TYPE_ATTRIBUTE_NAME;
+        String pathAttributeName = ThunderConstant.PATH_ATTRIBUTE_NAME;
 
-        String nettyServerExecutorId = ThunderConstants.NETTY_SERVER_EXECUTOR_ID;
-        String nettyClientExecutorId = ThunderConstants.NETTY_CLIENT_EXECUTOR_ID;
-        String nettyClientInterceptorId = ThunderConstants.NETTY_CLIENT_INTERCEPTOR_ID;
+        String nettyServerExecutorId = ThunderConstant.NETTY_SERVER_EXECUTOR_ID;
+        String nettyClientExecutorId = ThunderConstant.NETTY_CLIENT_EXECUTOR_ID;
+        String nettyClientInterceptorId = ThunderConstant.NETTY_CLIENT_INTERCEPTOR_ID;
 
-        String hessianServerExecutorId = ThunderConstants.HESSIAN_SERVER_EXECUTOR_ID;
-        String hessianClientExecutorId = ThunderConstants.HESSIAN_CLIENT_EXECUTOR_ID;
-        String hessianClientInterceptorId = ThunderConstants.HESSIAN_CLIENT_INTERCEPTOR_ID;
+        String hessianServerExecutorId = ThunderConstant.HESSIAN_SERVER_EXECUTOR_ID;
+        String hessianClientExecutorId = ThunderConstant.HESSIAN_CLIENT_EXECUTOR_ID;
+        String hessianClientInterceptorId = ThunderConstant.HESSIAN_CLIENT_INTERCEPTOR_ID;
 
-        String mqServerExecutorId = ThunderConstants.MQ_SERVER_EXECUTOR_ID;
-        String mqClientExecutorId = ThunderConstants.MQ_CLIENT_EXECUTOR_ID;
-        String mqClientInterceptorId = ThunderConstants.MQ_CLIENT_INTERCEPTOR_ID;
+        String mqServerExecutorId = ThunderConstant.MQ_SERVER_EXECUTOR_ID;
+        String mqClientExecutorId = ThunderConstant.MQ_CLIENT_EXECUTOR_ID;
+        String mqClientInterceptorId = ThunderConstant.MQ_CLIENT_INTERCEPTOR_ID;
 
-        String kafkaServerExecutorId = ThunderConstants.KAFKA_SERVER_EXECUTOR_ID;
-        String kafkaClientExecutorId = ThunderConstants.KAFKA_CLIENT_EXECUTOR_ID;
-        String kafkaClientInterceptorId = ThunderConstants.KAFKA_CLIENT_INTERCEPTOR_ID;
+        String kafkaServerExecutorId = ThunderConstant.KAFKA_SERVER_EXECUTOR_ID;
+        String kafkaClientExecutorId = ThunderConstant.KAFKA_CLIENT_EXECUTOR_ID;
+        String kafkaClientInterceptorId = ThunderConstant.KAFKA_CLIENT_INTERCEPTOR_ID;
 
-        String activeMQQueueId = ThunderConstants.ACTIVE_MQ_QUEUE_ID;
-        String activeMQTopicId = ThunderConstants.ACTIVE_MQ_TOPIC_ID;
-        String activeMQJndiInitialContextFactoryId = ThunderConstants.ACTIVE_MQ_JNDI_INITIAL_CONTEXT_FACTORY_ID;
-        String activeMQInitialConnectionFactory = ThunderConstants.ACTIVE_MQ_INITIAL_CONNECTION_FACTORY_ID;
-        String activeMQPooledConnectionFactoryId = ThunderConstants.ACTIVE_MQ_POOLED_CONNECTION_FACTORY_ID;
+        String activeMQQueueId = ThunderConstant.ACTIVE_MQ_QUEUE_ID;
+        String activeMQTopicId = ThunderConstant.ACTIVE_MQ_TOPIC_ID;
+        String activeMQJndiInitialContextFactoryId = ThunderConstant.ACTIVE_MQ_JNDI_INITIAL_CONTEXT_FACTORY_ID;
+        String activeMQInitialConnectionFactory = ThunderConstant.ACTIVE_MQ_INITIAL_CONNECTION_FACTORY_ID;
+        String activeMQPooledConnectionFactoryId = ThunderConstant.ACTIVE_MQ_POOLED_CONNECTION_FACTORY_ID;
 
-        String tibcoQueueId = ThunderConstants.TIBCO_QUEUE_ID;
-        String tibcoTopicId = ThunderConstants.TIBCO_TOPIC_ID;
-        String tibcoJndiInitialContextFactoryId = ThunderConstants.TIBCO_JNDI_INITIAL_CONTEXT_FACTORY_ID;
-        String tibcoInitialConnectionFactory = ThunderConstants.TIBCO_INITIAL_CONNECTION_FACTORY_ID;
-        String tibcoPooledConnectionFactoryId = ThunderConstants.TIBCO_POOLED_CONNECTION_FACTORY_ID;
+        String tibcoQueueId = ThunderConstant.TIBCO_QUEUE_ID;
+        String tibcoTopicId = ThunderConstant.TIBCO_TOPIC_ID;
+        String tibcoJndiInitialContextFactoryId = ThunderConstant.TIBCO_JNDI_INITIAL_CONTEXT_FACTORY_ID;
+        String tibcoInitialConnectionFactory = ThunderConstant.TIBCO_INITIAL_CONNECTION_FACTORY_ID;
+        String tibcoPooledConnectionFactoryId = ThunderConstant.TIBCO_POOLED_CONNECTION_FACTORY_ID;
 
         String type = element.getAttribute(typeAttributeName);
         ProtocolType protocolType = null;

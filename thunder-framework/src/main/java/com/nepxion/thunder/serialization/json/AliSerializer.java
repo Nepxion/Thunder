@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.serialization.SerializerException;
 
 public class AliSerializer {
@@ -24,7 +24,7 @@ public class AliSerializer {
             throw new SerializerException("Object is null");
         }
 
-        return JSON.toJSONStringWithDateFormat(object, ThunderConstants.DATE_FORMAT, SerializerFeature.WriteClassName);
+        return JSON.toJSONStringWithDateFormat(object, ThunderConstant.DATE_FORMAT, SerializerFeature.WriteClassName);
     }
 
     public static <T> T fromJson(String json, Class<T> clazz) {

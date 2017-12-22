@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.object.ObjectPoolFactory;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.common.property.ThunderPropertiesManager;
@@ -36,7 +36,7 @@ public class PropertiesContext {
 
     public static String getRegistryAddress() {
         try {
-            return properties.getString(ThunderConstants.ZOOKEEPER_ADDRESS_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.ZOOKEEPER_ADDRESS_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -44,12 +44,12 @@ public class PropertiesContext {
 
     public static void setRegistryAddress(String registryAddress) {
         registryAddress = registryAddress.replaceAll(";", ",");
-        properties.put(ThunderConstants.ZOOKEEPER_ADDRESS_ATTRIBUTE_NAME, registryAddress);
+        properties.put(ThunderConstant.ZOOKEEPER_ADDRESS_ATTRIBUTE_NAME, registryAddress);
     }
 
     public static String getRedisSentinel() {
         try {
-            return properties.getString(ThunderConstants.REDIS_SENTINEL_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.REDIS_SENTINEL_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -57,7 +57,7 @@ public class PropertiesContext {
 
     public static String getRedisMasterName() {
         try {
-            return properties.getString(ThunderConstants.REDIS_MASTER_NAME_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.REDIS_MASTER_NAME_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -65,7 +65,7 @@ public class PropertiesContext {
 
     public static String getRedisClientName() {
         try {
-            return properties.getString(ThunderConstants.REDIS_CLIENT_NAME_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.REDIS_CLIENT_NAME_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -73,7 +73,7 @@ public class PropertiesContext {
 
     public static String getRedisPassword() {
         try {
-            return properties.getString(ThunderConstants.REDIS_PASSWORD_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.REDIS_PASSWORD_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -81,7 +81,7 @@ public class PropertiesContext {
 
     public static String getRedisCluster() {
         try {
-            return properties.getString(ThunderConstants.REDIS_CLUSTER_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.REDIS_CLUSTER_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -89,7 +89,7 @@ public class PropertiesContext {
 
     public static String getLoggerHost() {
         try {
-            return properties.getString(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.SPLUNK_HOST_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -97,7 +97,7 @@ public class PropertiesContext {
 
     public static int getLoggerPort() {
         try {
-            return properties.getInteger(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME);
+            return properties.getInteger(ThunderConstant.SPLUNK_PORT_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return -1;
         }
@@ -105,7 +105,7 @@ public class PropertiesContext {
 
     public static String getLoggerUserName() {
         try {
-            return properties.getString(ThunderConstants.SPLUNK_USER_NAME_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.SPLUNK_USER_NAME_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }
@@ -113,7 +113,7 @@ public class PropertiesContext {
 
     public static String getLoggerPassword() {
         try {
-            return properties.getString(ThunderConstants.SPLUNK_PASSWORD_ATTRIBUTE_NAME);
+            return properties.getString(ThunderConstant.SPLUNK_PASSWORD_ATTRIBUTE_NAME);
         } catch (Exception e) {
             return null;
         }

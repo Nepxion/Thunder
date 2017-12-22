@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.nepxion.thunder.common.callback.ThunderCallback;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.container.CacheContainer;
 import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
@@ -66,7 +66,7 @@ public class ClientInterceptorAdapter extends ThunderDelegateImpl {
             return;
         }
 
-        long scan = properties.getLong(ThunderConstants.ASYNC_SCAN_ATTRIBUTE_NAME);
+        long scan = properties.getLong(ThunderConstant.ASYNC_SCAN_ATTRIBUTE_NAME);
 
         Thread scanAsyncThread = new Thread(new ScanAsyncRunnable(responseEntityMap, scan), "Scan Async");
         scanAsyncThread.setDaemon(true);

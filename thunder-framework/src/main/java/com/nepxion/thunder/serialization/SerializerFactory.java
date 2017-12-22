@@ -13,7 +13,7 @@ package com.nepxion.thunder.serialization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.serialization.binary.FSTSerializerFactory;
 import com.nepxion.thunder.serialization.binary.KryoSerializerFactory;
@@ -27,7 +27,7 @@ public class SerializerFactory {
     private static boolean serializerLogPrint;
 
     public static void initialize(ThunderProperties properties) {
-        String binarySerializer = properties.getString(ThunderConstants.BINARY_SERIALIZER_ATTRIBUTE_NAME);
+        String binarySerializer = properties.getString(ThunderConstant.BINARY_SERIALIZER_ATTRIBUTE_NAME);
         try {
             binarySerializerType = SerializerType.fromString(binarySerializer);
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class SerializerFactory {
             KryoSerializerFactory.initialize();
         }
 
-        String jsonSerializer = properties.getString(ThunderConstants.JSON_SERIALIZER_ATTRIBUTE_NAME);
+        String jsonSerializer = properties.getString(ThunderConstant.JSON_SERIALIZER_ATTRIBUTE_NAME);
         try {
             jsonSerializerType = SerializerType.fromString(jsonSerializer);
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class SerializerFactory {
             FSTJsonSerializerFactory.initialize();
         }
 
-        serializerLogPrint = properties.getBoolean(ThunderConstants.SERIALIZER_LOG_PRINT_ATTRIBUTE_NAME);
+        serializerLogPrint = properties.getBoolean(ThunderConstant.SERIALIZER_LOG_PRINT_ATTRIBUTE_NAME);
     }
 
     public static SerializerType getBinarySerializerType() {

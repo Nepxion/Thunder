@@ -19,7 +19,7 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ApplicationType;
 import com.nepxion.thunder.common.entity.ProtocolType;
@@ -103,7 +103,7 @@ public class SummaryController {
 
         List<String> times = new ArrayList<String>();
         for (ApplicationEntity serviceInstance : serviceInstanceList) {
-            times.add(new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(serviceInstance.getTime())));
+            times.add(new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(new Date(serviceInstance.getTime())));
         }
         summaryEntity.setTimes(times);
 
@@ -132,7 +132,7 @@ public class SummaryController {
 
         List<String> times = new ArrayList<String>();
         for (ApplicationEntity referenceInstance : referenceInstanceList) {
-            times.add(new SimpleDateFormat(ThunderConstants.DATE_FORMAT).format(new Date(referenceInstance.getTime())));
+            times.add(new SimpleDateFormat(ThunderConstant.DATE_FORMAT).format(new Date(referenceInstance.getTime())));
         }
         summaryEntity.setTimes(times);
 

@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import com.nepxion.thunder.common.config.ApplicationConfig;
 import com.nepxion.thunder.common.config.ReferenceConfig;
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ApplicationType;
@@ -340,7 +340,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved property [{}]", path);
 
-            String property = new String(data, ThunderConstants.ENCODING_FORMAT);
+            String property = new String(data, ThunderConstant.ENCODING_FORMAT);
 
             return property;
         }
@@ -562,7 +562,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         UserType type = userEntity.getType();
         List<UserOperation> operations = userEntity.getOperations();
 
-        if ((StringUtils.equals(name, ThunderConstants.USER_ADMIN_NAME) && type != UserType.ADMINISTRATOR) || (!StringUtils.equals(name, ThunderConstants.USER_ADMIN_NAME) && type == UserType.ADMINISTRATOR)) {
+        if ((StringUtils.equals(name, ThunderConstant.USER_ADMIN_NAME) && type != UserType.ADMINISTRATOR) || (!StringUtils.equals(name, ThunderConstant.USER_ADMIN_NAME) && type == UserType.ADMINISTRATOR)) {
             throw new ZookeeperException("User can't be persisted, because name=" + name + ", type=" + type);
         }
 
@@ -586,7 +586,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     @Override
     public void deleteUser(UserEntity userEntity) throws Exception {
         String name = userEntity.getName();
-        if (StringUtils.equals(name, ThunderConstants.USER_ADMIN_NAME)) {
+        if (StringUtils.equals(name, ThunderConstant.USER_ADMIN_NAME)) {
             throw new ZookeeperException("Administrator [" + name + "] can't be deleted");
         }
 
@@ -845,7 +845,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         MethodInvocation frequencyInvocation = new MethodInvocation();
         frequencyInvocation.setMethodName("setFrequency");
         frequencyInvocation.setParameterTypes(new Class<?>[] { int.class });
-        frequencyInvocation.setParameters(new Object[] { properties.getInteger(ThunderConstants.FREQUENCY_ATTRIBUTE_NAME) });
+        frequencyInvocation.setParameters(new Object[] { properties.getInteger(ThunderConstant.FREQUENCY_ATTRIBUTE_NAME) });
 
         modifyApplication(applicationEntity, frequencyInvocation);
     }
@@ -855,17 +855,17 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         MethodInvocation scretKeyInvocation = new MethodInvocation();
         scretKeyInvocation.setMethodName("setSecretKey");
         scretKeyInvocation.setParameterTypes(new Class<?>[] { String.class });
-        scretKeyInvocation.setParameters(new Object[] { properties.getString(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME) });
+        scretKeyInvocation.setParameters(new Object[] { properties.getString(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME) });
 
         MethodInvocation versionInvocation = new MethodInvocation();
         versionInvocation.setMethodName("setVersion");
         versionInvocation.setParameterTypes(new Class<?>[] { int.class });
-        versionInvocation.setParameters(new Object[] { properties.getInteger(ThunderConstants.VERSION_ATTRIBUTE_NAME) });
+        versionInvocation.setParameters(new Object[] { properties.getInteger(ThunderConstant.VERSION_ATTRIBUTE_NAME) });
 
         MethodInvocation tokenInvocation = new MethodInvocation();
         tokenInvocation.setMethodName("setToken");
         tokenInvocation.setParameterTypes(new Class<?>[] { long.class });
-        tokenInvocation.setParameters(new Object[] { properties.getLong(ThunderConstants.TOKEN_ATTRIBUTE_NAME) });
+        tokenInvocation.setParameters(new Object[] { properties.getLong(ThunderConstant.TOKEN_ATTRIBUTE_NAME) });
 
         List<MethodInvocation> serviceInvocationList = new ArrayList<MethodInvocation>();
         serviceInvocationList.add(scretKeyInvocation);
@@ -880,12 +880,12 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         MethodInvocation scretKeyInvocation = new MethodInvocation();
         scretKeyInvocation.setMethodName("setSecretKey");
         scretKeyInvocation.setParameterTypes(new Class<?>[] { String.class });
-        scretKeyInvocation.setParameters(new Object[] { properties.getString(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME) });
+        scretKeyInvocation.setParameters(new Object[] { properties.getString(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME) });
 
         MethodInvocation versionInvocation = new MethodInvocation();
         versionInvocation.setMethodName("setVersion");
         versionInvocation.setParameterTypes(new Class<?>[] { int.class });
-        versionInvocation.setParameters(new Object[] { properties.getInteger(ThunderConstants.VERSION_ATTRIBUTE_NAME) });
+        versionInvocation.setParameters(new Object[] { properties.getInteger(ThunderConstant.VERSION_ATTRIBUTE_NAME) });
 
         List<MethodInvocation> referenceInvocationList = new ArrayList<MethodInvocation>();
         referenceInvocationList.add(scretKeyInvocation);
@@ -1053,7 +1053,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createRootPath() {
         StringBuilder builder = new StringBuilder();
         builder.append("/");
-        builder.append(StringUtils.isEmpty(namespace) ? properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME) : namespace);
+        builder.append(StringUtils.isEmpty(namespace) ? properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME) : namespace);
 
         return builder;
     }
@@ -1061,7 +1061,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createApplicationCategoryPath() {
         StringBuilder builder = createRootPath();
         builder.append("/");
-        builder.append(ThunderConstants.APPLICATION_ELEMENT_NAME);
+        builder.append(ThunderConstant.APPLICATION_ELEMENT_NAME);
 
         return builder;
     }
@@ -1095,7 +1095,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createServiceCategoryPath(String application, String group) {
         StringBuilder builder = createApplicationPath(application, group);
         builder.append("/");
-        builder.append(ThunderConstants.SERVICE_ELEMENT_NAME);
+        builder.append(ThunderConstant.SERVICE_ELEMENT_NAME);
 
         return builder;
     }
@@ -1111,7 +1111,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createReferenceCategoryPath(String application, String group) {
         StringBuilder builder = createApplicationPath(application, group);
         builder.append("/");
-        builder.append(ThunderConstants.REFERENCE_ELEMENT_NAME);
+        builder.append(ThunderConstant.REFERENCE_ELEMENT_NAME);
 
         return builder;
     }
@@ -1127,7 +1127,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createConfigurationCategoryPath() {
         StringBuilder builder = createRootPath();
         builder.append("/");
-        builder.append(ThunderConstants.CONFIGURATION_ELEMENT_NAME);
+        builder.append(ThunderConstant.CONFIGURATION_ELEMENT_NAME);
 
         return builder;
     }
@@ -1151,7 +1151,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createMonitorCategoryPath() {
         StringBuilder builder = createRootPath();
         builder.append("/");
-        builder.append(ThunderConstants.MONITOR_ELEMENT_NAME);
+        builder.append(ThunderConstant.MONITOR_ELEMENT_NAME);
 
         return builder;
     }
@@ -1159,7 +1159,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
     public StringBuilder createUserCategoryPath() {
         StringBuilder builder = createRootPath();
         builder.append("/");
-        builder.append(ThunderConstants.USER_ELEMENT_NAME);
+        builder.append(ThunderConstant.USER_ELEMENT_NAME);
 
         return builder;
     }

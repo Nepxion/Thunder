@@ -12,7 +12,7 @@ package com.nepxion.thunder.common.object;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class ObjectPoolFactory {
@@ -25,16 +25,16 @@ public class ObjectPoolFactory {
     public static GenericObjectPoolConfig createFSTObjectPoolConfig() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
         try {
-            config.setMaxTotal(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.FST_OBJECT_POOL_MAX_TOTAL_ATTRIBUTE_NAME));
-            config.setMaxIdle(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.FST_OBJECT_POOL_MAX_IDLE_ATTRIBUTE_NAME));
-            config.setMinIdle(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.FST_OBJECT_POOL_MIN_IDLE_ATTRIBUTE_NAME));
-            config.setMaxWaitMillis(properties.getLong(ThunderConstants.FST_OBJECT_POOL_MAX_WAIT_MILLIS_ATTRIBUTE_NAME));
-            config.setTimeBetweenEvictionRunsMillis(properties.getLong(ThunderConstants.FST_OBJECT_POOL_TIME_BETWEEN_EVICTION_RUN_MILLIS_ATTRIBUTE_NAME));
-            config.setMinEvictableIdleTimeMillis(properties.getLong(ThunderConstants.FST_OBJECT_POOL_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
-            config.setSoftMinEvictableIdleTimeMillis(properties.getLong(ThunderConstants.FST_OBJECT_POOL_SOFT_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
-            config.setBlockWhenExhausted(properties.getBoolean(ThunderConstants.FST_OBJECT_POOL_BLOCK_WHEN_EXHAUSTED_ATTRIBUTE_NAME));
-            config.setLifo(properties.getBoolean(ThunderConstants.FST_OBJECT_POOL_LIFO_ATTRIBUTE_NAME));
-            config.setFairness(properties.getBoolean(ThunderConstants.FST_OBJECT_POOL_FAIRNESS_ATTRIBUTE_NAME));
+            config.setMaxTotal(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.FST_OBJECT_POOL_MAX_TOTAL_ATTRIBUTE_NAME));
+            config.setMaxIdle(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.FST_OBJECT_POOL_MAX_IDLE_ATTRIBUTE_NAME));
+            config.setMinIdle(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.FST_OBJECT_POOL_MIN_IDLE_ATTRIBUTE_NAME));
+            config.setMaxWaitMillis(properties.getLong(ThunderConstant.FST_OBJECT_POOL_MAX_WAIT_MILLIS_ATTRIBUTE_NAME));
+            config.setTimeBetweenEvictionRunsMillis(properties.getLong(ThunderConstant.FST_OBJECT_POOL_TIME_BETWEEN_EVICTION_RUN_MILLIS_ATTRIBUTE_NAME));
+            config.setMinEvictableIdleTimeMillis(properties.getLong(ThunderConstant.FST_OBJECT_POOL_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
+            config.setSoftMinEvictableIdleTimeMillis(properties.getLong(ThunderConstant.FST_OBJECT_POOL_SOFT_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
+            config.setBlockWhenExhausted(properties.getBoolean(ThunderConstant.FST_OBJECT_POOL_BLOCK_WHEN_EXHAUSTED_ATTRIBUTE_NAME));
+            config.setLifo(properties.getBoolean(ThunderConstant.FST_OBJECT_POOL_LIFO_ATTRIBUTE_NAME));
+            config.setFairness(properties.getBoolean(ThunderConstant.FST_OBJECT_POOL_FAIRNESS_ATTRIBUTE_NAME));
             config.setTestOnBorrow(false);
             config.setTestOnReturn(false);
             config.setTestOnCreate(false);
@@ -50,16 +50,16 @@ public class ObjectPoolFactory {
     public static GenericObjectPoolConfig createRedisObjectPoolConfig() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
         try {
-            config.setMaxTotal(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.REDIS_OBJECT_POOL_MAX_TOTAL_ATTRIBUTE_NAME));
-            config.setMaxIdle(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.REDIS_OBJECT_POOL_MAX_IDLE_ATTRIBUTE_NAME));
-            config.setMinIdle(ThunderConstants.CPUS * properties.getInteger(ThunderConstants.REDIS_OBJECT_POOL_MIN_IDLE_ATTRIBUTE_NAME));
-            config.setMaxWaitMillis(properties.getLong(ThunderConstants.REDIS_OBJECT_POOL_MAX_WAIT_MILLIS_ATTRIBUTE_NAME));
-            config.setTimeBetweenEvictionRunsMillis(properties.getLong(ThunderConstants.REDIS_OBJECT_POOL_TIME_BETWEEN_EVICTION_RUN_MILLIS_ATTRIBUTE_NAME));
-            config.setMinEvictableIdleTimeMillis(properties.getLong(ThunderConstants.REDIS_OBJECT_POOL_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
-            config.setSoftMinEvictableIdleTimeMillis(properties.getLong(ThunderConstants.REDIS_OBJECT_POOL_SOFT_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
-            config.setBlockWhenExhausted(properties.getBoolean(ThunderConstants.REDIS_OBJECT_POOL_BLOCK_WHEN_EXHAUSTED_ATTRIBUTE_NAME));
-            config.setLifo(properties.getBoolean(ThunderConstants.REDIS_OBJECT_POOL_LIFO_ATTRIBUTE_NAME));
-            config.setFairness(properties.getBoolean(ThunderConstants.REDIS_OBJECT_POOL_FAIRNESS_ATTRIBUTE_NAME));
+            config.setMaxTotal(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.REDIS_OBJECT_POOL_MAX_TOTAL_ATTRIBUTE_NAME));
+            config.setMaxIdle(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.REDIS_OBJECT_POOL_MAX_IDLE_ATTRIBUTE_NAME));
+            config.setMinIdle(ThunderConstant.CPUS * properties.getInteger(ThunderConstant.REDIS_OBJECT_POOL_MIN_IDLE_ATTRIBUTE_NAME));
+            config.setMaxWaitMillis(properties.getLong(ThunderConstant.REDIS_OBJECT_POOL_MAX_WAIT_MILLIS_ATTRIBUTE_NAME));
+            config.setTimeBetweenEvictionRunsMillis(properties.getLong(ThunderConstant.REDIS_OBJECT_POOL_TIME_BETWEEN_EVICTION_RUN_MILLIS_ATTRIBUTE_NAME));
+            config.setMinEvictableIdleTimeMillis(properties.getLong(ThunderConstant.REDIS_OBJECT_POOL_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
+            config.setSoftMinEvictableIdleTimeMillis(properties.getLong(ThunderConstant.REDIS_OBJECT_POOL_SOFT_MIN_EVICTABLE_IDLE_TIME_MILLIS_ATTRIBUTE_NAME));
+            config.setBlockWhenExhausted(properties.getBoolean(ThunderConstant.REDIS_OBJECT_POOL_BLOCK_WHEN_EXHAUSTED_ATTRIBUTE_NAME));
+            config.setLifo(properties.getBoolean(ThunderConstant.REDIS_OBJECT_POOL_LIFO_ATTRIBUTE_NAME));
+            config.setFairness(properties.getBoolean(ThunderConstant.REDIS_OBJECT_POOL_FAIRNESS_ATTRIBUTE_NAME));
             config.setTestOnBorrow(false);
             config.setTestOnReturn(false);
             config.setTestOnCreate(false);

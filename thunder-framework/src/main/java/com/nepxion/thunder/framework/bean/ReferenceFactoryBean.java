@@ -23,7 +23,7 @@ import org.springframework.beans.factory.BeanClassLoaderAware;
 
 import com.nepxion.thunder.common.config.ReferenceConfig;
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.MethodEntity;
 import com.nepxion.thunder.common.entity.MethodKey;
@@ -75,7 +75,7 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
     protected void cacheReference() {
         String interfaceName = interfaze.getName();
 
-        String namespace = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
+        String namespace = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
 
         // 如果用户在Spring Xml未定义对应的Method，系统将自动创建全局方法的配置
         // 如果用户在Spring Xml只定义部分的Method，那么系统创建和用户自定义将Merge在一起，用户自定义的将覆盖系统自动创建的方法
@@ -153,9 +153,9 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         if (serviceConfig == null) {
             serviceConfig = new ServiceConfig();
             serviceConfig.setInterface(interfaceName);
-            serviceConfig.setSecretKey(properties.getString(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME));
-            serviceConfig.setVersion(properties.getInteger(ThunderConstants.VERSION_ATTRIBUTE_NAME));
-            serviceConfig.setToken(properties.getLong(ThunderConstants.TOKEN_ATTRIBUTE_NAME));
+            serviceConfig.setSecretKey(properties.getString(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME));
+            serviceConfig.setVersion(properties.getInteger(ThunderConstant.VERSION_ATTRIBUTE_NAME));
+            serviceConfig.setToken(properties.getLong(ThunderConstant.TOKEN_ATTRIBUTE_NAME));
 
             registryExecutor.persistService(serviceConfig, applicationEntity);
         }
@@ -173,8 +173,8 @@ public class ReferenceFactoryBean extends AbstractFactoryBean implements BeanCla
         if (referenceConfig == null) {
             referenceConfig = new ReferenceConfig();
             referenceConfig.setInterface(interfaceName);
-            referenceConfig.setSecretKey(properties.getString(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME));
-            referenceConfig.setVersion(properties.getInteger(ThunderConstants.VERSION_ATTRIBUTE_NAME));
+            referenceConfig.setSecretKey(properties.getString(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME));
+            referenceConfig.setVersion(properties.getInteger(ThunderConstant.VERSION_ATTRIBUTE_NAME));
 
             registryExecutor.persistReference(referenceConfig, applicationEntity);
         }

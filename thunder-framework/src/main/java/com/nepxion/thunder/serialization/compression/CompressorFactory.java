@@ -13,7 +13,7 @@ package com.nepxion.thunder.serialization.compression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class CompressorFactory {
@@ -23,7 +23,7 @@ public class CompressorFactory {
     private static boolean compress;
 
     public static void initialize(ThunderProperties properties) {
-        String compressor = properties.getString(ThunderConstants.COMPRESSOR_ATTRIBUTE_NAME);
+        String compressor = properties.getString(ThunderConstant.COMPRESSOR_ATTRIBUTE_NAME);
         try {
             compressorType = CompressorType.fromString(compressor);
         } catch (Exception e) {
@@ -31,7 +31,7 @@ public class CompressorFactory {
         }
         LOG.info("Compressor is {}", compressorType);
 
-        compress = properties.getBoolean(ThunderConstants.COMPRESS_ATTRIBUTE_NAME);
+        compress = properties.getBoolean(ThunderConstant.COMPRESS_ATTRIBUTE_NAME);
         LOG.info("Compress is {}", compress);
     }
 

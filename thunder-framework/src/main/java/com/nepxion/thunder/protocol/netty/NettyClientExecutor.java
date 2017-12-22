@@ -40,7 +40,7 @@ import net.openhft.affinity.AffinityThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.protocol.AbstractClientExecutor;
 
@@ -63,7 +63,7 @@ public class NettyClientExecutor extends AbstractClientExecutor {
 
         // 主线程等待连接成功后，第一个await执行，唤醒当前连接线程和主线程
         // 两倍于Netty的连接超时事件，这么做防止服务端Netty连接还不完成，客户端就开始调用服务
-        barrier.await(properties.getLong(ThunderConstants.NETTY_CONNECT_TIMEOUT_ATTRIBUTE_NAME) * 2, TimeUnit.MILLISECONDS);
+        barrier.await(properties.getLong(ThunderConstant.NETTY_CONNECT_TIMEOUT_ATTRIBUTE_NAME) * 2, TimeUnit.MILLISECONDS);
     }
 
     private void connect(final String interfaze, final ApplicationEntity applicationEntity, final CyclicBarrier barrier) throws Exception {
@@ -73,7 +73,7 @@ public class NettyClientExecutor extends AbstractClientExecutor {
         LOG.info("Attempt to connect to {}:{}", host, port);
 
         final ThreadFactory threadFactory = new AffinityThreadFactory("ClientAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
-        final EventLoopGroup group = new NioEventLoopGroup(ThunderConstants.CPUS, threadFactory);
+        final EventLoopGroup group = new NioEventLoopGroup(ThunderConstant.CPUS, threadFactory);
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
@@ -82,26 +82,26 @@ public class NettyClientExecutor extends AbstractClientExecutor {
                     client.group(group).channel(NioSocketChannel.class)
                             .option(ChannelOption.TCP_NODELAY, true)
                             .option(ChannelOption.SO_KEEPALIVE, true)
-                            .option(ChannelOption.SO_SNDBUF, properties.getInteger(ThunderConstants.NETTY_SO_SNDBUF_ATTRIBUTE_NAME))
-                            .option(ChannelOption.SO_RCVBUF, properties.getInteger(ThunderConstants.NETTY_SO_RCVBUF_ATTRIBUTE_NAME))
+                            .option(ChannelOption.SO_SNDBUF, properties.getInteger(ThunderConstant.NETTY_SO_SNDBUF_ATTRIBUTE_NAME))
+                            .option(ChannelOption.SO_RCVBUF, properties.getInteger(ThunderConstant.NETTY_SO_RCVBUF_ATTRIBUTE_NAME))
                             .option(ChannelOption.RCVBUF_ALLOCATOR, AdaptiveRecvByteBufAllocator.DEFAULT)
-                            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, properties.getInteger(ThunderConstants.NETTY_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
+                            .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, properties.getInteger(ThunderConstant.NETTY_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
                             .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-                            .option(ChannelOption.WRITE_BUFFER_LOW_WATER_MARK, properties.getInteger(ThunderConstants.NETTY_WRITE_BUFFER_LOW_WATER_MARK_ATTRIBUTE_NAME))
-                            .option(ChannelOption.WRITE_BUFFER_HIGH_WATER_MARK, properties.getInteger(ThunderConstants.NETTY_WRITE_BUFFER_HIGH_WATER_MARK_ATTRIBUTE_NAME))
+                            .option(ChannelOption.WRITE_BUFFER_LOW_WATER_MARK, properties.getInteger(ThunderConstant.NETTY_WRITE_BUFFER_LOW_WATER_MARK_ATTRIBUTE_NAME))
+                            .option(ChannelOption.WRITE_BUFFER_HIGH_WATER_MARK, properties.getInteger(ThunderConstant.NETTY_WRITE_BUFFER_HIGH_WATER_MARK_ATTRIBUTE_NAME))
                             .handler(new LoggingHandler(LogLevel.INFO))
                             .handler(new ChannelInitializer<SocketChannel>() {
                                 @Override
                                 public void initChannel(SocketChannel channel) throws Exception {
                                     channel.pipeline()
-                                            .addLast(new IdleStateHandler(properties.getLong(ThunderConstants.NETTY_WRITE_IDLE_TIME_ATTRIBUTE_NAME), properties.getLong(ThunderConstants.NETTY_READ_IDLE_TIME_ATTRIBUTE_NAME), properties.getLong(ThunderConstants.NETTY_ALL_IDLE_TIME_ATTRIBUTE_NAME), TimeUnit.MILLISECONDS))
-                                            .addLast(new NettyObjectDecoder(properties.getInteger(ThunderConstants.NETTY_MAX_MESSAGE_SIZE_ATTRIBUTE_NAME)))
+                                            .addLast(new IdleStateHandler(properties.getLong(ThunderConstant.NETTY_WRITE_IDLE_TIME_ATTRIBUTE_NAME), properties.getLong(ThunderConstant.NETTY_READ_IDLE_TIME_ATTRIBUTE_NAME), properties.getLong(ThunderConstant.NETTY_ALL_IDLE_TIME_ATTRIBUTE_NAME), TimeUnit.MILLISECONDS))
+                                            .addLast(new NettyObjectDecoder(properties.getInteger(ThunderConstant.NETTY_MAX_MESSAGE_SIZE_ATTRIBUTE_NAME)))
                                             .addLast(new NettyObjectEncoder())
                                             .addLast(new JdkZlibDecoder())
                                             .addLast(new JdkZlibEncoder())
-                                            .addLast(new WriteTimeoutHandler(properties.getInteger(ThunderConstants.NETTY_WRITE_TIMEOUT_ATTRIBUTE_NAME)))
-                                            .addLast(new ReadTimeoutHandler(properties.getInteger(ThunderConstants.NETTY_READ_TIMEOUT_ATTRIBUTE_NAME)))
-                                            .addLast(new NettyClientHandler(cacheContainer, executorContainer, properties.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME), properties.getBoolean(ThunderConstants.HEART_BEAT_LOG_PRINT_ATTRIBUTE_NAME)));
+                                            .addLast(new WriteTimeoutHandler(properties.getInteger(ThunderConstant.NETTY_WRITE_TIMEOUT_ATTRIBUTE_NAME)))
+                                            .addLast(new ReadTimeoutHandler(properties.getInteger(ThunderConstant.NETTY_READ_TIMEOUT_ATTRIBUTE_NAME)))
+                                            .addLast(new NettyClientHandler(cacheContainer, executorContainer, properties.getBoolean(ThunderConstant.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME), properties.getBoolean(ThunderConstant.HEART_BEAT_LOG_PRINT_ATTRIBUTE_NAME)));
                                 }
                             });
 
@@ -140,7 +140,7 @@ public class NettyClientExecutor extends AbstractClientExecutor {
                 } finally {
                     group.shutdownGracefully().sync();
 
-                    TimeUnit.MILLISECONDS.sleep(properties.getInteger(ThunderConstants.NETTY_RECONNECT_DELAY_ATTRIBUTE_NAME));
+                    TimeUnit.MILLISECONDS.sleep(properties.getInteger(ThunderConstant.NETTY_RECONNECT_DELAY_ATTRIBUTE_NAME));
 
                     // 启动重连
                     // 判断注册中心是否有该服务Online(即ApplicationEntity注册)。如果ApplicationEntity不存在，则表示服务端下线，不需要重连；如果存在，表示是因为网络的原因，则需要重连

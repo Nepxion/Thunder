@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
 
 import com.nepxion.thunder.cluster.consistency.ConsistencyExecutor;
 import com.nepxion.thunder.cluster.loadbalance.LoadBalanceExecutor;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.LoadBalanceType;
 import com.nepxion.thunder.common.entity.ProtocolEntity;
@@ -44,7 +44,7 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
         ProtocolEntity protocolEntity = cacheContainer.getProtocolEntity();
         ProtocolType protocolType = protocolEntity.getType();
         if (protocolType.isLoadBalanceSupported()) {
-            String loadBalanceAttributeName = ThunderConstants.LOAD_BALANCE_ATTRIBUTE_NAME;
+            String loadBalanceAttributeName = ThunderConstant.LOAD_BALANCE_ATTRIBUTE_NAME;
 
             String loadBalance = element.getAttribute(loadBalanceAttributeName);
             LoadBalanceType loadBalanceType = null;
@@ -71,9 +71,9 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
     protected LoadBalanceExecutor createLoadBalanceExecutor(LoadBalanceType loadBalanceType) {
         LoadBalanceExecutor loadBalanceExecutor = executorContainer.getLoadBalanceExecutor();
         if (loadBalanceExecutor == null) {
-            String consistentHashLoadBalanceExecutorId = ThunderConstants.CONSISTENT_HASH_LOAD_BALANCE_EXECUTOR_ID;
-            String roundRobinLoadBalanceExecutorId = ThunderConstants.ROUND_ROBIN_LOAD_BALANCE_EXECUTOR_ID;
-            String randomLoadBalanceExecutorId = ThunderConstants.RANDOM_LOAD_BALANCE_EXECUTOR_ID;
+            String consistentHashLoadBalanceExecutorId = ThunderConstant.CONSISTENT_HASH_LOAD_BALANCE_EXECUTOR_ID;
+            String roundRobinLoadBalanceExecutorId = ThunderConstant.ROUND_ROBIN_LOAD_BALANCE_EXECUTOR_ID;
+            String randomLoadBalanceExecutorId = ThunderConstant.RANDOM_LOAD_BALANCE_EXECUTOR_ID;
             try {
                 switch (loadBalanceType) {
                     case CONSISTENT_HASH:
@@ -99,7 +99,7 @@ public class StrategyBeanDefinitionParser extends AbstractExtensionBeanDefinitio
     protected ConsistencyExecutor createConsistencyExecutor() {
         ConsistencyExecutor consistencyExecutor = executorContainer.getConsistencyExecutor();
         if (consistencyExecutor == null) {
-            String consistencyExecutorId = ThunderConstants.CONSISTENCY_EXECUTOR_ID;
+            String consistencyExecutorId = ThunderConstant.CONSISTENCY_EXECUTOR_ID;
             try {
                 consistencyExecutor = createDelegate(consistencyExecutorId);
             } catch (Exception e) {

@@ -12,7 +12,7 @@ package com.nepxion.thunder.framework;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.container.CacheContainer;
 import com.nepxion.thunder.common.container.ExecutorContainer;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
@@ -53,13 +53,13 @@ public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
         delegate.setCacheContainer(cacheContainer);
         delegate.setExecutorContainer(executorContainer);
 
-        registerBeanDefinitionParser(ThunderConstants.APPLICATION_ELEMENT_NAME, new ApplicationBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.PROTOCOL_ELEMENT_NAME, new ProtocolBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.REGISTRY_ELEMENT_NAME, new RegistryBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.STRATEGY_ELEMENT_NAME, new StrategyBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.MONITOR_ELEMENT_NAME, new MonitorBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.SERVICE_ELEMENT_NAME, new ServiceBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.REFERENCE_ELEMENT_NAME, new ReferenceBeanDefinitionParser(delegate));
-        registerBeanDefinitionParser(ThunderConstants.METHOD_ELEMENT_NAME, new MethodBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.APPLICATION_ELEMENT_NAME, new ApplicationBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.PROTOCOL_ELEMENT_NAME, new ProtocolBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.REGISTRY_ELEMENT_NAME, new RegistryBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.STRATEGY_ELEMENT_NAME, new StrategyBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.MONITOR_ELEMENT_NAME, new MonitorBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.SERVICE_ELEMENT_NAME, new ServiceBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.REFERENCE_ELEMENT_NAME, new ReferenceBeanDefinitionParser(delegate));
+        registerBeanDefinitionParser(ThunderConstant.METHOD_ELEMENT_NAME, new MethodBeanDefinitionParser(delegate));
     }
 }

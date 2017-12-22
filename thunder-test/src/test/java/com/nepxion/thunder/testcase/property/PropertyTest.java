@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MQEntity;
 import com.nepxion.thunder.common.entity.MQPropertyEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
@@ -50,6 +50,6 @@ public class PropertyTest {
         MQPropertyEntity propertyEntity = new MQPropertyEntity("com.nepxion.test", "tibco-1", entity);
         LOG.info("mqUrl : {}", propertyEntity.getString("mqUrl"));
 
-        LOG.info("summarizeProperties : {}", propertyEntity.summarizeProperties(ThunderConstants.KAFKA_CONSUMER_ATTRIBUTE_NAME));
+        LOG.info("summarizeProperties : {}", propertyEntity.summarizeProperties(ThunderConstant.KAFKA_CONSUMER_ATTRIBUTE_NAME));
     }
 }

@@ -19,7 +19,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 import com.nepxion.thunder.common.entity.MQPropertyEntity;
 
@@ -32,7 +32,7 @@ public class KafkaMQConsumer extends ThunderDelegateImpl {
     public KafkaMQConsumer(MQPropertyEntity mqPropertyEntity, String groupId) {
         Map<String, Object> map = null;
         try {
-            map = mqPropertyEntity.summarizeProperties(ThunderConstants.KAFKA_CONSUMER_ATTRIBUTE_NAME);
+            map = mqPropertyEntity.summarizeProperties(ThunderConstant.KAFKA_CONSUMER_ATTRIBUTE_NAME);
         } catch (Exception e) {
             LOG.error("Extract properties failed", e);
         }

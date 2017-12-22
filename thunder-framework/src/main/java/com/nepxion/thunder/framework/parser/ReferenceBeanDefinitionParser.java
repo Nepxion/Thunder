@@ -20,7 +20,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.MethodEntity;
 import com.nepxion.thunder.common.entity.MethodKey;
@@ -44,11 +44,11 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
 
-        String namespaceElementName = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
-        String referenceElementName = ThunderConstants.REFERENCE_ELEMENT_NAME;
-        String methodElementName = ThunderConstants.METHOD_ELEMENT_NAME;
-        String interfaceAttributeName = ThunderConstants.INTERFACE_ATTRIBUTE_NAME;
-        String serverAttributeName = ThunderConstants.SERVER_ATTRIBUTE_NAME;
+        String namespaceElementName = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
+        String referenceElementName = ThunderConstant.REFERENCE_ELEMENT_NAME;
+        String methodElementName = ThunderConstant.METHOD_ELEMENT_NAME;
+        String interfaceAttributeName = ThunderConstant.INTERFACE_ATTRIBUTE_NAME;
+        String serverAttributeName = ThunderConstant.SERVER_ATTRIBUTE_NAME;
 
         String interfaze = element.getAttribute(interfaceAttributeName);
         String server = element.getAttribute(serverAttributeName);
@@ -83,9 +83,9 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
     }
 
     private Map parseMethodElements(Element referenceElement, ParserContext parserContext, BeanDefinitionBuilder builder) {
-        String methodElementName = ThunderConstants.METHOD_ELEMENT_NAME;
-        String methodAttributeName = ThunderConstants.METHOD_ATTRIBUTE_NAME;
-        String parameterTypesAttributeName = ThunderConstants.PARAMETER_TYPES_ATTRIBUTE_NAME;
+        String methodElementName = ThunderConstant.METHOD_ELEMENT_NAME;
+        String methodAttributeName = ThunderConstant.METHOD_ATTRIBUTE_NAME;
+        String parameterTypesAttributeName = ThunderConstant.PARAMETER_TYPES_ATTRIBUTE_NAME;
 
         List<Element> methodElements = DomUtils.getChildElementsByTagName(referenceElement, methodElementName);
 
@@ -131,7 +131,7 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
     protected ClientExecutorAdapter createClientExecutorAdapter() {
         ClientExecutorAdapter clientExecutorAdapter = executorContainer.getClientExecutorAdapter();
         if (clientExecutorAdapter == null) {
-            String clientExecutorAdapterId = ThunderConstants.CLIENT_EXECUTOR_ADAPTER_ID;
+            String clientExecutorAdapterId = ThunderConstant.CLIENT_EXECUTOR_ADAPTER_ID;
             try {
                 clientExecutorAdapter = createDelegate(clientExecutorAdapterId);
             } catch (Exception e) {
@@ -147,7 +147,7 @@ public class ReferenceBeanDefinitionParser extends AbstractExtensionBeanDefiniti
     protected ClientInterceptorAdapter createClientInterceptorAdapter() {
         ClientInterceptorAdapter clientInterceptorAdapter = executorContainer.getClientInterceptorAdapter();
         if (clientInterceptorAdapter == null) {
-            String clientInterceptorAdapterId = ThunderConstants.CLIENT_INTERCEPTOR_ADAPTER_ID;
+            String clientInterceptorAdapterId = ThunderConstant.CLIENT_INTERCEPTOR_ADAPTER_ID;
             try {
                 clientInterceptorAdapter = createDelegate(clientInterceptorAdapterId);
             } catch (Exception e) {

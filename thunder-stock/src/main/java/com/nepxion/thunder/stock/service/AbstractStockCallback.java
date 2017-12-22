@@ -21,7 +21,7 @@ import org.apache.http.ParseException;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.util.EntityUtils;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.stock.entity.InterfaceType;
 import com.nepxion.thunder.stock.entity.Stock;
 import com.nepxion.thunder.stock.entity.StockType;
@@ -41,7 +41,7 @@ public abstract class AbstractStockCallback implements FutureCallback<HttpRespon
         String result = null;
 
         try {
-            result = EntityUtils.toString(httpEntity, ThunderConstants.ENCODING_FORMAT);
+            result = EntityUtils.toString(httpEntity, ThunderConstant.ENCODING_FORMAT);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IOException e) {

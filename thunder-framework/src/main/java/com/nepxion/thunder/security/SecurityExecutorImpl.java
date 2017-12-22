@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.nepxion.thunder.common.config.ApplicationConfig;
 import com.nepxion.thunder.common.config.ReferenceConfig;
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ServiceEntity;
@@ -84,9 +84,9 @@ public class SecurityExecutorImpl extends ThunderDelegateImpl implements Securit
 
     @Override
     public boolean execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String interfaze = request.getHeader(ThunderConstants.INTERFACE_ATTRIBUTE_NAME);
-        String referenceSecretKey = request.getHeader(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME);
-        int referenceVersion = Integer.parseInt(request.getHeader(ThunderConstants.VERSION_ATTRIBUTE_NAME));
+        String interfaze = request.getHeader(ThunderConstant.INTERFACE_ATTRIBUTE_NAME);
+        String referenceSecretKey = request.getHeader(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME);
+        int referenceVersion = Integer.parseInt(request.getHeader(ThunderConstant.VERSION_ATTRIBUTE_NAME));
 
         Map<String, ServiceEntity> serviceEntityMap = cacheContainer.getServiceEntityMap();
         ServiceEntity serviceEntity = serviceEntityMap.get(interfaze);

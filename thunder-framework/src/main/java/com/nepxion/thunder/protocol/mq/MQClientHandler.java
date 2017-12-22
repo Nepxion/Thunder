@@ -17,7 +17,7 @@ import javax.jms.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MQPropertyEntity;
 import com.nepxion.thunder.protocol.ClientExecutorAdapter;
 import com.nepxion.thunder.protocol.ProtocolResponse;
@@ -31,7 +31,7 @@ public class MQClientHandler extends MQConsumer {
 
     public MQClientHandler(MQPropertyEntity mqPropertyEntity) {
         try {
-            transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
+            transportLogPrint = mqPropertyEntity.getBoolean(ThunderConstant.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME);
         } catch (Exception e) {
             LOG.error("Get properties failed", e);
         }

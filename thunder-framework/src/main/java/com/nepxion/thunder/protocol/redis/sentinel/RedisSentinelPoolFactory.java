@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisSentinelPool;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.object.ObjectPoolFactory;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
@@ -42,7 +42,7 @@ public class RedisSentinelPoolFactory {
 
         String sentinelValue = null;
         try {
-            sentinelValue = properties.getString(ThunderConstants.REDIS_SENTINEL_ATTRIBUTE_NAME);
+            sentinelValue = properties.getString(ThunderConstant.REDIS_SENTINEL_ATTRIBUTE_NAME);
         } catch (Exception e) {
             LOG.warn("Redis sentinel address is null, sentinel pool won't start");
 
@@ -62,14 +62,14 @@ public class RedisSentinelPoolFactory {
                 sentinelSet.add(sentinel.trim());
             }
 
-            sentinelPool = new JedisSentinelPool(properties.getString(ThunderConstants.REDIS_MASTER_NAME_ATTRIBUTE_NAME),
+            sentinelPool = new JedisSentinelPool(properties.getString(ThunderConstant.REDIS_MASTER_NAME_ATTRIBUTE_NAME),
                     sentinelSet,
                     ObjectPoolFactory.createRedisObjectPoolConfig(),
-                    properties.getInteger(ThunderConstants.REDIS_CONNECTION_TIMEOUT_ATTRIBUTE_NAME),
-                    properties.getInteger(ThunderConstants.REDIS_SO_TIMEOUT_ATTRIBUTE_NAME),
-                    StringUtils.isNotEmpty(properties.getString(ThunderConstants.REDIS_PASSWORD_ATTRIBUTE_NAME)) ? properties.getString(ThunderConstants.REDIS_PASSWORD_ATTRIBUTE_NAME) : null,
-                    properties.getInteger(ThunderConstants.REDIS_DATABASE_ATTRIBUTE_NAME),
-                    StringUtils.isNotEmpty(properties.getString(ThunderConstants.REDIS_CLIENT_NAME_ATTRIBUTE_NAME)) ? properties.getString(ThunderConstants.REDIS_CLIENT_NAME_ATTRIBUTE_NAME) : null);
+                    properties.getInteger(ThunderConstant.REDIS_CONNECTION_TIMEOUT_ATTRIBUTE_NAME),
+                    properties.getInteger(ThunderConstant.REDIS_SO_TIMEOUT_ATTRIBUTE_NAME),
+                    StringUtils.isNotEmpty(properties.getString(ThunderConstant.REDIS_PASSWORD_ATTRIBUTE_NAME)) ? properties.getString(ThunderConstant.REDIS_PASSWORD_ATTRIBUTE_NAME) : null,
+                    properties.getInteger(ThunderConstant.REDIS_DATABASE_ATTRIBUTE_NAME),
+                    StringUtils.isNotEmpty(properties.getString(ThunderConstant.REDIS_CLIENT_NAME_ATTRIBUTE_NAME)) ? properties.getString(ThunderConstant.REDIS_CLIENT_NAME_ATTRIBUTE_NAME) : null);
             LOG.info("Redis sentinel is initialized...");
         } catch (Exception e) {
             LOG.error("Redis sentinel pool is initialized failed", e);

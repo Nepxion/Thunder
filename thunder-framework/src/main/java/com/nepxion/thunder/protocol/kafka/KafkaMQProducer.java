@@ -24,7 +24,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.MQPropertyEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
@@ -43,7 +43,7 @@ public class KafkaMQProducer {
     public KafkaMQProducer(MQPropertyEntity mqPropertyEntity) {
         Map<String, Object> map = null;
         try {
-            map = mqPropertyEntity.summarizeProperties(ThunderConstants.KAFKA_PRODUCER_ATTRIBUTE_NAME);
+            map = mqPropertyEntity.summarizeProperties(ThunderConstant.KAFKA_PRODUCER_ATTRIBUTE_NAME);
         } catch (Exception e) {
             LOG.error("Extract properties failed", e);
         }

@@ -19,7 +19,7 @@ import com.caucho.hessian.client.HessianConnectionFactory;
 import com.caucho.hessian.client.HessianProxyFactory;
 import com.caucho.hessian.client.HessianURLConnectionFactory;
 import com.nepxion.thunder.common.config.ReferenceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 
 public class HessianAuthProxyFactory extends HessianProxyFactory {
     private Map<String, ReferenceConfig> referenceConfigMap;
@@ -44,9 +44,9 @@ public class HessianAuthProxyFactory extends HessianProxyFactory {
                 String secretKey = referenceConfig.getSecretKey();
                 int version = referenceConfig.getVersion();
 
-                connection.addHeader(ThunderConstants.INTERFACE_ATTRIBUTE_NAME, interfaze);
-                connection.addHeader(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME, secretKey);
-                connection.addHeader(ThunderConstants.VERSION_ATTRIBUTE_NAME, String.valueOf(version));
+                connection.addHeader(ThunderConstant.INTERFACE_ATTRIBUTE_NAME, interfaze);
+                connection.addHeader(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME, secretKey);
+                connection.addHeader(ThunderConstant.VERSION_ATTRIBUTE_NAME, String.valueOf(version));
 
                 return connection;
             }

@@ -32,7 +32,7 @@ import com.nepxion.swing.label.JBasicLabel;
 import com.nepxion.swing.layout.table.TableLayout;
 import com.nepxion.swing.locale.SwingLocale;
 import com.nepxion.swing.optionpane.JBasicOptionPane;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.UserEntity;
 import com.nepxion.thunder.common.entity.UserFactory;
 import com.nepxion.thunder.common.entity.UserOperation;
@@ -135,7 +135,7 @@ public class ConsoleLogin extends JLoginDialog {
 
         UserEntity userEntity = null;
         try {
-            userEntity = UserController.getUser(ThunderConstants.USER_ADMIN_NAME);
+            userEntity = UserController.getUser(ThunderConstant.USER_ADMIN_NAME);
         } catch (Exception e) {
 
         }

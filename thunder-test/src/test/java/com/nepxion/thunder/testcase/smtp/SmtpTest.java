@@ -12,7 +12,7 @@ package com.nepxion.thunder.testcase.smtp;
 
 import org.junit.Test;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.event.smtp.SmtpExecutor;
 import com.nepxion.thunder.event.smtp.SmtpSslExecutor;
 
@@ -39,7 +39,7 @@ public class SmtpTest {
         builder.append("消息2");
         String text = builder.toString();
 
-        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstants.ENCODING_FORMAT);
+        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_FORMAT);
     }
 
     @Test
@@ -64,6 +64,6 @@ public class SmtpTest {
         builder.append("消息2");
         String text = builder.toString();
 
-        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstants.ENCODING_FORMAT);
+        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_FORMAT);
     }
 }

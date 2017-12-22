@@ -36,7 +36,7 @@ import net.openhft.affinity.AffinityThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.protocol.AbstractServerExecutor;
 import com.nepxion.thunder.protocol.redis.sentinel.RedisSentinelPoolFactory;
@@ -68,7 +68,7 @@ public class NettyServerExecutor extends AbstractServerExecutor {
         final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         // From https://github.com/netty/netty/wiki/Thread-Affinity
         final ThreadFactory threadFactory = new AffinityThreadFactory("ServerAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
-        final EventLoopGroup workerGroup = new NioEventLoopGroup(2 * ThunderConstants.CPUS, threadFactory);
+        final EventLoopGroup workerGroup = new NioEventLoopGroup(2 * ThunderConstant.CPUS, threadFactory);
         Executors.newSingleThreadExecutor().submit(new Callable<ChannelFuture>() {
             @Override
             public ChannelFuture call() throws Exception {
@@ -77,24 +77,24 @@ public class NettyServerExecutor extends AbstractServerExecutor {
                     server.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                             .option(ChannelOption.TCP_NODELAY, true)
                             .option(ChannelOption.SO_KEEPALIVE, true)
-                            .option(ChannelOption.SO_SNDBUF, properties.getInteger(ThunderConstants.NETTY_SO_SNDBUF_ATTRIBUTE_NAME))
-                            .option(ChannelOption.SO_RCVBUF, properties.getInteger(ThunderConstants.NETTY_SO_RCVBUF_ATTRIBUTE_NAME))
+                            .option(ChannelOption.SO_SNDBUF, properties.getInteger(ThunderConstant.NETTY_SO_SNDBUF_ATTRIBUTE_NAME))
+                            .option(ChannelOption.SO_RCVBUF, properties.getInteger(ThunderConstant.NETTY_SO_RCVBUF_ATTRIBUTE_NAME))
                             .option(ChannelOption.RCVBUF_ALLOCATOR, AdaptiveRecvByteBufAllocator.DEFAULT)
                             .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
                             .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-                            .childOption(ChannelOption.WRITE_BUFFER_LOW_WATER_MARK, properties.getInteger(ThunderConstants.NETTY_WRITE_BUFFER_LOW_WATER_MARK_ATTRIBUTE_NAME))
-                            .childOption(ChannelOption.WRITE_BUFFER_HIGH_WATER_MARK, properties.getInteger(ThunderConstants.NETTY_WRITE_BUFFER_HIGH_WATER_MARK_ATTRIBUTE_NAME))
-                            .option(ChannelOption.SO_BACKLOG, properties.getInteger(ThunderConstants.NETTY_SO_BACKLOG_ATTRIBUTE_NAME))
+                            .childOption(ChannelOption.WRITE_BUFFER_LOW_WATER_MARK, properties.getInteger(ThunderConstant.NETTY_WRITE_BUFFER_LOW_WATER_MARK_ATTRIBUTE_NAME))
+                            .childOption(ChannelOption.WRITE_BUFFER_HIGH_WATER_MARK, properties.getInteger(ThunderConstant.NETTY_WRITE_BUFFER_HIGH_WATER_MARK_ATTRIBUTE_NAME))
+                            .option(ChannelOption.SO_BACKLOG, properties.getInteger(ThunderConstant.NETTY_SO_BACKLOG_ATTRIBUTE_NAME))
                             .handler(new LoggingHandler(LogLevel.INFO))
                             .childHandler(new ChannelInitializer<SocketChannel>() {
                                 @Override
                                 public void initChannel(SocketChannel channel) throws Exception {
                                     channel.pipeline()
-                                            .addLast(new NettyObjectDecoder(properties.getInteger(ThunderConstants.NETTY_MAX_MESSAGE_SIZE_ATTRIBUTE_NAME)))
+                                            .addLast(new NettyObjectDecoder(properties.getInteger(ThunderConstant.NETTY_MAX_MESSAGE_SIZE_ATTRIBUTE_NAME)))
                                             .addLast(new NettyObjectEncoder())
                                             .addLast(new JdkZlibDecoder())
                                             .addLast(new JdkZlibEncoder())
-                                            .addLast(new NettyServerHandler(cacheContainer, executorContainer, properties.getBoolean(ThunderConstants.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME)));
+                                            .addLast(new NettyServerHandler(cacheContainer, executorContainer, properties.getBoolean(ThunderConstant.TRANSPORT_LOG_PRINT_ATTRIBUTE_NAME)));
                                 }
                             });
 

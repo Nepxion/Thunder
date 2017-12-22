@@ -22,7 +22,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.MonitorEntity;
 import com.nepxion.thunder.common.entity.MonitorType;
@@ -41,7 +41,7 @@ public class MonitorBeanDefinitionParser extends AbstractExtensionBeanDefinition
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
 
-        String typeAttributeName = ThunderConstants.TYPE_ATTRIBUTE_NAME;
+        String typeAttributeName = ThunderConstant.TYPE_ATTRIBUTE_NAME;
 
         String type = element.getAttribute(typeAttributeName);
         List<MonitorType> monitorTypes = null;
@@ -72,9 +72,9 @@ public class MonitorBeanDefinitionParser extends AbstractExtensionBeanDefinition
     protected List<MonitorExecutor> createMonitorExecutors(List<MonitorType> monitorTypes) {
         List<MonitorExecutor> monitorExecutors = executorContainer.getMonitorExecutors();
         if (CollectionUtils.isEmpty(monitorExecutors)) {
-            String logServiceMonitorExecutorId = ThunderConstants.LOG_SERVICE_MONITOR_EXECUTOR_ID;
-            String redisServiceMonitorExecutorId = ThunderConstants.REDIS_SERVICE_MONITOR_EXECUTOR_ID;
-            String webServiceMonitorExecutorId = ThunderConstants.WEB_SERVICE_MONITOR_EXECUTOR_ID;
+            String logServiceMonitorExecutorId = ThunderConstant.LOG_SERVICE_MONITOR_EXECUTOR_ID;
+            String redisServiceMonitorExecutorId = ThunderConstant.REDIS_SERVICE_MONITOR_EXECUTOR_ID;
+            String webServiceMonitorExecutorId = ThunderConstant.WEB_SERVICE_MONITOR_EXECUTOR_ID;
 
             monitorExecutors = new ArrayList<MonitorExecutor>();
             MonitorExecutor monitorExecutor = null;

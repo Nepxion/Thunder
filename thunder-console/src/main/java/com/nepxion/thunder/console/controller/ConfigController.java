@@ -22,7 +22,7 @@ import com.nepxion.swing.element.ElementNode;
 import com.nepxion.thunder.common.config.ApplicationConfig;
 import com.nepxion.thunder.common.config.ReferenceConfig;
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.console.context.RegistryContext;
@@ -39,13 +39,13 @@ public class ConfigController {
 
         ElementNode root = new ElementNode(ConsoleLocale.getString("registry_center"), ConsoleLocale.getString("registry_center"), null, ConsoleLocale.getString("registry_center"));
 
-        if (StringUtils.equals(category, ThunderConstants.APPLICATION_ELEMENT_NAME)) {
+        if (StringUtils.equals(category, ThunderConstant.APPLICATION_ELEMENT_NAME)) {
             for (Map.Entry<ProtocolType, RegistryExecutor> entry : registryExecutorMap.entrySet()) {
                 ProtocolType protocolType = entry.getKey();
                 RegistryExecutor registryExecutor = entry.getValue();
                 assembleApplication(registryExecutor, protocolType, root);
             }
-        } else if (StringUtils.equals(category, ThunderConstants.CONFIGURATION_ELEMENT_NAME)) {
+        } else if (StringUtils.equals(category, ThunderConstant.CONFIGURATION_ELEMENT_NAME)) {
             RegistryExecutor registryExecutor = RegistryContext.getDefaultRegistryExecutor();
             assembleConfiguration(registryExecutor, root);
         }

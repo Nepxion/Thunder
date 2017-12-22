@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MonitorStat;
 import com.nepxion.thunder.common.thread.ThreadPoolFactory;
 import com.nepxion.thunder.common.util.RandomUtil;
@@ -59,7 +59,7 @@ public class RedisServiceMonitorExecutor extends AbstractMonitorExecutor {
             public Object call() throws Exception {
                 try {
                     jedis.hset(traceId, RandomUtil.uuidRandom(), SerializerExecutor.toJson(monitorStat));
-                    jedis.pexpire(traceId, properties.getLong(ThunderConstants.REDIS_DATA_EXPIRATION_ATTRIBUTE_NAME));
+                    jedis.pexpire(traceId, properties.getLong(ThunderConstant.REDIS_DATA_EXPIRATION_ATTRIBUTE_NAME));
                 } catch (Exception e) {
                     LOG.error("Execute failed", e);
                 } finally {
@@ -86,7 +86,7 @@ public class RedisServiceMonitorExecutor extends AbstractMonitorExecutor {
             public Object call() throws Exception {
                 try {
                     cluster.hset(traceId, RandomUtil.uuidRandom(), SerializerExecutor.toJson(monitorStat));
-                    cluster.pexpire(traceId, properties.getLong(ThunderConstants.REDIS_DATA_EXPIRATION_ATTRIBUTE_NAME));
+                    cluster.pexpire(traceId, properties.getLong(ThunderConstant.REDIS_DATA_EXPIRATION_ATTRIBUTE_NAME));
                 } catch (Exception e) {
                     LOG.error("Execute failed", e);
                 } finally {

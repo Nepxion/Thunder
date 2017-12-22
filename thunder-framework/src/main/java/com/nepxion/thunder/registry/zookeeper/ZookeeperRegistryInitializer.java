@@ -10,7 +10,7 @@ package com.nepxion.thunder.registry.zookeeper;
  * @version 1.0
  */
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegateImpl;
 import com.nepxion.thunder.common.entity.RegistryEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
@@ -28,9 +28,9 @@ public class ZookeeperRegistryInitializer extends ThunderDelegateImpl implements
         }
 
         String address = registryEntity.getAddress();
-        int sessionTimeout = properties.getInteger(ThunderConstants.ZOOKEEPER_SESSION_TIMOUT_ATTRIBUTE_NAME);
-        int connectTimeout = properties.getInteger(ThunderConstants.ZOOKEEPER_CONNECT_TIMEOUT_ATTRIBUTE_NAME);
-        int connectWaitTime = properties.getInteger(ThunderConstants.ZOOKEEPER_CONNECT_WAIT_TIME_ATTRIBUTE_NAME);
+        int sessionTimeout = properties.getInteger(ThunderConstant.ZOOKEEPER_SESSION_TIMOUT_ATTRIBUTE_NAME);
+        int connectTimeout = properties.getInteger(ThunderConstant.ZOOKEEPER_CONNECT_TIMEOUT_ATTRIBUTE_NAME);
+        int connectWaitTime = properties.getInteger(ThunderConstant.ZOOKEEPER_CONNECT_WAIT_TIME_ATTRIBUTE_NAME);
 
         invoker.create(address, sessionTimeout, connectTimeout, connectWaitTime);
         invoker.startAndBlock();

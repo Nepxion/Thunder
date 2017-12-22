@@ -27,7 +27,7 @@ import org.apache.http.ssl.TrustStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 
 public class ApacheSyncClientExecutor {
@@ -41,9 +41,9 @@ public class ApacheSyncClientExecutor {
 
     public void initialize(ThunderProperties properties, boolean https) throws Exception {
         RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout(properties.getInteger(ThunderConstants.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
-                .setConnectionRequestTimeout(properties.getInteger(ThunderConstants.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
-                .setSocketTimeout(properties.getInteger(ThunderConstants.APACHE_SO_TIMEOUT_ATTRIBUTE_NAME))
+                .setConnectTimeout(properties.getInteger(ThunderConstant.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
+                .setConnectionRequestTimeout(properties.getInteger(ThunderConstant.APACHE_CONNECT_TIMEOUT_ATTRIBUTE_NAME))
+                .setSocketTimeout(properties.getInteger(ThunderConstant.APACHE_SO_TIMEOUT_ATTRIBUTE_NAME))
                 .build();
 
         HttpClientBuilder clientBuilder = HttpClients.custom();

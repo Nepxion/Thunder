@@ -22,7 +22,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.support.JmsUtils;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 
 public class MQTemplate extends JmsTemplate {
 
@@ -39,8 +39,8 @@ public class MQTemplate extends JmsTemplate {
         MessageProducer producer = null;
         try {
             Message message = messageCreator.createMessage(session);
-            boolean async = message.getBooleanProperty(ThunderConstants.ASYNC_ATTRIBUTE_NAME);
-            long timeout = message.getLongProperty(ThunderConstants.TIMEOUT_ATTRIBUTE_NAME);
+            boolean async = message.getBooleanProperty(ThunderConstant.ASYNC_ATTRIBUTE_NAME);
+            long timeout = message.getLongProperty(ThunderConstant.TIMEOUT_ATTRIBUTE_NAME);
 
             producer = createProducer(session, destination);
             // DeliveryMode.PERSISTENT:持久化模式，消息在硬盘堆积模式

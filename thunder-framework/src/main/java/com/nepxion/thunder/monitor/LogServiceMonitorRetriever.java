@@ -23,14 +23,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MonitorStat;
 
 public class LogServiceMonitorRetriever extends AbstractMonitorRetriever {
     private static final Logger LOG = LoggerFactory.getLogger(LogServiceMonitorRetriever.class);
 
     public List<MonitorStat> retrieve(String traceId, String filePath) throws Exception {
-        return retrieve(traceId, filePath, ThunderConstants.ENCODING_FORMAT);
+        return retrieve(traceId, filePath, ThunderConstant.ENCODING_FORMAT);
     }
 
     public List<MonitorStat> retrieve(String traceId, String filePath, String encoding) throws Exception {
@@ -44,7 +44,7 @@ public class LogServiceMonitorRetriever extends AbstractMonitorRetriever {
 
         List<MonitorStat> monitorStatList = new ArrayList<MonitorStat>();
 
-        String key = "\"" + ThunderConstants.TRACE_ID + "\":\"" + traceId + "\"";
+        String key = "\"" + ThunderConstant.TRACE_ID + "\":\"" + traceId + "\"";
 
         InputStream inputStream = new FileInputStream(filePath);
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.toCharset(encoding));

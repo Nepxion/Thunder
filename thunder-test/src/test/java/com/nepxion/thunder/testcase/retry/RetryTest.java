@@ -12,7 +12,7 @@ package com.nepxion.thunder.testcase.retry;
 
 import org.junit.Test;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.common.property.ThunderPropertiesManager;
 
@@ -22,7 +22,7 @@ public class RetryTest {
 
     @Test
     public void test() throws Exception {
-        System.out.println(invoke1(properties.getInteger(ThunderConstants.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME)));
+        System.out.println(invoke1(properties.getInteger(ThunderConstant.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME)));
         //invoke2(properties.getInteger(ThunderConstants.RETRY_TIMES_ATTRIBUTE_NAME));
     }
 
@@ -31,7 +31,7 @@ public class RetryTest {
         invokeRetryTimes--;
 
         if (invokeRetryTimes > -1) {
-            System.out.println("Retry times = " + (properties.getInteger(ThunderConstants.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME) - invokeRetryTimes));
+            System.out.println("Retry times = " + (properties.getInteger(ThunderConstant.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME) - invokeRetryTimes));
 
             return invoke1(invokeRetryTimes);
         }
@@ -45,7 +45,7 @@ public class RetryTest {
 
         if (loop() < 7) {
             if (invokeRetryTimes > -1) {
-                System.out.println("Retry times = " + (properties.getInteger(ThunderConstants.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME) - invokeRetryTimes));
+                System.out.println("Retry times = " + (properties.getInteger(ThunderConstant.LOAD_BALANCE_RETRY_TIMES_ATTRIBUTE_NAME) - invokeRetryTimes));
 
                 invoke2(invokeRetryTimes);
             }

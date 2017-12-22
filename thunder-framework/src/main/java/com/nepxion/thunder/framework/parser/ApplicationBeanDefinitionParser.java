@@ -17,7 +17,7 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.util.HostUtil;
@@ -37,15 +37,15 @@ public class ApplicationBeanDefinitionParser extends AbstractExtensionBeanDefini
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
 
-        String namespaceElementName = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
-        String applicationElementName = ThunderConstants.APPLICATION_ELEMENT_NAME;
-        String applicationAttributeName = ThunderConstants.APPLICATION_ATTRIBUTE_NAME;
-        String groupAttributeName = ThunderConstants.GROUP_ATTRIBUTE_NAME;
-        String clusterAttributeName = ThunderConstants.CLUSTER_ATTRIBUTE_NAME;
-        String hostAttributeName = ThunderConstants.HOST_ATTRIBUTE_NAME;
-        String portAttributeName = ThunderConstants.PORT_ATTRIBUTE_NAME;
-        String hostParameterName = ThunderConstants.HOST_PARAMETER_NAME;
-        String portParameterName = ThunderConstants.PORT_PARAMETER_NAME;
+        String namespaceElementName = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
+        String applicationElementName = ThunderConstant.APPLICATION_ELEMENT_NAME;
+        String applicationAttributeName = ThunderConstant.APPLICATION_ATTRIBUTE_NAME;
+        String groupAttributeName = ThunderConstant.GROUP_ATTRIBUTE_NAME;
+        String clusterAttributeName = ThunderConstant.CLUSTER_ATTRIBUTE_NAME;
+        String hostAttributeName = ThunderConstant.HOST_ATTRIBUTE_NAME;
+        String portAttributeName = ThunderConstant.PORT_ATTRIBUTE_NAME;
+        String hostParameterName = ThunderConstant.HOST_PARAMETER_NAME;
+        String portParameterName = ThunderConstant.PORT_PARAMETER_NAME;
 
         String application = element.getAttribute(applicationAttributeName);
         if (StringUtils.isEmpty(application)) {

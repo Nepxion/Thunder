@@ -18,7 +18,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 import com.nepxion.thunder.common.config.ApplicationConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.PropertyType;
@@ -52,10 +52,10 @@ public class RegistryBeanDefinitionParser extends AbstractExtensionBeanDefinitio
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         super.doParse(element, parserContext, builder);
 
-        String typeAttributeName = ThunderConstants.TYPE_ATTRIBUTE_NAME;
-        String addressAttributeName = ThunderConstants.ADDRESS_ATTRIBUTE_NAME;
-        String addressParameterName = ThunderConstants.REGISTRY_ADDRESS_PARAMETER_NAME;
-        String configAttributeName = ThunderConstants.CONFIG_ATTRIBUTE_NAME;
+        String typeAttributeName = ThunderConstant.TYPE_ATTRIBUTE_NAME;
+        String addressAttributeName = ThunderConstant.ADDRESS_ATTRIBUTE_NAME;
+        String addressParameterName = ThunderConstant.REGISTRY_ADDRESS_PARAMETER_NAME;
+        String configAttributeName = ThunderConstant.CONFIG_ATTRIBUTE_NAME;
 
         String type = element.getAttribute(typeAttributeName);
         RegistryType registryType = null;
@@ -86,7 +86,7 @@ public class RegistryBeanDefinitionParser extends AbstractExtensionBeanDefinitio
             address = element.getAttribute(addressAttributeName);
             if (StringUtils.isEmpty(address)) {
                 try {
-                    address = properties.getString(ThunderConstants.ZOOKEEPER_ADDRESS_ATTRIBUTE_NAME);
+                    address = properties.getString(ThunderConstant.ZOOKEEPER_ADDRESS_ATTRIBUTE_NAME);
                 } catch (Exception e) {
 
                 }
@@ -140,7 +140,7 @@ public class RegistryBeanDefinitionParser extends AbstractExtensionBeanDefinitio
     protected RegistryInitializer createRegistryInitializer(RegistryType registryType) {
         RegistryInitializer registryInitializer = executorContainer.getRegistryInitializer();
         if (registryInitializer == null) {
-            String zookeeperRegistryInitializerId = ThunderConstants.ZOOKEEPER_REGISTRY_INITIALIZER_ID;
+            String zookeeperRegistryInitializerId = ThunderConstant.ZOOKEEPER_REGISTRY_INITIALIZER_ID;
             try {
                 switch (registryType) {
                     case ZOOKEEPER:
@@ -160,7 +160,7 @@ public class RegistryBeanDefinitionParser extends AbstractExtensionBeanDefinitio
     protected RegistryExecutor createRegistryExecutor(RegistryType registryType) {
         RegistryExecutor registryExecutor = executorContainer.getRegistryExecutor();
         if (registryExecutor == null) {
-            String zookeeperRegistryExecutorId = ThunderConstants.ZOOKEEPER_REGISTRY_EXECUTOR_ID;
+            String zookeeperRegistryExecutorId = ThunderConstant.ZOOKEEPER_REGISTRY_EXECUTOR_ID;
             try {
                 switch (registryType) {
                     case ZOOKEEPER:
@@ -272,7 +272,7 @@ public class RegistryBeanDefinitionParser extends AbstractExtensionBeanDefinitio
             applicationConfig = new ApplicationConfig();
             applicationConfig.setApplication(applicationEntity.getApplication());
             applicationConfig.setGroup(applicationEntity.getGroup());
-            applicationConfig.setFrequency(properties.getInteger(ThunderConstants.FREQUENCY_ATTRIBUTE_NAME));
+            applicationConfig.setFrequency(properties.getInteger(ThunderConstant.FREQUENCY_ATTRIBUTE_NAME));
 
             registryExecutor.persistApplication(applicationConfig);
         }

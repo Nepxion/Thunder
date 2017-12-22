@@ -18,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.common.util.StringUtil;
 import com.nepxion.thunder.event.protocol.ProtocolEvent;
@@ -35,10 +35,10 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
     public SmtpEventInterceptor(ThunderProperties properties) {
         this.properties = properties;
 
-        String notificationExclusion = properties.getString(ThunderConstants.SMTP_NOTIFICATION_EXCLUSION_ATTRIBUTE_NAME);
-        String host = properties.getString(ThunderConstants.SMTP_HOST_ATTRIBUTE_NAME);
-        String user = properties.getString(ThunderConstants.SMTP_USER_ATTRIBUTE_NAME);
-        String password = properties.getString(ThunderConstants.SMTP_PASSWORD_ATTRIBUTE_NAME);
+        String notificationExclusion = properties.getString(ThunderConstant.SMTP_NOTIFICATION_EXCLUSION_ATTRIBUTE_NAME);
+        String host = properties.getString(ThunderConstant.SMTP_HOST_ATTRIBUTE_NAME);
+        String user = properties.getString(ThunderConstant.SMTP_USER_ATTRIBUTE_NAME);
+        String password = properties.getString(ThunderConstant.SMTP_PASSWORD_ATTRIBUTE_NAME);
 
         notificationExclusionList = new ArrayList<String>();
         String[] notificationExclusionArray = StringUtils.split(notificationExclusion, ",");
@@ -48,7 +48,7 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
             }
         }
 
-        boolean ssl = properties.getBoolean(ThunderConstants.SMTP_SSL_ATTRIBUTE_NAME);
+        boolean ssl = properties.getBoolean(ThunderConstant.SMTP_SSL_ATTRIBUTE_NAME);
         if (ssl) {
             smtpExecutor = new SmtpSslExecutor(host, user, password);
         } else {
@@ -73,11 +73,11 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
     }
 
     private void send(ProtocolEvent event) throws Exception {
-        String from = properties.getString(ThunderConstants.SMTP_MAIL_FROM_ATTRIBUTE_NAME);
-        String to = properties.getString(ThunderConstants.SMTP_MAIL_TO_ATTRIBUTE_NAME);
-        String cc = properties.getString(ThunderConstants.SMTP_MAIL_CC_ATTRIBUTE_NAME);
-        String bcc = properties.getString(ThunderConstants.SMTP_MAIL_BCC_ATTRIBUTE_NAME);
-        String namespace = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
+        String from = properties.getString(ThunderConstant.SMTP_MAIL_FROM_ATTRIBUTE_NAME);
+        String to = properties.getString(ThunderConstant.SMTP_MAIL_TO_ATTRIBUTE_NAME);
+        String cc = properties.getString(ThunderConstant.SMTP_MAIL_CC_ATTRIBUTE_NAME);
+        String bcc = properties.getString(ThunderConstant.SMTP_MAIL_BCC_ATTRIBUTE_NAME);
+        String namespace = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
         String subject = StringUtil.firstLetterToUpper(namespace) + "调用异常通知";
 
         String text = event.toString();
@@ -123,6 +123,6 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
         builder.append("</html>");
         text = builder.toString();
 
-        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstants.ENCODING_FORMAT);
+        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_FORMAT);
     }
 }

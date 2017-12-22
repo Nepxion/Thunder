@@ -55,7 +55,7 @@ import com.nepxion.swing.selector.dropdown.IDropDownPopupMenu;
 import com.nepxion.swing.selector.dropdown.component.JTreeDropDownSelector;
 import com.nepxion.swing.textfield.number.JNumberTextField;
 import com.nepxion.swing.tip.bubble.JBubbleTip;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
 import com.nepxion.thunder.common.entity.RegistryType;
@@ -122,7 +122,7 @@ public class DeployTopology extends AbstractTopology {
         protocolComboBox.setPreferredSize(new Dimension(110, protocolComboBox.getPreferredSize().height));
         protocolComboBox.setModel(comboBoxModel);
 
-        configTree = new ConfigTree(ThunderConstants.CONFIGURATION_ELEMENT_NAME);
+        configTree = new ConfigTree(ThunderConstant.CONFIGURATION_ELEMENT_NAME);
         configDropDownSelector = new JTreeDropDownSelector(configTree, true) {
             private static final long serialVersionUID = 1L;
 

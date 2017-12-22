@@ -17,7 +17,7 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.SubscriberExceptionHandler;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.thread.ThreadPoolFactory;
 
 public final class EventControllerFactory {
@@ -65,7 +65,7 @@ public final class EventControllerFactory {
             case ASYNC:
                 EventController asyncEventController = ASYNC_CONTROLLER_MAP.get(identifier);
                 if (asyncEventController == null) {
-                    EventController newEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, ThunderConstants.EVENT_BUS));
+                    EventController newEventController = createAsyncController(ThreadPoolFactory.createThreadPoolDefaultExecutor(null, ThunderConstant.EVENT_BUS));
                     asyncEventController = ASYNC_CONTROLLER_MAP.putIfAbsent(identifier, newEventController);
                     if (asyncEventController == null) {
                         asyncEventController = newEventController;

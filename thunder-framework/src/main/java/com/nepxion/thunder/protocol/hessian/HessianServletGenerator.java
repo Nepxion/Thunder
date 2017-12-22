@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileDeleteStrategy;
 import org.apache.commons.io.FileUtils;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ServiceEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.common.util.ClassUtil;
@@ -37,8 +37,8 @@ public class HessianServletGenerator {
     public HessianServletGenerator(Map<String, ServiceEntity> serviceEntityMap, ThunderProperties properties, String path) {
         this.serviceEntityMap = serviceEntityMap;
 
-        hessianServiceExporter = properties.getString(ThunderConstants.HESSIAN_SERVICE_EXPORTER_ID);
-        hessianServletFile = properties.getString(ThunderConstants.HESSIAN_SERVLET_FILE_ATTRIBUTE_NAME);
+        hessianServiceExporter = properties.getString(ThunderConstant.HESSIAN_SERVICE_EXPORTER_ID);
+        hessianServletFile = properties.getString(ThunderConstant.HESSIAN_SERVLET_FILE_ATTRIBUTE_NAME);
 
         path = FileUtil.validatePath(path);
 
@@ -61,7 +61,7 @@ public class HessianServletGenerator {
 
     private StringBuilder generateContent() {
         StringBuilder builder = new StringBuilder();
-        builder.append("<?xml version=\"1.0\" encoding=\"" + ThunderConstants.ENCODING_FORMAT + "\"?>\n");
+        builder.append("<?xml version=\"1.0\" encoding=\"" + ThunderConstant.ENCODING_FORMAT + "\"?>\n");
         builder.append("<beans xmlns=\"http://www.springframework.org/schema/beans\"\n");
         builder.append("    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n");
         builder.append("    xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n");

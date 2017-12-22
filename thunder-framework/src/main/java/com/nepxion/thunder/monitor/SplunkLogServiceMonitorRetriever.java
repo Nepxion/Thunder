@@ -26,7 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.MonitorStat;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.splunk.JobExportArgs;
@@ -48,10 +48,10 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
         if (service == null) {
             try {
                 ServiceArgs loginArgs = new ServiceArgs();
-                loginArgs.setHost(properties.getString(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME));
-                loginArgs.setPort(properties.getInteger(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME));
-                loginArgs.setUsername(properties.getString(ThunderConstants.SPLUNK_USER_NAME_ATTRIBUTE_NAME));
-                loginArgs.setPassword(properties.getString(ThunderConstants.SPLUNK_PASSWORD_ATTRIBUTE_NAME));
+                loginArgs.setHost(properties.getString(ThunderConstant.SPLUNK_HOST_ATTRIBUTE_NAME));
+                loginArgs.setPort(properties.getInteger(ThunderConstant.SPLUNK_PORT_ATTRIBUTE_NAME));
+                loginArgs.setUsername(properties.getString(ThunderConstant.SPLUNK_USER_NAME_ATTRIBUTE_NAME));
+                loginArgs.setPassword(properties.getString(ThunderConstant.SPLUNK_PASSWORD_ATTRIBUTE_NAME));
                 loginArgs.setSSLSecurityProtocol(SSLSecurityProtocol.TLSv1_2);
 
                 service = Service.connect(loginArgs);
@@ -75,7 +75,7 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
     }
 
     public List<MonitorStat> retrieve(String traceId, Map<String, Object> conditions) throws Exception {
-        return retrieve(traceId, conditions, ThunderConstants.ENCODING_FORMAT);
+        return retrieve(traceId, conditions, ThunderConstant.ENCODING_FORMAT);
     }
 
     public List<MonitorStat> retrieve(String traceId, Map<String, Object> conditions, String encoding) throws Exception {
@@ -87,27 +87,27 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
             throw new MonitorException("Splunk service is null");
         }
 
-        String sourceType = properties.getString(ThunderConstants.NAMESPACE_ELEMENT_NAME);
-        int maximumTime = properties.getInteger(ThunderConstants.SPLUNK_MAXIMUM_TIME_ATTRIBUTE_NAME);
+        String sourceType = properties.getString(ThunderConstant.NAMESPACE_ELEMENT_NAME);
+        int maximumTime = properties.getInteger(ThunderConstant.SPLUNK_MAXIMUM_TIME_ATTRIBUTE_NAME);
         String earliestTime = null;
         String latestTime = null;
         if (MapUtils.isNotEmpty(conditions)) {
-            Object sourceTypeObject = conditions.get(ThunderConstants.SPLUNK_SOURCE_TYPE_ATTRIBUTE_NAME);
+            Object sourceTypeObject = conditions.get(ThunderConstant.SPLUNK_SOURCE_TYPE_ATTRIBUTE_NAME);
             if (sourceTypeObject != null) {
                 sourceType = sourceTypeObject.toString();
             }
 
-            Object maximumTimeObject = conditions.get(ThunderConstants.SPLUNK_MAXIMUM_TIME_ATTRIBUTE_NAME);
+            Object maximumTimeObject = conditions.get(ThunderConstant.SPLUNK_MAXIMUM_TIME_ATTRIBUTE_NAME);
             if (maximumTimeObject != null) {
                 maximumTime = (Integer) maximumTimeObject;
             }
 
-            Object earliestTimeObject = conditions.get(ThunderConstants.SPLUNK_EARLIEST_TIME_ATTRIBUTE_NAME);
+            Object earliestTimeObject = conditions.get(ThunderConstant.SPLUNK_EARLIEST_TIME_ATTRIBUTE_NAME);
             if (earliestTimeObject != null) {
                 earliestTime = new SimpleDateFormat(DATE_FORMAT_SPLUNK).format((Date) earliestTimeObject);
             }
 
-            Object latestTimeObject = conditions.get(ThunderConstants.SPLUNK_LATEST_TIME_ATTRIBUTE_NAME);
+            Object latestTimeObject = conditions.get(ThunderConstant.SPLUNK_LATEST_TIME_ATTRIBUTE_NAME);
             if (latestTimeObject != null) {
                 latestTime = new SimpleDateFormat(DATE_FORMAT_SPLUNK).format((Date) latestTimeObject);
             }
@@ -123,14 +123,14 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
             exportArgs.setLatestTime(latestTime);
         }
 
-        InputStream inputStream = service.export("search sourcetype=\"" + sourceType + "\" " + ThunderConstants.TRACE_ID + "=\"" + traceId + "\"", exportArgs);
+        InputStream inputStream = service.export("search sourcetype=\"" + sourceType + "\" " + ThunderConstant.TRACE_ID + "=\"" + traceId + "\"", exportArgs);
         if (inputStream == null) {
             throw new MonitorException("Input stream is null");
         }
 
         List<MonitorStat> monitorStatList = new ArrayList<MonitorStat>();
 
-        String key = "{\"" + ThunderConstants.TRACE_ID + "\":\"" + traceId + "\"";
+        String key = "{\"" + ThunderConstant.TRACE_ID + "\":\"" + traceId + "\"";
 
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charsets.toCharset(encoding));
         BufferedReader bufferedReader = IOUtils.toBufferedReader(inputStreamReader);

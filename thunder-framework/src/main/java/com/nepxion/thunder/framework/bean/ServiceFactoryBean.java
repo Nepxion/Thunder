@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.nepxion.thunder.common.config.ApplicationConfig;
 import com.nepxion.thunder.common.config.ServiceConfig;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.entity.ServiceEntity;
 import com.nepxion.thunder.common.util.ClassUtil;
@@ -87,9 +87,9 @@ public class ServiceFactoryBean extends AbstractFactoryBean {
             serviceConfig = new ServiceConfig();
             serviceConfig.setInterface(interfaceName);
             serviceConfig.setMethods(methods);
-            serviceConfig.setSecretKey(properties.getString(ThunderConstants.SECRET_KEY_ATTRIBUTE_NAME));
-            serviceConfig.setVersion(properties.getInteger(ThunderConstants.VERSION_ATTRIBUTE_NAME));
-            serviceConfig.setToken(properties.getLong(ThunderConstants.TOKEN_ATTRIBUTE_NAME));
+            serviceConfig.setSecretKey(properties.getString(ThunderConstant.SECRET_KEY_ATTRIBUTE_NAME));
+            serviceConfig.setVersion(properties.getInteger(ThunderConstant.VERSION_ATTRIBUTE_NAME));
+            serviceConfig.setToken(properties.getLong(ThunderConstant.TOKEN_ATTRIBUTE_NAME));
 
             registryExecutor.persistService(serviceConfig, applicationEntity);
         } else {

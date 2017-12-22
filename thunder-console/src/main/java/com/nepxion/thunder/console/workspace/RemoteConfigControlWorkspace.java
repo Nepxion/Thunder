@@ -29,7 +29,7 @@ import com.nepxion.swing.scrollpane.JBasicScrollPane;
 import com.nepxion.swing.searchable.JSearchableContainer;
 import com.nepxion.swing.searchable.JSearchableFactory;
 import com.nepxion.swing.textarea.JBasicTextArea;
-import com.nepxion.thunder.common.constant.ThunderConstants;
+import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.console.controller.PropertyController;
 import com.nepxion.thunder.console.icon.ConsoleIconFactory;
@@ -114,7 +114,7 @@ public class RemoteConfigControlWorkspace extends ConfigWorkspace {
 
     @Override
     protected String createCategory() {
-        return ThunderConstants.CONFIGURATION_ELEMENT_NAME;
+        return ThunderConstant.CONFIGURATION_ELEMENT_NAME;
     }
 
     @Override
