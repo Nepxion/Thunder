@@ -20,9 +20,8 @@ public class MathsUtil {
             return null;
         }
 
-        long result = 0;
+        long result = 1;
         try {
-            result = 1;
             String[] array = StringUtils.split(value, ASTERISK);
             for (String data : array) {
                 result *= Long.parseLong(data.trim());

@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.nepxion.thunder.common.constant.ThunderConstants;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.spi.SpiLoader;
 
@@ -35,7 +36,7 @@ public class ThunderPropertiesManager {
         try {
             LOG.info("Parse default property config file [{}]", DEFAULT_PATH);
 
-            properties = new ThunderProperties(DEFAULT_PATH);
+            properties = new ThunderProperties(DEFAULT_PATH, ThunderConstants.ENCODING_FORMAT);
         } catch (Exception e) {
             LOG.error("Parse default property config file failed for [{}]", DEFAULT_PATH, e);
         }
@@ -45,7 +46,7 @@ public class ThunderPropertiesManager {
         try {
             LOG.info("Parse ext property config file [{}]", EXT_PATH);
 
-            extProperties = new ThunderProperties(EXT_PATH);
+            extProperties = new ThunderProperties(EXT_PATH, ThunderConstants.ENCODING_FORMAT);
         } catch (Exception e) {
             LOG.warn("Parse ext property config file failed for [{}], maybe file doesn't exist, ignore", EXT_PATH);
         }
@@ -91,7 +92,7 @@ public class ThunderPropertiesManager {
         }
 
         if (StringUtils.isNotEmpty(property)) {
-            remoteProperties = new ThunderProperties(property.getBytes());
+            remoteProperties = new ThunderProperties(property.getBytes(), ThunderConstants.ENCODING_FORMAT);
 
             LOG.info("Merge remote property configs to default property configs");
             LOG.info("---------------- Remote Property Config ----------------\r\n{}", remoteProperties.getContent());

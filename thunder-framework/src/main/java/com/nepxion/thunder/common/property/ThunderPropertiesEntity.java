@@ -82,9 +82,9 @@ public abstract class ThunderPropertiesEntity implements Serializable {
     }
 
     private void summarizeProperties(ThunderProperties properties, Map<String, Object> map, String prefix) {
-        for (Map.Entry<String, Object> entry : properties.getMap().entrySet()) {
+        for (Map.Entry<String, String> entry : properties.getMap().entrySet()) {
             String key = entry.getKey();
-            Object value = entry.getValue();
+            String value = entry.getValue();
 
             if (key.startsWith(prefix)) {
                 int index = key.indexOf(prefix);

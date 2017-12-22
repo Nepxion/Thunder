@@ -56,7 +56,7 @@ public class ThunderDelegateImpl implements ThunderDelegate {
 
     @Override
     public <T> T createDelegate(String delegateClassId) throws Exception {
-        String delegateClassName = properties.get(delegateClassId);
+        String delegateClassName = properties.getString(delegateClassId);
 
         T delegateInstance = ClassUtil.createInstance(delegateClassName);
 
