@@ -14,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -35,31 +34,31 @@ public class ZookeeperTest {
     @Test
     public void testCreate() throws Exception {
         ZookeeperInvoker invoker = new ZookeeperInvoker();
-        CuratorFramework client = invoker.create(ADDRESS, SESSION_TIMEOUT, CONNECT_TIMEOUT, CONNECT_WAIT_TIME);
-        invoker.startAndBlock(client, 20000, TimeUnit.MILLISECONDS);
+        invoker.create(ADDRESS, SESSION_TIMEOUT, CONNECT_TIMEOUT, CONNECT_WAIT_TIME);
+        invoker.startAndBlock(20000, TimeUnit.MILLISECONDS);
 
         String path1 = "/thunder/application/netty/MY_GROUP/APP-IOS/service/com.nepxion.thunder.test.service.UserService/{\"application\":\"APP-IOS\",\"group\":\"MY_GROUP\",\"cluster\":\"NettyServerCluster\",\"host\":\"10.11.106.121\",\"port\":6010}";
-        create(invoker, client, path1);
+        create(invoker, path1);
 
         String path2 = "/thunder/application/netty/MY_GROUP/APP-IOS/service/com.nepxion.thunder.test.service.AnimalService/{\"application\":\"APP-IOS\",\"group\":\"MY_GROUP\",\"cluster\":\"NettyServerCluster\",\"host\":\"10.11.106.121\",\"port\":6010}";
-        create(invoker, client, path2);
+        create(invoker, path2);
 
         // invoker.close(client);
 
         System.in.read();
     }
 
-    private void create(final ZookeeperInvoker invoker, final CuratorFramework client, final String path) throws Exception {
+    private void create(final ZookeeperInvoker invoker, final String path) throws Exception {
         for (int i = 0; i < 5000; i++) {
             LOG.info("发送事件={}", i);
             EXECUTOR.execute(new Runnable() {
                 public void run() {
                     try {
                         String fullPath = path + RandomUtil.uuidRandom();
-                        if (invoker.pathExist(client, fullPath)) {
-                            invoker.deletePath(client, fullPath);
+                        if (invoker.pathExist(fullPath)) {
+                            invoker.deletePath(fullPath);
                         }
-                        invoker.createPath(client, fullPath, CreateMode.EPHEMERAL);
+                        invoker.createPath(fullPath, CreateMode.EPHEMERAL);
                         // TimeUnit.MILLISECONDS.sleep(200);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -72,12 +71,12 @@ public class ZookeeperTest {
     @Test
     public void testDelete() throws Exception {
         ZookeeperInvoker invoker = new ZookeeperInvoker();
-        CuratorFramework client = invoker.create(ADDRESS, SESSION_TIMEOUT, CONNECT_TIMEOUT, CONNECT_WAIT_TIME);
-        invoker.startAndBlock(client, 20000, TimeUnit.MILLISECONDS);
+        invoker.create(ADDRESS, SESSION_TIMEOUT, CONNECT_TIMEOUT, CONNECT_WAIT_TIME);
+        invoker.startAndBlock(20000, TimeUnit.MILLISECONDS);
 
-        invoker.deletePath(client, "/thunder");
+        invoker.deletePath("/thunder");
 
-        // invoker.close(client);
+        // invoker.close();
 
         System.in.read();
     }

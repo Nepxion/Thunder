@@ -42,54 +42,54 @@ public class ZookeeperListenerTest {
     @Test
     public void test() throws Exception {
         ZookeeperInvoker invoker = new ZookeeperInvoker();
-        CuratorFramework client = invoker.create(ADDRESS, SESSION_TIMEOUT, CONNECT_TIMEOUT, CONNECT_WAIT_TIME);
-        invoker.startAndBlock(client, 20000, TimeUnit.MILLISECONDS);
+        invoker.create(ADDRESS, SESSION_TIMEOUT, CONNECT_TIMEOUT, CONNECT_WAIT_TIME);
+        invoker.startAndBlock(20000, TimeUnit.MILLISECONDS);
 
-        if (!invoker.pathExist(client, APPLICATION)) {
-            invoker.createPath(client, APPLICATION, CreateMode.PERSISTENT);
+        if (!invoker.pathExist(APPLICATION)) {
+            invoker.createPath(APPLICATION, CreateMode.PERSISTENT);
         }
 
-        usingNodeCacheListener(client, SERVER);
-        usingPathChildrenListener(client, SERVER);
-        usingTreeCacheListener(client, SERVER);
+        usingNodeCacheListener(invoker.getClient(), SERVER);
+        usingPathChildrenListener(invoker.getClient(), SERVER);
+        usingTreeCacheListener(invoker.getClient(), SERVER);
 
         // 创建节点
-        if (!invoker.pathExist(client, SERVER)) {
+        if (!invoker.pathExist(SERVER)) {
             LOG.info("创建节点：" + SERVER);
-            invoker.createPath(client, SERVER);
+            invoker.createPath(SERVER);
         }
 
         // 放入节点数据
-        if (invoker.pathExist(client, SERVER)) {
+        if (invoker.pathExist(SERVER)) {
             LOG.info("放入节点数据：" + SERVER);
-            invoker.setData(client, SERVER, new String("server"));
+            invoker.setData(SERVER, new String("server"));
         }
 
         // 删除节点
-        if (invoker.pathExist(client, SERVER)) {
+        if (invoker.pathExist(SERVER)) {
             LOG.info("删除节点：" + SERVER);
-            invoker.deletePath(client, SERVER);
+            invoker.deletePath(SERVER);
         }
 
         // 创建子节点
-        if (!invoker.pathExist(client, SUB_SERVER)) {
+        if (!invoker.pathExist(SUB_SERVER)) {
             LOG.info("创建子节点：" + SUB_SERVER);
-            invoker.createPath(client, SUB_SERVER);
+            invoker.createPath(SUB_SERVER);
         }
 
         // 放入子节点数据
-        if (invoker.pathExist(client, SUB_SERVER)) {
+        if (invoker.pathExist(SUB_SERVER)) {
             LOG.info("放入子节点数据：" + SUB_SERVER);
-            invoker.setData(client, SUB_SERVER, new String("sub-server"));
+            invoker.setData(SUB_SERVER, new String("sub-server"));
         }
 
         // 删除子节点
-        if (invoker.pathExist(client, SUB_SERVER)) {
+        if (invoker.pathExist(SUB_SERVER)) {
             LOG.info("删除子节点：" + SUB_SERVER);
-            invoker.deletePath(client, SUB_SERVER);
+            invoker.deletePath(SUB_SERVER);
         }
 
-        //executor.close(client);
+        //invoker.close();
 
         System.in.read();
     }
