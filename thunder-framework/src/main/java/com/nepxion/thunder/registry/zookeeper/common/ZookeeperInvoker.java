@@ -162,7 +162,7 @@ public class ZookeeperInvoker {
         }
 
         if (!isStarted()) {
-            throw new ZookeeperException("Zookeeper client isn't started");
+            throw new ZookeeperException("Zookeeper client is closed");
         }
     }
 
