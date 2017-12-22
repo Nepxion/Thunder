@@ -1162,9 +1162,9 @@ public class TraceTopology extends AbstractTopology {
                 JClassicButton startButton = new JClassicButton(ConsoleLocale.getString("start"), ConsoleIconFactory.getSwingIcon("stereo/control_play_16.png"), ConsoleLocale.getString("start"));
                 startButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        Map<String, Object> splunkValue = new HashMap<String, Object>();
+                        Map<String, String> splunkValue = new HashMap<String, String>();
                         splunkValue.put(ThunderConstants.SPLUNK_HOST_ATTRIBUTE_NAME, hostComboBox.getSelectedItem().toString());
-                        splunkValue.put(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME, Integer.valueOf(portTextField.getText().trim()));
+                        splunkValue.put(ThunderConstants.SPLUNK_PORT_ATTRIBUTE_NAME, portTextField.getText().trim());
                         splunkValue.put(ThunderConstants.SPLUNK_USER_NAME_ATTRIBUTE_NAME, userNameTextField.getText().trim());
                         splunkValue.put(ThunderConstants.SPLUNK_PASSWORD_ATTRIBUTE_NAME, passwordField.getPasswordText().trim());
                         PropertiesContext.addPropertiesMap(splunkValue);
@@ -1310,7 +1310,7 @@ public class TraceTopology extends AbstractTopology {
 
                 startButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        Map<String, Object> sentinelValue = new HashMap<String, Object>();
+                        Map<String, String> sentinelValue = new HashMap<String, String>();
                         sentinelValue.put(ThunderConstants.REDIS_SENTINEL_ATTRIBUTE_NAME, sentinelComboBox.getSelectedItem().toString());
                         sentinelValue.put(ThunderConstants.REDIS_MASTER_NAME_ATTRIBUTE_NAME, masterNameTextField.getText().trim());
                         sentinelValue.put(ThunderConstants.REDIS_CLIENT_NAME_ATTRIBUTE_NAME, clientNameTextField.getText().trim());
@@ -1409,7 +1409,7 @@ public class TraceTopology extends AbstractTopology {
 
                 startButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        Map<String, Object> sentinelValue = new HashMap<String, Object>();
+                        Map<String, String> sentinelValue = new HashMap<String, String>();
                         sentinelValue.put(ThunderConstants.REDIS_CLUSTER_ATTRIBUTE_NAME, clusterComboBox.getSelectedItem().toString());
 
                         PropertiesContext.addPropertiesMap(sentinelValue);

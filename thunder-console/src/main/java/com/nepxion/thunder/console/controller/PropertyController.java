@@ -10,6 +10,7 @@ package com.nepxion.thunder.console.controller;
  * @version 1.0
  */
 
+import com.nepxion.thunder.common.constant.ThunderConstants;
 import com.nepxion.thunder.common.entity.ApplicationEntity;
 import com.nepxion.thunder.common.property.ThunderProperties;
 import com.nepxion.thunder.console.context.RegistryContext;
@@ -25,7 +26,7 @@ public class PropertyController {
 
     public static ThunderProperties getProperties(ApplicationEntity applicationEntity) throws Exception {
         String property = RegistryContext.getDefaultRegistryExecutor().retrieveProperty(applicationEntity);
-        ThunderProperties properties = new ThunderProperties(property.getBytes());
+        ThunderProperties properties = new ThunderProperties(property.getBytes(), ThunderConstants.ENCODING_FORMAT);
 
         return properties;
     }

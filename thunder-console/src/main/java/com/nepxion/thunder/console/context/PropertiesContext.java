@@ -153,8 +153,8 @@ public class PropertiesContext {
         }
     }
 
-    public static void addPropertiesMap(Map<String, Object> value) {
-        for (Map.Entry<String, Object> entry : value.entrySet()) {
+    public static void addPropertiesMap(Map<String, String> value) {
+        for (Map.Entry<String, String> entry : value.entrySet()) {
             properties.put(entry.getKey(), entry.getValue());
         }
     }
