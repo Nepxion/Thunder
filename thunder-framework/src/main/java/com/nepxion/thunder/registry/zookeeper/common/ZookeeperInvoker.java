@@ -145,6 +145,11 @@ public class ZookeeperInvoker {
         }
     }
 
+    // 获取ZooKeeper客户端是否初始化
+    public boolean isInitialized() {
+        return client != null;
+    }
+
     // 获取ZooKeeper客户端连接是否正常
     public boolean isStarted() {
         return client.getState() == CuratorFrameworkState.STARTED;
