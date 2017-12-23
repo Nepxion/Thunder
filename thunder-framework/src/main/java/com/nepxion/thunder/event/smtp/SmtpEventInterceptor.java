@@ -123,6 +123,6 @@ public class SmtpEventInterceptor extends ProtocolEventInterceptor {
         builder.append("</html>");
         text = builder.toString();
 
-        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_FORMAT);
+        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_UTF_8);
     }
 }

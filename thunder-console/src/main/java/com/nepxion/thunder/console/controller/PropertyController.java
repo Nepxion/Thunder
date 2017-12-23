@@ -26,7 +26,7 @@ public class PropertyController {
 
     public static ThunderProperties getProperties(ApplicationEntity applicationEntity) throws Exception {
         String property = RegistryContext.getDefaultRegistryExecutor().retrieveProperty(applicationEntity);
-        ThunderProperties properties = new ThunderProperties(property.getBytes(), ThunderConstant.ENCODING_FORMAT);
+        ThunderProperties properties = new ThunderProperties(property.getBytes(), ThunderConstant.ENCODING_UTF_8, ThunderConstant.ENCODING_UTF_8);
 
         return properties;
     }

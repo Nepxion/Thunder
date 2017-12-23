@@ -41,7 +41,7 @@ public abstract class AbstractStockCallback implements FutureCallback<HttpRespon
         String result = null;
 
         try {
-            result = EntityUtils.toString(httpEntity, ThunderConstant.ENCODING_FORMAT);
+            result = EntityUtils.toString(httpEntity, ThunderConstant.ENCODING_UTF_8);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IOException e) {

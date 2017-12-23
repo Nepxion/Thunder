@@ -36,7 +36,7 @@ public class ThunderPropertiesManager {
         try {
             LOG.info("Parse default property config file [{}]", DEFAULT_PATH);
 
-            properties = new ThunderProperties(DEFAULT_PATH, ThunderConstant.ENCODING_FORMAT);
+            properties = new ThunderProperties(DEFAULT_PATH, ThunderConstant.ENCODING_GBK, ThunderConstant.ENCODING_UTF_8);
         } catch (Exception e) {
             LOG.error("Parse default property config file failed for [{}]", DEFAULT_PATH, e);
         }
@@ -46,7 +46,7 @@ public class ThunderPropertiesManager {
         try {
             LOG.info("Parse ext property config file [{}]", EXT_PATH);
 
-            extProperties = new ThunderProperties(EXT_PATH, ThunderConstant.ENCODING_FORMAT);
+            extProperties = new ThunderProperties(EXT_PATH, ThunderConstant.ENCODING_GBK, ThunderConstant.ENCODING_UTF_8);
         } catch (Exception e) {
             LOG.warn("Parse ext property config file failed for [{}], maybe file doesn't exist, ignore", EXT_PATH);
         }
@@ -92,7 +92,7 @@ public class ThunderPropertiesManager {
         }
 
         if (StringUtils.isNotEmpty(property)) {
-            remoteProperties = new ThunderProperties(property.getBytes(), ThunderConstant.ENCODING_FORMAT);
+            remoteProperties = new ThunderProperties(property.getBytes(), ThunderConstant.ENCODING_UTF_8, ThunderConstant.ENCODING_UTF_8);
 
             LOG.info("Merge remote property configs to default property configs");
             LOG.info("---------------- Remote Property Config ----------------\r\n{}", remoteProperties.getContent());

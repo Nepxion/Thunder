@@ -51,10 +51,10 @@ public class WebServiceMonitorExecutor extends AbstractMonitorExecutor {
 
             String value = SerializerExecutor.toJson(monitorStat);
 
-            HttpEntity entity = new StringEntity(value, ThunderConstant.ENCODING_FORMAT);
+            HttpEntity entity = new StringEntity(value, ThunderConstant.ENCODING_UTF_8);
 
             HttpPost httpPost = new HttpPost(address);
-            httpPost.addHeader("content-type", "application/json;charset=" + ThunderConstant.ENCODING_FORMAT);
+            httpPost.addHeader("content-type", "application/json;charset=" + ThunderConstant.ENCODING_UTF_8);
             httpPost.setEntity(entity);
 
             HttpAsyncCallback httpAsyncCallback = new HttpAsyncCallback();

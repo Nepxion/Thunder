@@ -340,7 +340,7 @@ public class ZookeeperRegistryExecutor extends ThunderDelegateImpl implements Re
         if (ArrayUtils.isNotEmpty(data)) {
             LOG.info("Retrieved property [{}]", path);
 
-            String property = new String(data, ThunderConstant.ENCODING_FORMAT);
+            String property = new String(data, ThunderConstant.ENCODING_UTF_8);
 
             return property;
         }

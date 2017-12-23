@@ -30,7 +30,7 @@ public class LogServiceMonitorRetriever extends AbstractMonitorRetriever {
     private static final Logger LOG = LoggerFactory.getLogger(LogServiceMonitorRetriever.class);
 
     public List<MonitorStat> retrieve(String traceId, String filePath) throws Exception {
-        return retrieve(traceId, filePath, ThunderConstant.ENCODING_FORMAT);
+        return retrieve(traceId, filePath, ThunderConstant.ENCODING_UTF_8);
     }
 
     public List<MonitorStat> retrieve(String traceId, String filePath, String encoding) throws Exception {

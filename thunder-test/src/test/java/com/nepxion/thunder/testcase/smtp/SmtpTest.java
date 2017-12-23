@@ -39,7 +39,7 @@ public class SmtpTest {
         builder.append("消息2");
         String text = builder.toString();
 
-        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_FORMAT);
+        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_UTF_8);
     }
 
     @Test
@@ -64,6 +64,6 @@ public class SmtpTest {
         builder.append("消息2");
         String text = builder.toString();
 
-        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_FORMAT);
+        smtpExecutor.sendHtml(from, to, cc, bcc, subject, text, ThunderConstant.ENCODING_UTF_8);
     }
 }

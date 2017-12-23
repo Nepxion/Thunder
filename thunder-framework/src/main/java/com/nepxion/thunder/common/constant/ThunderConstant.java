@@ -246,7 +246,10 @@ public class ThunderConstant {
     public static final String PORT_PARAMETER_NAME = "ThunderPort";
     public static final String REGISTRY_ADDRESS_PARAMETER_NAME = "ThunderRegistryAddress";
 
-    public static final String ENCODING_FORMAT = "UTF-8";
+    public static final String ENCODING_UTF_8 = "UTF-8";
+    public static final String ENCODING_GBK = "GBK";
+    public static final String ENCODING_ISO_8859_1 = "ISO-8859-1";
+
     public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
 
     public static final String USER_ADMIN_NAME = "admin";

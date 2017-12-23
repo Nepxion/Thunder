@@ -75,7 +75,7 @@ public class SplunkLogServiceMonitorRetriever extends AbstractMonitorRetriever {
     }
 
     public List<MonitorStat> retrieve(String traceId, Map<String, Object> conditions) throws Exception {
-        return retrieve(traceId, conditions, ThunderConstant.ENCODING_FORMAT);
+        return retrieve(traceId, conditions, ThunderConstant.ENCODING_UTF_8);
     }
 
     public List<MonitorStat> retrieve(String traceId, Map<String, Object> conditions, String encoding) throws Exception {

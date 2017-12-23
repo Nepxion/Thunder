@@ -60,7 +60,7 @@ public class EncryptionUtil {
     }
 
     public static String encrypt(String text, String algorithm) throws Exception {
-        return encrypt(text, algorithm, ThunderConstant.ENCODING_FORMAT);
+        return encrypt(text, algorithm, ThunderConstant.ENCODING_UTF_8);
     }
 
     public static String encrypt(String text, String algorithm, String charset) throws Exception {

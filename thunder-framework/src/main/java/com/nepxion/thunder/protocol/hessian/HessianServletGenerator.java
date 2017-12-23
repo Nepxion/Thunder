@@ -61,7 +61,7 @@ public class HessianServletGenerator {
 
     private StringBuilder generateContent() {
         StringBuilder builder = new StringBuilder();
-        builder.append("<?xml version=\"1.0\" encoding=\"" + ThunderConstant.ENCODING_FORMAT + "\"?>\n");
+        builder.append("<?xml version=\"1.0\" encoding=\"" + ThunderConstant.ENCODING_UTF_8 + "\"?>\n");
         builder.append("<beans xmlns=\"http://www.springframework.org/schema/beans\"\n");
         builder.append("    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n");
         builder.append("    xsi:schemaLocation=\"http://www.springframework.org/schema/beans\n");
