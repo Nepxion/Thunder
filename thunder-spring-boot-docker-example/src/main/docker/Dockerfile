@@ -1,7 +1,7 @@
 FROM java
 ADD /thunder-spring-boot-docker-example-1.0.0.jar //
 
-EXPOSE 8888
+EXPOSE 6010
 
 CMD ["./run.sh"]
 
