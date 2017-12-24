@@ -19,12 +19,9 @@ import org.w3c.dom.Element;
 
 import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.delegate.ThunderDelegate;
-import com.nepxion.thunder.common.entity.MQEntity;
 import com.nepxion.thunder.common.entity.ProtocolEntity;
 import com.nepxion.thunder.common.entity.ProtocolType;
-import com.nepxion.thunder.common.entity.WebServiceEntity;
 import com.nepxion.thunder.framework.bean.ProtocolFactoryBean;
-import com.nepxion.thunder.framework.exception.FrameworkException;
 
 @SuppressWarnings("all")
 public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitionParser {
@@ -39,35 +36,6 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
         super.doParse(element, parserContext, builder);
 
         String typeAttributeName = ThunderConstant.TYPE_ATTRIBUTE_NAME;
-        String pathAttributeName = ThunderConstant.PATH_ATTRIBUTE_NAME;
-
-        String nettyServerExecutorId = ThunderConstant.NETTY_SERVER_EXECUTOR_ID;
-        String nettyClientExecutorId = ThunderConstant.NETTY_CLIENT_EXECUTOR_ID;
-        String nettyClientInterceptorId = ThunderConstant.NETTY_CLIENT_INTERCEPTOR_ID;
-
-        String hessianServerExecutorId = ThunderConstant.HESSIAN_SERVER_EXECUTOR_ID;
-        String hessianClientExecutorId = ThunderConstant.HESSIAN_CLIENT_EXECUTOR_ID;
-        String hessianClientInterceptorId = ThunderConstant.HESSIAN_CLIENT_INTERCEPTOR_ID;
-
-        String mqServerExecutorId = ThunderConstant.MQ_SERVER_EXECUTOR_ID;
-        String mqClientExecutorId = ThunderConstant.MQ_CLIENT_EXECUTOR_ID;
-        String mqClientInterceptorId = ThunderConstant.MQ_CLIENT_INTERCEPTOR_ID;
-
-        String kafkaServerExecutorId = ThunderConstant.KAFKA_SERVER_EXECUTOR_ID;
-        String kafkaClientExecutorId = ThunderConstant.KAFKA_CLIENT_EXECUTOR_ID;
-        String kafkaClientInterceptorId = ThunderConstant.KAFKA_CLIENT_INTERCEPTOR_ID;
-
-        String activeMQQueueId = ThunderConstant.ACTIVE_MQ_QUEUE_ID;
-        String activeMQTopicId = ThunderConstant.ACTIVE_MQ_TOPIC_ID;
-        String activeMQJndiInitialContextFactoryId = ThunderConstant.ACTIVE_MQ_JNDI_INITIAL_CONTEXT_FACTORY_ID;
-        String activeMQInitialConnectionFactory = ThunderConstant.ACTIVE_MQ_INITIAL_CONNECTION_FACTORY_ID;
-        String activeMQPooledConnectionFactoryId = ThunderConstant.ACTIVE_MQ_POOLED_CONNECTION_FACTORY_ID;
-
-        String tibcoQueueId = ThunderConstant.TIBCO_QUEUE_ID;
-        String tibcoTopicId = ThunderConstant.TIBCO_TOPIC_ID;
-        String tibcoJndiInitialContextFactoryId = ThunderConstant.TIBCO_JNDI_INITIAL_CONTEXT_FACTORY_ID;
-        String tibcoInitialConnectionFactory = ThunderConstant.TIBCO_INITIAL_CONNECTION_FACTORY_ID;
-        String tibcoPooledConnectionFactoryId = ThunderConstant.TIBCO_POOLED_CONNECTION_FACTORY_ID;
 
         String type = element.getAttribute(typeAttributeName);
         ProtocolType protocolType = null;
@@ -81,64 +49,6 @@ public class ProtocolBeanDefinitionParser extends AbstractExtensionBeanDefinitio
 
         ProtocolEntity protocolEntity = new ProtocolEntity();
         protocolEntity.setType(protocolType);
-
-        switch (protocolType) {
-            case NETTY:
-                protocolEntity.setServerExecutorId(nettyServerExecutorId);
-                protocolEntity.setClientExecutorId(nettyClientExecutorId);
-                protocolEntity.setClientInterceptorId(nettyClientInterceptorId);
-                break;
-            case HESSIAN:
-                protocolEntity.setServerExecutorId(hessianServerExecutorId);
-                protocolEntity.setClientExecutorId(hessianClientExecutorId);
-                protocolEntity.setClientInterceptorId(hessianClientInterceptorId);
-
-                String path = properties.getString(pathAttributeName);
-                if (StringUtils.isEmpty(path)) {
-                    throw new FrameworkException("Web path is missing for " + protocolType);
-                }
-                WebServiceEntity webServiceEntity = new WebServiceEntity();
-                webServiceEntity.setPath(path);
-                cacheContainer.setWebServiceEntity(webServiceEntity);
-                break;
-            case KAFKA:
-                protocolEntity.setServerExecutorId(kafkaServerExecutorId);
-                protocolEntity.setClientExecutorId(kafkaClientExecutorId);
-                protocolEntity.setClientInterceptorId(kafkaClientInterceptorId);
-
-                MQEntity kafkaEntity = new MQEntity();
-                kafkaEntity.extractProperties(properties, protocolType);
-                cacheContainer.setMQEntity(kafkaEntity);
-                break;
-            case ACTIVE_MQ:
-                protocolEntity.setServerExecutorId(mqServerExecutorId);
-                protocolEntity.setClientExecutorId(mqClientExecutorId);
-                protocolEntity.setClientInterceptorId(mqClientInterceptorId);
-
-                MQEntity activeMQEntity = new MQEntity();
-                activeMQEntity.setQueueId(activeMQQueueId);
-                activeMQEntity.setTopicId(activeMQTopicId);
-                activeMQEntity.setJndiInitialContextFactoryId(activeMQJndiInitialContextFactoryId);
-                activeMQEntity.setInitialConnectionFactoryId(activeMQInitialConnectionFactory);
-                activeMQEntity.setPooledConnectionFactoryId(activeMQPooledConnectionFactoryId);
-                activeMQEntity.extractProperties(properties, protocolType);
-                cacheContainer.setMQEntity(activeMQEntity);
-                break;
-            case TIBCO:
-                protocolEntity.setServerExecutorId(mqServerExecutorId);
-                protocolEntity.setClientExecutorId(mqClientExecutorId);
-                protocolEntity.setClientInterceptorId(mqClientInterceptorId);
-
-                MQEntity tibcoEntity = new MQEntity();
-                tibcoEntity.setQueueId(tibcoQueueId);
-                tibcoEntity.setTopicId(tibcoTopicId);
-                tibcoEntity.setJndiInitialContextFactoryId(tibcoJndiInitialContextFactoryId);
-                tibcoEntity.setInitialConnectionFactoryId(tibcoInitialConnectionFactory);
-                tibcoEntity.setPooledConnectionFactoryId(tibcoPooledConnectionFactoryId);
-                tibcoEntity.extractProperties(properties, protocolType);
-                cacheContainer.setMQEntity(tibcoEntity);
-                break;
-        }
 
         cacheContainer.setProtocolEntity(protocolEntity);
         builder.addPropertyValue(createBeanName(ProtocolEntity.class), protocolEntity);
