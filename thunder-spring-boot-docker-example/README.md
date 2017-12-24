@@ -5,7 +5,7 @@
 
 # 安装和部署Docker
 ```java
-1. Win10环境下(此方式最简单，强烈推荐，但该方式不支持Win7，请注意带“重要”字样的步骤)
+1. Win10环境下(此方式最简单，强烈推荐，但该方式不支持Win7，请注意带“重要”字样的步骤，哪位同学还有更方便的一键部署方式，请告知)
    1.1 安装Docker
        1)在官网下载Docker
        2)安装Docker
@@ -17,11 +17,12 @@
 
    1.3 修改配置
        1)重要：把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，默认为10.0.75.1
-       2)重要：把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地的真实IP
-         因为部署到Docker后，Docker中localhost并非对应Zookeeper的localhost地址
+         在Win10下，运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
+       2)重要：把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
+         在Win10下，运行ipconfig命令，可以获取本地网卡的IP
 
    1.4 安装镜像
-       1)重要：在根目录下执行install-docker.bat里的语句
+       1)重要：在根目录下执行install-docker.bat里的语句。等待一段时间后，镜像制作上传成功，在最后的窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
        2)在Docker图标上右键菜单，点击进入Kitematic界面，并用Docker Hub账号登录登录(账户名在登录的时候必须是全部小写)
        3)点击镜像(My Images)列表，出现thunder-spring-boot-docker-example镜像，则表示镜像安装成功。如果看不到，则可再次点击镜像(My Images)列表即可刷新最新镜像列表，见图2
 
@@ -30,7 +31,7 @@
        1)重要：在DOCKER CLI窗口执行下面语句(任选一条)，多个端口映射请用多个-p隔开，见图5
          docker run -d -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
          docker run -it --rm -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
-       2)重要：在所选容器的的Settings->Hostname/Ports界面，看到端口已经映射好了，点击SAVE(很重要)并重启容器
+       2)重要：在所选容器的的Settings->Hostname/Ports界面，看到端口已经映射好了，点击SAVE(很重要)让端口映射生效，并重启容器
 
        方法2：界面添加
        1)在镜像(My Images)列表点“CREATE”，在容器(Containers)列表中将出现它，并且将自动启动，见图3
@@ -52,6 +53,13 @@
        1)运行Zookeeper
        2)在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
        3)观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图6
+
+   2.0 更新镜像和容器
+       以后镜像不需要把上述所有步骤重新做一下，只需要执行如下四步即可
+       1)停止原先运行的容器(最好删除容器以及关联的镜像)
+       2)在根目录下执行install-docker.bat里的语句
+       3)docker run -d -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
+       4)在所选容器的的Settings->Hostname/Ports界面，端口映射宿主机端口6010映射到容器端口6010(即Thunder的启动端口)，并点击SAVE(很重要)并重启容器
 ```
 图1
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
