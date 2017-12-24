@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>release</id>
+	<formats>
+		<format>war</format>
+		<format>dir</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>/WEB-INF/lib</outputDirectory>
+			<unpack>false</unpack>
+			<scope>runtime</scope>
+		</dependencySet>
+	</dependencySets>
+	<fileSets>
+		<fileSet>
+			<directory>src/main/webapp/WEB-INF</directory>
+			<outputDirectory>/WEB-INF</outputDirectory>
+			<includes>
+				<include>*.xml</include>
+			</includes>
+			<fileMode>0744</fileMode>
+		</fileSet>
+		<fileSet>
+			<directory>src/test/resources</directory>
+			<outputDirectory>WEB-INF/classes</outputDirectory>
+			<includes>
+				<include>*.properties</include>
+			</includes>
+			<fileMode>0744</fileMode>
+		</fileSet>		
+	</fileSets>
+</assembly>
