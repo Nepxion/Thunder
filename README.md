@@ -1,24 +1,26 @@
-# Thunder
+# Nepxion Thunder
 [![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+
+Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
 
 参考博客：http://nepxion.iteye.com/
 
-## 1. 概要
+## 简介
 
-    1.1 Thunder是基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
+    1.1 和Dubbo功能的比较
     跟Dubbo相比，Thunder的增强功能包括
-    1）支持Message Queue（消息队列中间件），Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积
-    2）支持本地链式调用，全程无阻塞的调用方式，可省去业务端写Callback的步骤
-    3）支持跨进程的调用链，服务端和调用端都支持软负载均衡
-    4）支持远程配置和调优，业务端所有集群下的应用可共享一个配置文件，并且通过远程配置方式修改，也支持业务系统自身已经存在的参数化平台的配置方式接入
-    5）支持丰富的监控手段，默认支持Redis，Splunk，自定义第三方WebService做监控
-    6）支付丰富的服务治理手段，图形化，上下线宕机邮件或者短信通知，异常事件自定义捕捉
-    7）支持序列化在网络传输层面的压缩（QuickLz），在大数据量传输，通过压缩，对提高吞吐量（TPS）尤其有效
-    8）支持Spring的简化配置，支持全局配置和局部配置的结合
-    9）支持对微服务框架的整合（例如：Spring Boot）
+    1)支持Message Queue（消息队列中间件)，Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积
+    2)支持本地链式调用，全程无阻塞的调用方式，可省去业务端写Callback的步骤
+    3)支持跨进程的调用链，服务端和调用端都支持软负载均衡
+    4)支持远程配置和调优，业务端所有集群下的应用可共享一个配置文件，并且通过远程配置方式修改，也支持业务系统自身已经存在的参数化平台的配置方式接入
+    5)支持丰富的监控手段，默认支持Redis，Splunk，自定义第三方WebService做监控
+    6)支付丰富的服务治理手段，图形化，上下线宕机邮件或者短信通知，异常事件自定义捕捉
+    7)支持序列化在网络传输层面的压缩（QuickLz)，在大数据量传输，通过压缩，对提高吞吐量（TPS)尤其有效
+    8)支持Spring的简化配置，支持全局配置和局部配置的结合
+    9)支持对微服务框架的整合（例如：Spring Boot)
     跟Dubbo相比，Thunder的未支持功能包括
-    1）软负载均衡的算法，Thunder支持三种（轮询，随机，一致性哈希），Dubbo还支持最少活跃度，还支持预热和权重计算
-    2）访问规则，Thunder支持限流，密钥匹配，版本匹配，Dubbo相对更丰富，例如黑白名单，服务降级，网段隔离
+    1)软负载均衡的算法，Thunder支持三种（轮询，随机，一致性哈希)，Dubbo还支持最少活跃度，还支持预热和权重计算
+    2)访问规则，Thunder支持限流，密钥匹配，版本匹配，Dubbo相对更丰富，例如黑白名单，服务降级，网段隔离
     1.2 Netty是由JBOSS提供的一个Java开源框架，提供异步的、事件驱动的网络应用程序框架和工具，它是基于TCP，UDP协议的传输方式的NIO框架。在Thunder，实现异步/同步/广播的调用方式，多线程实现调用
     1.3 Hessian是轻量级的Remoting HTTP框架，提供同步的调用方式。它是基于二进制RPC协议。在Thunder，实现异步/同步/广播的调用方式，多线程实现调用
     1.4 Kafka是一种高吞吐量的分布式发布订阅消息系统，非JMS标准，是MQ里面性能最优化的。在Thunder，实现异步/同步/广播的调用方式，多线程实现调用
@@ -37,9 +39,9 @@
     1.17 Nepxion Swing Repository，Thunder利用它实现Java Desktop版的服务治理
     1.18 Java SPI，Thunder利用它实现相关扩展
     1.19 Jdeferred Promise，Thunder利用它实现链式调用
-	1.20 Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口，Thunder利用它做容器
+    1.20 Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口，Thunder利用它做容器
 
-## 2. 功能
+## 功能
 
     2.1 框架进程可以既是服务方，又是调用方，两者为一体，互为Server和Client模式，只要在注册中心注册，无论是客户端还是服务端都将是负载均衡的节点。基于上述设计，支持多级以上的调用链方式：纯异步多级调用，纯同步多级调用，先异步后同步多级调用，先同步后异步多级调用，异步多层Callback调用
     2.2 支持TCP NIO框架(Netty)，TCP MQ消息队列框架(Kafka，ActiveMQ，Tibco)，HTTP(Hessian)的传输方式，支持多线程调用
