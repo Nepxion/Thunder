@@ -81,5 +81,5 @@
 ## Win7 Docker和Kitematic基本操作
 此方式较复杂
 
-   1. 请参考http://nepxion.iteye.com/blog/2321596
-   2. 因为thunder-spring-boot-docker-example模块已经重构过，故有些地方有出入，例如类名等，相信你能看得懂
+    1. 请参考http://nepxion.iteye.com/blog/2321596
+    2. 因为thunder-spring-boot-docker-example模块已经重构过，故有些地方有出入，例如类名等，相信你能看得懂
