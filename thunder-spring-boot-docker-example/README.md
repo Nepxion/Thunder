@@ -109,6 +109,7 @@
         docker ps -a (查看所有容器，包括停止的容器)
         docker ps -l (查看最新创建的容器，只列出最后创建的容器)
         docker ps -n=x (查看最新创建的x个容器，-n=x选项，会列出最后创建的x个容器)
+        docker port [容器名] (查看容器端口映射)
         docker top [容器名] (查看容器内部的进程)
         docker exec (在容器中运行一个进程)
         docker logs [容器名] (查看容器操作日志)
