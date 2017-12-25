@@ -79,7 +79,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
                     <!-- Forbid to contain uppercase characters -->
-                    <imageName>${project.artifactId}</imageName>
+                    <imageName>thunder-spring-boot</imageName>
                     <baseImage>java</baseImage>
                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
                     <!-- <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint> -->
