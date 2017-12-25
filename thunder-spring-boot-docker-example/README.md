@@ -24,8 +24,8 @@
           运行ipconfig命令，可以获取本地网卡的IP
 
     5 安装镜像和容器
-       5.1 在根目录下执行install-docker.bat里的语句，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
-       5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图5
+      5.1 在根目录下执行install-docker.bat里的语句，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
+      5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图5
 
     6 验证镜像和容器
       6.1 点击镜像(My Images)列表，出现thunder-spring-boot镜像，则表示镜像安装成功。如果看不到，则可再次点击镜像(My Images)列表即可刷新最新镜像列表，见图2	
