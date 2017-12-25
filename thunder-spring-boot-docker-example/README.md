@@ -23,24 +23,24 @@
       4.2 把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
           运行ipconfig命令，可以获取本地网卡的IP
 
-    5 安装镜像和容器
-       5.1 在根目录下执行install-docker.bat里的语句(您可以打开看看，里面包含的命令)，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
-       5.2 点击镜像(My Images)列表，出现thunder-spring-boot-docker-example镜像，则表示镜像安装成功。如果看不到，则可再次点击镜像(My Images)列表即可刷新最新镜像列表，见图2
-       5.3 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启
+    5 安装镜像和容器(一键部署)
+       5.1 在根目录下执行install-docker.bat里的语句，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
+       5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图5
 
-    6 验证容器
-      6.1 运行Zookeeper
-      6.2 在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
-      6.3 观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图6
+    6 验证镜像和容器
+      6.1 点击镜像(My Images)列表，出现thunder-spring-boot镜像，则表示镜像安装成功。如果看不到，则可再次点击镜像(My Images)列表即可刷新最新镜像列表，见图2	
+      6.2 运行Zookeeper
+      6.3 在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
+      6.4 观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图5
 
-    6 更新镜像和容器
+    7 更新镜像和容器
       以后镜像不需要把上述所有步骤重新做一下，只需要执行“5 安装镜像和容器”
 
 ## 附录Kitematic操作
 
     1 安装容器
       1.1 命令行方式(推荐)
-          1.1.1 在DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开，见图5
+          1.1.1 在Window Dos窗口或者DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开
                 docker run -d -p 127.0.0.1:6010:6010 --name thunder-spring-boot thunder-spring-boot:latest
           1.1.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启
         1.2 界面方式
@@ -73,9 +73,6 @@
 
 图5
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker5.jpg)
-
-图6
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker6.jpg)
 
 ## 附录附录Docker命令
 注意：镜像版本的参数可能不是必需的
