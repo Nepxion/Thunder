@@ -15,7 +15,7 @@
       2.2 重要：禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
     3 修改配置
-      3.1 ·把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，默认为10.0.75.1·
+      3.1 重要：把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，默认为10.0.75.1
           运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
       3.2 重要：把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
           运行ipconfig命令，可以获取本地网卡的IP
@@ -54,11 +54,10 @@
       9.3 观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图6
 
     10 更新镜像和容器
-       以后镜像不需要把上述所有步骤重新做一下，只需要执行如下四步即可
+       以后镜像不需要把上述所有步骤重新做一下，只需要执行如下三步即可
        10.1 停止原先运行的容器(最好删除容器以及关联的镜像)
-       10.2 在根目录下执行install-docker.bat里的语句
-       10.3 docker run -d -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
-       10.4 在所选容器的的Settings->Hostname/Ports界面，端口映射宿主机端口6010映射到容器端口6010(即Thunder的启动端口)，并点击SAVE(很重要)并重启容器
+       10.2 执行4.1步骤
+       10.3 执行5.1步骤
 
 图1
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
