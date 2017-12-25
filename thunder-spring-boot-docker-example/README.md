@@ -3,7 +3,9 @@
     1. Docker Hub注册账户，https://hub.docker.com/
 
 ## Win10 Docker部署
-此方式最简单，强烈推荐，但该方式不支持Win7，主要是“5 安装镜像和容器”的操作步骤
+此方式最简单，强烈推荐，但该方式不支持Win7
+
+### 部署前准备工作
 
     1 安装Docker
       1.1 在官网下载Docker
@@ -15,38 +17,41 @@
 
     3 开启Docker非认证模式
       3.1 在Docker图标上右键菜单，选Settings，进入设置界面，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图1
-      3.2 禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉，切记！
+      3.2 禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
-    4 修改配置
-      4.1 把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，例如10.0.75.1
+### 开始部署
+
+    1 修改配置
+      1.1 启动Thunder时候，需要把服务提供端的IP地址注册到Zookeeper上，以宿主机IP代替Docker IP注册上去
+          把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，例如10.0.75.1
           运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
-      4.2 把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
+      1.2 容器里服务要访问容器外服务，需要给容器里服务指定外部的IP地址(这里以Zookeeper为例)
+          把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
           运行ipconfig命令，可以获取本地网卡的IP
 
-    5 安装镜像和容器
-      5.1 在根目录下执行install-docker.bat里的语句，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
-      5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图4
+    2 安装镜像和容器
+      2.1 在根目录下执行install-docker.bat里的语句，一键部署镜像和容器。等待一段时间后，交互型容器创建并启动成功
 
-    6 验证镜像和容器
-      6.1 点击镜像(My Images)列表，出现thunder-spring-boot镜像，则表示镜像安装成功。如果看不到，则可再次点击镜像(My Images)列表即可刷新最新镜像列表，见图2	
-      6.2 运行Zookeeper
-      6.3 在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java
-      6.4 观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图5
+    3 验证镜像和容器
+      3.1 验证镜像和容器是否安装成功
+          点击镜像(My Images)列表的Tab，刷新镜像和容器列表，出现thunder-spring-boot镜像和容器，两者安装成功，见图2	
+      3.2 验证容器里的服务是否被外部访问
+          在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java，执行容器外的应用访问容器内的应用
+          观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图5
 
-    7 更新镜像和容器
-      以后镜像不需要把上述所有步骤重新做一下，只需要执行“5 安装镜像和容器”
+    4 更新镜像和容器
+      5.1 以后更新不需要把上述所有步骤重新做一下，只需要把”5 安装镜像和容器“中的步骤执行一遍即可，达到一键部署目的
 
 ## 附录Kitematic操作
 
     1 安装容器
       1.1 命令行方式(推荐)
-          1.1.1 在Window Dos窗口或者DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开
-                docker run -d -p 127.0.0.1:6010:6010 --name thunder-spring-boot thunder-spring-boot:latest
-          1.1.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图4
+          1.1.1 在Window Dos窗口或者DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开，千万不要在前面加localhost，否则映射不成功
+                docker run -d -p 6010:6010 --name thunder-spring-boot thunder-spring-boot:latest
         1.2 界面方式
             5.2.1 在镜像(My Images)列表点“CREATE”，在容器(Containers)列表中将出现它，并且将自动启动，见图3
             5.2.2 容器(Containers)列表上面，点“NEW”，返回上级界面，继续安装其它镜像
-            5.2.3 在所选容器的的Settings->Hostname/Ports界面，添加端口映射宿主机端口6010映射到容器端口6010(即Thunder的启动端口)，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图4
+            5.2.3 在所选容器的的Settings->Hostname/Ports界面，添加端口映射宿主机端口6010映射到容器端口6010(即Thunder的启动端口)，点击SAVE让端口映射生效，容器将自动重启，见图4
 
     2 启动和停止容器
       2.1 点“START”，启动容器，见图3
@@ -81,7 +86,7 @@
         docker create [镜像名]:[镜像版本] (创建容器)
         docker run -d -p [IP地址]:[宿主机端口]:[容器端口] --name [容器名] [镜像名]:[镜像版本] (创建后台型容器，运行在后台，创建后与终端无关，只有调用docker stop、docker kill命令才能使容器停止)
         docker run -i -t --rm -p [IP地址]:[宿主机端口]:[容器端口] --name [容器名] [镜像名]:[镜像版本] (创建交互型容器，运行在前台，容器中使用exit命令或者调用docker stop、docker kill命令，容器停止)
-        -it:
+        -[IP地址]:如果Docker装在本地，千万不要在前面加localhost，否则映射不成功
         -i:标准输入给容器 
         -t:分配一个虚拟终端
         -d:以守护进程方式运行，容器在后台运行
