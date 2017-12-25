@@ -15,7 +15,7 @@
       2.2 重要：禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
     3 修改配置
-      3.1 重要：把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，默认为10.0.75.1
+      3.1 `把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，默认为10.0.75.1`
           运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
       3.2 重要：把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
           运行ipconfig命令，可以获取本地网卡的IP
