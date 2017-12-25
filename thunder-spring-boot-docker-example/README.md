@@ -3,7 +3,7 @@
     1. Docker Hub注册账户，https://hub.docker.com/
 
 ## Win10 Docker部署
-此方式最简单，强烈推荐，但该方式不支持Win7
+此方式最简单，强烈推荐，但该方式不支持Win7，主要是“5 安装镜像和容器”的操作步骤
 
     1 安装Docker
       1.1 在官网下载Docker
@@ -23,7 +23,7 @@
       4.2 把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
           运行ipconfig命令，可以获取本地网卡的IP
 
-    5 安装镜像和容器(一键部署)
+    5 安装镜像和容器
        5.1 在根目录下执行install-docker.bat里的语句，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
        5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图5
 
