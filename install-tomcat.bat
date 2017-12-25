@@ -19,10 +19,12 @@
 @set JAVA_HOME=E:\Tool\JDK-1.7.0
 @echo Found JAVA_HOME=%JAVA_HOME%
 
+@set PROJECT_NAME=thunder-test
+
 @rem 删除target，有时候mvn会clean失败，需事先强制删除target
-rmdir /s/q thunder-test\target
+if exist %PROJECT_NAME%\target rmdir /s/q %PROJECT_NAME%\target
 
 @rem 执行相关模块的install
-call mvn clean install -DskipTests -pl thunder-framework,thunder-test -am
+call mvn clean install -DskipTests -pl thunder-framework,%PROJECT_NAME% -am
 
 pause

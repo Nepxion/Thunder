@@ -23,7 +23,7 @@
 @set IMAGE_NAME=thunder-spring-boot
 
 @rem 删除target，有时候mvn会clean失败，需事先强制删除target
-rmdir /s/q %PROJECT_NAME%\target
+if exist %PROJECT_NAME%\target rmdir /s/q %PROJECT_NAME%\target
 
 @rem 执行相关模块的install
 call mvn clean install -DskipTests -pl thunder-framework,thunder-test,%PROJECT_NAME% -am
