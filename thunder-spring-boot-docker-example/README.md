@@ -28,7 +28,7 @@
     5 安装容器
       5.1 命令行方式(推荐)
           5.1.1 重要：在DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开，见图5
-                docker run -d --rm -p 127.0.0.1:6010:6010 --name thunder-spring-boot-docker-example thunder-spring-boot-docker-example
+                docker run -d -p 127.0.0.1:6010:6010 --name thunder-spring-boot-docker-example thunder-spring-boot-docker-example
                 docker run -it --rm -p 127.0.0.1:6010:6010 --name thunder-spring-boot-docker-example thunder-spring-boot-docker-example
                 -it:
                   -i:标准输入给容器 
