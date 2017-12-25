@@ -27,9 +27,12 @@
 
     5 安装容器
       5.1 命令行方式(推荐)
-          5.1.1 重要：在DOCKER CLI窗口执行下面语句(任选一条)，多个端口映射请用多个-p隔开，见图5
-                docker run -d -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
-                docker run -it --rm -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
+          5.1.1 重要：在DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开，见图5
+                1)docker run -d -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
+                2)docker run -it --rm -p 127.0.0.1:6010:6010 thunder-spring-boot-docker-example
+                -d:以守护进程方式运行(后台)
+                -p:端口映射
+                --rm:退出时删除容器
           5.1.2 重要：在所选容器的的Settings->Hostname/Ports界面，看到端口已经映射好了，点击SAVE(很重要)让端口映射生效，并重启容器
 
         5.2 界面方式
