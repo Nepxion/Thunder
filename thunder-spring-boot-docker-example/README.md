@@ -25,7 +25,7 @@
 
     5 安装镜像和容器
       5.1 在根目录下执行install-docker.bat里的语句，一键创建镜像和容器。等待一段时间后，在当前Dos窗口直接模拟运行Spring Boot的可执行包，是为了验证镜像是否制作正确
-      5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图5
+      5.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图4
 
     6 验证镜像和容器
       6.1 点击镜像(My Images)列表，出现thunder-spring-boot镜像，则表示镜像安装成功。如果看不到，则可再次点击镜像(My Images)列表即可刷新最新镜像列表，见图2	
@@ -42,7 +42,7 @@
       1.1 命令行方式(推荐)
           1.1.1 在Window Dos窗口或者DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开
                 docker run -d -p 127.0.0.1:6010:6010 --name thunder-spring-boot thunder-spring-boot:latest
-          1.1.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启
+          1.1.2 在所选容器的的Settings->Hostname/Ports界面，端口已经自动映射好了，点击SAVE(很重要)让端口映射生效，容器将自动重启，见图4
         1.2 界面方式
             5.2.1 在镜像(My Images)列表点“CREATE”，在容器(Containers)列表中将出现它，并且将自动启动，见图3
             5.2.2 容器(Containers)列表上面，点“NEW”，返回上级界面，继续安装其它镜像
