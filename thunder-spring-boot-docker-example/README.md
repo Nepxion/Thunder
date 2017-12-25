@@ -2,7 +2,7 @@
 
     1. Docker Hub注册账户，https://hub.docker.com/
 
-## Win10 Docker和Kitematic基本操作
+## Win10 Docker部署
 此方式最简单，强烈推荐，但该方式不支持Win7，请注意带“重要”字样的步骤，哪位同学还有更方便的一键部署方式，请告知
 
     1 安装Docker
@@ -10,9 +10,9 @@
       1.2 安装Docker
       1.3 安装Kitematic
 
-    2 开启非TLS访问模式
+    2 开启Docker非认证模式
       2.1 重要：在Docker图标上右键菜单，选Settings，进入设置界面，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图1
-      2.2 禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
+      2.2 重要：禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
     3 修改配置
       3.1 重要：把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，默认为10.0.75.1
@@ -78,7 +78,7 @@
 图6
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker6.jpg)
 
-## Win7 Docker和Kitematic基本操作
+## Win7 Docker部署
 此方式较复杂
 
     1. 请参考http://nepxion.iteye.com/blog/2321596
