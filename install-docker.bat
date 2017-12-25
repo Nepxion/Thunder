@@ -25,13 +25,24 @@ rmdir /s/q thunder-spring-boot-docker-example\target
 @rem 执行相关模块的install
 call mvn clean install -DskipTests -pl thunder-framework,thunder-test,thunder-spring-boot-docker-example -am
 
-@rem 安装Docker镜像
+@rem 停止和删除容器
+call docker stop thunder-spring-boot
+@rem call docker kill thunder-spring-boot
+call docker rm thunder-spring-boot
+
+@rem 删除镜像
+call docker rmi thunder-spring-boot
+
+@rem 安装容器镜像
 cd thunder-spring-boot-docker-example
 
 set DOCKER_HOST=tcp://localhost:2375
 @rem set DOCKER_HOST=tcp://192.168.99.100:2376
 @rem set DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
 
-call mvn package docker:build -DskipTests && java -jar target/thunder-spring-boot-docker-example-1.0.0.jar
+call mvn package docker:build -DskipTests
+@rem call mvn package docker:build -DskipTests && java -jar target/thunder-spring-boot-docker-example-1.0.0.jar
+
+call docker run -i -t -p 127.0.0.1:6010:6010 --name thunder-spring-boot thunder-spring-boot:latest
 
 pause
