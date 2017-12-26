@@ -15,9 +15,13 @@
     2 登录Docker
       2.1 在Docker图标上右键菜单，点击进入Kitematic界面，并用Docker Hub账号登录登录(账户名在登录的时候必须是全部小写)
 
-    3 开启Docker非认证模式
-      3.1 在Docker图标上右键菜单，选Settings，进入设置界面，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图1
-      3.2 禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
+    3 加速Docker(可选)
+      3.1 Docker默认从国外的Mirror站点下载镜像，如果您觉得下载速度很慢，可以把它改成从阿里云的Mirro站点
+          在Docker图标上右键菜单，选Settings->Daemon，在Registry mirros里填入https://pee6w651.mirror.aliyuncs.com，见图1
+
+    4 开启Docker非认证模式
+      4.1 在Docker图标上右键菜单，选Settings->General，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图2
+      4.2 禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
 
 ### 开始部署
 
@@ -34,10 +38,10 @@
 
     3 验证镜像和容器
       3.1 验证镜像和容器是否安装成功
-          点击镜像(My Images)列表的Tab，刷新镜像和容器列表，出现thunder-spring-boot镜像和容器，两者安装成功，见图2	
+          点击镜像(My Images)列表的Tab，刷新镜像和容器列表，出现thunder-spring-boot镜像和容器，两者安装成功，见图3
       3.2 验证容器里的服务是否被外部访问
           在IDE里运行thunder-spring-boot-docker-example\...\NettyClientCommandLineApplication.java，执行容器外的应用访问容器内的应用
-          观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图5
+          观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图6
 
     4 更新镜像和容器
       5.1 以后更新不需要把上述所有步骤重新做一下，只需要把”5 安装镜像和容器“中的步骤执行一遍即可，达到一键部署目的
@@ -49,20 +53,20 @@
           1.1.1 在Window Dos窗口或者DOCKER CLI窗口执行下面语句，多个端口映射请用多个-p隔开，千万不要在前面加localhost，否则映射不成功
                 docker run -d -p 6010:6010 --name thunder-spring-boot thunder-spring-boot:latest
         1.2 界面方式
-            5.2.1 在镜像(My Images)列表点“CREATE”，在容器(Containers)列表中将出现它，并且将自动启动，见图3
+            5.2.1 在镜像(My Images)列表点“CREATE”，在容器(Containers)列表中将出现它，并且将自动启动，见图4
             5.2.2 容器(Containers)列表上面，点“NEW”，返回上级界面，继续安装其它镜像
-            5.2.3 在所选容器的的Settings->Hostname/Ports界面，添加端口映射宿主机端口6010映射到容器端口6010(即Thunder的启动端口)，点击SAVE让端口映射生效，容器将自动重启，见图4
+            5.2.3 在所选容器的的Settings->Hostname/Ports界面，添加端口映射宿主机端口6010映射到容器端口6010(即Thunder的启动端口)，点击SAVE让端口映射生效，容器将自动重启，见图5
 
     2 启动和停止容器
-      2.1 点“START”，启动容器，见图3
+      2.1 点“START”，启动容器
       2.2 点“STOP”，停止容器
       2.3 点“RESTART”，重启容器
 
     3 删除镜像
-      3.1 在镜像(My Images)列表，点“。。。”的按钮，然后再点“DELETE TAG”，即可删除镜像，见图2
+      3.1 在镜像(My Images)列表，点“。。。”的按钮，然后再点“DELETE TAG”，即可删除镜像
 
     4 删除容器
-      4.1 在容器(Containers)列表，把鼠标移上去，会出现“X”的按钮，点击它，即可删除容器，见图3 
+      4.1 在容器(Containers)列表，把鼠标移上去，会出现“X”的按钮，点击它，即可删除容器
 
 图1
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
