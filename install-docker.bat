@@ -19,8 +19,8 @@
 @set JAVA_HOME=E:\Tool\JDK-1.7.0
 @echo Found JAVA_HOME=%JAVA_HOME%
 
-@set DEPENDENCY_LIST=thunder-framework,thunder-test
 @set PROJECT_NAME=thunder-spring-boot-docker-example
+@set PROJECT_LIST=thunder-framework,thunder-test,%PROJECT_NAME%
 @set IMAGE_NAME=thunder-spring-boot
 @set MACHINE_PORT=6010
 @set CONTAINER_PORT=6010
@@ -28,7 +28,7 @@
 if exist %PROJECT_NAME%\target rmdir /s/q %PROJECT_NAME%\target
 
 @rem 执行相关模块的Maven Install
-call mvn clean install -DskipTests -pl %DEPENDENCY_LIST% ,%PROJECT_NAME% -am
+call mvn clean install -DskipTests -pl %PROJECT_LIST% -am
 
 @rem 停止和删除Docker容器
 call docker stop %IMAGE_NAME%
