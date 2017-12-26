@@ -21,6 +21,9 @@
 
 @set PROJECT_NAME=thunder-spring-boot-docker-example
 @set PROJECT_LIST=thunder-framework,thunder-test,%PROJECT_NAME%
+
+set DOCKER_HOST=tcp://localhost:2375
+@rem set DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
 @set IMAGE_NAME=thunder-spring-boot
 @set MACHINE_PORT=6010
 @set CONTAINER_PORT=6010
@@ -39,9 +42,6 @@ call docker rm %IMAGE_NAME%
 call docker rmi %IMAGE_NAME%
 
 cd %PROJECT_NAME%
-
-set DOCKER_HOST=tcp://localhost:2375
-@rem set DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
 
 @rem 安装Docker镜像
 call mvn package docker:build -DskipTests
