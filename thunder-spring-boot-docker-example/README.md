@@ -27,7 +27,7 @@
 
     1 修改配置
       1.1 启动Thunder时候，需要把服务提供端的IP地址注册到Zookeeper上，以宿主机IP代替Docker IP注册上去
-          把thunder-spring-boot-docker-example\src\main\docker\dockfile中-DThunderHost=XXX，修改为你机器上Docker宿主机的IP，例如10.0.75.1
+          把thunder-spring-boot-docker-example\src\main\docker\dockfile中ENV THUNDER_HOST=，修改为你机器上Docker宿主机的IP，例如10.0.75.1
           运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
       1.2 容器里服务要访问容器外服务，需要给容器里服务指定外部的IP地址(这里以Zookeeper为例)
           把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
