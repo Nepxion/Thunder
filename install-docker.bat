@@ -15,10 +15,6 @@
 @title Nepxion Thunder
 @color 0a
 
-@echo Please ensure to config JAVA_HOME with Java 7
-@set JAVA_HOME=E:\Tool\JDK-1.7.0
-@echo Found JAVA_HOME=%JAVA_HOME%
-
 @set PROJECT_NAME=thunder-spring-boot-docker-example
 @set PROJECT_LIST=thunder-framework,thunder-test,%PROJECT_NAME%
 
