@@ -1,7 +1,7 @@
 echo 'on'
 echo '============================================================='
 echo '$                                                           $'
-echo '$                      Nepxion Thunder                     $'
+echo '$                      Nepxion Thunder                      $'
 echo '$                                                           $'
 echo '$                                                           $'
 echo '$                                                           $'
