@@ -16,11 +16,11 @@
 @color 0a
 
 @set PROJECT_NAME=thunder-test
+@set PROJECT_LIST=thunder-framework,%PROJECT_NAME%
 
-@rem 删除target，有时候mvn会clean失败，需事先强制删除target
 if exist %PROJECT_NAME%\target rmdir /s/q %PROJECT_NAME%\target
 
-@rem 执行相关模块的install
-call mvn clean install -DskipTests -pl thunder-framework,%PROJECT_NAME% -am
+@rem 执行相关模块的Maven Install
+call mvn clean install -DskipTests -pl %PROJECT_LIST% -am
 
 pause
