@@ -1,7 +1,7 @@
 echo 'on'
 echo '============================================================='
 echo '$                                                           $'
-echo '$                      Nepxion Thunder                     $'
+echo '$                      Nepxion Thunder                      $'
 echo '$                                                           $'
 echo '$                                                           $'
 echo '$                                                           $'
@@ -21,6 +21,7 @@ PROJECT_LIST=thunder-framework,thunder-test,${PROJECT_NAME}
 DOCKER_HOST=tcp://localhost:2375
 # DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
 IMAGE_NAME=thunder-spring-boot
+MACHINE_IP=10.0.75.1
 MACHINE_PORT=6010
 CONTAINER_PORT=6010
 
@@ -42,7 +43,7 @@ docker rmi ${IMAGE_NAME}
 cd ${PROJECT_NAME}
 
 # 安装Docker镜像
-mvn package docker:build -DskipTests
+mvn package docker:build -DskipTests -DexposeIP=${MACHINE_IP} -DexposePort=${CONTAINER_PORT%}
 
 # 安装和启动Docker容器，并自动执行端口映射
 docker run -i -t -p ${MACHINE_PORT}:${CONTAINER_PORT} --name ${IMAGE_NAME} ${IMAGE_NAME}:latest
