@@ -21,10 +21,10 @@ PROJECT_LIST=thunder-framework,thunder-test,${PROJECT_NAME}
 DOCKER_HOST=tcp://localhost:2375
 # DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
 IMAGE_NAME=thunder-spring-boot
+MAIN_CLASS=com.nepxion.thunder.NettyServerApplication
 MACHINE_IP=10.0.75.1
 MACHINE_PORT=6010
 CONTAINER_PORT=6010
-MAIN_CLASS=com.nepxion.thunder.NettyServerApplication
 
 if [ ! -d ${PROJECT_NAME}\target];then
 rmdir /s/q ${PROJECT_NAME}\target
@@ -44,7 +44,7 @@ docker rmi ${IMAGE_NAME}
 cd ${PROJECT_NAME}
 
 # 安装Docker镜像
-mvn package docker:build -DskipTests -DExposePort=${CONTAINER_PORT} -DMainClass=${MAIN_CLASS} -DThunderHost=${MACHINE_IP} -DThunderPort=${MACHINE_PORT}
+mvn package docker:build -DskipTests -DMainClass=${MAIN_CLASS} -DExposePort=${CONTAINER_PORT} -DThunderHost=${MACHINE_IP} -DThunderPort=${MACHINE_PORT}
 
 # 安装和启动Docker容器，并自动执行端口映射
 docker run -i -t -p ${MACHINE_PORT}:${CONTAINER_PORT} --name ${IMAGE_NAME} ${IMAGE_NAME}:latest
