@@ -59,7 +59,7 @@
                 <version>${spring.boot.version}</version>
                 <configuration>
                     <executable>true</executable>
-                    <mainClass>com.nepxion.thunder.NettyServerApplication</mainClass>
+                    <mainClass>${MainClass}</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>
