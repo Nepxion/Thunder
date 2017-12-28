@@ -21,7 +21,7 @@
 
     4 开启Docker非认证模式
       4.1 在Docker图标上右键菜单，选Settings->General，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图2
-      4.2 禁止Docker认证模式，例如，把“set DOCKER_CERT_PATH=...”注释掉
+      4.2 禁止Docker认证模式，例如，把“DOCKER_CERT_PATH=...”注释掉
 
 ### 开始部署
 
@@ -29,6 +29,13 @@
       1.1 启动Thunder时候，需要把服务提供端的IP地址注册到Zookeeper上，以宿主机IP代替Docker IP注册上去
           把根目录install-docker.bat或者install-docker.sh中的MACHINE_IP=XXX，修改为你机器上Docker宿主机的IP，例如10.0.75.1
           运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
+          附录：相关环境变量介绍
+          DOCKER_HOST=tcp://localhost:2375                        // Docker服务器的URL
+          DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs // 认证模式下的证书存放路径
+          IMAGE_NAME=thunder-spring-boot                          // 镜像名称
+          MACHINE_IP=10.0.75.1                                    // 容器宿主机IP，即Thunder要注册到Zookeeper的IP
+          MACHINE_PORT=6010                                       // 容器宿主机端口，即Thunder要注册到Zookeeper的端口，同时也是映射到Docker容器的主机端口
+          CONTAINER_PORT=6010                                     // 容器端口，即暴露端口，同时也是被容器宿主机映射的端口
       1.2 容器里服务要访问容器外服务，需要给容器里服务指定外部的IP地址(这里以Zookeeper为例)
           把thunder-spring-boot-docker-example\src\main\resources\thunder-ext.properties中Zookeeper地址改成对应你本地网卡的IP
           运行ipconfig命令，可以获取本地网卡的IP
