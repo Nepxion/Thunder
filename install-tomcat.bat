@@ -16,11 +16,10 @@
 @color 0a
 
 @set PROJECT_NAME=thunder-test
-@set PROJECT_LIST=thunder-framework,%PROJECT_NAME%
 
 if exist %PROJECT_NAME%\target rmdir /s/q %PROJECT_NAME%\target
 
 @rem 执行相关模块的Maven Install
-call mvn clean install -DskipTests -pl %PROJECT_LIST% -am
+call mvn clean install -DskipTests -pl %PROJECT_NAME% -am
 
 pause

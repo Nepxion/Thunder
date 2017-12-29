@@ -16,7 +16,6 @@ title=Nepxion Thunder
 color=0a
 
 PROJECT_NAME=thunder-spring-boot-docker-example
-PROJECT_LIST=thunder-framework,thunder-test,${PROJECT_NAME}
 
 DOCKER_HOST=tcp://localhost:2375
 # DOCKER_CERT_PATH=/User/Neptune/.docker/machine/certs
@@ -30,7 +29,7 @@ rmdir /s/q ${PROJECT_NAME}/target
 fi
 
 # 执行相关模块的Maven Install
-mvn clean install -DskipTests -pl ${PROJECT_LIST} -am
+mvn clean install -DskipTests -pl ${PROJECT_NAME} -am
 
 # 停止和删除Docker容器
 docker stop ${IMAGE_NAME}
