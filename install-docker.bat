@@ -18,8 +18,8 @@
 @set PROJECT_NAME=thunder-spring-boot-docker-example
 @set PROJECT_LIST=thunder-framework,thunder-test,%PROJECT_NAME%
 
-set DOCKER_HOST=tcp://localhost:2375
-@rem set DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
+@set DOCKER_HOST=tcp://localhost:2375
+@rem @set DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
 @set IMAGE_NAME=thunder-spring-boot
 @set MACHINE_IP=10.0.75.1
 @set MACHINE_PORT=6010
