@@ -19,14 +19,14 @@ PROJECT_NAME=thunder-spring-boot-docker-example
 PROJECT_LIST=thunder-framework,thunder-test,${PROJECT_NAME}
 
 DOCKER_HOST=tcp://localhost:2375
-# DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
+# DOCKER_CERT_PATH=/User/Neptune/.docker/machine/certs
 IMAGE_NAME=thunder-spring-boot
 MACHINE_IP=10.0.75.1
 MACHINE_PORT=6010
 CONTAINER_PORT=6010
 
-if [ ! -d ${PROJECT_NAME}\target];then
-rmdir /s/q ${PROJECT_NAME}\target
+if [ ! -d ${PROJECT_NAME}/target];then
+rmdir /s/q ${PROJECT_NAME}/target
 fi
 
 # 执行相关模块的Maven Install
