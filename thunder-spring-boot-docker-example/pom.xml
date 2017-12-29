@@ -78,7 +78,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
-                    <imageName>thunder-spring-boot</imageName>
+                    <imageName>${ImageName}</imageName>
                     <baseImage>java</baseImage>
                     <entryPoint>["java", "-jar", "-DThunderHost=${ThunderHost}", "-DThunderPort=${ThunderPort}","/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
