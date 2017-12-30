@@ -9,6 +9,7 @@
 
     1 安装Docker
       1.1 在官网下载Docker
+          https://www.docker.com/community-edition，在Download Docker Community Edition栏下，选择相关的操作系统下的Docker客户端进行下载
       1.2 安装Docker
       1.3 安装Kitematic
 
