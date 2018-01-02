@@ -152,7 +152,13 @@ public class ZookeeperInvoker {
 
     // 获取ZooKeeper客户端连接是否正常
     public boolean isStarted() {
-        return client.getState() == CuratorFrameworkState.STARTED;
+        try {
+            lock.lock();
+
+            return client.getState() == CuratorFrameworkState.STARTED;
+        } finally {
+            lock.unlock();
+        }
     }
 
     // 检查ZooKeeper是否是启动状态
