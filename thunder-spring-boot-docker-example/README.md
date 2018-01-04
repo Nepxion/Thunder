@@ -18,11 +18,16 @@
 
     3 加速Docker(可选)
       3.1 Docker默认从国外的Mirror站点下载镜像，如果您觉得下载速度很慢，可以把它改成从阿里云的Mirro站点
-          在Docker图标上右键菜单，选Settings->Daemon，在Registry mirros里填入https://pee6w651.mirror.aliyuncs.com，见图1
+          在Docker图标上右键菜单，选Settings->Daemon，见图1
+          在Insecure registries里填入registry.mirrors.aliyuncs.com，
+          在Registry mirros里填入https://pee6w651.mirror.aliyuncs.com
 
     4 开启Docker非认证模式
       4.1 在Docker图标上右键菜单，选Settings->General，把“Expose daemon on tcp//localhost:2375 without TLS”打勾，见图2
       4.2 禁止Docker认证模式，例如，把“DOCKER_CERT_PATH=...”注释掉
+
+    5 Win10防火墙设置(注意)
+      5.1 Win10防火墙有时候会把Docker服务的可执行程序误认为木马病毒，需要把它设置为允许的项目，切记，见图6
 
 ### 开始部署
 
@@ -90,6 +95,9 @@
 
 图5
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker5.jpg)
+
+图6
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Win10.jpg)
 
 ## 附录附录Docker命令
 注意：镜像版本的参数可能不是必需的
