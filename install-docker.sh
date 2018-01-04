@@ -23,6 +23,8 @@ IMAGE_NAME=thunder-spring-boot
 MACHINE_IP=10.0.75.1
 MACHINE_PORT=6010
 CONTAINER_PORT=6010
+RUN_MODE=-i -t
+# RUN_MODE=-d
 
 if [ ! -d ${PROJECT_NAME}/target];then
 rmdir /s/q ${PROJECT_NAME}/target
@@ -45,4 +47,4 @@ cd ${PROJECT_NAME}
 mvn package docker:build -DskipTests -DImageName=${IMAGE_NAME} -DExposePort=${CONTAINER_PORT} -DThunderHost=${MACHINE_IP} -DThunderPort=${MACHINE_PORT}
 
 # 安装和启动Docker容器，并自动执行端口映射
-docker run -i -t -p ${MACHINE_PORT}:${CONTAINER_PORT} -h ${IMAGE_NAME} --name ${IMAGE_NAME} ${IMAGE_NAME}:latest
+docker run ${RUN_MODE} -p ${MACHINE_PORT}:${CONTAINER_PORT} -h ${IMAGE_NAME} --name ${IMAGE_NAME} ${IMAGE_NAME}:latest
