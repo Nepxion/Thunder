@@ -79,7 +79,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
                     <imageName>${ImageName}</imageName>
-                    <baseImage>java</baseImage>
+                    <baseImage>openjdk:8-jre-alpine</baseImage>
                     <entryPoint>["java", "-jar", "-DThunderHost=${ThunderHost}", "-DThunderPort=${ThunderPort}","/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
                         <resource>
