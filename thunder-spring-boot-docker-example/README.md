@@ -97,7 +97,7 @@
     1.1 创建容器
         docker create [镜像名]:[镜像版本] (创建容器)
         docker run -d -p [IP地址]:[宿主机端口]:[容器端口] --name [容器名] [镜像名]:[镜像版本] (创建后台型容器，运行在后台，创建后与终端无关，只有调用docker stop、docker kill命令才能使容器停止)
-        docker run -i -t --rm -p [IP地址]:[宿主机端口]:[容器端口] --name [容器名] [镜像名]:[镜像版本] (创建交互型容器，运行在前台，容器中使用exit命令或者调用docker stop、docker kill命令，容器停止)
+        docker run -i -t --rm -p [IP地址]:[宿主机端口]:[容器端口] --name [容器名] [镜像名]:[镜像版本] (创建交互型容器，运行在前台，容器中使用exit命令或者调用docker stop、docker kill命令才能使容器停止)
         -[IP地址]:如果Docker装在本地，千万不要在前面加localhost，否则映射不成功
         -i:标准输入给容器 
         -t:分配一个虚拟终端
