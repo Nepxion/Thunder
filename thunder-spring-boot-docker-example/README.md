@@ -27,7 +27,7 @@
       4.2 禁止Docker认证模式，例如，把“DOCKER_CERT_PATH=...”注释掉
 
     5 Win10防火墙设置(注意)
-      5.1 Win10防火墙有时候会把Docker服务的可执行程序误认为木马病毒，需要把它设置为允许的项目，切记，见图6
+      5.1 Win10防火墙有时候会把Docker服务的可执行程序误认为木马病毒，需要把它设置为允许的项目，切记，见图7
 
 ### 开始部署
 
@@ -82,22 +82,25 @@
       4.1 在容器(Containers)列表，把鼠标移上去，会出现“X”的按钮，点击它，即可删除容器
 
 图1
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker1.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Docker1.jpg)
 
 图2
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker2.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Docker2.jpg)
 
 图3
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker3.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Docker3.jpg)
 
 图4
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker4.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Docker4.jpg)
 
 图5
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Docker5.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Docker5.jpg)
 
 图6
-![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/Win10.jpg)
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Docker6.jpg)
+
+图7
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Win10.jpg)
 
 ## 附录附录Docker命令
 注意：镜像版本的参数可能不是必需的
