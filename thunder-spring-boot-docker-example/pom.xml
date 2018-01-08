@@ -81,6 +81,9 @@
                     <imageName>${ImageName}</imageName>
                     <baseImage>openjdk:8-jre-alpine</baseImage>
                     <entryPoint>["java", "-jar", "-DThunderHost=${ThunderHost}", "-DThunderPort=${ThunderPort}","/${project.build.finalName}.jar"]</entryPoint>
+                    <exposes>
+                        <expose>${ExposePort}</expose>
+                    </exposes>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
@@ -88,9 +91,6 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <exposes>
-                        <expose>${ExposePort}</expose>
-                    </exposes>
                 </configuration>
             </plugin>
         </plugins>
