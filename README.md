@@ -1,5 +1,6 @@
 # Nepxion Thunder
-[![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Nepxion/Thunder/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Nepxion/Thunder.svg?branch=master)](https://travis-ci.org/Nepxion/Thunder)
 
 Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
 
