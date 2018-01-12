@@ -5,6 +5,9 @@
     <name>Nepxion Thunder Console</name>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
+    <description>Nepxion Thunder is a distribution RPC framework based on Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper + Redis + Spring Web MVC + Spring Boot + Docker </description>
+    <url>http://www.nepxion.com</url>
+
     <parent>
         <groupId>com.nepxion</groupId>
         <artifactId>thunder</artifactId>
