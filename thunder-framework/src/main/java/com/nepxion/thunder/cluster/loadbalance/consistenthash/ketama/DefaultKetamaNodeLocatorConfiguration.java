@@ -93,8 +93,6 @@ public class DefaultKetamaNodeLocatorConfiguration<T> implements KetamaNodeLocat
      * for example a key for a particular server's first repetition may look
      * like:
      * <p>
-     *
-     * <p>
      * <code>myhost/10.0.2.1-0</code>
      * </p>
      *

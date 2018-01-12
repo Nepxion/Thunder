@@ -82,7 +82,7 @@ public final class KetamaNodeLocator<T> implements NodeLocator<T> {
      * @param alg
      *            The hash algorithm to use when choosing a node in the Ketama
      *            consistent hash continuum
-     * @param conf
+     * @param conf configuration
      */
     public KetamaNodeLocator(List<T> nodes, HashAlgorithm alg, KetamaNodeLocatorConfiguration<T> conf) {
         super();

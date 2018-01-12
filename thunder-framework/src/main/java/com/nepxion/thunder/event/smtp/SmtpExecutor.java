@@ -84,7 +84,7 @@ public class SmtpExecutor {
      * @param text      邮件内容，支持Html格式
      * @param htmlStyle 邮件内容，支持Html格式
      * @param encoding  编码
-     * @throws Exception
+     * @throws Exception 异常抛出
      */
     public void send(String from, String to, String cc, String bcc, String subject, String text, boolean htmlStyle, String encoding) throws Exception {
         MimeMessage message = new MimeMessage(session);

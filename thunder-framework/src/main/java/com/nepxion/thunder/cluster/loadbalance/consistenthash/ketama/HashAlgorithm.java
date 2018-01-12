@@ -30,7 +30,7 @@ public interface HashAlgorithm {
 
     /**
      * Compute the hash for the given key.
-     *
+     * @param k the object key
      * @return a positive integer hash
      */
     long hash(final String k);

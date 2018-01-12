@@ -59,13 +59,10 @@ public class KafkaMQProducer {
         return producer;
     }
 
-    /**
-     * The default partitioning strategy:
-     * <ul>
-     * <li>If a partition is specified in the record, use it
-     * <li>If no partition is specified but a key is present choose a partition based on a hash of the key
-     * <li>If no partition or key is present choose a partition in a round-robin fashion
-     */
+    // The default partitioning strategy:
+    // If a partition is specified in the record, use it
+    // If no partition is specified but a key is present choose a partition based on a hash of the key
+    // If no partition or key is present choose a partition in a round-robin fashion
     public void produceRequest(final String topic, final ApplicationEntity applicationEntity, final ProtocolRequest request) throws Exception {
         final String url = applicationEntity.toUrl();
         final String interfaze = request.getInterface();

@@ -52,6 +52,7 @@ public interface NodeLocator<T> {
 
     /**
      * Get all memcached nodes. This is useful for broadcasting messages.
+     * @return all memcached nodes.
      */
     List<T> getAll();
 

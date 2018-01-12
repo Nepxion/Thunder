@@ -96,7 +96,7 @@ public enum DefaultHashAlgorithm implements HashAlgorithm {
 
     /**
      * Compute the hash for the given key.
-     *
+     * @param k the object key
      * @return a positive integer hash
      */
     public long hash(final String k) {
@@ -156,6 +156,8 @@ public enum DefaultHashAlgorithm implements HashAlgorithm {
 
     /**
      * Get the md5 of the given key.
+     * @param k the object key
+     * @return byte[]
      */
     public static byte[] computeMd5(String k) {
         MessageDigest md5;
