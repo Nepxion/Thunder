@@ -36,7 +36,7 @@ public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
         System.out.println("  ║║ ║╔╗║║║║╔╗╣╔╗║║═╣╔╝");
         System.out.println("  ║║ ║║║║╚╝║║║║╚╝║║═╣║");
         System.out.println("  ╚╝ ╚╝╚╩══╩╝╚╩══╩══╩╝");
-        System.out.println("Nepxion Thunder  v1.0.0.RELEASE");
+        System.out.println("Nepxion Thunder  v1.0.0");
         System.out.println("");
     }
 
