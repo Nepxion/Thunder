@@ -63,7 +63,7 @@
       5.1 代码下载到阿里云，然后执行上述步骤即可(运行脚本install-docker.sh)
 
     6 推送镜像到阿里云
-      6.1 本地推送镜像到阿里云，执行脚本install-image.bat或者install-image.sh
+      6.1 本地推送镜像到阿里云，执行脚本install-image.bat或者install-image.sh，见图8
 
 ## 附录：Kitematic操作
 
@@ -107,6 +107,9 @@
 
 图7
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Win10.jpg)
+
+图8
+![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Aliyun.jpg)
 
 ## 附录：Docker命令
 注意：镜像版本的参数可能不是必需的
