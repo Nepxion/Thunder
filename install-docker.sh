@@ -19,7 +19,7 @@ PROJECT_NAME=thunder-spring-boot-docker-example
 
 DOCKER_HOST=tcp://localhost:2375
 # DOCKER_CERT_PATH=/User/Neptune/.docker/machine/certs
-IMAGE_NAME=thunder-spring-boot
+IMAGE_NAME=thunder-service
 MACHINE_IP=10.0.75.1
 MACHINE_PORT=6010
 CONTAINER_PORT=6010

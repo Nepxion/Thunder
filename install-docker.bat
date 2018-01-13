@@ -19,7 +19,7 @@
 
 @set DOCKER_HOST=tcp://localhost:2375
 @rem @set DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs
-@set IMAGE_NAME=thunder-spring-boot
+@set IMAGE_NAME=thunder-service
 @set MACHINE_IP=10.0.75.1
 @set MACHINE_PORT=6010
 @set CONTAINER_PORT=6010
