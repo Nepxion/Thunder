@@ -33,9 +33,9 @@
 
     1 修改配置
       1.1 启动Thunder时候，需要把服务提供端的IP地址注册到Zookeeper上，以宿主机IP代替Docker IP注册上去
-          把根目录install-docker.bat或者install-docker.sh中的MACHINE_IP=XXX，修改为你机器上Docker宿主机的IP，例如10.0.75.1
+          把根目录脚本install-docker.bat或者install-docker.sh中的MACHINE_IP=XXX，修改为你机器上Docker宿主机的IP，例如10.0.75.1
           运行ipconfig命令，你可以看到一个Docker的虚拟网卡(DockerNAT)，其显示的IP即为Docker宿主机的IP
-          附录：相关环境变量介绍
+          相关环境变量介绍
           DOCKER_HOST=tcp://localhost:2375                        // Docker服务器的URL
           DOCKER_CERT_PATH=C:\Users\Neptune\.docker\machine\certs // 认证模式下的证书存放路径
           IMAGE_NAME=thunder-spring-boot                          // 镜像名称
@@ -47,7 +47,7 @@
           运行ipconfig命令，可以获取本地网卡的IP
 
     2 安装镜像和容器
-      2.1 在根目录下执行install-docker.bat或者install-docker.sh里的语句，一键部署镜像和容器。等待一段时间后，交互型容器创建并启动成功
+      2.1 在根目录下执行脚本install-docker.bat或者install-docker.sh，一键部署镜像和容器。等待一段时间后，交互型容器创建并启动成功
 
     3 验证镜像和容器
       3.1 验证镜像和容器是否安装成功
@@ -57,9 +57,15 @@
           观察Docker控制台，如果有中文输出，表示Docker内部服务可以被外界访问了，一切成功！见图6
 
     4 更新镜像和容器
-      5.1 以后更新不需要把上述所有步骤重新做一下，只需要把”5 安装镜像和容器“中的步骤执行一遍即可，达到一键部署目的
+      4.1 以后更新不需要把上述所有步骤重新做一下，只需要把”5 安装镜像和容器“中的步骤执行一遍即可，达到一键部署目的
 
-## 附录Kitematic操作
+    5 部署容器到阿里云
+      5.1 代码下载到阿里云，然后执行上述步骤即可(运行脚本install-docker.sh)
+
+    6 推送镜像到阿里云
+      6.1 本地推送镜像到阿里云，执行脚本install-image.bat或者install-image.sh
+
+## 附录：Kitematic操作
 
     1 安装容器
       1.1 命令行方式(推荐)
@@ -102,7 +108,7 @@
 图7
 ![Alt text](https://github.com/Nepxion/Thunder/blob/master/thunder-spring-boot-docker-example/doc/Win10.jpg)
 
-## 附录附录Docker命令
+## 附录：Docker命令
 注意：镜像版本的参数可能不是必需的
 
     1.1 创建容器
