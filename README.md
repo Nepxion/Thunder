@@ -10,16 +10,6 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 
 容器部署：https://github.com/Nepxion/Thunder/tree/master/thunder-spring-boot-docker-example
 
-### 依赖
-
-```xml
-<dependency>
-  <groupId>com.nepxion</groupId>
-  <artifactId>thunder-framework</artifactId>
-  <version>${thunder.version}</version>
-</dependency>
-```
-
 ## 简介
 
     1.1 和Dubbo功能的比较
@@ -84,3 +74,13 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
     2.24 支持异步事件驱动发布框架发布事件，进行业务系统的重试补偿，接入框架的所有异常通知(邮件或短信通知)
     2.25 支持链式调用
     2.26 支持不同线程池选用的队列类型配置，线程池Reject五大模式的配置。采用多线程池隔离技术，当多个服务部署在同一个JVM，一个服务调用忙，不会影响其它服务调用，业务端可以视具体场景，决定是否要开启线程隔离
+	
+## 依赖
+
+```xml
+<dependency>
+  <groupId>com.nepxion</groupId>
+  <artifactId>thunder-framework</artifactId>
+  <version>${thunder.version}</version>
+</dependency>
+```
