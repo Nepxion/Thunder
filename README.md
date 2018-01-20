@@ -10,6 +10,16 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 
 容器部署：https://github.com/Nepxion/Thunder/tree/master/thunder-spring-boot-docker-example
 
+### 依赖
+
+```xml
+<dependency>
+  <groupId>com.nepxion</groupId>
+  <artifactId>thunder-framework</artifactId>
+  <version>${thunder.version}</version>
+</dependency>
+```
+
 ## 简介
 
     1.1 和Dubbo功能的比较
