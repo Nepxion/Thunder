@@ -12,14 +12,14 @@ package com.nepxion.thunder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 import com.nepxion.thunder.test.core.AnimalService;
 import com.nepxion.thunder.test.core.CoreInvoker;
 import com.nepxion.thunder.test.core.UserService;
 
-@EnableAutoConfiguration
+@SpringBootApplication
 @ImportResource({ "classpath*:netty-client-context.xml" })
 public class NettyClientCommandLineApplication implements CommandLineRunner {
     @Autowired

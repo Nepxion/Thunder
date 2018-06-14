@@ -10,13 +10,13 @@ package com.nepxion.thunder;
  */
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.context.annotation.ImportResource;
 
 // 该类的作用是改端口，预防端口冲突
-@EnableAutoConfiguration
+@SpringBootApplication
 @ImportResource({ "classpath*:netty-client-context.xml" })
 public class NettyClientEmbeddedCommandLineApplication extends NettyClientCommandLineApplication implements EmbeddedServletContainerCustomizer {
 
