@@ -12,6 +12,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 
 ## 简介
 - 和Dubbo功能的比较
+
   跟Dubbo相比，Thunder的增强功能包括
   - 支持Message Queue（消息队列中间件)，Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积
   - 支持本地链式调用，全程无阻塞的调用方式，可省去业务端写Callback的步骤
@@ -22,6 +23,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
   - 支持序列化在网络传输层面的压缩（QuickLz)，在大数据量传输，通过压缩，对提高吞吐量（TPS)尤其有效
   - 支持Spring的简化配置，支持全局配置和局部配置的结合
   - 支持对微服务框架的整合（例如：Spring Boot)
+
   跟Dubbo相比，Thunder的未支持功能包括
   - 软负载均衡的算法，Thunder支持三种（轮询，随机，一致性哈希)，Dubbo还支持最少活跃度，还支持预热和权重计算
   - 访问规则，Thunder支持限流，密钥匹配，版本匹配，Dubbo相对更丰富，例如黑白名单，服务降级，网段隔离
