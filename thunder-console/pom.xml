@@ -51,30 +51,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.nepxion</groupId>
-            <artifactId>swing</artifactId>
-            <version>${nepxion.swing.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/nepxion-swing-${nepxion.swing.version}.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nepxion</groupId>
-            <artifactId>util</artifactId>
-            <version>${nepxion.util.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/nepxion-util-${nepxion.util.version}.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nepxion</groupId>
-            <artifactId>cots</artifactId>
-            <version>${nepxion.cots.version}</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/nepxion-util-${nepxion.cots.version}.jar</systemPath>
-        </dependency>
-
-        <dependency>
             <groupId>jdesktop</groupId>
             <artifactId>swing-worker</artifactId>
             <version>${swing.worker.version}</version>
@@ -112,6 +88,30 @@
             <version>${jcalendar.version}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/jcalendar-${jcalendar.version}.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nepxion</groupId>
+            <artifactId>swing</artifactId>
+            <version>${nepxion.swing.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/nepxion-swing-${nepxion.swing.version}.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nepxion</groupId>
+            <artifactId>util</artifactId>
+            <version>${nepxion.util.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/nepxion-util-${nepxion.util.version}.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nepxion</groupId>
+            <artifactId>cots</artifactId>
+            <version>${nepxion.cots.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/nepxion-cots-${nepxion.cots.version}.jar</systemPath>
         </dependency>
 
         <dependency>
