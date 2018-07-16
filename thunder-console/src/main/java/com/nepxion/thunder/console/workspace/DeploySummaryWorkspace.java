@@ -204,7 +204,6 @@ public class DeploySummaryWorkspace extends Workspace {
         return table;
     }
 
-    @SuppressWarnings("unchecked")
     private void setTableModel(final JBasicTable table, final List<SummaryEntity> rows, final String[] titles, final boolean monitorSummary) {
         BasicTableModel tableModel = new BasicTableModel(rows, titles) {
             private static final long serialVersionUID = 1L;
