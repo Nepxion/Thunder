@@ -20,6 +20,9 @@
         <jide.version>2.9.7</jide.version>
         <l2fprod.version>7.3</l2fprod.version>
         <jcalendar.version>1.3.4.200905090658</jcalendar.version>
+        <nepxion.swing.version>1.0.0</nepxion.swing.version>
+        <nepxion.util.version>1.0.0</nepxion.util.version>
+        <nepxion.cots.version>1.0.0</nepxion.cots.version>
         <twaver.version>3.7</twaver.version>
     </properties>
 
@@ -48,27 +51,27 @@
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.nepxion</groupId>
             <artifactId>swing</artifactId>
-            <version>${project.version}</version>
+            <version>${nepxion.swing.version}</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/nepxion-swing-${project.version}.jar</systemPath>
+            <systemPath>${project.basedir}/lib/nepxion-swing-${nepxion.swing.version}.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.nepxion</groupId>
             <artifactId>util</artifactId>
-            <version>${project.version}</version>
+            <version>${nepxion.util.version}</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/nepxion-util-${project.version}.jar</systemPath>
+            <systemPath>${project.basedir}/lib/nepxion-util-${nepxion.util.version}.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.nepxion</groupId>
             <artifactId>cots</artifactId>
-            <version>${project.version}</version>
+            <version>${nepxion.cots.version}</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/nepxion-cots-${project.version}.jar</systemPath>
+            <systemPath>${project.basedir}/lib/nepxion-util-${nepxion.cots.version}.jar</systemPath>
         </dependency>
 
         <dependency>
