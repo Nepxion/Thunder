@@ -3,7 +3,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.nepxion/thunder.svg?label=maven%20central)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.nepxion%22%20AND%20thunder)
 [![Javadocs](http://www.javadoc.io/badge/com.nepxion/thunder-framework.svg)](http://www.javadoc.io/doc/com.nepxion/thunder-framework)
 [![Build Status](https://travis-ci.org/Nepxion/Thunder.svg?branch=master)](https://travis-ci.org/Nepxion/Thunder)
-[![Code Beat](https://codebeat.co/badges/cbf7191d-e3b8-4913-b1d8-f717f08bc05a)](https://codebeat.co/projects/github-com-nepxion-thunder-master)
 
 Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
 
