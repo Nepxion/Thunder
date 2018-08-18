@@ -7,9 +7,7 @@
 Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
 
 ## 请联系我
-- 请加微信群或者微信
-
-![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信群-1.jpg) ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
+![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
 
 技术博客：[http://nepxion.iteye.com/](http://nepxion.iteye.com/)
 
