@@ -88,7 +88,7 @@ public abstract class ThunderPropertiesEntity implements Serializable {
             if (key.startsWith(prefix)) {
                 int index = key.indexOf(prefix);
                 String name = key.substring(index + prefix.length());
-                map.put(name, value.toString());
+                map.put(name, value);
             }
         }
     }

@@ -86,7 +86,7 @@ public class ThunderProperties implements Serializable {
             throw new IllegalArgumentException("Value is null for key [" + key + "]");
         }
 
-        Long result = MathsUtil.calculate(value.toString());
+        Long result = MathsUtil.calculate(value);
         if (result != null) {
             map.put(key, String.valueOf(result));
         } else {
