@@ -29,15 +29,18 @@ import com.nepxion.thunder.framework.parser.StrategyBeanDefinitionParser;
 
 public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
     static {
-        System.out.println("");
-        System.out.println("╔════╦╗         ╔╗");
-        System.out.println("║╔╗╔╗║║         ║║");
-        System.out.println("╚╝║║╚╣╚═╦╗╔╦═╗╔═╝╠══╦═╗");
-        System.out.println("  ║║ ║╔╗║║║║╔╗╣╔╗║║═╣╔╝");
-        System.out.println("  ║║ ║║║║╚╝║║║║╚╝║║═╣║");
-        System.out.println("  ╚╝ ╚╝╚╩══╩╝╚╩══╩══╩╝");
-        System.out.println("Nepxion Thunder  v1.0.1");
-        System.out.println("");
+        String logoShown = System.getProperty("nepxion.logo.shown", "true");
+        if (Boolean.valueOf(logoShown)) {
+            System.out.println("");
+            System.out.println("╔════╦╗         ╔╗");
+            System.out.println("║╔╗╔╗║║         ║║");
+            System.out.println("╚╝║║╚╣╚═╦╗╔╦═╗╔═╝╠══╦═╗");
+            System.out.println("  ║║ ║╔╗║║║║╔╗╣╔╗║║═╣╔╝");
+            System.out.println("  ║║ ║║║║╚╝║║║║╚╝║║═╣║");
+            System.out.println("  ╚╝ ╚╝╚╩══╩╝╚╩══╩══╩╝");
+            System.out.println("Nepxion Thunder  v1.0.2");
+            System.out.println("");
+        }
     }
 
     @Override
