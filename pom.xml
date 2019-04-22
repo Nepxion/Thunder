@@ -6,7 +6,7 @@
     <name>Nepxion Thunder</name>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.2</version>
+    <version>2.0.0</version>
     <description>Nepxion Thunder is a distribution RPC framework based on Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper + Redis + Spring Web MVC + Spring Boot + Docker </description>
     <url>http://www.nepxion.com</url>
 
