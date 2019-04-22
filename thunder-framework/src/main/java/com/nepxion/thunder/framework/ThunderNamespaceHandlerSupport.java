@@ -11,6 +11,10 @@ package com.nepxion.thunder.framework;
 
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
+import com.nepxion.banner.BannerConstant;
+import com.nepxion.banner.Description;
+import com.nepxion.banner.LogoBanner;
+import com.nepxion.banner.NepxionBanner;
 import com.nepxion.thunder.common.constant.ThunderConstant;
 import com.nepxion.thunder.common.container.CacheContainer;
 import com.nepxion.thunder.common.container.ExecutorContainer;
@@ -26,11 +30,12 @@ import com.nepxion.thunder.framework.parser.ReferenceBeanDefinitionParser;
 import com.nepxion.thunder.framework.parser.RegistryBeanDefinitionParser;
 import com.nepxion.thunder.framework.parser.ServiceBeanDefinitionParser;
 import com.nepxion.thunder.framework.parser.StrategyBeanDefinitionParser;
+import com.taobao.text.Color;
 
 public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
     static {
-        String logoShown = System.getProperty("nepxion.logo.shown", "true");
-        if (Boolean.valueOf(logoShown)) {
+        /*String bannerShown = System.getProperty(BannerConstant.BANNER_SHOWN, "true");
+        if (Boolean.valueOf(bannerShown)) {
             System.out.println("");
             System.out.println("╔════╦╗         ╔╗");
             System.out.println("║╔╗╔╗║║         ║║");
@@ -38,9 +43,13 @@ public class ThunderNamespaceHandlerSupport extends NamespaceHandlerSupport {
             System.out.println("  ║║ ║╔╗║║║║╔╗╣╔╗║║═╣╔╝");
             System.out.println("  ║║ ║║║║╚╝║║║║╚╝║║═╣║");
             System.out.println("  ╚╝ ╚╝╚╩══╩╝╚╩══╩══╩╝");
-            System.out.println("Nepxion Thunder  v1.0.2");
+            System.out.println("Nepxion Thunder  v" + ThunderConstant.THUNDER_VERSION);
             System.out.println("");
-        }
+        }*/
+
+        LogoBanner logoBanner = new LogoBanner(ThunderNamespaceHandlerSupport.class, "/com/nepxion/thunder/resource/logo.txt", "Welcome to Nepxion", 7, 5, new Color[] { Color.red, Color.green, Color.cyan, Color.blue, Color.yellow, Color.magenta, Color.red }, true);
+
+        NepxionBanner.show(logoBanner, new Description(BannerConstant.VERSION + ":", ThunderConstant.THUNDER_VERSION, 0, 1), new Description(BannerConstant.GITHUB + ":", BannerConstant.NEPXION_GITHUB + "/Thunder", 0, 1));
     }
 
     @Override
