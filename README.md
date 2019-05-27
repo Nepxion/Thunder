@@ -92,3 +92,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
   <version>${thunder.version}</version>
 </dependency>
 ```
+
+## Star走势图
+
+[![Stargazers over time](https://starchart.cc/Nepxion/Thunder.svg)](https://starchart.cc/Nepxion/Thunder)
