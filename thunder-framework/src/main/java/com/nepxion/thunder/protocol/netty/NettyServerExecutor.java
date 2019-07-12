@@ -65,8 +65,13 @@ public class NettyServerExecutor extends AbstractServerExecutor {
         LOG.info("Attempt to start server with host={}, port={}", host, port);
 
         final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        // From https://github.com/netty/netty/wiki/Thread-Affinity
-        final ThreadFactory threadFactory = new AffinityThreadFactory("ServerAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+        ThreadFactory threadFactory = null;
+        if (properties.getBoolean(ThunderConstant.AFFINITY_THREAD_ATTRIBUTE_NAME)) {
+            // From https://github.com/netty/netty/wiki/Thread-Affinity
+            threadFactory = new AffinityThreadFactory("ServerAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+
+            LOG.info("ServerAffinityThreadFactory is initialized...");
+        }
         final EventLoopGroup workerGroup = new NioEventLoopGroup(2 * ThunderConstant.CPUS, threadFactory);
         Executors.newSingleThreadExecutor().submit(new Callable<ChannelFuture>() {
             @Override

@@ -243,6 +243,8 @@ public class ThunderConstant {
     public static final String COMPRESSOR_ATTRIBUTE_NAME = "compressor";
     public static final String COMPRESS_ATTRIBUTE_NAME = "compress";
 
+    public static final String AFFINITY_THREAD_ATTRIBUTE_NAME = "affinityThread";
+
     public static final String HOST_PARAMETER_NAME = "ThunderHost";
     public static final String PORT_PARAMETER_NAME = "ThunderPort";
     public static final String REGISTRY_ADDRESS_PARAMETER_NAME = "ThunderRegistryAddress";

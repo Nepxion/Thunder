@@ -71,7 +71,13 @@ public class NettyClientExecutor extends AbstractClientExecutor {
 
         LOG.info("Attempt to connect to {}:{}", host, port);
 
-        final ThreadFactory threadFactory = new AffinityThreadFactory("ClientAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+        ThreadFactory threadFactory = null;
+        if (properties.getBoolean(ThunderConstant.AFFINITY_THREAD_ATTRIBUTE_NAME)) {
+            // From https://github.com/netty/netty/wiki/Thread-Affinity
+            threadFactory = new AffinityThreadFactory("ClientAffinityThreadFactory", AffinityStrategies.DIFFERENT_CORE);
+
+            LOG.info("ClientAffinityThreadFactory is initialized...");
+        }
         final EventLoopGroup group = new NioEventLoopGroup(ThunderConstant.CPUS, threadFactory);
         Executors.newCachedThreadPool().submit(new Callable<Object>() {
             @Override
