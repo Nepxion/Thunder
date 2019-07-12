@@ -15,6 +15,6 @@
 @title Nepxion Thunder
 @color 0a
 
-call mvn versions:set -DnewVersion=2.0.0
+call mvn versions:set -DnewVersion=2.0.1
 
 pause

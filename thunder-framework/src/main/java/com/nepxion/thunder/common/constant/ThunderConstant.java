@@ -10,7 +10,7 @@ package com.nepxion.thunder.common.constant;
  */
 
 public class ThunderConstant {
-    public static final String THUNDER_VERSION = "2.0.0";
+    public static final String THUNDER_VERSION = "2.0.1";
 
     public static final String NAMESPACE_ELEMENT_NAME = "namespace";
     public static final String APPLICATION_ELEMENT_NAME = "application";
