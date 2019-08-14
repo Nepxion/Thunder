@@ -1,10 +1,5 @@
 # Nepxion Thunder
-[![Total lines](https://tokei.rs/b1/github/Nepxion/Thunder?category=lines)](https://tokei.rs/b1/github/Nepxion/Thunder?category=lines)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/Nepxion/Thunder/blob/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/com.nepxion/thunder.svg?label=maven%20central)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.nepxion%22%20AND%20thunder)
-[![Javadocs](http://www.javadoc.io/badge/com.nepxion/thunder-framework.svg)](http://www.javadoc.io/doc/com.nepxion/thunder-framework)
-[![Build Status](https://travis-ci.org/Nepxion/Thunder.svg?branch=master)](https://travis-ci.org/Nepxion/Thunder)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a2c3078fc1464fdf961c0c276200e3e4)](https://www.codacy.com/project/HaojunRen/Thunder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nepxion/Thunder&amp;utm_campaign=Badge_Grade_Dashboard)
+[![Total lines](https://tokei.rs/b1/github/Nepxion/Thunder?category=lines)](https://tokei.rs/b1/github/Nepxion/Thunder?category=lines)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/Nepxion/Thunder/blob/master/LICENSE)  [![Maven Central](https://img.shields.io/maven-central/v/com.nepxion/thunder.svg?label=maven%20central)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.nepxion%22%20AND%20thunder)  [![Javadocs](http://www.javadoc.io/badge/com.nepxion/thunder-framework.svg)](http://www.javadoc.io/doc/com.nepxion/thunder-framework)  [![Build Status](https://travis-ci.org/Nepxion/Thunder.svg?branch=master)](https://travis-ci.org/Nepxion/Thunder)  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a2c3078fc1464fdf961c0c276200e3e4)](https://www.codacy.com/project/HaojunRen/Thunder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nepxion/Thunder&amp;utm_campaign=Badge_Grade_Dashboard)
 
 Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zookeeper(Curator Framework) + Redis + FST + Spring + Spring Web MVC + Spring Boot + Docker分布式RPC调用框架。架构思想主要是来自阿里巴巴的Dubbo框架，但比它更轻量级，零配置式实现部署
 
@@ -15,8 +10,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 ## 请联系我
 微信和公众号
 
-![Alt text](https://github.com/Nepxion/Docs/raw/master/zxing-doc/微信-1.jpg)
-![Alt text](https://github.com/Nepxion/Docs/raw/master/zxing-doc/公众号-1.jpg)
+![Alt text](https://github.com/Nepxion/Docs/raw/master/zxing-doc/微信-1.jpg)![Alt text](https://github.com/Nepxion/Docs/raw/master/zxing-doc/公众号-1.jpg)
 
 ## 简介
 - 和Dubbo功能的比较
