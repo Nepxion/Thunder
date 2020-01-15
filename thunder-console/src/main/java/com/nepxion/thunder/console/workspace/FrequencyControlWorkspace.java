@@ -72,7 +72,7 @@ public class FrequencyControlWorkspace extends ConfigWorkspace {
 
                             return;
                         }
-                    } catch (NumberFormatException e) {
+                    } catch (Exception e) {
                         showError(ConsoleLocale.getString("invalid_input"));
 
                         return;
@@ -132,7 +132,7 @@ public class FrequencyControlWorkspace extends ConfigWorkspace {
 
                             return;
                         }
-                    } catch (NumberFormatException e) {
+                    } catch (Exception e) {
                         showError(ConsoleLocale.getString("invalid_input"));
 
                         return;

@@ -74,11 +74,11 @@ public class TencentStockCallback extends AbstractStockCallback {
         }
         try {
             price.setHighPrice(Float.parseFloat(parameterList[33]));
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
         }
         try {
             price.setLowPrice(Float.parseFloat(parameterList[34]));
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
         }
         price.setTodayFirstPrice(Float.parseFloat(parameterList[5]));
         price.setYesterdayLastPrice(Float.parseFloat(parameterList[4]));

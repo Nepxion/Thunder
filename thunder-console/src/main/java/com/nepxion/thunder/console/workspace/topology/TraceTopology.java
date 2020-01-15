@@ -1572,7 +1572,7 @@ public class TraceTopology extends AbstractTopology {
                 nodeStartY = Integer.parseInt(nodeStartYTextField.getText());
                 nodeHorizontalGap = Integer.parseInt(nodeHorizontalGapTextField.getText());
                 nodeVerticalGap = Integer.parseInt(nodeVerticalGapTextField.getText());
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 return false;
             }
 
