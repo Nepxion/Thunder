@@ -41,7 +41,7 @@
         <snappy.version>1.1.2.6</snappy.version>
         <guava.version>20.0</guava.version>
         <jdeferred.version>1.2.4</jdeferred.version>
-        <jackson.version>2.7.3</jackson.version>
+        <jackson.version>2.11.0</jackson.version>
         <fastjson.version>1.2.8</fastjson.version>
         <httpclient.version>4.5.2</httpclient.version>
         <httpasyncclient.version>4.1.1</httpasyncclient.version>
