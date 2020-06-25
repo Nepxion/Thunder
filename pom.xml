@@ -42,7 +42,7 @@
         <guava.version>20.0</guava.version>
         <jdeferred.version>1.2.4</jdeferred.version>
         <jackson.version>2.7.3</jackson.version>
-        <fastjson.version>1.2.8</fastjson.version>
+        <fastjson.version>1.2.25.sec10</fastjson.version>
         <httpclient.version>4.5.2</httpclient.version>
         <httpasyncclient.version>4.1.1</httpasyncclient.version>
         <servlet.version>3.1.0</servlet.version>
