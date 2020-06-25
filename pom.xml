@@ -26,7 +26,7 @@
         <commons.pool2.version>2.4.2</commons.pool2.version>
         <spring.version>4.2.7.RELEASE</spring.version>
         <mail.version>1.5.5</mail.version>
-        <netty.version>4.0.36.Final</netty.version>
+        <netty.version>4.1.42.Final</netty.version>
         <affinity.version>3.0.6</affinity.version>
         <hessian.version>4.0.38</hessian.version>
         <activemq.core.version>5.7.0</activemq.core.version>
