@@ -7,7 +7,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 
 容器部署：[https://github.com/Nepxion/Thunder/tree/master/thunder-spring-boot-docker-example](https://github.com/Nepxion/Thunder/tree/master/thunder-spring-boot-docker-example)
 
-## 请联系我
+## 请联系我 
 微信和公众号
 
 ![](http://nepxion.gitee.io/docs/zxing-doc/微信-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/公众号-1.jpg)![](http://nepxion.gitee.io/docs/zxing-doc/文档-1.jpg)
