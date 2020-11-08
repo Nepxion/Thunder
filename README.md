@@ -79,7 +79,6 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 - 支持线程亲和性。添加配置affinityThread = true，启动时在命令行添加-Daffinity.reserved={cpu-mark-in-hex}，就可以指定进程使用哪个CPU
 
 ## 依赖
-
 ```xml
 <dependency>
   <groupId>com.nepxion</groupId>
@@ -89,5 +88,4 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 ```
 
 ## Star走势图
-
 [![Stargazers over time](https://starchart.cc/Nepxion/Thunder.svg)](https://starchart.cc/Nepxion/Thunder)
