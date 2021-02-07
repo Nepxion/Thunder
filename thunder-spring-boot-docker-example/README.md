@@ -88,28 +88,28 @@
       4.1 在容器(Containers)列表，把鼠标移上去，会出现“X”的按钮，点击它，即可删除容器
 
 图1
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Docker1.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Docker1.jpg)
 
 图2
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Docker2.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Docker2.jpg)
 
 图3
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Docker3.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Docker3.jpg)
 
 图4
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Docker4.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Docker4.jpg)
 
 图5
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Docker5.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Docker5.jpg)
 
 图6
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Docker6.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Docker6.jpg)
 
 图7
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Win10.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Win10.jpg)
 
 图8
-![Alt text](https://github.com/HaojunRen/Docs/raw/master/thunder-doc/Aliyun.jpg)
+![](http://nepxion.gitee.io/docs//thunder-doc/Aliyun.jpg)
 
 ## 附录：Docker命令
 注意：镜像版本的参数可能不是必需的
