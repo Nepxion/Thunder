@@ -10,7 +10,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 容器部署：[https://github.com/Nepxion/Thunder/tree/master/thunder-spring-boot-docker-example](https://github.com/Nepxion/Thunder/tree/master/thunder-spring-boot-docker-example)
 
 ## 简介
-- 和Dubbo功能的比较 
+- 和Dubbo功能的比较
 
   跟Dubbo相比，Thunder的增强功能包括
   - 支持Message Queue（消息队列中间件)，Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积
