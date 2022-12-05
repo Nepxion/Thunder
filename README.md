@@ -13,7 +13,7 @@ Nepxion Thunder是一款基于Netty + Hessian + Kafka + ActiveMQ + Tibco + Zooke
 - 和Dubbo功能的比较
 
   跟Dubbo相比，Thunder的增强功能包括
-  - 支持Message Queue（消息队列中间件)，Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积 
+  - 支持Message Queue（消息队列中间件)，Dubbo只支持Netty等内存堆积消息的方式，Thunder不仅支持内存堆积，也支持MQ的硬盘文件堆积
   - 支持本地链式调用，全程无阻塞的调用方式，可省去业务端写Callback的步骤
   - 支持跨进程的调用链，服务端和调用端都支持软负载均衡
   - 支持远程配置和调优，业务端所有集群下的应用可共享一个配置文件，并且通过远程配置方式修改，也支持业务系统自身已经存在的参数化平台的配置方式接入
